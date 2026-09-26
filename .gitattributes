@@ -3,3 +3,5 @@
 "01 - Daily Notes/**/*.md" merge=union
 .githooks/* text eol=lf
 *.sh text eol=lf
+"08 - Resources/Onboarding/**" text eol=lf
+*.zip binary

@@ -177,7 +177,7 @@ if (Test-Path $hookSrc) {
   New-Item -ItemType Directory -Force -Path $hookDir | Out-Null
   Copy-Item $hookSrc (Join-Path $hookDir 'junior-handoff-nudge.json') -Force
   $settingsFile = Join-Path $claudeHome 'settings.json'
-  $hookCmd = 'cat "$HOME/.claude/hooks/junior-handoff-nudge.json"'
+  $hookCmd = 'grep -Eq ''"command":"[^"]*git commit'' && cat "$HOME/.claude/hooks/junior-handoff-nudge.json" ; true'
   $settings = [pscustomobject]@{}
   $parsed = $true
   if (Test-Path $settingsFile) {
@@ -189,9 +189,15 @@ if (Test-Path $hookSrc) {
     if (-not $settings.PSObject.Properties['hooks']) { $settings | Add-Member -NotePropertyName hooks -NotePropertyValue ([pscustomobject]@{}) }
     $existing = @()
     if ($settings.hooks.PSObject.Properties['PostToolUse']) { $existing = @($settings.hooks.PostToolUse) }
-    $present = $existing | Where-Object { $_.hooks | Where-Object { $_.command -eq $hookCmd } }
-    if ($present) {
+    $found = 0; $stale = 0
+    foreach ($e in $existing) { foreach ($h in @($e.hooks)) { if ($h.command -match 'junior-handoff-nudge') { $found++; if ($h.command -ne $hookCmd) { $stale++ } } } }
+    if ($found -gt 0 -and $stale -eq 0) {
       Say 'Handoff nudge hook is already in your Claude settings.'
+    } elseif ($found -gt 0) {
+      Copy-Item $settingsFile "$settingsFile.bak" -Force
+      foreach ($e in $existing) { foreach ($h in @($e.hooks)) { if ($h.command -match 'junior-handoff-nudge') { $h.command = $hookCmd } } }
+      [IO.File]::WriteAllText($settingsFile, ($settings | ConvertTo-Json -Depth 20), $utf8)
+      Say 'Updated the handoff nudge hook in your Claude settings.'
     } else {
       if (Test-Path $settingsFile) { Copy-Item $settingsFile "$settingsFile.bak" -Force }
       $entry = [pscustomobject]@{
