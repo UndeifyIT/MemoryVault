@@ -1,0 +1,11 @@
+jaredrhod-marketing skill (vendored copy)
+
+Origin:   https://github.com/jaredrhod/ai-marketing-skills (folder: jaredrhod-marketing)
+Commit:   47b68a5c4d4ee1bf69240e3e7f75a1fe085b8252 (2026-08-30)
+Author:   Jared Rhodenizer (@jaredrhod)
+License:  CC BY-SA 4.0 (LICENSE is inside the zip). Credit the author; keep any adapted version under the same license.
+
+Reviewed 2026-09-26 by Junior for Isaac: plain markdown only, no scripts, no links or commands, SKILL.md allows only the Read tool.
+It is vendored (zipped here) instead of fetched at install time so every machine gets exactly the reviewed files.
+
+To update: clone the origin repo, read the diff against this zip, replace the zip, and update the commit above.

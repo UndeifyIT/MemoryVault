@@ -19,7 +19,11 @@ param(
   [string]$ObsidianConfigDir = (Join-Path $env:APPDATA 'obsidian'),
   [string]$ClaudeProjectsDir = (Join-Path $HOME '.claude\projects'),
   [string]$DesktopDir = [Environment]::GetFolderPath('Desktop'),
-  [string]$SkillsDir = (Join-Path $HOME '.claude\skills')
+  [string]$SkillsDir = (Join-Path $HOME '.claude\skills'),
+  # Extra plugins from kit\plugins.json to install on top of the core kit, e.g. -Extras supabase,sentry or -Extras all
+  [string[]]$Extras = @(),
+  [switch]$DryRun,        # print what plugins would be installed, install nothing
+  [switch]$SkipPlugins
 )
 
 $ErrorActionPreference = 'Stop'
@@ -204,6 +208,78 @@ if (Test-Path $hookSrc) {
         Warn 'The settings edit did not verify, so I restored your backup. Add the handoff hook by hand (see Onboarding.md).'
       }
     }
+  }
+}
+
+# 6d. The baseline kit every Junior gets: the marketing skill (a reviewed, vendored copy) and the core plugins
+$kitDir = Join-Path $VaultDir '08 - Resources\Onboarding\kit'
+$mkZip = Join-Path $kitDir 'jaredrhod-marketing.zip'
+$mkDst = Join-Path $SkillsDir 'jaredrhod-marketing'
+if (Test-Path (Join-Path $mkDst 'SKILL.md')) {
+  Say 'The marketing skill is already installed.'
+} elseif (Test-Path $mkZip) {
+  $tmp = Join-Path ([IO.Path]::GetTempPath()) ('jrm-' + [guid]::NewGuid().ToString('N'))
+  try {
+    Expand-Archive -Path $mkZip -DestinationPath $tmp
+    $inner = Join-Path $tmp 'jaredrhod-marketing'
+    if (-not (Test-Path (Join-Path $inner 'SKILL.md'))) { throw 'unexpected zip layout' }
+    New-Item -ItemType Directory -Force -Path $mkDst | Out-Null
+    Copy-Item (Join-Path $inner '*') $mkDst -Recurse -Force
+    Say "Installed the marketing skill at $mkDst"
+  } catch { Warn "Could not install the marketing skill: $($_.Exception.Message)" }
+  finally { if (Test-Path $tmp) { Remove-Item $tmp -Recurse -Force } }
+} else {
+  Warn 'kit\jaredrhod-marketing.zip is missing from the vault; skipping the marketing skill.'
+}
+
+$kitJson = Join-Path $kitDir 'plugins.json'
+if ($SkipPlugins) {
+  Say 'Skipping plugins (-SkipPlugins).'
+} elseif (-not (Test-Path $kitJson)) {
+  Warn 'kit\plugins.json is missing from the vault; skipping plugins.'
+} elseif (-not (Have claude)) {
+  Warn 'Claude Code is not on PATH, so plugins were skipped. Install Claude Code, then run this script again.'
+} else {
+  $kit = Get-Content -Raw -Encoding UTF8 $kitJson | ConvertFrom-Json
+  $claudeHome = Split-Path $SkillsDir
+  $mk = $kit.marketplace
+  $installedFile = Join-Path $claudeHome 'plugins\installed_plugins.json'
+  $installed = @()
+  if (Test-Path $installedFile) {
+    try { $installed = @((Get-Content -Raw $installedFile | ConvertFrom-Json).plugins.PSObject.Properties.Name) } catch { }
+  }
+  $mcpNames = @()
+  $cj = Join-Path $HOME '.claude.json'
+  if (Test-Path $cj) {
+    try { $mcpNames = @((Get-Content -Raw $cj | ConvertFrom-Json).mcpServers.PSObject.Properties.Name) } catch { }
+  }
+  $knownFile = Join-Path $claudeHome 'plugins\known_marketplaces.json'
+  $haveMk = (Test-Path $knownFile) -and ((Get-Content -Raw $knownFile) -match [regex]::Escape($mk))
+  if (-not $haveMk -and $mk -eq 'claude-plugins-official' -and -not $DryRun) {
+    Say 'Adding the official plugin marketplace...'
+    claude plugin marketplace add anthropics/claude-plugins-official
+  }
+  $Extras = @($Extras | ForEach-Object { $_ -split ',' } | Where-Object { $_ })
+  $want = @($kit.core)
+  if ($Extras -contains 'all') { $want += @($kit.extras) }
+  else {
+    foreach ($e in $Extras) {
+      $hit = $kit.extras | Where-Object { $_.plugin -eq $e }
+      if ($hit) { $want += $hit } else { Warn "Unknown extra '$e'. Options: $((@($kit.extras) | ForEach-Object { $_.plugin }) -join ', ')" }
+    }
+  }
+  foreach ($p in $want) {
+    $id = "$($p.plugin)@$mk"
+    if ($installed -contains $id) { Say "$($p.plugin) is already installed."; continue }
+    if ($p.skipIfMcpServer -and ($mcpNames -contains $p.skipIfMcpServer)) {
+      Say "$($p.plugin): you already have a '$($p.skipIfMcpServer)' MCP server set up, so I didn't add a duplicate."
+      continue
+    }
+    if ($DryRun) { Say "[dry run] would install $id"; continue }
+    Say "Installing $id ..."
+    claude plugin install $id --scope user
+    if ($LASTEXITCODE -ne 0) { Warn "Could not install $id. Try it by hand: claude plugin install $id"; continue }
+    if ($p.needs) { Warn "$($p.plugin) needs: $($p.needs)" }
   }
 }
 

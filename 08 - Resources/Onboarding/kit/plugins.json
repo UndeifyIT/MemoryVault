@@ -1,0 +1,68 @@
+{
+  "marketplace": "claude-plugins-official",
+  "core": [
+    {
+      "plugin": "context7",
+      "why": "Current documentation for any library or framework, so code isn't written from stale memory.",
+      "skipIfMcpServer": "context7"
+    },
+    {
+      "plugin": "playwright",
+      "why": "Drives a real browser: end-to-end tests, UI checks, screenshots, reproducing bugs."
+    },
+    {
+      "plugin": "superpowers",
+      "why": "Systematic debugging, test-driven development, brainstorming and plan-then-execute workflows."
+    },
+    {
+      "plugin": "code-review",
+      "why": "Multi-agent review of a pull request or diff for real bugs."
+    },
+    {
+      "plugin": "security-guidance",
+      "why": "Security review of generated code: pattern warnings on edits and a diff review before finishing."
+    }
+  ],
+  "extras": [
+    {
+      "plugin": "supabase",
+      "why": "Database, auth, storage and advisors for BakeFlow and ShiftOS. Needs a Supabase login. Keep agent access read-only on production.",
+      "needs": "Supabase account login"
+    },
+    {
+      "plugin": "github",
+      "why": "Repos, issues and pull requests from inside Claude.",
+      "needs": "GitHub personal access token"
+    },
+    {
+      "plugin": "sentry",
+      "why": "Production error monitoring: read reports and stack traces, debug live failures.",
+      "needs": "Sentry account (free developer tier)"
+    },
+    {
+      "plugin": "posthog",
+      "why": "Product analytics, feature flags and error tracking; shows what users actually do, which feeds marketing and strategy.",
+      "needs": "PostHog account (free tier)"
+    },
+    {
+      "plugin": "chrome-devtools-mcp",
+      "why": "Live Chrome debugging: performance traces, network requests, console errors.",
+      "needs": "Chrome"
+    },
+    {
+      "plugin": "semgrep",
+      "why": "Free static security scanning while code is written.",
+      "needs": "Semgrep installed"
+    },
+    {
+      "plugin": "claude-security",
+      "why": "Deep vulnerability scan of your own code with every finding challenged. Run before releases; it uses a lot of tokens.",
+      "needs": "Nothing, but expect heavy usage"
+    },
+    {
+      "plugin": "typescript-lsp",
+      "why": "TypeScript and JavaScript code intelligence (definitions, references, types).",
+      "needs": "typescript-language-server installed globally"
+    }
+  ]
+}
