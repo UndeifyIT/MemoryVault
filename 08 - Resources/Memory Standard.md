@@ -160,9 +160,12 @@ Every write follows the same steps:
 - If two people edited the same note and Git reports a conflict, keep both versions' content, merge by hand, and tell the other person.
 - Never commit `.obsidian/workspace.json` or other personal Obsidian state; the `.gitignore` covers it.
 
+### Secret scan
+The vault has a `pre-commit` hook (`.githooks/pre-commit`, switched on by the onboarding script) that blocks a commit adding a secret-bearing file (`.env`, keys, certificates, service-account JSON) or secret-looking content (cloud keys, GitHub and Slack tokens, Stripe, Paystack and Flutterwave keys, JWTs, database URLs with passwords, `password = ...` style values). It is a safety net, not permission to be careless. To clear a false positive, add `allowlist secret` to the line. If a real secret was ever committed or pushed, treat it as leaked and rotate it.
+
 ## 8. Upkeep
 
-Once a week, in about 15 minutes, Junior lists: notes missing frontmatter, notes not in their folder index, `idea` notes older than a month, facts with old check dates, and items in Active Priorities that look done. Isaac and Tolu decide what to archive, fix, or delete. Archiving follows the vault rules: Junior asks first.
+Once a week, in about 15 minutes, Junior lists: notes missing frontmatter, notes not in their folder index, `idea` notes older than a month, facts with old check dates, and items in Active Priorities that look done. The review also counts the notes. Junior finds things by searching the vault and following indexes, which is fast at this size. Once the vault passes about 150 notes, or recall starts missing things, add a topic index note and add it to this review. Isaac and Tolu decide what to archive, fix, or delete. Archiving follows the vault rules: Junior asks first.
 
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.

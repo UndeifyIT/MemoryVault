@@ -44,6 +44,8 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 - Writes Junior's boot file to `~\my-agent\CLAUDE.md` from `CLAUDE.template.txt`, filled in with the person's name and vault path. It never overwrites an existing one; it writes `CLAUDE.md.new` beside it instead.
 - Writes the one-memory redirect into Claude Code's memory for that folder.
 - Backs up Obsidian's `obsidian.json`, registers the vault, and checks the path exists.
+- Turns on the vault's secret-scan hook (`git config core.hooksPath .githooks`), so a commit that adds a key, token, database URL with a password, or a `.env` or key file is blocked.
+- Adds a small hook to `~\.claude\settings.json` (backing the file up first, merging with what's there) that, after every successful `git commit` in any project, reminds Claude to run Junior's handoff routine. It only acts when Junior is loaded.
 - Installs the `junior` and `junior-off` skills (from `junior-SKILL.txt` and `junior-off-SKILL.txt`) into `~\.claude\skills`, updating them on every run.
 - Puts a **Chat with Junior** launcher on the Desktop. It does not start at login.
 
@@ -60,4 +62,6 @@ On a person's first session Junior asks a few questions and saves their profile 
 - `onboard.ps1`: the setup script.
 - `junior-SKILL.txt`: the source of the `junior` skill that makes `load junior` work.
 - `junior-off-SKILL.txt`: the source of the `junior-off` skill that makes `kill junior` work.
+- `junior-handoff-nudge.json`: the message the commit hook feeds Claude. The hook is `cat "$HOME/.claude/hooks/junior-handoff-nudge.json"` on `PostToolUse`, matcher `Bash`, filtered to `git commit *`. It needs no Node. It only matches a plain `git commit ...`, not `git -C` or `git -c ... commit`.
+- The vault's own `.githooks/pre-commit` is the secret scan. To silence a false positive, add `allowlist secret` to that line. Never bypass it for a real secret: rotate the secret instead.
 - `CLAUDE.template.txt`: Junior's boot file with `{{NAME}}` and `{{VAULT_PATH}}` placeholders.
