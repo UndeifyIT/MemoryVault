@@ -254,11 +254,10 @@ if ($SkipPlugins) {
   if (Test-Path $installedFile) {
     try { $installed = @((Get-Content -Raw $installedFile | ConvertFrom-Json).plugins.PSObject.Properties.Name) } catch { }
   }
-  $mcpNames = @()
+  # ~/.claude.json can hold keys that differ only by case, which Windows PowerShell cannot parse, so search the raw text
+  $cjRaw = ''
   $cj = Join-Path $HOME '.claude.json'
-  if (Test-Path $cj) {
-    try { $mcpNames = @((Get-Content -Raw $cj | ConvertFrom-Json).mcpServers.PSObject.Properties.Name) } catch { }
-  }
+  if (Test-Path $cj) { $cjRaw = Get-Content -Raw $cj }
   $knownFile = Join-Path $claudeHome 'plugins\known_marketplaces.json'
   $haveMk = (Test-Path $knownFile) -and ((Get-Content -Raw $knownFile) -match [regex]::Escape($mk))
   if (-not $haveMk -and $mk -eq 'claude-plugins-official' -and -not $DryRun) {
@@ -277,7 +276,7 @@ if ($SkipPlugins) {
   foreach ($p in $want) {
     $id = "$($p.plugin)@$mk"
     if ($installed -contains $id) { Say "$($p.plugin) is already installed."; continue }
-    if ($p.skipIfMcpServer -and ($mcpNames -contains $p.skipIfMcpServer)) {
+    if ($p.skipIfMcpServer -and ($cjRaw -match ('"' + [regex]::Escape($p.skipIfMcpServer) + '"\s*:\s*\{'))) {
       Say "$($p.plugin): you already have a '$($p.skipIfMcpServer)' MCP server set up, so I didn't add a duplicate."
       continue
     }

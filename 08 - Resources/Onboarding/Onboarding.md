@@ -30,6 +30,38 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 3. Answer the one question (first name). Close Obsidian first if it's open.
 4. Open Obsidian. Then, in any project in VS Code with the Claude Code extension, start a chat and type **`load junior`** (or `/junior`). Junior loads into that conversation for that codebase. Without VS Code, double-click **Chat with Junior** on the Desktop instead.
 
+## The baseline kit (every Junior gets this)
+
+The setup script installs these on every machine. The list lives in `kit/plugins.json`; edit that file to change it, and re-run the script to apply.
+
+| Tool | Helps with | Why it's there |
+|---|---|---|
+| context7 | Coding | Current docs for any library, so code isn't written from stale memory. Skipped if the machine already has a `context7` server. |
+| playwright | Testing, debugging | Drives a real browser: end-to-end tests, UI checks, screenshots, reproducing bugs. |
+| superpowers | Coding, testing, debugging | Systematic debugging, test-driven development, brainstorming, plan-then-execute. |
+| code-review | Coding | Multi-agent review of a diff or pull request for real bugs. |
+| security-guidance | Security | Security review of generated code as it's written. |
+| `jaredrhod-marketing` skill | Marketing | Jared's marketing playbook, installed from a reviewed, vendored copy (`kit/jaredrhod-marketing.zip`, source and license in `kit/jaredrhod-marketing.SOURCE.txt`). |
+
+**Extras (opt-in, most need an account).** Add them with `-Extras`, for example `onboard.ps1 -Extras supabase,sentry`, or `-Extras all`:
+
+| Extra | Helps with | Needs |
+|---|---|---|
+| supabase | Coding, monitoring | Supabase login. Both BakeFlow and ShiftOS run on Supabase. Keep agent access read-only on production. |
+| github | Coding | GitHub personal access token. |
+| sentry | Monitoring, debugging | Sentry account (free developer tier). |
+| posthog | Marketing, monitoring | PostHog account (free tier): what users actually do, feature flags, error tracking. |
+| chrome-devtools-mcp | Debugging | Chrome: performance traces, network, console. |
+| semgrep | Security | Semgrep installed: free static scanning while coding. |
+| claude-security | Security | Nothing, but it uses a lot of tokens; run it before releases. |
+| typescript-lsp | Coding | `typescript-language-server` installed globally. |
+
+Uptime monitoring has no official plugin. Use a free external monitor for the live sites and the Supabase endpoints.
+
+**Security notes for the kit (CISO view).** Every plugin is code or an MCP server with access to your machine or accounts, so add one only for a reason. Playwright's server is started with `npx @playwright/mcp@latest`, which fetches the newest version each time; if that ever concerns you, pin a version in your own plugin settings. Never give an agent write access to a production database. Plugins update themselves through the marketplace; review changes for anything that touches secrets or the network.
+
+To preview what the script would install without changing anything, add `-DryRun`. To skip plugins entirely, add `-SkipPlugins`.
+
 ## Loading Junior in a codebase
 
 - `load junior` triggers the `junior` skill installed at `~\.claude\skills\junior\SKILL.md`. It reads the boot file (`~\my-agent\CLAUDE.md`), becomes Junior on top of that project's own instructions, reads the vault index, yesterday's daily note and Active Priorities, and matches the codebase to a vault project.
@@ -46,6 +78,7 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 - Backs up Obsidian's `obsidian.json`, registers the vault, and checks the path exists.
 - Turns on the vault's secret-scan hook (`git config core.hooksPath .githooks`), so a commit that adds a key, token, database URL with a password, or a `.env` or key file is blocked.
 - Adds a small hook to `~\.claude\settings.json` (backing the file up first, merging with what's there) that, after every successful `git commit` in any project, reminds Claude to run Junior's handoff routine. It only acts when Junior is loaded.
+- Installs the baseline kit: the marketing skill and the core plugins (see "The baseline kit" below), plus any `-Extras` you ask for.
 - Installs the `junior` and `junior-off` skills (from `junior-SKILL.txt` and `junior-off-SKILL.txt`) into `~\.claude\skills`, updating them on every run.
 - Puts a **Chat with Junior** launcher on the Desktop. It does not start at login.
 
@@ -62,6 +95,8 @@ On a person's first session Junior asks a few questions and saves their profile 
 - `onboard.ps1`: the setup script.
 - `junior-SKILL.txt`: the source of the `junior` skill that makes `load junior` work.
 - `junior-off-SKILL.txt`: the source of the `junior-off` skill that makes `kill junior` work.
-- `junior-handoff-nudge.json`: the message the commit hook feeds Claude. The hook is `cat "$HOME/.claude/hooks/junior-handoff-nudge.json"` on `PostToolUse`, matcher `Bash`, filtered to `git commit *`. It needs no Node. It only matches a plain `git commit ...`, not `git -C` or `git -c ... commit`.
+- `junior-handoff-nudge.json`: the message the commit hook feeds Claude. The hook runs on `PostToolUse` with matcher `Bash`, and its command checks that the Bash command that just ran contained `git commit` before printing that file, so it stays silent for anything else. It needs no Node. It doesn't match `git -C ... commit` or `git -c ... commit`.
 - The vault's own `.githooks/pre-commit` is the secret scan. To silence a false positive, add `allowlist secret` to that line. Never bypass it for a real secret: rotate the secret instead.
+- `kit/plugins.json`: the list of core plugins and opt-in extras the script installs.
+- `kit/jaredrhod-marketing.zip` and `kit/jaredrhod-marketing.SOURCE.txt`: the vendored marketing skill and where it came from.
 - `CLAUDE.template.txt`: Junior's boot file with `{{NAME}}` and `{{VAULT_PATH}}` placeholders.
