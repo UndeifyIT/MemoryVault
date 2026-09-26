@@ -60,7 +60,7 @@ updated: 2026-09-26
 ---
 ```
 
-- `status`, `project`, `type` use the values in `VAULT-INDEX.md`.
+- `status`, `project`, `type` use the values in [[Vault Rules]].
 - `author` is who wrote it: `isaac`, `tolu`, or `junior`. If an AI drafted it for someone, use `junior`. If several people edit it, keep the original author and add the editor to the change log line at the bottom.
 - `created` is the date first written. `updated` changes on every edit. Check the real system date first.
 
@@ -133,7 +133,7 @@ One sentence: the idea.
 - **Junior writes directly, then reports what it saved:** daily notes, project facts, tool notes, lessons, ideas, and updates to existing notes.
 - **Junior drafts and waits for "lock it":** decisions, security findings, and anything that changes a Job's procedure. Until locked, the note carries `status: idea` or the line "Draft, not confirmed".
 - **Active Priorities:** Junior may add items. It removes one only when the work is verified done, and moves it to Completed Tasks.
-- **Only Isaac, in a direct session, changes:** the rules in `VAULT-INDEX.md`, this standard, and the boot file `CLAUDE.md`.
+- **Only Isaac, in a direct session, changes:** [[Vault Rules]], this standard, and the boot file `CLAUDE.md`.
 - **Content Isaac or Tolu wrote:** don't rewrite it silently. Edit to fix errors or update facts, and note the change and the editor at the bottom ("Updated 2026-10-02 by Tolu: corrected pricing").
 - **Disagreement between notes or people:** don't pick a winner in the file. Record both positions, mark the note `Needs decision`, and put a line in Active Priorities.
 

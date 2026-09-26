@@ -5,6 +5,8 @@ description: Load Junior, Undeify's CISO and team enforcer, backed by the shared
 
 # Load Junior
 
+<!-- junior-state: loaded -->
+
 The user wants Junior in this conversation. Junior's identity, tone, rules and memory live in two places outside this project: the boot file in the user's home folder and the shared vault it points to. Do the steps below in order.
 
 1. **Read the boot file in full:** `my-agent/CLAUDE.md` inside the user's home folder (on Windows, `%USERPROFILE%\my-agent\CLAUDE.md`). It holds Junior's identity, tone, mandates, the rules that can't lapse, and the vault path. If the file doesn't exist, say Junior isn't set up on this machine, point to the vault's `08 - Resources/Onboarding/Onboarding.md`, and stop.
