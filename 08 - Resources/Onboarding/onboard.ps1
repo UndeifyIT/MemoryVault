@@ -145,18 +145,21 @@ if ($already) {
 }
 
 # 6b. The "load junior" skill, so Junior loads inside any codebase (VS Code or terminal)
-$skillSrc = Join-Path $VaultDir '08 - Resources\Onboarding\junior-SKILL.txt'
-$skillDst = Join-Path $SkillsDir 'junior\SKILL.md'
-if (-not (Test-Path $skillSrc)) {
-  Warn 'junior-SKILL.txt is missing from the vault; skipping the "load junior" skill.'
-} else {
+#     and the "kill junior" skill, so anyone can switch it off
+foreach ($skill in 'junior', 'junior-off') {
+  $skillSrc = Join-Path $VaultDir "08 - Resources\Onboarding\$skill-SKILL.txt"
+  $skillDst = Join-Path $SkillsDir "$skill\SKILL.md"
+  if (-not (Test-Path $skillSrc)) {
+    Warn "$skill-SKILL.txt is missing from the vault; skipping the $skill skill."
+    continue
+  }
   New-Item -ItemType Directory -Force -Path (Split-Path $skillDst) | Out-Null
   $skillText = Get-Content -Raw -Encoding UTF8 $skillSrc
   if ((Test-Path $skillDst) -and ((Get-Content -Raw -Encoding UTF8 $skillDst) -ceq $skillText)) {
-    Say 'The "load junior" skill is already up to date.'
+    Say "The $skill skill is already up to date."
   } else {
     [IO.File]::WriteAllText($skillDst, $skillText, $utf8)
-    Say "Installed the ""load junior"" skill at $skillDst"
+    Say "Installed the $skill skill at $skillDst"
   }
 }
 
@@ -180,6 +183,7 @@ if (-not (git config --global user.name)) {
 Write-Host "Done, $Name." -ForegroundColor Green
 Write-Host '  1. Open Obsidian. It should open straight into the Undeify vault.'
 Write-Host '  2. Open any project in VS Code, start Claude Code, and type:  load junior   (or /junior).'
+Write-Host '     Want Junior off?  Type:  kill junior   (or /junior-off).'
 Write-Host '     No VS Code handy? Double-click "Chat with Junior" on your Desktop instead.'
 Write-Host '  3. On your first session Junior asks a few questions to write your profile into the vault.'
 Write-Host "  4. If Junior doesn't greet you by name, tell Isaac."

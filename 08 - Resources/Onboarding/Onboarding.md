@@ -34,6 +34,7 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 
 - `load junior` triggers the `junior` skill installed at `~\.claude\skills\junior\SKILL.md`. It reads the boot file (`~\my-agent\CLAUDE.md`), becomes Junior on top of that project's own instructions, reads the vault index, yesterday's daily note and Active Priorities, and matches the codebase to a vault project.
 - It lasts for that conversation. Start a new chat and say `load junior` again. `/junior` is the reliable form if the phrase ever doesn't trigger.
+- **Turning Junior off:** type `kill junior` (or `/junior-off`). This drops Junior for the rest of that conversation. Say "kill junior everywhere" and it also removes the always-on pointer in `~\.claude\CLAUDE.md`, if that person has one, so new chats start without Junior. `load junior` brings him back any time. Nobody is forced to use Junior.
 - Claude Code may ask permission the first time it reads the vault, since the vault sits outside the project folder. Allow it. To stop the prompts, add `Read(<vault path>/**)` and `Edit(<vault path>/**)` to the allow list in `~\.claude\settings.json`.
 
 ## What the script does
@@ -43,7 +44,7 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 - Writes Junior's boot file to `~\my-agent\CLAUDE.md` from `CLAUDE.template.txt`, filled in with the person's name and vault path. It never overwrites an existing one; it writes `CLAUDE.md.new` beside it instead.
 - Writes the one-memory redirect into Claude Code's memory for that folder.
 - Backs up Obsidian's `obsidian.json`, registers the vault, and checks the path exists.
-- Installs the `junior` skill (from `junior-SKILL.txt`) into `~\.claude\skills`, updating it on every run.
+- Installs the `junior` and `junior-off` skills (from `junior-SKILL.txt` and `junior-off-SKILL.txt`) into `~\.claude\skills`, updating them on every run.
 - Puts a **Chat with Junior** launcher on the Desktop. It does not start at login.
 
 Safe to re-run. It skips anything already done.
@@ -58,4 +59,5 @@ On a person's first session Junior asks a few questions and saves their profile 
 
 - `onboard.ps1`: the setup script.
 - `junior-SKILL.txt`: the source of the `junior` skill that makes `load junior` work.
+- `junior-off-SKILL.txt`: the source of the `junior-off` skill that makes `kill junior` work.
 - `CLAUDE.template.txt`: Junior's boot file with `{{NAME}}` and `{{VAULT_PATH}}` placeholders.
