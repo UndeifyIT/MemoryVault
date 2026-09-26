@@ -8,6 +8,7 @@ type: index
 One master note per recurring task. Each lists the exact notes that task needs and nothing else. Add a Job whenever Isaac explains the same task twice.
 
 ## Notes in this folder
+- [[Session Handoff and Resume]] — saving where a coding session stopped and picking a project back up.
 - [[Coding and Feature Work]] — building, fixing, and reviewing code across Undeify's projects.
 - [[Brainstorming and Idea Development]] — turning rough ideas into something Isaac and Tolu can build on.
 - [[Low-Budget Marketing Plan]] — organic marketing and strategy while funds are tight.

@@ -9,7 +9,7 @@ type: guide
 
 ## Boot chain (read these, in order, and you have the skill)
 1. This note, end to end.
-2. The index of the project being worked on: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]] — where the code lives and what's recorded about it.
+2. The project being worked on: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]]. Read its Status and Architecture notes (see [[Session Handoff and Resume]]) — where the code lives, where we stopped, what's next.
 3. [[Active Priorities]] — whether this work is tied to a current priority.
 
 ## The procedure
@@ -19,7 +19,7 @@ type: guide
 4. Prefer approaches that save time. Isaac and Tolu want to use loop engineering and graph engineering; ask Isaac how they want those applied and record the answer under Lessons.
 5. Make the change, then check it works by running it or its tests. Don't claim it works without evidence.
 6. Do a security pass: input handling, authentication, secrets, dependencies.
-7. Record what changed in today's daily note and in the project's notes.
+7. Run the handoff from [[Session Handoff and Resume]]: update the project's Status (where we stopped), Log, Architecture if needed, and today's daily note. Do it at every milestone, not just at the end.
 
 ## Quality bar
 - Verified by running it, not assumed.

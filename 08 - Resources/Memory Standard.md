@@ -32,6 +32,8 @@ Save it if a future session, or the other founder, would be worse off without it
 
 Anything that fits no row goes in `00 - Inbox`, and gets sorted at the next review.
 
+For project work (Status, Architecture, Log, Decisions, handoffs and how to resume), the exact layout and routines are in [[Project Notes Standard]]. That note governs where a project's notes live.
+
 ## 2. What never goes in
 
 - **Secrets.** Passwords, API keys, tokens, private keys, connection strings, `.env` contents. Write where it's stored ("in the team password manager, item X"), never the value.

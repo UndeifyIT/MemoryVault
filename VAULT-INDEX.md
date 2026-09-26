@@ -32,12 +32,12 @@ Our most important project right now.
 
 ## BakeFlow (03 - BakeFlow)
 
-Local copies on this machine: `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B`. Repo: https://github.com/isaaCurity/-Davila-B-B
+Repo: https://github.com/isaaCurity/-Davila-B-B. Isaac's local copies (machine-specific): `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B`.
 - **Status:** Not recorded yet.
 
 ## ShiftOS (04 - ShiftOS)
 
-Local copy on this machine: `C:\Users\HP\ShiftOS-main`. GitHub: https://github.com/ShiftOS
+GitHub: https://github.com/ShiftOS. Isaac's local copy (machine-specific): `C:\Users\HP\ShiftOS-main`.
 - **Status:** Not recorded yet.
 
 ## Linhora (05 - Linhora)
@@ -115,7 +115,7 @@ updated: YYYY-MM-DD
 ---
 ```
 
-`author` is who wrote the note; `created` is the date first written; `updated` changes on every edit. What is allowed into the vault, where each kind of memory lives, and how to write it are set out in [[Memory Standard]]. Follow it on every write.
+`author` is who wrote the note; `created` is the date first written; `updated` changes on every edit. What is allowed into the vault, where each kind of memory lives, and how to write it are set out in [[Memory Standard]]. Follow it on every write. Every project keeps a Status, Architecture and Log note (plus a Decisions folder), and Junior saves "where we stopped" and picks work back up as set out in [[Project Notes Standard]]. When a question is about our work, search the vault before answering.
 
 When creating or editing a note, add `wikilinks`:
 
