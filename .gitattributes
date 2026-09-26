@@ -1,5 +1,5 @@
 # Append-only notes merge automatically instead of conflicting
 *Log.md merge=union
-01 - Daily Notes/**/*.md merge=union
+"01 - Daily Notes/**/*.md" merge=union
 .githooks/* text eol=lf
 *.sh text eol=lf
