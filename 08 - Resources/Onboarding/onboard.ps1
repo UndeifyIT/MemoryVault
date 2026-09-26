@@ -78,8 +78,12 @@ New-Item -ItemType Directory -Force -Path $AgentDir | Out-Null
 $claudeMd = Join-Path $AgentDir 'CLAUDE.md'
 $boot = (Get-Content -Raw -Encoding UTF8 $tplPath).Replace('{{NAME}}', $Name).Replace('{{VAULT_PATH}}', $VaultDir)
 if (Test-Path $claudeMd) {
-  [IO.File]::WriteAllText("$claudeMd.new", $boot, $utf8)
-  Warn "A CLAUDE.md already exists in $AgentDir, so I left it alone. The new one is CLAUDE.md.new; compare and merge by hand."
+  if ((Get-Content -Raw -Encoding UTF8 $claudeMd) -ceq $boot) {
+    Say 'Junior''s boot file is already up to date.'
+  } else {
+    [IO.File]::WriteAllText("$claudeMd.new", $boot, $utf8)
+    Warn "A different CLAUDE.md already exists in $AgentDir, so I left it alone. The current template is CLAUDE.md.new; compare and merge by hand."
+  }
 } else {
   [IO.File]::WriteAllText($claudeMd, $boot, $utf8)
   Say "Wrote Junior's boot file to $claudeMd"
