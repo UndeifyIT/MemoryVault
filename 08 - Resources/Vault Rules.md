@@ -117,3 +117,15 @@ This is universal — every AI that reads this vault does it. Isaac uses multipl
 Judgment: a passing mention is not a personality trait. Check for duplicates/contradictions; if new info contradicts an entry, update that entry rather than adding a second. Match existing tone. Never remove an entry unless explicitly contradicted. Fewer, higher-quality updates.
 
 Log every profile update in the daily note's "Profile Updates" section (e.g. "**Personal Interests:** added woodworking").
+
+## Who approves what
+
+- **Isaac only:** `VAULT-INDEX.md`, these Vault Rules, the Memory Standard, the Project Notes Standard, everything in `08 - Resources/Onboarding/` and its `kit/` folder (the boot template, skills, hooks, scripts, plugin list), the Junior Checks note, and any change to a risk's severity or an acceptance of risk in the Security Register.
+- **Either founder can "lock it":** a project decision, a finding, a Status or Architecture change, a Log rotation, a priorities change, and everything else in the vault. Tolu approves in the projects he leads. An approval is an explicit "lock it" or "approved" from a founder in the conversation; Junior never approves for itself.
+- **Waiting drafts:** anything still marked "Draft, not confirmed" is a pending approval. The daily digest lists pending items with their age, oldest first, and anything older than seven days goes at the top.
+
+## Names, links and paths
+
+- **Unique names.** A note's file name must be unique across the vault, because links find notes by name. Project notes start with the project name ("BakeFlow Status", "MindBridge Auth Decision"). Company-wide notes get a specific name. Never name a note "Notes", "Decisions" or "Todo".
+- **No machine-specific paths** in shared notes. Record repo URLs. A path that only works on one person's machine goes in that person's section and says whose machine it is.
+- **Automated check.** The vault check flags duplicate names, links that don't resolve, and Windows user-folder paths in shared notes. It only warns.

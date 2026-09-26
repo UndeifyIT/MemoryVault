@@ -11,7 +11,7 @@ Read this file at the start of every conversation to understand who I am, how I 
 
 ## Vault location
 
-This vault lives at `C:\Users\HP\Undeify`. If you use Claude Desktop, claude.ai, or any AI other than Claude Code, you have to point it at this path (set it in your MCP / filesystem connector, and tell the AI "my vault is here"). An AI can't read or maintain a vault it can't find.
+This vault lives in each person's home folder as `Undeify`; the exact path is in their boot file (Isaac's copy, machine-specific: `C:\Users\HP\Undeify`). If you use Claude Desktop, claude.ai, or any AI other than Claude Code, you have to point it at this path (set it in your MCP / filesystem connector, and tell the AI "my vault is here"). An AI can't read or maintain a vault it can't find.
 
 ---
 
