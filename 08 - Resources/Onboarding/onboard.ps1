@@ -18,7 +18,8 @@ param(
   [string]$AgentDir = (Join-Path $HOME 'my-agent'),
   [string]$ObsidianConfigDir = (Join-Path $env:APPDATA 'obsidian'),
   [string]$ClaudeProjectsDir = (Join-Path $HOME '.claude\projects'),
-  [string]$DesktopDir = [Environment]::GetFolderPath('Desktop')
+  [string]$DesktopDir = [Environment]::GetFolderPath('Desktop'),
+  [string]$SkillsDir = (Join-Path $HOME '.claude\skills')
 )
 
 $ErrorActionPreference = 'Stop'
@@ -143,6 +144,22 @@ if ($already) {
   Say 'Registered the vault with Obsidian.'
 }
 
+# 6b. The "load junior" skill, so Junior loads inside any codebase (VS Code or terminal)
+$skillSrc = Join-Path $VaultDir '08 - Resources\Onboarding\junior-SKILL.txt'
+$skillDst = Join-Path $SkillsDir 'junior\SKILL.md'
+if (-not (Test-Path $skillSrc)) {
+  Warn 'junior-SKILL.txt is missing from the vault; skipping the "load junior" skill.'
+} else {
+  New-Item -ItemType Directory -Force -Path (Split-Path $skillDst) | Out-Null
+  $skillText = Get-Content -Raw -Encoding UTF8 $skillSrc
+  if ((Test-Path $skillDst) -and ((Get-Content -Raw -Encoding UTF8 $skillDst) -ceq $skillText)) {
+    Say 'The "load junior" skill is already up to date.'
+  } else {
+    [IO.File]::WriteAllText($skillDst, $skillText, $utf8)
+    Say "Installed the ""load junior"" skill at $skillDst"
+  }
+}
+
 # 7. Desktop launcher
 $launcher = Join-Path $DesktopDir 'Chat with Junior.bat'
 if (Test-Path $launcher) {
@@ -162,5 +179,7 @@ if (-not (git config --global user.name)) {
 }
 Write-Host "Done, $Name." -ForegroundColor Green
 Write-Host '  1. Open Obsidian. It should open straight into the Undeify vault.'
-Write-Host '  2. Double-click "Chat with Junior" on your Desktop. Junior will introduce itself and ask a few questions to write your profile into the vault.'
-Write-Host "  3. If Junior doesn't greet you by name, tell Isaac."
+Write-Host '  2. Open any project in VS Code, start Claude Code, and type:  load junior   (or /junior).'
+Write-Host '     No VS Code handy? Double-click "Chat with Junior" on your Desktop instead.'
+Write-Host '  3. On your first session Junior asks a few questions to write your profile into the vault.'
+Write-Host "  4. If Junior doesn't greet you by name, tell Isaac."
