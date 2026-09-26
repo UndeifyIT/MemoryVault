@@ -14,7 +14,7 @@ type: guide
 
 ## The procedure
 1. Identify which project the task belongs to and read its index.
-2. Read the code involved in full before proposing changes.
+2. Read the code involved before proposing changes: search for the right files, then read those files or the relevant ranges. Never open a large file whole (see [[Project Notes Standard]], section 6).
 3. State the plan in plain language, including which files change. Wait for Isaac's confirmation before any edit, commit, push, or deploy (boot config rule).
 4. Prefer approaches that save time. Isaac and Tolu want to use loop engineering and graph engineering; ask Isaac how they want those applied and record the answer under Lessons.
 5. Make the change, then check it works by running it or its tests. Don't claim it works without evidence.

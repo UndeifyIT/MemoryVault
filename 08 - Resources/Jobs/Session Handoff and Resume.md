@@ -30,7 +30,7 @@ updated: 2026-09-26
 1. Read Status, Architecture and the last lines of Log.
 2. Check the repo's real state (`git status`, recent commits). If it disagrees with the notes, trust the repo and fix the notes.
 3. Report where things stand in a few lines, propose the next step, and wait.
-4. If Status and Architecture are still "Not recorded yet", survey the repo in full, draft both marked "Draft, not confirmed", and ask for confirmation.
+4. If Status and Architecture are still "Not recorded yet", survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both marked "Draft, not confirmed" listing what you read, and ask for confirmation.
 
 ## Quality bar
 - A stranger could continue the work from Status alone: branch, files, next action, how to test.

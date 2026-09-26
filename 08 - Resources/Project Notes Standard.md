@@ -76,11 +76,21 @@ Junior does this without being asked, at every one of these moments: after each 
 3. Read the last ten or so lines of `<Project> Log`, and check the repo's actual state (`git status`, recent commits). If the repo and the notes disagree, believe the repo, say so, and fix the notes.
 4. Say in a few lines where things stand and propose the next step. Then wait.
 
-If Status and Architecture still say "Not recorded yet", bootstrap them: survey the repo in full (every relevant file, no skimming), draft both notes from what you find, mark them "Draft, not confirmed", and ask the user to confirm or correct.
+If Status and Architecture still say "Not recorded yet", bootstrap them: survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both notes from what you find, mark them "Draft, not confirmed" with a line listing what you read and what you did not, and ask the user to confirm or correct.
 
 ## 6. Recall before answering
 
 When a question is about our work (what we decided, how something works, what we did last, why we chose a tool), search the vault first with Glob and Grep and read the matching notes, before answering from memory or from the code alone. Say where the answer came from. If the vault has nothing, say so plainly and offer to save the answer once it's found. Never present a guess as recalled fact.
 
+## 6. Reading rules (don't burn tokens on big files)
+
+Reading is the main cost of a session. The vault's own notes are small, so the risk is big files in the repos and the odd note that grows too long.
+
+- **Check size first.** A file of a few hundred lines can be read whole. Anything larger gets searched (Grep) and read by range (offset and limit), or by its start or end only.
+- **Never read whole:** logs and changelogs (BakeFlow's `IMPLEMENTATION_LOG.md` is over 500 KB), lockfiles, generated or build output, `node_modules`, `dist`, data dumps, long specs. A Read guard hook refuses whole-file reads over about 60 KB and tells Junior to use ranges; set `JUNIOR_READ_LIMIT_BYTES` to change the limit.
+- **How to read a project's control files:** `CURRENT_TASK` and `BLOCKERS` by their top section only; the Log by its last ten lines (`tail`); `ARCHITECTURE_DECISIONS` by searching for the topic. Read each project's vault Status and Architecture whole; they are kept short on purpose.
+- **Delegate broad searches.** For "where is X used" or "survey this repo", give the search to a subagent so only its conclusion enters the conversation.
+- **Keep vault notes small:** Status under about 80 lines, Architecture under about 120, any other note under about 200. The weekly review lists notes over 200 lines so they can be split. When a note grows, move detail into a linked note and keep the parent as the summary.
+- **Say what you read.** When a summary or audit is based on a partial read, state what was read and what wasn't. Never claim a whole-file read that was a search.
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.

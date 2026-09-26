@@ -25,7 +25,7 @@ updated: 2026-09-26
 6. Add one line per project to today's daily note, following the Memory Standard.
 
 ## Weekly review
-1. Do the Upkeep steps in the Memory Standard: notes missing frontmatter, notes missing from their folder index, `idea` notes older than a month, stale facts, Inbox notes that need a home, and the note count.
+1. Do the Upkeep steps in the Memory Standard: notes missing frontmatter, notes missing from their folder index, `idea` notes older than a month, stale facts, Inbox notes that need a home, notes over 200 lines that should be split, and the note count.
 2. Review the open risks in the Security Register and run the weekly checks listed there.
 3. On the 1st of the month, run the Tool Register review.
 4. Add this week's row to the Marketing Hub metrics log and flag what's missing from the content calendar.
