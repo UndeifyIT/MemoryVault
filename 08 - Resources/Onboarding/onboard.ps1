@@ -60,6 +60,8 @@ if (Test-Path (Join-Path $VaultDir '.git')) {
   git clone $RepoUrl $VaultDir
   if ($LASTEXITCODE -ne 0) { throw 'git clone failed. Check the URL and that you have been added to the repo.' }
 }
+# Turn on the vault's secret-scan hook: commits that add keys, tokens or .env files are blocked.
+git -C $VaultDir config core.hooksPath .githooks
 $tplPath = Join-Path $VaultDir '08 - Resources\Onboarding\CLAUDE.template.txt'
 if (-not (Test-Path $tplPath)) { throw "Boot-file template not found at $tplPath. Is this the Undeify vault?" }
 
@@ -160,6 +162,48 @@ foreach ($skill in 'junior', 'junior-off') {
   } else {
     [IO.File]::WriteAllText($skillDst, $skillText, $utf8)
     Say "Installed the $skill skill at $skillDst"
+  }
+}
+
+# 6c. Handoff nudge: after a successful `git commit`, remind Claude to save "where we stopped" (only acts if Junior is loaded)
+$hookSrc = Join-Path $VaultDir '08 - Resources\Onboarding\junior-handoff-nudge.json'
+if (Test-Path $hookSrc) {
+  $claudeHome = Split-Path $SkillsDir
+  $hookDir = Join-Path $claudeHome 'hooks'
+  New-Item -ItemType Directory -Force -Path $hookDir | Out-Null
+  Copy-Item $hookSrc (Join-Path $hookDir 'junior-handoff-nudge.json') -Force
+  $settingsFile = Join-Path $claudeHome 'settings.json'
+  $hookCmd = 'cat "$HOME/.claude/hooks/junior-handoff-nudge.json"'
+  $settings = [pscustomobject]@{}
+  $parsed = $true
+  if (Test-Path $settingsFile) {
+    try { $settings = Get-Content -Raw $settingsFile | ConvertFrom-Json } catch { $parsed = $false }
+  }
+  if (-not $parsed) {
+    Warn "Could not read $settingsFile as JSON, so I left it alone. Add the handoff hook by hand (see Onboarding.md)."
+  } else {
+    if (-not $settings.PSObject.Properties['hooks']) { $settings | Add-Member -NotePropertyName hooks -NotePropertyValue ([pscustomobject]@{}) }
+    $existing = @()
+    if ($settings.hooks.PSObject.Properties['PostToolUse']) { $existing = @($settings.hooks.PostToolUse) }
+    $present = $existing | Where-Object { $_.hooks | Where-Object { $_.command -eq $hookCmd } }
+    if ($present) {
+      Say 'Handoff nudge hook is already in your Claude settings.'
+    } else {
+      if (Test-Path $settingsFile) { Copy-Item $settingsFile "$settingsFile.bak" -Force }
+      $entry = [pscustomobject]@{
+        matcher = 'Bash'
+        hooks   = @([pscustomobject]@{ type = 'command'; command = $hookCmd; 'if' = 'Bash(git commit *)'; timeout = 10 })
+      }
+      $all = @($existing) + $entry
+      if ($settings.hooks.PSObject.Properties['PostToolUse']) { $settings.hooks.PostToolUse = $all }
+      else { $settings.hooks | Add-Member -NotePropertyName PostToolUse -NotePropertyValue $all }
+      [IO.File]::WriteAllText($settingsFile, ($settings | ConvertTo-Json -Depth 20), $utf8)
+      try { $null = Get-Content -Raw $settingsFile | ConvertFrom-Json; Say 'Added the handoff nudge hook to your Claude settings.' }
+      catch {
+        if (Test-Path "$settingsFile.bak") { Copy-Item "$settingsFile.bak" $settingsFile -Force }
+        Warn 'The settings edit did not verify, so I restored your backup. Add the handoff hook by hand (see Onboarding.md).'
+      }
+    }
   }
 }
 
