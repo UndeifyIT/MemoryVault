@@ -80,6 +80,8 @@ awk -f "$here/vault-check.awk" -v mode="$m" -v vault="$VAULT" -v home="$HOME" -v
   -v statusmax=$STATUS_MAX -v archmax=$ARCH_MAX -v notemax=$NOTE_MAX -v logmax=$LOG_MAX \
   -v priomax=$PRIORITIES_MAX -v notesmax=$NOTES_MAX -v stale=$STALE_DAYS -v draftdays=$DRAFT_DAYS \
   -v snooze=$SNOOZE_DAYS -v weeklydays=$WEEKLY_DAYS -v budget=$STARTUP_BYTES_MAX > "$T.out" 2>/dev/null
+# A broken awk must not look like "all is well": say so, once, instead of printing nothing.
+if [ $? -ne 0 ] && [ "$mode" != "--precommit" ]; then echo "vault-check could not run (awk failed). Run vault-check.sh --doctor."; fi
 
 weekly=0
 while IFS= read -r line; do

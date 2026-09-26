@@ -9,6 +9,7 @@
 
 IFS= read -r -d '' in
 ch=${JUNIOR_CLAUDE_HOME:-$HOME/.claude}
+in=${in//\": \"/\":\"}                    # tolerate pretty-printed JSON
 
 tool=${in#*\"tool_name\":\"}; tool=${tool%%\"*}
 sid=${in#*\"session_id\":\"}; sid=${sid%%\"*}

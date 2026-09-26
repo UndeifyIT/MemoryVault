@@ -40,7 +40,11 @@ printf '%s\n' "$names" | while IFS= read -r f; do
     # label is the first field; the rest, rejoined, is the regex
     regex=$(printf '%s' "$regex_rest")
     [ -z "$regex" ] && continue
-    if printf '%s\n' "$added" | grep -Eiq -e "$regex"; then
+    hay=$added
+    # The loose "assigned value" rule skips lines that only READ a secret from the environment or hold a placeholder,
+    # so ordinary code does not train people to bypass the hook.
+    [ "$label" = "Assigned secret value" ] && hay=$(printf '%s\n' "$added" | grep -Evi 'process\.env|import\.meta\.env|os\.environ|getenv|Deno\.env|\$\{|<[a-z_-]+>|your[_-]|example|placeholder|changeme|xxxx|\*\*\*')
+    if printf '%s\n' "$hay" | grep -Eiq -e "$regex"; then
       echo "BLOCKED: possible $label added in: $f"
       echo x >> "$marker"
     fi

@@ -36,6 +36,19 @@ ident() { # export a commit identity: the repo's own if set, else a neutral one
   export GIT_AUTHOR_EMAIL=${e:-junior@undeify.invalid} GIT_COMMITTER_EMAIL=${e:-junior@undeify.invalid}
 }
 
+show_status() {
+  if [ -f "$REC" ]; then
+    echo "Pending proposal: branch $(recget branch), patch id $(recget patch), created $(recget created_day). Files: $(recget files)"
+    echo "Say \"lock it\" to apply (vault-maintain.sh apply $(recget patch)), or discard it."
+  else echo "No pending proposal."; fi
+}
+
+uniq_archive() { # uniq_archive <worktree> <name>: a name whose note does not exist yet, so a same-day rotation never overwrites an archive
+  n=$2; i=2
+  while [ -e "$1/07 - Archive/$n.md" ]; do n="$2 $i"; i=$((i+1)); done
+  printf '%s' "$n"
+}
+
 sync_state() { # sets ahead/behind against the upstream after a fetch
   git fetch -q 2>/dev/null || echo "note: could not reach origin, using the last fetch"
   ab=$(git rev-list --left-right --count 'HEAD...@{u}' 2>/dev/null) || { echo "No upstream branch set."; return 1; }
@@ -62,7 +75,7 @@ rotate_log() {
   awk '/^[0-9][0-9][0-9][0-9]-[0-9][0-9]-[0-9][0-9] \|/ { s=1 } s' "$full" > "$T.orig"
   cat "$T.mov" "$T.kep" > "$T.mk"
   cmp -s "$T.orig" "$T.mk" || { echo "Invariant failed for $f (moved + kept differs from the original). Nothing changed."; return 2; }
-  an="$proj Log archive $stamp8"; af="07 - Archive/$an.md"
+  an=$(uniq_archive "$d" "$proj Log archive $stamp8"); af="07 - Archive/$an.md"
   mkdir -p "$d/07 - Archive"
   { frontmatter archived "${slug:-meta}" log; printf '# %s\n\nEntries moved out of [[%s Log]] on %s to keep it short. Oldest first.\n\n' "$an" "$proj" "$today"; cat "$T.mov"; } > "$d/$af"
   { cat "$T.pre"; printf 'Older entries: [[%s]]\n' "$an"; cat "$T.kep"; } > "$full"
@@ -91,7 +104,7 @@ rotate_prio() {
   awk '/^### Completed Tasks/{s=1;next} /^### /{s=0} s&&/^- \[x\]/' "$T.pn" > "$T.pk"
   cat "$T.pk" "$T.pm" > "$T.pmk"
   cmp -s "$T.po" "$T.pmk" || { echo "Invariant failed for Active Priorities (moved + kept differs from the original). Nothing changed."; return 2; }
-  an="Completed Priorities $stamp8"; af="07 - Archive/$an.md"
+  an=$(uniq_archive "$d" "Completed Priorities $stamp8"); af="07 - Archive/$an.md"
   mkdir -p "$d/07 - Archive"
   { frontmatter archived meta log; printf '# %s\n\nCompleted items moved out of [[Active Priorities]] on %s. Newest first.\n\n' "$an" "$today"; cat "$T.pm"; } > "$d/$af"
   awk -v link="- Older completed items: [[$an]]" '{ print } /^### Completed Tasks/ { print link }' "$T.pn" > "$full"
@@ -106,11 +119,7 @@ $af
 }
 
 case "$cmd" in
-  status)
-    if [ -f "$REC" ]; then
-      echo "Pending proposal: branch $(recget branch), patch id $(recget patch), created $(recget created_day). Files: $(recget files)"
-      echo "Say \"lock it\" to apply (vault-maintain.sh apply $(recget patch)), or discard it."
-    else echo "No pending proposal."; fi ;;
+  status) show_status ;;
 
   discard)
     if [ -f "$REC" ]; then
@@ -118,7 +127,7 @@ case "$cmd" in
     else echo "No pending proposal."; fi ;;
 
   propose)
-    if [ -f "$REC" ]; then echo "A proposal is already pending. Apply it or discard it first."; "$0" status; exit 1; fi
+    if [ -f "$REC" ]; then echo "A proposal is already pending. Apply it or discard it first."; show_status; exit 1; fi
     sync_state || exit 1
     [ "${ahead:-0}" -gt 0 ] && { echo "Refusing: this vault has $ahead unpushed commit(s). Push or resolve them first."; exit 1; }
     if [ "${behind:-0}" -gt 0 ]; then git merge --ff-only -q '@{u}' 2>/dev/null || { echo "Refusing: could not fast-forward to origin."; exit 1; }; fi
@@ -176,6 +185,7 @@ EOF
 
   apply)
     want=$2
+    ident                                   # the rebase below commits, so it needs an identity even on a fresh machine
     [ -f "$REC" ] || { echo "No pending proposal."; exit 1; }
     pid=$(recget patch); branch=$(recget branch); dir=$(recget dir); base=$(recget base); files=$(recget files); created=$(recget created)
     [ "$want" = "$pid" ] || { echo "Refusing: the patch id you approved ($want) is not the pending one ($pid)."; exit 1; }

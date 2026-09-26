@@ -180,7 +180,12 @@ function Set-ClaudeHook {
   $found = 0; $stale = 0
   foreach ($e in $existing) {
     foreach ($h in @($e.hooks)) {
-      if ($h.command -match $Needle) { $found++; if ($h.command -ne $Command) { $stale++; $h.command = $Command } }
+      if ($h.command -match $Needle) {
+        $found++
+        if ($h.command -ne $Command) { $stale++; $h.command = $Command }
+        # a wider matcher (a new tool to watch) must reach machines that already have the hook
+        if ($Matcher -and $e.PSObject.Properties['matcher'] -and $e.matcher -ne $Matcher) { $stale++; $e.matcher = $Matcher }
+      }
     }
   }
   if ($found -gt 0) { if ($stale -gt 0) { return 'updated' } else { return 'unchanged' } }
@@ -223,7 +228,7 @@ if ((Test-Path $srcNudge) -and (Test-Path $srcGuard)) {
     $r2 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Read' -Needle 'junior-read-guard' -Command $guardCmd -IfRule ''
     # prompt-injection gate: mark after external reads, ask before risky actions, clear on a new human prompt
     $r3 = Set-ClaudeHook -Settings $settings -Event 'PostToolUse' -Matcher 'WebFetch|mcp__.*' -Needle 'junior-taint-mark' -Command 'sh "$HOME/.claude/hooks/junior-taint-mark.sh"' -IfRule ''
-    $r4 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Write|Edit|MultiEdit|NotebookEdit|Bash|mcp__.*' -Needle 'junior-taint-gate' -Command 'sh "$HOME/.claude/hooks/junior-taint-gate.sh"' -IfRule ''
+    $r4 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|WebFetch|mcp__.*' -Needle 'junior-taint-gate' -Command 'sh "$HOME/.claude/hooks/junior-taint-gate.sh"' -IfRule ''
     $r5 = Set-ClaudeHook -Settings $settings -Event 'UserPromptSubmit' -Matcher '' -Needle 'junior-taint-clear' -Command 'sh "$HOME/.claude/hooks/junior-taint-clear.sh"' -IfRule ''
     if (-not (@($r1,$r2,$r3,$r4,$r5) | Where-Object { $_ -ne 'unchanged' })) {
       Say 'Claude hooks (handoff nudge, read guard, injection gate) are already up to date.'

@@ -72,5 +72,19 @@ sed -i 's/^created=.*/created=1000/' $W/cc/junior-state/maint.rec
 out=$(run isaac apply "$pid"); echo "$out" | grep -q "older than"; ok $? "expired proposal refused"
 run isaac discard | grep -q discarded; ok $? "discard works"
 
+echo "S9 a second rotation on the same day never overwrites the first archive"
+mk_env; out=$(run isaac propose); pid=$(echo "$out" | sed -n 's/^Patch id: \([0-9a-f]*\).*/\1/p'); run isaac apply "$pid" >/dev/null
+( cd $W/isaac; i=1; while [ $i -le 320 ]; do echo "2026-09-26 | isaac | later change $i | z$i" >> "03 - BakeFlow/BakeFlow Log.md"; i=$((i+1)); done; git commit -qam more; git push -q 2>/dev/null )
+first=$(cd $W/isaac; ls "07 - Archive"/BakeFlow\ Log\ archive*.md | head -1); before=$(entries "$first")
+out=$(run isaac propose); pid=$(echo "$out" | sed -n 's/^Patch id: \([0-9a-f]*\).*/\1/p'); run isaac apply "$pid" >/dev/null
+( cd $W/isaac; [ "$(ls "07 - Archive"/BakeFlow\ Log\ archive*.md | wc -l | tr -d ' ')" = 2 ] ); ok $? "two archive notes exist, not one overwritten"
+( cd $W/isaac; [ "$(entries "$first")" = "$before" ] ); ok $? "the first archive is unchanged"
+
+echo "S10 apply on a machine with no git identity still rebases"
+mk_env; out=$(run isaac propose); pid=$(echo "$out" | sed -n 's/^Patch id: \([0-9a-f]*\).*/\1/p')
+( cd $W/tolu; echo "tolu note" > "03 - BakeFlow/Other.md"; git add -A; git commit -qm other; git push -q 2>/dev/null )
+( cd $W/isaac; git config --unset user.name; git config --unset user.email )
+out2=$(GIT_CONFIG_GLOBAL=/dev/null GIT_CONFIG_NOSYSTEM=1 run isaac apply "$pid"); echo "$out2" | grep -q "Applied and pushed"; ok $? "applied with no configured identity"
+
 echo; echo "RESULT: $pass passed, $fail failed"
 rm -rf $W
