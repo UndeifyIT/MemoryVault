@@ -169,49 +169,60 @@ foreach ($skill in 'junior', 'junior-off') {
   }
 }
 
-# 6c. Handoff nudge: after a successful `git commit`, remind Claude to save "where we stopped" (only acts if Junior is loaded)
-$hookSrc = Join-Path $VaultDir '08 - Resources\Onboarding\junior-handoff-nudge.json'
-if (Test-Path $hookSrc) {
+# 6c. Claude hooks, merged into settings.json (backed up first):
+#     - handoff nudge: after a successful `git commit`, remind Claude to save "where we stopped" (only acts if Junior is loaded)
+#     - read guard: refuse to open a huge file whole; a ranged read (offset or limit) is always allowed
+function Set-ClaudeHook {
+  param($Settings, [string]$Event, [string]$Matcher, [string]$Needle, [string]$Command, [string]$IfRule)
+  if (-not $Settings.PSObject.Properties['hooks']) { $Settings | Add-Member -NotePropertyName hooks -NotePropertyValue ([pscustomobject]@{}) }
+  $existing = @()
+  if ($Settings.hooks.PSObject.Properties[$Event]) { $existing = @($Settings.hooks.$Event) }
+  $found = 0; $stale = 0
+  foreach ($e in $existing) {
+    foreach ($h in @($e.hooks)) {
+      if ($h.command -match $Needle) { $found++; if ($h.command -ne $Command) { $stale++; $h.command = $Command } }
+    }
+  }
+  if ($found -gt 0) { if ($stale -gt 0) { return 'updated' } else { return 'unchanged' } }
+  $hook = [ordered]@{ type = 'command'; command = $Command; timeout = 10 }
+  if ($IfRule) { $hook['if'] = $IfRule }
+  $entry = [pscustomobject]@{ matcher = $Matcher; hooks = @([pscustomobject]$hook) }
+  $all = @($existing) + $entry
+  if ($Settings.hooks.PSObject.Properties[$Event]) { $Settings.hooks.$Event = $all }
+  else { $Settings.hooks | Add-Member -NotePropertyName $Event -NotePropertyValue $all }
+  return 'added'
+}
+
+$srcNudge = Join-Path $VaultDir '08 - Resources\Onboarding\junior-handoff-nudge.json'
+$srcGuard = Join-Path $VaultDir '08 - Resources\Onboarding\kit\junior-read-guard.sh'
+if ((Test-Path $srcNudge) -and (Test-Path $srcGuard)) {
   $claudeHome = Split-Path $SkillsDir
   $hookDir = Join-Path $claudeHome 'hooks'
   New-Item -ItemType Directory -Force -Path $hookDir | Out-Null
-  Copy-Item $hookSrc (Join-Path $hookDir 'junior-handoff-nudge.json') -Force
+  Copy-Item $srcNudge (Join-Path $hookDir 'junior-handoff-nudge.json') -Force
+  Copy-Item $srcGuard (Join-Path $hookDir 'junior-read-guard.sh') -Force
   $settingsFile = Join-Path $claudeHome 'settings.json'
-  $hookCmd = 'grep -Eq ''"command":"[^"]*git commit'' && cat "$HOME/.claude/hooks/junior-handoff-nudge.json" ; true'
+  $nudgeCmd = 'grep -Eq ''"command":"[^"]*git commit'' && cat "$HOME/.claude/hooks/junior-handoff-nudge.json" ; true'
+  $guardCmd = 'sh "$HOME/.claude/hooks/junior-read-guard.sh"'
   $settings = [pscustomobject]@{}
   $parsed = $true
   if (Test-Path $settingsFile) {
     try { $settings = Get-Content -Raw $settingsFile | ConvertFrom-Json } catch { $parsed = $false }
   }
   if (-not $parsed) {
-    Warn "Could not read $settingsFile as JSON, so I left it alone. Add the handoff hook by hand (see Onboarding.md)."
+    Warn "Could not read $settingsFile as JSON, so I left it alone. Add the Junior hooks by hand (see Onboarding.md)."
   } else {
-    if (-not $settings.PSObject.Properties['hooks']) { $settings | Add-Member -NotePropertyName hooks -NotePropertyValue ([pscustomobject]@{}) }
-    $existing = @()
-    if ($settings.hooks.PSObject.Properties['PostToolUse']) { $existing = @($settings.hooks.PostToolUse) }
-    $found = 0; $stale = 0
-    foreach ($e in $existing) { foreach ($h in @($e.hooks)) { if ($h.command -match 'junior-handoff-nudge') { $found++; if ($h.command -ne $hookCmd) { $stale++ } } } }
-    if ($found -gt 0 -and $stale -eq 0) {
-      Say 'Handoff nudge hook is already in your Claude settings.'
-    } elseif ($found -gt 0) {
-      Copy-Item $settingsFile "$settingsFile.bak" -Force
-      foreach ($e in $existing) { foreach ($h in @($e.hooks)) { if ($h.command -match 'junior-handoff-nudge') { $h.command = $hookCmd } } }
-      [IO.File]::WriteAllText($settingsFile, ($settings | ConvertTo-Json -Depth 20), $utf8)
-      Say 'Updated the handoff nudge hook in your Claude settings.'
+    $r1 = Set-ClaudeHook -Settings $settings -Event 'PostToolUse' -Matcher 'Bash' -Needle 'junior-handoff-nudge' -Command $nudgeCmd -IfRule 'Bash(git commit *)'
+    $r2 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Read' -Needle 'junior-read-guard' -Command $guardCmd -IfRule ''
+    if ($r1 -eq 'unchanged' -and $r2 -eq 'unchanged') {
+      Say 'Claude hooks (handoff nudge, read guard) are already up to date.'
     } else {
       if (Test-Path $settingsFile) { Copy-Item $settingsFile "$settingsFile.bak" -Force }
-      $entry = [pscustomobject]@{
-        matcher = 'Bash'
-        hooks   = @([pscustomobject]@{ type = 'command'; command = $hookCmd; 'if' = 'Bash(git commit *)'; timeout = 10 })
-      }
-      $all = @($existing) + $entry
-      if ($settings.hooks.PSObject.Properties['PostToolUse']) { $settings.hooks.PostToolUse = $all }
-      else { $settings.hooks | Add-Member -NotePropertyName PostToolUse -NotePropertyValue $all }
       [IO.File]::WriteAllText($settingsFile, ($settings | ConvertTo-Json -Depth 20), $utf8)
-      try { $null = Get-Content -Raw $settingsFile | ConvertFrom-Json; Say 'Added the handoff nudge hook to your Claude settings.' }
+      try { $null = Get-Content -Raw $settingsFile | ConvertFrom-Json; Say "Claude hooks: handoff nudge $r1, read guard $r2." }
       catch {
         if (Test-Path "$settingsFile.bak") { Copy-Item "$settingsFile.bak" $settingsFile -Force }
-        Warn 'The settings edit did not verify, so I restored your backup. Add the handoff hook by hand (see Onboarding.md).'
+        Warn 'The settings edit did not verify, so I restored your backup. Add the Junior hooks by hand (see Onboarding.md).'
       }
     }
   }
