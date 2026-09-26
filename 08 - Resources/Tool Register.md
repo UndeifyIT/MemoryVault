@@ -24,7 +24,7 @@ Never put a password, key or token in this note. "Credentials live in" names the
 |---|---|---|---|---|---|---|
 | Claude (Code and plan) | Coding and Junior | Not recorded yet | Isaac, Tolu | Their machines and connected accounts | Their Claude accounts | In use |
 | Obsidian | Viewing the vault | Free | Each person | Local vault folder | none | In use |
-| GitHub | Code and the vault repo | Not recorded yet | Isaac | Repos and org access | Not recorded yet | In use; vault repo not created yet |
+| GitHub | Code and the vault repo | Not recorded yet | Isaac | Repos and org access | Not recorded yet | In use; the vault lives in the private repo UndeifyIT/MemoryVault |
 | Supabase (BakeFlow, ShiftOS live projects) | Database, auth, storage | Not recorded yet | Isaac | Production data | Not recorded yet | In use |
 | Resend (BakeFlow invite emails) | Transactional email | Not recorded yet | Isaac | Sends email from the app | Supabase secrets | In use, per repo docs |
 | Expo and EAS (BakeFlow push) | Mobile builds and push | Not recorded yet | Isaac | Expo account | Not recorded yet | Push credentials not yet set up |

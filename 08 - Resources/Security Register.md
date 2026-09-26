@@ -16,7 +16,7 @@ Severity is Junior's judgment (low, medium, high). "From repo docs" means it com
 
 | ID | Project | Risk | Severity | Owner | Next step |
 |---|---|---|---|---|---|
-| SR-001 | Vault | The vault has no remote yet, so there is no backup and no sharing. | Medium | Isaac | Create the private GitHub repo and push. |
+| SR-001 | Vault | Resolved 2026-09-26: the vault is pushed to the private repo UndeifyIT/MemoryVault. Remaining: add Tolu as a collaborator, and turn on multi-factor sign-in and branch protection for the org. | Low | Isaac | Add Tolu; enable MFA for everyone in the org. |
 | SR-002 | Kit | The Playwright MCP server runs `npx @playwright/mcp@latest`, so each start fetches the newest version. Accepted for now. | Low | Isaac | Pin a version if it ever matters. |
 | SR-003 | BakeFlow | `has_permission()` gates 0 of 109 RLS policies; role checks are authoritative and the permission keys are effectively client-side (repo TD-001). | Medium | Isaac | Decide whether to accept it or migrate. From repo docs. |
 | SR-004 | BakeFlow | Committed migrations don't match the versions recorded on the live database, so the repo can't rebuild production. | Medium | Isaac | Reconcile per the repo's `docs/PROJECT-OVERVIEW.md`. From repo docs. |
@@ -28,6 +28,7 @@ Severity is Junior's judgment (low, medium, high). "From repo docs" means it com
 Append-only, newest last. One line each: `date | project | what was found or happened | severity | status | link to the fix`.
 
 2026-09-26 | Vault | Register created with the seven open risks above | n/a | open | none
+2026-09-26 | Vault | Vault pushed to private repo UndeifyIT/MemoryVault after a secret scan of all history found nothing | n/a | closed | SR-001
 
 ## 3. Incident-response runbook
 Use it for a leaked secret, a suspected breach, a compromised account or a data exposure.

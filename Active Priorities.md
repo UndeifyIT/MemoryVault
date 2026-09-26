@@ -13,10 +13,11 @@ The single queue of open work across everything. Tag each item with its project 
 - [ ] Awareness: grow Undeify's presence on social media platforms organically.
 - [ ] Coding efficiency: adopt loop engineering and graph engineering to save time. See [[Coding and Feature Work]].
 - [ ] [[MindBridge]]: our most important project. Record its context, status, and next steps here once Isaac has added them.
-- [ ] Push the vault to a private GitHub repo and add Tolu (Isaac). Until then there is no backup or sharing. See [[Security Register]] SR-001.
+- [ ] Add Tolu to the private repo UndeifyIT/MemoryVault and turn on multi-factor sign-in for the org (Isaac). See [[Security Register]] SR-001.
 - [ ] Fill in the costs, budget and runway in [[Tool Register]] (Isaac).
 - [ ] Set up Composio for connecting apps, with least-privilege access (Isaac). Steps are in [[Onboarding]].
 - [ ] Confirm or correct the BakeFlow and ShiftOS Status and Architecture drafts (Isaac).
 - [ ] Tell Junior where the MindBridge and Linhora repos are so their notes can be drafted (Isaac).
 
 ### Completed Tasks
+- [x] 2026-09-26: vault pushed to the private repo UndeifyIT/MemoryVault.

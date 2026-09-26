@@ -33,7 +33,7 @@ updated: 2026-09-26
 6. Report the findings and the decisions needed. Don't archive or delete anything without asking.
 
 ## Scheduling
-Both routines run on demand today. To have them run by themselves, the vault must be on GitHub first; then a scheduled routine (`/schedule`) can run Junior against it. Set that up once the private repo exists.
+Both routines run on demand today. To have them run by themselves, the vault must be on GitHub, which it now is (UndeifyIT/MemoryVault); a scheduled routine (`/schedule`) can then run Junior against it. Isaac to decide when and how often.
 
 ## Quality bar
 - Short enough to read in a minute; every item has an owner and a date.

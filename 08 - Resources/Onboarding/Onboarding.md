@@ -18,9 +18,9 @@ How a new team member gets the vault, Obsidian and their own Junior on a Windows
 
 ## The steps
 
-1. Open PowerShell and clone the vault into the home folder (replace the URL with the vault repo's URL; GitHub may open a sign-in window):
+1. Open PowerShell and clone the vault into the home folder (the vault repo is private, so GitHub will ask you to sign in with an account that has been added to it):
    ```
-   git clone <VAULT_REPO_URL> "$HOME\Undeify"
+   git clone https://github.com/UndeifyIT/MemoryVault.git "$HOME\Undeify"
    ```
    If Git isn't installed yet, run `winget install --id Git.Git -e` first, then open a new PowerShell window.
 2. Run the setup script (the `-ExecutionPolicy Bypass` applies to this one run only; Windows blocks scripts by default):
