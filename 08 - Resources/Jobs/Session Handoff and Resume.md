@@ -18,7 +18,7 @@ updated: 2026-09-26
 
 ## The procedure
 **Handoff**
-1. Pull the vault.
+1. Pull the vault with `git pull --rebase`.
 2. Update the current person's *Where we stopped* in the project's Status note, and refresh Snapshot and Next steps.
 3. Append one line per completed change to the project's Log.
 4. Update Architecture if the stack, integrations or run steps changed.
@@ -30,7 +30,7 @@ updated: 2026-09-26
 1. Read Status, Architecture and the last lines of Log.
 2. Check the repo's real state (`git status`, recent commits). If it disagrees with the notes, trust the repo and fix the notes.
 3. Report where things stand in a few lines, propose the next step, and wait.
-4. If Status and Architecture are still "Not recorded yet", survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both marked "Draft, not confirmed" listing what you read, and ask for confirmation.
+4. If Status and Architecture are still "Not recorded yet", survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both with a line starting `> Draft, not confirmed` listing what you read, and ask for confirmation.
 
 ## Quality bar
 - A stranger could continue the work from Status alone: branch, files, next action, how to test.

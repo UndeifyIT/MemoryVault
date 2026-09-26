@@ -120,15 +120,18 @@ BEGIN {
     if (f ~ / Status\.md$/) m = statusmax; else if (f ~ / Architecture\.md$/) m = archmax; else if (f ~ / Log( [0-9]+)?\.md$/) m = logmax
     if (size[f] > m && speak("size." f, size[f])) { b = f; sub(/.*\//, "", b); say(b " has " size[f] " lines (limit " m "). Ask to split or rotate it.") } }
 
-  # 7. open priorities and note count
-  open = 0; o = 0
+  # 7. open priorities (largest section, so per-project headings keep it short) and note count
+  open = 0; o = 0; grp = ""; gc = 0; maxc = 0; maxg = "the list"; total = 0
   while ((getline l < (vault "/Active Priorities.md")) > 0) {
     if (l ~ /^### Open Tasks/) { o = 1; continue }
-    if (l ~ /^###/) o = 0
-    if (o && l ~ /^- \[ \]/) open++
+    if (l ~ /^### /) o = 0
+    if (o && l ~ /^#### /) { if (gc > maxc) { maxc = gc; maxg = grp }; grp = substr(l, 6); gc = 0; continue }
+    if (o && l ~ /^- \[ \]/) { gc++; total++ }
   }
+  if (gc > maxc) { maxc = gc; maxg = (grp == "" ? "the list" : grp) }
   close(vault "/Active Priorities.md")
-  if (open > priomax && speak("prio", open)) say("Active Priorities has " open " open items (limit " priomax "). Consider per-project sections.")
+  open = total
+  if (maxc > priomax && speak("prio", maxc)) say("Active Priorities has " maxc " open items under \"" maxg "\" (limit " priomax "). Split it or close some.")
   if (na > notesmax && speak("notes", na)) say("The vault has " na " notes (limit " notesmax "). Time to consider a topic index.")
 
   # 8. startup reading budget

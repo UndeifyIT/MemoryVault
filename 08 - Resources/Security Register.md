@@ -21,7 +21,12 @@ Severity is Junior's judgment (low, medium, high). "From repo docs" means it com
 | SR-003 | BakeFlow | `has_permission()` gates 0 of 109 RLS policies; role checks are authoritative and the permission keys are effectively client-side (repo TD-001). | Medium | Isaac | Decide whether to accept it or migrate. From repo docs. |
 | SR-004 | BakeFlow | Committed migrations don't match the versions recorded on the live database, so the repo can't rebuild production. | Medium | Isaac | Reconcile per the repo's `docs/PROJECT-OVERVIEW.md`. From repo docs. |
 | SR-005 | ShiftOS | Real Supabase JWT verification for the newly built operations was not tested at the HTTP layer. | Medium | Isaac, Tolu | Test with a real session. From repo audit. |
-| SR-006 | Team | Composio (planned) would hold OAuth access to every connected account, which makes it one high-value target. | Medium | Isaac | Follow the least-privilege steps in [[Onboarding]] before connecting apps. |
+| SR-006 | Team | Composio (planned) would hold OAuth access to every connected account, which makes it one high-value target. | Medium | Isaac | Follow the least-privilege steps in [[Onboarding]] before connecting apps. The injection gate marks any Composio call as external content and asks before risky follow-up actions. |
+| SR-008 | Kit | Junior's hooks fail open if `sh`, `gawk` or the hook files are missing on a machine (a hook that cannot run is a non-blocking error). | Medium | Junior | `vault-check.sh --doctor` runs each hook with a test payload; onboard.ps1 runs it after install. Run it monthly and after any Git or Claude update. |
+| SR-009 | Kit | The prompt-injection gate (taint hooks) is a speed bump: it asks before risky actions after an email, chat or web read, but a determined injection can still shape a request the user approves. Read-only connector scopes are the real defence. | Medium | Isaac | Keep Composio and Gmail scopes read-only until needed; confirm every `ask`; test the gate with the seeded email in [[Junior Checks]]. Whether an `ask` prompts under every permission mode is unverified. |
+| SR-010 | Kit | Model or behaviour drift: Junior's rules are plain text and a new Claude version may follow them differently. | Medium | Isaac | Run [[Junior Checks]] after every model change and kit bump. |
+| SR-011 | Team | Configuration drift between machines: skills, hooks and boot file are copies, and plugins auto-update. | Low | Isaac | Kit `VERSION` stamp; `load junior` prints one line when a machine is behind; re-run onboard.ps1. |
+| SR-012 | Vault | GitHub is the only copy people rely on. | Medium | Isaac | `vault-backup.sh` writes a verified bundle outside GitHub; keep one off-machine, and run the restore drill monthly. |
 | SR-007 | Repos | The vault's secret scan covers only the vault. Project repos have no scan unless a hook is installed. | Medium | Junior | Install the local guard hook per repo (see [[Onboarding]]). Done for the BakeFlow repo on Isaac's machine, 2026-09-26. The ShiftOS copy has no `.git` folder, so it can't be guarded until it is a real clone. |
 
 ## 2. Findings and incidents
@@ -41,7 +46,7 @@ Use it for a leaked secret, a suspected breach, a compromised account or a data 
 
 ## 4. Recurring checks
 - **Weekly:** review open risks; run the dependency audit for each project (`npm audit` or `pnpm audit`); confirm the vault is pushed.
-- **Monthly:** run the Tool Register review (access, owners, keys due for rotation); test that a vault backup restores.
+- **Monthly:** run the Tool Register review (access, owners, keys due for rotation); run `vault-check.sh --doctor`; write a backup with `vault-backup.sh` and do the **restore drill** (clone the newest bundle into an empty folder, open it, and run `load junior` from that copy); confirm multi-factor sign-in is still on for the GitHub org and every connected account.
 - **Before each release:** run the security review (security-guidance, and claude-security or semgrep if installed) and re-check the open risks for that project.
 
 ## Change log

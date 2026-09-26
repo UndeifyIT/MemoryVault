@@ -53,4 +53,7 @@ if [ -s "$marker" ]; then
   echo "If it was ever pushed or shared, treat it as leaked and rotate it."
   exit 1
 fi
+# Warn-only checks on the staged notes (names, links, paths, front matter). Never changes the exit code.
+vc="08 - Resources/Onboarding/kit/vault-check.sh"
+[ -f "$vc" ] && sh "$vc" --precommit 2>/dev/null
 exit 0

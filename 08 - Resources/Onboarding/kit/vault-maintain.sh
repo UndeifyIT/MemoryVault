@@ -79,16 +79,16 @@ $af
 # rotate_prio <worktree>: move older completed items out of Active Priorities. Newest completed items sit at the top.
 rotate_prio() {
   d=$1; f="Active Priorities.md"; full="$d/$f"
-  done_n=$(awk '/^### Completed Tasks/{s=1;next} /^###/{s=0} s&&/^- \[x\]/{c++} END{print c+0}' "$full")
+  done_n=$(awk '/^### Completed Tasks/{s=1;next} /^### /{s=0} s&&/^- \[x\]/{c++} END{print c+0}' "$full")
   [ "$done_n" -gt "$DONE_MAX" ] || return 1
   : > "$T.pm"; : > "$T.pn"
   awk -v keep="$DONE_KEEP" -v mov="$T.pm" -v out="$T.pn" '
     /^### Completed Tasks/ { sec=1; print > out; next }
-    sec && /^###/ { sec=0 }
+    sec && /^### / { sec=0 }
     sec && /^- \[x\]/ { c++; if (c > keep) { print > mov; next } }
     { print > out }' "$full"
-  awk '/^### Completed Tasks/{s=1;next} /^###/{s=0} s&&/^- \[x\]/' "$full" > "$T.po"
-  awk '/^### Completed Tasks/{s=1;next} /^###/{s=0} s&&/^- \[x\]/' "$T.pn" > "$T.pk"
+  awk '/^### Completed Tasks/{s=1;next} /^### /{s=0} s&&/^- \[x\]/' "$full" > "$T.po"
+  awk '/^### Completed Tasks/{s=1;next} /^### /{s=0} s&&/^- \[x\]/' "$T.pn" > "$T.pk"
   cat "$T.pk" "$T.pm" > "$T.pmk"
   cmp -s "$T.po" "$T.pmk" || { echo "Invariant failed for Active Priorities (moved + kept differs from the original). Nothing changed."; return 2; }
   an="Completed Priorities $stamp8"; af="07 - Archive/$an.md"
@@ -131,7 +131,7 @@ case "$cmd" in
       [ "$n" -gt "$LOG_KEEP" ] && [ "$(wc -l < "$f" | tr -d ' ')" -gt "$LOG_MAX" ] && cand="$cand$f
 "
     done < "$T.logs"
-    doneN=$(awk '/^### Completed Tasks/{s=1;next} /^###/{s=0} s&&/^- \[x\]/{c++} END{print c+0}' "Active Priorities.md" 2>/dev/null)
+    doneN=$(awk '/^### Completed Tasks/{s=1;next} /^### /{s=0} s&&/^- \[x\]/{c++} END{print c+0}' "Active Priorities.md" 2>/dev/null)
     [ "$doneN" -gt "$DONE_MAX" ] && cand="${cand}Active Priorities.md
 "
     [ -z "$cand" ] && { echo "Nothing to rotate."; exit 0; }

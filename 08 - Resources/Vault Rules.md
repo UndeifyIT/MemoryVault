@@ -122,7 +122,7 @@ Log every profile update in the daily note's "Profile Updates" section (e.g. "**
 
 - **Isaac only:** `VAULT-INDEX.md`, these Vault Rules, the Memory Standard, the Project Notes Standard, everything in `08 - Resources/Onboarding/` and its `kit/` folder (the boot template, skills, hooks, scripts, plugin list), the Junior Checks note, and any change to a risk's severity or an acceptance of risk in the Security Register.
 - **Either founder can "lock it":** a project decision, a finding, a Status or Architecture change, a Log rotation, a priorities change, and everything else in the vault. Tolu approves in the projects he leads. An approval is an explicit "lock it" or "approved" from a founder in the conversation; Junior never approves for itself.
-- **Waiting drafts:** anything still marked "Draft, not confirmed" is a pending approval. The daily digest lists pending items with their age, oldest first, and anything older than seven days goes at the top.
+- **Waiting drafts:** anything with a line starting `> Draft, not confirmed` is a pending approval. The daily digest lists pending items with their age, oldest first, and anything older than seven days goes at the top.
 
 ## Names, links and paths
 

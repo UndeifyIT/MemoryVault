@@ -37,7 +37,7 @@ The same three core notes exist for BakeFlow, ShiftOS and Linhora. A new project
 
 **Log: what changed.** One line per change, oldest first, append only:
 `2026-09-26 | isaac | Added password reset flow | abc1234`
-Date, author, what changed and why in one line, commit or PR reference. When a year ends or the file passes about 300 lines, move older entries to `<Project> Log 2026.md` and link it from the current one.
+Date, author, what changed and why in one line, commit or PR reference. When a Log passes about 300 lines, the oldest entries move to `07 - Archive/<Project> Log archive <date>.md`, the newest 100 stay, and the Log gets an "Older entries" link. This rotation, and moving older completed items out of Active Priorities, is done by `vault-maintain.sh` as a proposal on a separate branch that is applied only after a founder says "lock it" (see [[Team Cadence]]). Splitting a Status or Architecture note is advice only, never automatic.
 
 **Decisions.** One note per decision, in the Decision shape from the Memory Standard, named specifically ("MindBridge Auth Decision"). Once a project has five, the folder gets its own index note.
 
@@ -54,7 +54,7 @@ Date, author, what changed and why in one line, commit or PR reference. When a y
 - **No machine-specific paths** in project notes, because the vault is shared. Record repo URLs. Anything that only holds on one person's machine is labelled with whose machine it is.
 - **Inbox** is a waiting room. At the weekly review, every Inbox note gets a home, gets merged into an existing note, or gets deleted.
 - **Finished work:** when a project or note is done, archive it (with Isaac's OK), never delete history.
-- **Merge safety:** `Log.md` files and daily notes merge automatically in Git (`.gitattributes`), so both founders can append on the same day. Status and Architecture are edited by one person at a time: pull first, keep edits short, push straight after.
+- **Merge safety:** `Log.md` files and daily notes merge automatically in Git (`.gitattributes`), so both founders can append on the same day. Status and Architecture are edited by one person at a time: `git pull --rebase` first, keep edits short, push straight after. Each Status note has one "Where we stopped" section per person, and you edit only your own; a correction to someone else's section goes in the Log instead. When Active Priorities passes ten open items, the vault check says so, and Junior proposes per-project sections (a `### <Project>` heading inside Open Tasks) rather than splitting the file, which would add startup reads.
 
 ## 4. The handoff routine (how "where we stopped" gets saved)
 
@@ -76,7 +76,7 @@ Junior does this without being asked, at every one of these moments: after each 
 3. Read the last ten or so lines of `<Project> Log`, and check the repo's actual state (`git status`, recent commits). If the repo and the notes disagree, believe the repo, say so, and fix the notes.
 4. Say in a few lines where things stand and propose the next step. Then wait.
 
-If Status and Architecture still say "Not recorded yet", bootstrap them: survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both notes from what you find, mark them "Draft, not confirmed" with a line listing what you read and what you did not, and ask the user to confirm or correct.
+If Status and Architecture still say "Not recorded yet", bootstrap them: survey the repo the cheap way (README, manifests, directory listing, the top of its control files, then searches for the rest), draft both notes from what you find, mark them with a line starting `> Draft, not confirmed` that lists what you read and what you did not, and ask the user to confirm or correct.
 
 ## 6. Recall before answering
 
