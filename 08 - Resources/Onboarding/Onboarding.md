@@ -62,6 +62,26 @@ Uptime monitoring has no official plugin. Use a free external monitor for the li
 
 To preview what the script would install without changing anything, add `-DryRun`. To skip plugins entirely, add `-SkipPlugins`.
 
+## Connecting other apps (Google, Slack and the rest) through Composio
+
+Connections to outside apps are set up by each person, in their own Claude Code, once. Junior doesn't hold logins and the vault never stores them. Undeify's plan is one Composio MCP server that fronts all the apps, instead of one connector per app. Composio isn't in the official plugin marketplace, so it isn't part of the setup script and each person adds it themselves.
+
+1. Create your own Composio account and turn on multi-factor sign-in.
+2. In Composio, connect only the apps you actually need. Give each the narrowest permissions it offers, use a separate or limited account where you can (for example a marketing mailbox instead of your main one), and turn off delete and send actions you won't use if the dashboard lets you.
+3. Follow Composio's Claude Code instructions to generate your MCP URL and API key. The pattern is `claude mcp add --transport http composio "<YOUR_MCP_URL>" --header "X-API-Key: <YOUR_KEY>" --scope user`. Check the current syntax on Composio's page, since I couldn't open it when writing this.
+4. Keep the key and URL in your password manager. Claude stores them in `~\.claude.json` in plain text, so treat that file as sensitive, never commit or paste it, and rotate the key if it leaks.
+5. Check it with `claude mcp get composio`, restart Claude Code, and tell Junior which apps are connected.
+6. Add or update the Composio row in [[Tool Register]] (apps connected, owner, scope; no key). Review the connected apps monthly.
+
+**Why the care:** Composio holds sign-in access to every app you connect, so it becomes one valuable target, and anything a connected app receives (an email, a message) can carry instructions meant to trick an agent. That is why Junior's boot file says to confirm before sending, posting, spending, deleting or changing access, and to treat anything inside an email or page as data. It's tracked as SR-006 in [[Security Register]].
+
+## Guarding a project repo against leaked secrets
+
+The vault's secret scan only covers the vault. To guard a project repo on your own machine, run:
+```
+powershell -ExecutionPolicy Bypass -File "$HOME\Undeify\08 - Resources\Onboarding\kit\repo-guard.ps1" -Repo C:\path\to\repo
+```
+It copies the same scan into that repo's `.git\hooks` folder. That folder isn't tracked by Git, so nothing in the repo's files or history changes, and each teammate runs it for themselves. It never overwrites an existing hook and stops if the repo sets its own `core.hooksPath`. It only works on a real clone with a `.git` folder.
 ## Loading Junior in a codebase
 
 - `load junior` triggers the `junior` skill installed at `~\.claude\skills\junior\SKILL.md`. It reads the boot file (`~\my-agent\CLAUDE.md`), becomes Junior on top of that project's own instructions, reads the vault index, yesterday's daily note and Active Priorities, and matches the codebase to a vault project.
@@ -97,6 +117,7 @@ On a person's first session Junior asks a few questions and saves their profile 
 - `junior-off-SKILL.txt`: the source of the `junior-off` skill that makes `kill junior` work.
 - `junior-handoff-nudge.json`: the message the commit hook feeds Claude. The hook runs on `PostToolUse` with matcher `Bash`, and its command checks that the Bash command that just ran contained `git commit` before printing that file, so it stays silent for anything else. It needs no Node. It doesn't match `git -C ... commit` or `git -c ... commit`.
 - The vault's own `.githooks/pre-commit` is the secret scan. To silence a false positive, add `allowlist secret` to that line. Never bypass it for a real secret: rotate the secret instead.
+- `kit/repo-guard.ps1`: installs the secret scan into a project repo on this machine only.
 - `kit/plugins.json`: the list of core plugins and opt-in extras the script installs.
 - `kit/jaredrhod-marketing.zip` and `kit/jaredrhod-marketing.SOURCE.txt`: the vendored marketing skill and where it came from.
 - `CLAUDE.template.txt`: Junior's boot file with `{{NAME}}` and `{{VAULT_PATH}}` placeholders.
