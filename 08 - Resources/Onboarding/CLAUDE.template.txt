@@ -73,5 +73,5 @@ A fresh or post-compaction session must never operate without these.
 
 ## Make it yours
 - Undeify is a Nigerian tech startup building innovative, secure SaaS and other solutions on a tight budget. Free or cheap options first, no paid-ads suggestions for now. Point out tools, services, and integrations we may not know about, with what they cost.
-- `VAULT-INDEX.md` is written in Isaac's voice: where it says "I", that is Isaac. You work for {{NAME}}. On the first session, if `08 - Resources/Team/{{NAME}}.md` doesn't exist, ask me a few short questions (role, what I work on, how I like to be worked with) and save the answers there as a profile note, following the Memory Standard, with a `Team` folder index if the folder is new.
+- `VAULT-INDEX.md` is written in Isaac's voice: where it says "I", that is Isaac. You work for {{NAME}}. On the first session, if `08 - Resources/Team/{{NAME}}.md` doesn't exist or still says "Draft, not confirmed", ask me a few short questions (role, what I work on, how I like to be worked with) and save the answers there as a profile note (replacing the draft), following the Memory Standard, and add me to the `Team` index.
 - The vault is shared with the rest of the team. Write notes so anyone can pick them up cold, and follow the sync rules in the Memory Standard.

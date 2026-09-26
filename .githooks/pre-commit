@@ -1,0 +1,56 @@
+#!/bin/sh
+# Undeify vault: block commits that add secrets or secret-bearing files.
+# The vault is shared, so a secret committed here is a secret leaked.
+# False positive? Add "allowlist secret" to that line, or as a last resort commit with --no-verify
+# after checking by hand. Never bypass for a real secret: rotate it instead.
+
+marker=$(mktemp)
+trap 'rm -f "$marker"' EXIT
+
+names=$(git diff --cached --name-only --diff-filter=ACMR)
+[ -z "$names" ] && exit 0
+
+# 1. Files that should never be committed
+bad_files=$(printf '%s\n' "$names" \
+  | grep -Ei '(^|/)\.env($|\.)|\.(pem|key|p12|pfx|keystore)$|id_rsa|id_ed25519|credentials[^/]*\.json$|service[-_]account[^/]*\.json$' \
+  | grep -Evi '\.(example|sample|template)$')
+if [ -n "$bad_files" ]; then
+  echo "BLOCKED: these files look like they hold secrets and must not go in the vault:"
+  printf '  %s\n' "$bad_files"
+  echo x >> "$marker"
+fi
+
+# 2. Secret-looking content in added lines
+patterns='AWS access key|AKIA[0-9A-Z]{16}
+Private key block|-----BEGIN ([A-Z]+ )?PRIVATE KEY-----
+GitHub token|gh[pousr]_[A-Za-z0-9]{30,}|github_pat_[A-Za-z0-9_]{30,}
+Slack token|xox[baprs]-[A-Za-z0-9-]{10,}
+Google API key|AIza[0-9A-Za-z_-]{35}
+Stripe or Paystack secret key|sk_(live|test)_[A-Za-z0-9]{16,}
+Flutterwave secret key|FLWSECK(_TEST)?-[A-Za-z0-9]+
+OpenAI or Anthropic key|sk-ant-[A-Za-z0-9_-]{20,}|sk-[A-Za-z0-9]{32,}
+JSON web token|eyJ[A-Za-z0-9_-]{10,}\.eyJ[A-Za-z0-9_-]{10,}\.[A-Za-z0-9_-]{10,}
+Database URL with password|(postgres(ql)?|mysql|mongodb(\+srv)?|redis)://[^ :/@]+:[^ @]{3,}@
+Assigned secret value|(password|passwd|secret|api[_-]?key|token|private[_-]?key)["'"'"']?[[:space:]]*[:=][[:space:]]*["'"'"']?[A-Za-z0-9/+_.-]{16,}'
+
+printf '%s\n' "$names" | while IFS= read -r f; do
+  added=$(git diff --cached -U0 --no-color -- "$f" | grep '^+' | grep -v '^+++' | grep -v 'allowlist secret')
+  [ -z "$added" ] && continue
+  printf '%s\n' "$patterns" | while IFS='|' read -r label regex_rest; do
+    # label is the first field; the rest, rejoined, is the regex
+    regex=$(printf '%s' "$regex_rest")
+    [ -z "$regex" ] && continue
+    if printf '%s\n' "$added" | grep -Eiq -e "$regex"; then
+      echo "BLOCKED: possible $label added in: $f"
+      echo x >> "$marker"
+    fi
+  done
+done
+
+if [ -s "$marker" ]; then
+  echo ""
+  echo "Nothing was committed. Remove the secret and store it in the password manager, then note only where it lives."
+  echo "If it was ever pushed or shared, treat it as leaked and rotate it."
+  exit 1
+fi
+exit 0

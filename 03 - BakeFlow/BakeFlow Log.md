@@ -10,4 +10,4 @@ updated: 2026-09-26
 
 Append-only record of what changed in BakeFlow, oldest first. One line per change. Each line: date | author | what changed | commit or PR.
 
-2026-09-26 | junior | Project notes scaffold created | none
+2026-09-26 | junior | Project notes scaffold created | none2026-09-26 | junior | Status and Architecture drafted from the repo's own documents (not confirmed by Isaac) | none

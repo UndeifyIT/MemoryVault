@@ -32,7 +32,7 @@ Our most important project right now.
 
 ## BakeFlow (03 - BakeFlow)
 
-Repo: https://github.com/isaaCurity/-Davila-B-B. Isaac's local copies (machine-specific): `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B`.
+Repo: https://github.com/isaaCecurity/-Davila-B-B. Isaac's local copies (machine-specific): `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B`.
 - **Status:** Not recorded yet.
 
 ## ShiftOS (04 - ShiftOS)

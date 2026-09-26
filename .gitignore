@@ -2,3 +2,12 @@
 .obsidian/workspace-mobile.json
 .obsidian/cache
 .trash/
+
+# Never commit secrets
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+*.p12
+*.pfx

@@ -43,6 +43,8 @@ Date, author, what changed and why in one line, commit or PR reference. When a y
 
 **Everything else** (a bug that needs its own write-up, a spike, a research note) is a flat note in the project folder named `Issue - <short title>`, `Spike - <short title>`, and so on, and is listed in the project index. If it fits in a few lines, it lives in Status (known issues) instead of becoming a note.
 
+**When a repo has its own control files** (BakeFlow keeps `CURRENT_TASK.md`, `BLOCKERS.md`, `ARCHITECTURE_DECISIONS.md`, `IMPLEMENTATION_LOG.md` and more at its root), those files are the source of truth for task-level detail. The vault's Status and Architecture summarize and point to them, and never copy them. Record in Status which repo files hold the detail.
+
 ## 3. Keeping the vault tidy
 
 - **Folders:** don't create one unless it will hold five or more notes, or a distinct kind of note like Decisions. Never go deeper than one level below a project folder.

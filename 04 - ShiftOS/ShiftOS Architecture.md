@@ -8,17 +8,37 @@ updated: 2026-09-26
 ---
 # ShiftOS Architecture
 
-One sentence: how ShiftOS is built. Not recorded yet.
+ShiftOS is a multi-tenant workforce platform built as a pnpm monorepo on Supabase, with a React web app and an Expo mobile app. Draft, not confirmed: written by Junior from the repo's documents on 2026-09-26.
 
-- **Repos:** Not recorded yet. Record repo URLs and default branch, never local paths.
-- **Stack:** Not recorded yet.
-- **Structure:** Not recorded yet. Describe the main folders and what lives in each; don't paste file lists.
-- **Environments:** Not recorded yet. Names and URLs for dev, staging and production.
-- **Integrations:** Not recorded yet. For each service: what it does, and where its credentials live (never the values).
-- **Data:** Not recorded yet. The main entities and how they relate.
-- **Run and test:** Not recorded yet. The commands to install, run, test and deploy.
-- **Security notes:** Not recorded yet. Auth model, sensitive data, known risks.
-- **Open questions:** Not recorded yet.
+## What it is
+Shift scheduling, attendance, tasks, announcements and leave for organizations with branches. Its documentation is organized as a "product bible" of numbered domain volumes: organization, user and identity, roles and permissions, employee, shift, scheduling, attendance, task management, communication, notifications, reporting, security and more. The docs also describe "Shifty", an AI assistant (`docs/shifty`).
+
+## Repos and folders
+- **GitHub:** https://github.com/ShiftOS (organization; the exact repo isn't recorded yet). Isaac's local copy is `C:\Users\HP\ShiftOS-main` (machine-specific, no Git history).
+- **Layout:** `apps/web` (React, Vite, Tailwind, Vercel config), `apps/mobile` (Expo React Native), `packages/` (api, auth, authorization, backend, config, constants, database, errors, geography, repositories, services, tests, types, ui, utils, validation), `supabase/` (71 migrations and a policies folder), `docs/`.
+
+## Stack
+- pnpm workspaces (pnpm 11.20), TypeScript strict, ESLint, Prettier, Vitest for unit and integration tests.
+- Supabase (PostgreSQL, Auth, Storage) as the backend.
+- Layered flow per the audit: UI or RPC call, then service, then repository, then Postgres, with an `RpcRegistry` that executes operations.
+
+## Environments
+Live Supabase project (its reference is in the audit; not copied here). Other environments: Not recorded yet.
+
+## Integrations
+Supabase only, as far as the documents show. The database connection string lives in the repo's `.env` (`DATABASE_URL`); never copy values here.
+
+## Run and test
+`pnpm install`, then `pnpm dev:web`, `pnpm start:mobile`, `pnpm build:web`, `pnpm typecheck`, `pnpm lint`, `pnpm test` (Vitest). `pretest` builds all TypeScript references first.
+
+## Security notes
+Operations are permission-gated and branch-gated. Audit logs and security events are append-only. Avatars are served through signed URLs. The audit records that the database connection uses verified TLS certificates. It also notes that JWT verification for the newly built operations wasn't tested at the HTTP layer.
+
+## Open questions
+Isaac to confirm this draft. Which repo under the ShiftOS organization holds this code? Where is it deployed, and what is current?
+
+## Sources read for this draft
+`README.md`, `package.json`, the top of `docs/README.md` and the master specification, the start and end of `docs/backend-completion-audit.md`, and directory listings.
 
 ## Related
 - [[ShiftOS Status]]

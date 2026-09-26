@@ -8,7 +8,7 @@ updated: 2026-09-26
 ---
 # BakeFlow
 
-Repo: https://github.com/isaaCurity/-Davila-B-B. Isaac's local copies: `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B` (machine-specific, other machines differ).
+Repo: https://github.com/isaaCecurity/-Davila-B-B. Isaac's local copies: `C:\Users\HP\Downloads\bakeflow-website` and `C:\Users\HP\-Davila-B-B` (machine-specific, other machines differ).
 
 ## Start here
 - [[BakeFlow Status]] — where the project stands and where we stopped.
