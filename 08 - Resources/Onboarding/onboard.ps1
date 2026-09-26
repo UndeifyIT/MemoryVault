@@ -321,6 +321,7 @@ $shExe = (Get-Command sh -ErrorAction SilentlyContinue).Source
 if (-not $shExe -and (Test-Path "$env:ProgramFiles\Git\usr\bin\sh.exe")) { $shExe = "$env:ProgramFiles\Git\usr\bin\sh.exe" }
 if ($shExe) {
   $env:JUNIOR_CLAUDE_HOME = (Split-Path $SkillsDir)
+  $env:Path = (Split-Path $shExe) + ';' + $env:Path      # give sh its usual companions (tr, grep, awk) as Git Bash does
   $doc = & $shExe (Join-Path $VaultDir '08 - Resources\Onboarding\kit\vault-check.sh') --doctor 2>&1
   $failed = @($doc | Where-Object { $_ -match '^FAIL' })
   if ($failed.Count -gt 0) { $failed | ForEach-Object { Warn $_ } } else { Say 'Doctor: the tools and every Junior hook check out.' }
