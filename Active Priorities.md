@@ -32,10 +32,12 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Decide whether `UndeifyIT/ShiftOS` should be public; if not, make it private and protect `main` (Isaac). It is public today, and the audit's C1 exploit path is readable in its migrations. Never commit the `audit/` folder while it is public. See finding H4.
 - [ ] Review the Batch 2 findings (H4–H6, M6–M11, L6–L9) and run dashboard checks 7–10 at the end of findings.md (Isaac). Check first whether `OPENAI_API_KEY` is set on Render and whether OpenAI has a budget cap (H5).
 - [ ] Review the Batch 3 findings (H7, M12–M16, L10–L12) and run dashboard checks 11–13 (Isaac). H7 first: there is no monitoring or request logging at all, so there is currently no way to tell whether C1 has been used.
-- [ ] Batch 4 of the production-readiness audit (Junior): client audit, input validation, offline/PWA claims, auth config, privacy, third-party integrations, accessibility, time/localization, code quality, final release gates.
+- [ ] Review the Batch 4 findings (H8, H9, M17–M24, L13–L18) and run dashboard checks 14–17 (Isaac). H8 first: any Staff member can read a colleague's leave reasons and attendance, which is health and family information. H9 next: a failed read renders as "no shifts this week", so staff can conclude they aren't rostered.
+- [ ] Decide the two things in Batch 4 only Isaac can decide: whether a Supervisor should see a peer's leave *reason* at all or only the dates and status (fixes.md H8), and how long an offboarded employee's attendance, leave and photo are kept (fixes.md M17). Both block the privacy policy being made true.
 
 #### Linhora
 - [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).
 
 ### Completed Tasks
+- [x] 2026-09-27: ShiftOS production-readiness audit complete — all 4 batches, all 36 checklist sections. 1 Critical, 9 High, 24 Medium, 18 Low. Output in repo `audit/2026-09-27-production-readiness/`. Nothing applied.
 - [x] 2026-09-26: vault pushed to the private repo UndeifyIT/MemoryVault.
