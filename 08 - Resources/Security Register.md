@@ -27,13 +27,15 @@ Severity is Junior's judgment (low, medium, high). "From repo docs" means it com
 | SR-010 | Kit | Model or behaviour drift: Junior's rules are plain text and a new Claude version may follow them differently. | Medium | Isaac | Run [[Junior Checks]] after every model change and kit bump. |
 | SR-011 | Team | Configuration drift between machines: skills, hooks and boot file are copies, and plugins auto-update. | Low | Isaac | Kit `VERSION` stamp; `load junior` prints one line when a machine is behind; re-run onboard.ps1. |
 | SR-012 | Vault | GitHub is the only copy people rely on. | Medium | Isaac | `vault-backup.sh` writes a verified bundle outside GitHub; keep one off-machine, and run the restore drill monthly. |
-| SR-007 | Repos | The vault's secret scan covers only the vault. Project repos have no scan unless a hook is installed. | Medium | Junior | Install the local guard hook per repo (see [[Onboarding]]). Done for the BakeFlow repo on Isaac's machine, 2026-09-26. The ShiftOS copy has no `.git` folder, so it can't be guarded until it is a real clone. |
+| SR-007 | Repos | The vault's secret scan covers only the vault. Project repos have no scan unless a hook is installed. | Medium | Junior | Install the local guard hook per repo (see [[Onboarding]]). Done for the BakeFlow repo on Isaac's machine, 2026-09-26. The ShiftOS copy became a real clone on 2026-09-27 and still has no guard hook installed. |
 
 ## 2. Findings and incidents
 Append-only, newest last. One line each: `date | project | what was found or happened | severity | status | link to the fix`.
 
 2026-09-26 | Vault | Register created with the seven open risks above | n/a | open | none
 2026-09-26 | Vault | Vault pushed to private repo UndeifyIT/MemoryVault after a secret scan of all history found nothing | n/a | closed | SR-001
+2026-09-28 | ShiftOS | Full production-readiness audit (C1 invitation takeover and H8 leave-reading steps included) committed to public repo UndeifyIT/ShiftOS as `1f2c19c` at 00:11, by the isaaCecurity account. Found ~6 min later; 0 forks/stars/watchers at that point | high | open: repo still public | make repo private; then fix C1 first
+2026-09-28 | ShiftOS | Live DB check: `anon` can SELECT and INSERT `security_events` rows with null organization_id (2 rows exposed, each with a signup IP); any org member can INSERT and SELECT `audit_logs` via REST; `anon`/`authenticated` hold DELETE/UPDATE/TRUNCATE on `audit_logs` | high | open, draft | 2026-09-28 daily note
 
 ## 3. Incident-response runbook
 Use it for a leaked secret, a suspected breach, a compromised account or a data exposure.

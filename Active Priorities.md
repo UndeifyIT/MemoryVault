@@ -26,6 +26,10 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Confirm or correct the BakeFlow Status and Architecture drafts (Isaac). See [[BakeFlow Status]].
 
 #### ShiftOS
+- [ ] **Incident, do first:** make `UndeifyIT/ShiftOS` private now (Isaac). Commit `1f2c19c` (00:11, 2026-09-28) put the full security audit, with the C1 and H8 exploit steps, in the public repo. Then decide whether to remove it from history, and fix C1 next since its exploit path is now published. See [[Security Register]] section 2.
+- [ ] Confirm the `DATABASE_URL` username on Render (the username only, never the password) (Isaac). If it is `postgres`, RLS does nothing on the backend path and the repository classes are the only tenant isolation.
+- [ ] Find out why Render stopped auto-deploying after 2026-09-18, and where `074_extend_admin_role` came from; it is live and not in the repo (Isaac, Tolu).
+- [ ] Delete the orphan Render service `shiftos-backend` after checking what secrets it holds (Isaac). It has never built.
 - [ ] Confirm or correct the ShiftOS Status and Architecture drafts (Isaac). See [[ShiftOS Status]].
 - [ ] Review the Batch 1 audit findings and approve fixes by ID (Isaac). The Critical invitation-takeover fix (C1+H1) comes first. Files: repo `audit/2026-09-27-production-readiness/`. See [[ShiftOS Log]].
 - [ ] Run dashboard checks 1–6 listed in findings.md (Isaac or Tolu).
