@@ -28,8 +28,10 @@ The single queue of open work across everything. Items sit under a project headi
 #### ShiftOS
 - [ ] Confirm or correct the ShiftOS Status and Architecture drafts (Isaac). See [[ShiftOS Status]].
 - [ ] Review the Batch 1 audit findings and approve fixes by ID (Isaac). The Critical invitation-takeover fix (C1+H1) comes first. Files: repo `audit/2026-09-27-production-readiness/`. See [[ShiftOS Log]].
-- [ ] Run the six Supabase/Render/Vercel dashboard checks listed at the end of findings.md (Isaac or Tolu).
-- [ ] Batches 2–4 of the production-readiness audit (Junior, after Batch 1 review).
+- [ ] Run dashboard checks 1–6 listed in findings.md (Isaac or Tolu).
+- [ ] Decide whether `UndeifyIT/ShiftOS` should be public; if not, make it private and protect `main` (Isaac). It is public today, and the audit's C1 exploit path is readable in its migrations. Never commit the `audit/` folder while it is public. See finding H4.
+- [ ] Review the Batch 2 findings (H4–H6, M6–M11, L6–L9) and run dashboard checks 7–10 at the end of findings.md (Isaac). Check first whether `OPENAI_API_KEY` is set on Render and whether OpenAI has a budget cap (H5).
+- [ ] Batches 3–4 of the production-readiness audit (Junior).
 
 #### Linhora
 - [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).
