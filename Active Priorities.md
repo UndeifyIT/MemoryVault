@@ -27,6 +27,9 @@ The single queue of open work across everything. Items sit under a project headi
 
 #### ShiftOS
 - [ ] Confirm or correct the ShiftOS Status and Architecture drafts (Isaac). See [[ShiftOS Status]].
+- [ ] Review the Batch 1 audit findings and approve fixes by ID (Isaac). The Critical invitation-takeover fix (C1+H1) comes first. Files: repo `audit/2026-09-27-production-readiness/`. See [[ShiftOS Log]].
+- [ ] Run the six Supabase/Render/Vercel dashboard checks listed at the end of findings.md (Isaac or Tolu).
+- [ ] Batches 2–4 of the production-readiness audit (Junior, after Batch 1 review).
 
 #### Linhora
 - [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).

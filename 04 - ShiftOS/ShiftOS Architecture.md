@@ -4,7 +4,7 @@ project: shiftos
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-27
 ---
 # ShiftOS Architecture
 
@@ -16,7 +16,7 @@ ShiftOS is a multi-tenant workforce platform built as a pnpm monorepo on Supabas
 Shift scheduling, attendance, tasks, announcements and leave for organizations with branches. Its documentation is organized as a "product bible" of numbered domain volumes: organization, user and identity, roles and permissions, employee, shift, scheduling, attendance, task management, communication, notifications, reporting, security and more. The docs also describe "Shifty", an AI assistant (`docs/shifty`).
 
 ## Repos and folders
-- **GitHub:** https://github.com/ShiftOS (organization; the exact repo isn't recorded yet). Isaac's local copy is `C:\Users\HP\ShiftOS-main` (machine-specific, no Git history).
+- **GitHub:** https://github.com/UndeifyIT/ShiftOS (verified 2026-09-27 against the local clone's remote). Isaac's local copy (machine-specific) is `C:\Users\HP\ShiftOS-main`, a real clone on `main`. Previously recorded as `github.com/ShiftOS`, which was wrong (unrelated org).
 - **Layout:** `apps/web` (React, Vite, Tailwind, Vercel config), `apps/mobile` (Expo React Native), `packages/` (api, auth, authorization, backend, config, constants, database, errors, geography, repositories, services, tests, types, ui, utils, validation), `supabase/` (71 migrations and a policies folder), `docs/`.
 
 ## Stack
@@ -37,7 +37,7 @@ Supabase only, as far as the documents show. The database connection string live
 Operations are permission-gated and branch-gated. Audit logs and security events are append-only. Avatars are served through signed URLs. The audit records that the database connection uses verified TLS certificates. It also notes that JWT verification for the newly built operations wasn't tested at the HTTP layer.
 
 ## Open questions
-Isaac to confirm this draft. Which repo under the ShiftOS organization holds this code? Where is it deployed, and what is current?
+Isaac to confirm this draft. Where is it deployed, and what is current?
 
 ## Sources read for this draft
 `README.md`, `package.json`, the top of `docs/README.md` and the master specification, the start and end of `docs/backend-completion-audit.md`, and directory listings.

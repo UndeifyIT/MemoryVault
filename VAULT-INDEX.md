@@ -37,7 +37,7 @@ Repo: https://github.com/isaaCecurity/-Davila-B-B. Isaac's local copies (machine
 
 ## ShiftOS (04 - ShiftOS)
 
-GitHub: https://github.com/ShiftOS. Isaac's local copy (machine-specific): `C:\Users\HP\ShiftOS-main`.
+GitHub: https://github.com/UndeifyIT/ShiftOS. Isaac's local copy (machine-specific): `C:\Users\HP\ShiftOS-main`.
 - **Status:** Not recorded yet.
 
 ## Linhora (05 - Linhora)
