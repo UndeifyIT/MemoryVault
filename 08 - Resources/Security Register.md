@@ -35,6 +35,7 @@ Append-only, newest last. One line each: `date | project | what was found or hap
 2026-09-26 | Vault | Register created with the seven open risks above | n/a | open | none
 2026-09-26 | Vault | Vault pushed to private repo UndeifyIT/MemoryVault after a secret scan of all history found nothing | n/a | closed | SR-001
 2026-09-28 | ShiftOS | Full production-readiness audit (C1 invitation takeover and H8 leave-reading steps included) committed to public repo UndeifyIT/ShiftOS as `1f2c19c` at 00:11, by the isaaCecurity account. Found ~6 min later; 0 forks/stars/watchers at that point | high | open: repo still public | make repo private; then fix C1 first
+2026-09-28 | ShiftOS | Incident above contained: repo made private by Isaac, verified 00:35 (GitHub returns 404 unauthenticated). Window ~00:11–00:35. C1 now treated as public knowledge | high | contained | fix C1 first (audit I1)
 2026-09-28 | ShiftOS | Live DB check: `anon` can SELECT and INSERT `security_events` rows with null organization_id (2 rows exposed, each with a signup IP); any org member can INSERT and SELECT `audit_logs` via REST; `anon`/`authenticated` hold DELETE/UPDATE/TRUNCATE on `audit_logs` | high | open, draft | 2026-09-28 daily note
 
 ## 3. Incident-response runbook

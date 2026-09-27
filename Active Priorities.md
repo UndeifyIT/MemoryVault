@@ -26,7 +26,8 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Confirm or correct the BakeFlow Status and Architecture drafts (Isaac). See [[BakeFlow Status]].
 
 #### ShiftOS
-- [ ] **Incident, do first:** make `UndeifyIT/ShiftOS` private now (Isaac). Commit `1f2c19c` (00:11, 2026-09-28) put the full security audit, with the C1 and H8 exploit steps, in the public repo. Then decide whether to remove it from history, and fix C1 next since its exploit path is now published. See [[Security Register]] section 2.
+- [ ] Fix C1 now, ahead of every other finding: its exploit path was public from 00:11 to about 00:35 on 2026-09-28 (Incident I1, contained; repo private since). Then add `audit/` to `.gitignore` or move it out of the repo, so a "commit all" can't publish it again (Isaac to approve; Engineering).
+- [ ] Review Batch 5, the live production checks (I1, H10–H13, M25, M26, L19) in the repo's `audit/` folder (Isaac). H11 and H12 are one migration each; H13 means production is running 18 September's backend.
 - [ ] Confirm the `DATABASE_URL` username on Render (the username only, never the password) (Isaac). If it is `postgres`, RLS does nothing on the backend path and the repository classes are the only tenant isolation.
 - [ ] Find out why Render stopped auto-deploying after 2026-09-18, and where `074_extend_admin_role` came from; it is live and not in the repo (Isaac, Tolu).
 - [ ] Delete the orphan Render service `shiftos-backend` after checking what secrets it holds (Isaac). It has never built.
@@ -46,5 +47,6 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).
 
 ### Completed Tasks
+- [x] 2026-09-28: ShiftOS repo made private after the audit was pushed to it (verified 00:35). Batch 5 live checks written into the audit folder.
 - [x] 2026-09-27: ShiftOS production-readiness audit complete — all 4 batches, all 36 checklist sections. 1 Critical, 9 High, 24 Medium, 18 Low. Output in repo `audit/2026-09-27-production-readiness/`. Nothing applied.
 - [x] 2026-09-26: vault pushed to the private repo UndeifyIT/MemoryVault.
