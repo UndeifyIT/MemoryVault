@@ -35,6 +35,10 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Review the Batch 4 findings (H8, H9, M17–M24, L13–L18) and run dashboard checks 14–17 (Isaac). H8 first: any Staff member can read a colleague's leave reasons and attendance, which is health and family information. H9 next: a failed read renders as "no shifts this week", so staff can conclude they aren't rostered.
 - [ ] Decide the two things in Batch 4 only Isaac can decide: whether a Supervisor should see a peer's leave *reason* at all or only the dates and status (fixes.md H8), and how long an offboarded employee's attendance, leave and photo are kept (fixes.md M17). Both block the privacy policy being made true.
 
+- [ ] Marketing P0 (Isaac): decide whether to keep the ShiftOS name and which domain we control; `shiftos.app` is another company's product and receives our hello@ and privacy@ email. See [[ShiftOS Marketing Review]].
+- [ ] Marketing P0 (Isaac approves, Junior or Tolu builds): make the demo and newsletter forms actually store leads, with a bot check and rate limit. Both discard submissions today.
+- [ ] Decide ShiftOS pricing (Isaac): the pricing page and PF-012 disagree, and nothing in code enforces plans or takes payment.
+
 #### Linhora
 - [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).
 

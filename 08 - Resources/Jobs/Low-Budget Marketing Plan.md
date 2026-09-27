@@ -2,6 +2,9 @@
 status: active
 project: meta
 type: guide
+author: junior
+created: 2026-09-26
+updated: 2026-09-28
 ---
 # Low-Budget Marketing Plan
 
@@ -28,4 +31,4 @@ type: guide
 - Written for Nigerian and wider African founders and customers where that applies.
 
 ## Lessons (fold corrections in here over time)
-- None yet.
+- Before planning any traffic, check the plumbing: submit every form and confirm the lead lands somewhere, and check that every contact email and domain is actually ours. The ShiftOS site passed on looks and failed both (2026-09-28, [[ShiftOS Marketing Review]]).
