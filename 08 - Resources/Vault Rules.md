@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # Vault Rules
 
@@ -43,6 +43,11 @@ When creating or editing a note, add `wikilinks`:
 ## How to Determine Each Field
 
 **status** — Default `active`. For existing notes infer from content: in progress / has unchecked items → `active`; all done → `completed`; a future "maybe" → `idea`; was active but gone quiet → `parked`; in the Archive folder → `archived`.
+
+**Status tracking (Junior keeps it current).** Activity means evidence: a commit in the project's repo, an edit to its vault notes, a daily-note mention, or work in the current session.
+- **Automatic, then reported in one line:** `active` → `parked` after 14 days with no activity (Junior checks the project repo's commits first, because the vault check can't see them); `parked` → `active` when activity resumes; `active` → `completed` when every checkbox is done and verified against the real state.
+- **Never automatic:** `idea` → `active` (only a founder's "lock it" does that) and anything → `archived` (Junior asks first).
+- **Asking:** at `load junior` the vault check names at most one quiet item, quietest first, each at most once every 3 days. Junior asks one question ("still on, parked, or done?") and the answer sets the status.
 
 **project** — What the note *serves* (folder is the default, but content wins). Mapping:
 - `02 - MindBridge/*` → `mindbridge`

@@ -17,12 +17,15 @@ function speak(k, m,   sk, p, le, lm) {
   return 0
 }
 function readfile(f, arr,   l, c) { c = 0; while ((getline l < f) > 0) { sub(/\r$/, "", l); arr[++c] = l }; close(f); return c }
-function scan(f,   line, n, fence, fm, hasfm, upd, tmp, t) {
+function scan(f,   line, n, fence, fm, hasfm, upd, tmp, t, v) {
   fence = 0; fm = 0; hasfm = 0; upd = ""; n = 0
   while ((getline line < f) > 0) {
     n++; sub(/\r$/, "", line)
     if (n == 1 && line == "---") { fm = 1; hasfm = 1; continue }
-    if (fm == 1) { if (line == "---") fm = 0; else if (line ~ /^updated:/) { upd = line; sub(/^updated:[ \t]*/, "", upd) }; continue }
+    if (fm == 1) { if (line == "---") fm = 0
+      else if (line ~ /^updated:/) { upd = line; sub(/^updated:[ \t]*/, "", upd) }
+      else if (line ~ /^(status|type):/) { v = line; sub(/^[a-z]+:[ \t]*/, "", v); sub(/[ \t]+$/, "", v); if (line ~ /^status:/) fstat[f] = v; else ftype[f] = v }
+      continue }
     if (line ~ /^```/) { fence = !fence; continue }
     if (fence) continue
     if (line ~ /^<<<<<<< /) conf[f] = 1
@@ -112,6 +115,26 @@ BEGIN {
   for (f in draft) { if (!(f in last)) continue; age = int((now - toepoch(last[f])) / 86400)
     if (age >= draftdays) { dn++; if (age > oldest) oldest = age } }
   if (dn > 0 && speak("drafts", oldest)) say(dn " draft(s) waiting for approval; the oldest has waited " oldest " days.")
+
+  # 5b. quiet work: an active plan or project Status with no vault activity for `quiet` days.
+  # Activity = the latest of its last commit, its `updated:` date and (for a Status) its project Log's last commit.
+  # The vault can't see project repos, so Junior checks repo commits before acting. Startup names ONE item,
+  # quietest first; each item is asked about at most once per snooze window, so the question rotates.
+  qn = 0
+  for (i = 1; i <= ns; i++) { f = sc[i]
+    if (f !~ /^0[0-5] - |^08 - Resources\// || f ~ /Daily Notes|Onboarding\//) continue
+    if (fstat[f] != "active" || !(ftype[f] == "plan" || f ~ / Status\.md$/)) continue
+    a = (f in last) ? last[f] : ""; if (updd[f] > a) a = updd[f]
+    if (f ~ / Status\.md$/) { lg = f; sub(/ Status\.md$/, " Log.md", lg); if ((lg in last) && last[lg] > a) a = last[lg] }
+    if (a == "") continue
+    age = int((now - toepoch(a)) / 86400)
+    if (age >= quiet) { qn++; qf[qn] = f; qa[qn] = age }
+  }
+  for (k = 1; k <= qn; k++) { best = 0
+    for (j = 1; j <= qn; j++) if (!(j in qdone) && (best == 0 || qa[j] > qa[best])) best = j
+    qdone[best] = 1; b = qf[best]; sub(/.*\//, "", b); sub(/\.md$/, "", b)
+    if (speak("quiet." qf[best], 0)) { say("Quiet for " qa[best] (qa[best] == 1 ? " day: " : " days: ") b ". Ask one question: still on, parked, or done?"); if (mode == "startup") break }
+  }
 
   # 6. sizes
   for (i = 1; i <= ns; i++) { f = sc[i]

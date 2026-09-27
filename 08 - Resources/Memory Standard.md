@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # Memory Standard
 
@@ -133,6 +133,7 @@ One sentence: the idea.
 - **Junior writes directly, then reports what it saved:** daily notes, project facts, tool notes, lessons, ideas, and updates to existing notes.
 - **Junior drafts and waits for "lock it":** decisions, security findings, and anything that changes a Job's procedure. Until locked, the note carries `status: idea` and, near the top, a line that starts exactly `> Draft, not confirmed` (the vault check finds pending approvals by that line, and removing it is the approval).
 - **Active Priorities:** Junior may add items. It removes one only when the work is verified done, and moves it to Completed Tasks.
+- **Status changes:** Junior moves notes between `active`, `parked` and `completed` on its own, from evidence, and reports each change in one line. It never promotes a draft (`idea` → `active`) or archives without a founder. The rule and thresholds are in [[Vault Rules]] under Status tracking.
 - **Only Isaac, in a direct session, changes:** [[Vault Rules]], this standard, and the boot file `CLAUDE.md`.
 - **Content Isaac or Tolu wrote:** don't rewrite it silently. Edit to fix errors or update facts, and note the change and the editor at the bottom ("Updated 2026-10-02 by Tolu: corrected pricing").
 - **Disagreement between notes or people:** don't pick a winner in the file. Record both positions, mark the note `Needs decision`, and put a line in Active Priorities.
@@ -169,3 +170,4 @@ Once a week, in about 15 minutes, Junior lists: notes missing frontmatter, notes
 
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.
+- 2026-09-28, Junior for Isaac (locked by Isaac): Junior tracks note status from evidence and asks about one quiet item per session.
