@@ -19,3 +19,4 @@ Append-only record of what changed in ShiftOS, oldest first. One line per change
 2026-09-28 | junior | Live check of Google and email sign-in and sign-up: both work to Supabase; found auth emails can't reach real customers (built-in Supabase sender) | 1a11443
 2026-09-28 | junior | Built fix for audit C1 (invitation takeover) and H1 (self-reactivation): migration 075 and tests, proven offline, awaiting approval | branch fix/c1-h1-users-lockdown
 2026-09-28 | junior | C1/H1 fix committed and PR opened; migration 075 not yet applied | 481c171, PR 29
+2026-09-28 | junior | Audit C1 and H1 fixed in production: PR 29 merged and deployed, migration 075 applied and verified live | 9dafc5d, PR 29
