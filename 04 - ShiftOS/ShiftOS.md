@@ -4,11 +4,11 @@ project: shiftos
 type: index
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # ShiftOS
 
-GitHub: https://github.com/ShiftOS. Isaac's local copy: `C:\Users\HP\ShiftOS-main` (machine-specific, other machines differ).
+Workforce scheduling and operations platform, live in production. GitHub: `UndeifyIT/ShiftOS` (default branch `main`).
 
 ## Start here
 - [[ShiftOS Status]] — where the project stands and where we stopped.

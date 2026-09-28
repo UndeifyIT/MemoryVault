@@ -16,7 +16,11 @@ The single queue of open work across everything. Tag each item with its project 
 - [ ] Add Tolu to the private repo UndeifyIT/MemoryVault and turn on multi-factor sign-in for the org (Isaac). See [[Security Register]] SR-001.
 - [ ] Fill in the costs, budget and runway in [[Tool Register]] (Isaac).
 - [ ] Set up Composio for connecting apps, with least-privilege access (Isaac). Steps are in [[Onboarding]].
-- [ ] Confirm or correct the BakeFlow and ShiftOS Status and Architecture drafts (Isaac).
+- [ ] Confirm or correct the BakeFlow Status and Architecture drafts (Isaac). ShiftOS's were rewritten from the real repo on 2026-09-28.
+- [ ] ShiftOS: merge or close `feat/staff-and-admin-handoff` — its migration 074 is already live in the database but not on `main` (Tolu). See [[ShiftOS Status]].
+- [ ] ShiftOS: add every committer to the Vercel team, or have them commit with their Vercel email, so production deploys stop getting blocked (Isaac).
+- [ ] ShiftOS: work through `audit/2026-09-27-production-readiness/fixes.md` in the repo (Isaac).
+- [ ] Vault sync broken on this machine: `git pull` on UndeifyIT/MemoryVault answers "Repository not found", so this machine's GitHub login can't reach the private repo. Commits here stay local until that's fixed (Isaac).
 - [ ] Tell Junior where the MindBridge and Linhora repos are so their notes can be drafted (Isaac).
 
 ### Completed Tasks

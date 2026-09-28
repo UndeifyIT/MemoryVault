@@ -4,42 +4,49 @@ project: shiftos
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # ShiftOS Architecture
 
-ShiftOS is a multi-tenant workforce platform built as a pnpm monorepo on Supabase, with a React web app and an Expo mobile app. Draft, not confirmed: written by Junior from the repo's documents on 2026-09-26.
+ShiftOS is a multi-tenant workforce platform built as a pnpm monorepo on Supabase, with a React web app on Vercel, a Node RPC backend on Render and an Expo mobile app. Checked by Junior on 2026-09-28 against the repo and the hosting dashboards.
 
 ## What it is
-Shift scheduling, attendance, tasks, announcements and leave for organizations with branches. Its documentation is organized as a "product bible" of numbered domain volumes: organization, user and identity, roles and permissions, employee, shift, scheduling, attendance, task management, communication, notifications, reporting, security and more. The docs also describe "Shifty", an AI assistant (`docs/shifty`).
+Shift scheduling, attendance, tasks, shift notes, announcements, swap and leave requests, reports and notifications for organizations with branches. Four roles: Manager (organization-wide), Admin, Supervisor (branch-scoped) and Staff. The screens follow the design handoff in the repo's `Local file check/design_handoff_shiftos` folder. The docs also describe "Shifty", an AI assistant (`docs/shifty`).
 
 ## Repos and folders
-- **GitHub:** https://github.com/ShiftOS (organization; the exact repo isn't recorded yet). Isaac's local copy is `C:\Users\HP\ShiftOS-main` (machine-specific, no Git history).
-- **Layout:** `apps/web` (React, Vite, Tailwind, Vercel config), `apps/mobile` (Expo React Native), `packages/` (api, auth, authorization, backend, config, constants, database, errors, geography, repositories, services, tests, types, ui, utils, validation), `supabase/` (71 migrations and a policies folder), `docs/`.
+- **GitHub:** `UndeifyIT/ShiftOS`, default branch `main`. Work lands through pull requests.
+- **Layout:** `apps/web` (React, Vite, Tailwind), `apps/mobile` (Expo React Native), `packages/` (api, auth, authorization, backend, config, constants, database, errors, geography, repositories, services, tests, types, ui, utils, validation), `supabase/migrations`, `docs/`, `audit/`, and `tools/handoff-preview` (renders the design handoff locally for comparison).
 
 ## Stack
-- pnpm workspaces (pnpm 11.20), TypeScript strict, ESLint, Prettier, Vitest for unit and integration tests.
-- Supabase (PostgreSQL, Auth, Storage) as the backend.
-- Layered flow per the audit: UI or RPC call, then service, then repository, then Postgres, with an `RpcRegistry` that executes operations.
+- pnpm workspaces, TypeScript strict, ESLint, Prettier, Vitest.
+- Supabase: PostgreSQL, Auth, Storage.
+- Request flow: the web app POSTs to the backend's `/rpc/<operation>`; each operation runs service, then repository, then Postgres. Operations are registered in `packages/api/src/registry.ts`, and one that isn't registered fails.
 
 ## Environments
-Live Supabase project (its reference is in the audit; not copied here). Other environments: Not recorded yet.
+- **Web:** Vercel project `shiftos-web` in the `undeifyit` team, production at `shiftos-web.vercel.app`. Deploys automatically from `main`, but commits by authors outside the Vercel team are blocked until redeployed by hand.
+- **Backend:** Render web service `shiftos-backend-api` (Frankfurt, free plan) at `shiftos-backend-api.onrender.com`. Build `pnpm run build`, start `node packages/backend/dist/server.js`, auto-deploy from `main`. The free plan sleeps when idle, so the first request after a quiet spell is slow and the scheduled notification job doesn't run while it sleeps.
+- **Database:** one Supabase project (EU Central), used by both. Its reference and keys live in the repo's `.env` files; never copy values here.
+- A second Render service, `shiftos-backend`, is dead (every build failing since 2026-08-30).
 
 ## Integrations
-Supabase only, as far as the documents show. The database connection string lives in the repo's `.env` (`DATABASE_URL`); never copy values here.
+- Supabase only for data and auth. Email and WhatsApp notification delivery are not connected; notifications are in-app.
+- Credentials: the database URL, service-role key and anon key live in `.env` (ignored by Git) and in the Render and Vercel environment settings. `apps/web/.env.production` is committed and holds only the public Supabase URL and anon key.
 
 ## Run and test
-`pnpm install`, then `pnpm dev:web`, `pnpm start:mobile`, `pnpm build:web`, `pnpm typecheck`, `pnpm lint`, `pnpm test` (Vitest). `pretest` builds all TypeScript references first.
+`pnpm install`, then `pnpm dev:web`, `pnpm dev:backend`, `pnpm start:mobile`, `pnpm build`, `pnpm typecheck`, `pnpm test:unit`, `pnpm test:integration` (needs a database). Migrations are applied to Supabase in number order.
 
 ## Security notes
-Operations are permission-gated and branch-gated. Audit logs and security events are append-only. Avatars are served through signed URLs. The audit records that the database connection uses verified TLS certificates. It also notes that JWT verification for the newly built operations wasn't tested at the HTTP layer.
+- Every operation checks a permission and branch access on the server; hiding UI is convenience only.
+- Audit logs and security events are append-only. Avatars are served through signed URLs.
+- Scheduled notifications record each send in `notification_dispatches`, so they go out once even if the job runs twice.
+- Open risks and fixes: the repo's `audit/2026-09-27-production-readiness/`.
 
 ## Open questions
-Isaac to confirm this draft. Which repo under the ShiftOS organization holds this code? Where is it deployed, and what is current?
-
-## Sources read for this draft
-`README.md`, `package.json`, the top of `docs/README.md` and the master specification, the start and end of `docs/backend-completion-audit.md`, and directory listings.
+- Does Render auto-deploy work again, or does each merge need a manual deploy? Unverified until the next merge.
+- Should the backend move off Render's free plan so the scheduled job runs reliably?
 
 ## Related
 - [[ShiftOS Status]]
 - [[ShiftOS Log]]
+
+Previously (2026-09-26): drafted from a downloaded zip; it named the wrong GitHub organization and had no deploy details.
