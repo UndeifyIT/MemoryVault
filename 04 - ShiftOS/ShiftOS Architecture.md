@@ -1,4 +1,4 @@
----
+﻿---
 status: active
 project: shiftos
 type: reference
@@ -42,7 +42,6 @@ Shift scheduling, attendance, tasks, shift notes, announcements, swap and leave 
 - Open risks and fixes: the repo's `audit/2026-09-27-production-readiness/`.
 
 ## Open questions
-- Does Render auto-deploy work again, or does each merge need a manual deploy? Unverified until the next merge.
 - Should the backend move off Render's free plan so the scheduled job runs reliably?
 
 ## Related
@@ -50,3 +49,4 @@ Shift scheduling, attendance, tasks, shift notes, announcements, swap and leave 
 - [[ShiftOS Log]]
 
 Previously (2026-09-26): drafted from a downloaded zip; it named the wrong GitHub organization and had no deploy details.
+
