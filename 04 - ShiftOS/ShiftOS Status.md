@@ -37,7 +37,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 ## Where we stopped
 
 ### Isaac
-In progress with Junior (2026-09-28): audit fixes C1 and H1 on branch `fix/c1-h1-users-lockdown` (local, not pushed). Migration `075_lock_users_identity_columns.sql` plus integration tests `usersSelfWriteLockdown.integration.test.ts`; the existing invitation test now creates real login rows. Proven offline in an in-memory Postgres (18 checks: the attack works before, is refused after, normal sign-up and invitations still work). Typecheck clean, 189 unit tests pass. Not applied to the live database, not committed. Next: Isaac approves, then commit, open PR, apply 075 to Supabase. Production shows no past abuse (every profile email matches its login email).
+In progress with Junior (2026-09-28): audit fixes C1 and H1 on branch `fix/c1-h1-users-lockdown`, commit `481c171`, PR 29 open. Migration `075_lock_users_identity_columns.sql` plus integration tests `usersSelfWriteLockdown.integration.test.ts`; the existing invitation test now creates real login rows. Proven offline in an in-memory Postgres (18 checks: the attack works before, is refused after, normal sign-up and invitations still work). Typecheck clean, 189 unit tests pass. Not applied to the live database yet. Next: merge PR 29, then Junior applies 075 to Supabase and re-checks the live grants. Production shows no past abuse (every profile email matches its login email).
 
 Production-readiness audit: findings and proposed fixes committed on `main` (`1f2c19c`, `08f5ba9`). Next: decide which fixes from `fixes.md` to build first.
 
