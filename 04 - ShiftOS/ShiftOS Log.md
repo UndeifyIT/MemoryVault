@@ -17,3 +17,4 @@ Append-only record of what changed in ShiftOS, oldest first. One line per change
 2026-09-28 | junior | Confirmed backend on Render and database migrations (through 074) match main, apart from 074 which is only on feat/staff-and-admin-handoff | 08f5ba9
 2026-09-28 | junior | Status and Architecture rewritten from the real repo, Render, Vercel and Supabase state, replacing the zip-based drafts | none
 2026-09-28 | junior | Live check of Google and email sign-in and sign-up: both work to Supabase; found auth emails can't reach real customers (built-in Supabase sender) | 1a11443
+2026-09-28 | junior | Built fix for audit C1 (invitation takeover) and H1 (self-reactivation): migration 075 and tests, proven offline, awaiting approval | branch fix/c1-h1-users-lockdown
