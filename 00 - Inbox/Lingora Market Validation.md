@@ -8,7 +8,18 @@ updated: 2026-10-05
 ---
 # Lingora Market Validation
 
-Findings of the 2026-10-05 market validation of Lingora (Yorùbá-first, culture-led language app; repo https://github.com/UndeifyIT/Lingora): buildable, real but small demand, not venture-scale as a Yorùbá-only consumer subscription. Unverified whether Lingora is the vault's "Linhora" project; sort into that folder once Isaac confirms.
+Findings of the 2026-10-05 market validation of Lingora (pan-African heritage-language app, Yorùbá first; repo https://github.com/UndeifyIT/Lingora): feasible as a bootstrapped, family-first studio that adds languages only when evidence says so; not a fast-growth platform. Unverified whether Lingora is the vault's "Linhora" project; sort into that folder once Isaac confirms.
+
+## Scope (Isaac, 2026-10-05)
+- All African languages, Yorùbá first; English UI only for now. Bootstrapping, no raise planned. No traction yet; waitlist and socials planned after the research. Existing partnership with Spitch AI (speech API).
+- Buyers named: diaspora parents, diaspora adults, Africans at home, non-Africans. Revenue: freemium, family plan, B2B (Nigerian private schools; churches/mosques). Pricing undecided.
+
+## Pan-African findings (checked 2026-10-05)
+- Every roadmap language already has 2–3 competitors (Memrise, Ling, NKENNE, Dialogue Africa, Duolingo free for Swahili and Zulu). None is family/kids-first; that is the open lane.
+- Recommended order (pushback on Isaac's plan): Yorùbá → gate → Igbo → Twi → Amharic or Somali by waitlist demand; Hausa only for Nigeria/schools; Swahili and Zulu last. Reason: UK language retention is ~8% for Nigerians, ~18% Ghanaians, ~35% Somalis, so non-speakers are concentrated in Nigerian and Ghanaian heritage.
+- Model v4 (critic-checked): Yorùbá-only phase ≈ $2K–$153K a year (base $26K ≈ ₦35M); six languages + some school sales at year 3+ ≈ $8K / $91K / $434K (base ≈ ₦124M). No costs gathered yet.
+- Nigerian private schools: 91,252 schools / 13.7M pupils (UBEC 2022); South-West 3.38M pupils. Fit is weak: they teach Yorùbá to children who already speak it. Churches/mosques = distribution, not revenue.
+- Spitch (docs): speech in/out for en, yo, ha, ig, am; tone marking Yorùbá only; STT $0.00042/s ≈ $0.025 per learner-minute → about $400–$3,000/month per 10K free users. Cap Speak in the free tier. No published accuracy figures. Twi has no Spitch or Google speech support.
 
 - **Full report (private artifact):** https://claude.ai/artifact/1SBwmj3XAMTdJdn1fwukhh. Source HTML and data: `research/` in the Lingora repo folder (local, not yet committed).
 - **Method:** 23 claims, each attacked by a separate critic agent over three rounds; none survived unchanged, 21 amended, 2 cut to hypotheses. Sources: ONS Census 2021, US ACS 2019–2024, StatCan 2021, Duolingo FY2025 10-K, Google Play/iTunes data, Google Trends, competitor press. All checked 2026-10-05.

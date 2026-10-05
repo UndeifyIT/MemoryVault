@@ -50,6 +50,8 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Lingora: hire a native Yorùbá linguist to QA every string and tone mark; the prototype spells its first greeting two ways (Isaac, Tolu).
 - [ ] Lingora: decide whether to run the 90-day validation sprint and fix its kill criteria in advance (Isaac). Gates are in the report.
 - [ ] Lingora: decide whether to commit the `research/` folder to the repo (Isaac).
+- [ ] Lingora: pick ONE launch buyer (research recommends diaspora parents on a family plan) and decide the language order after Yorùbá (research recommends Igbo → Twi, not Hausa or Swahili/Zulu) (Isaac).
+- [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
 - [x] 2026-09-28: ShiftOS repo made private after the audit was pushed to it (verified 00:35). Batch 5 live checks written into the audit folder.
