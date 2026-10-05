@@ -19,6 +19,10 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Point `vault-backup.sh` at a folder outside GitHub that only you control (Isaac), and do the restore drill once.
 - [ ] Run the [[Junior Checks]] once in a scratch project, and again after any Claude model change (Isaac).
 
+- [ ] Decide whether to run the DPCO validation sprint from [[Undeify Opportunity Scan]]: 12–15 DPCO conversations by 30 Nov 2026, kill if fewer than 3 prepay ≥₦50K for a Jan–Mar 2027 pilot (Isaac).
+- [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
+- [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
+
 #### MindBridge
 - [ ] [[MindBridge]] is our most important project. Tell Junior where its repo is so its notes can be drafted, and record its context, status and next steps (Isaac).
 
