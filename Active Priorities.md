@@ -19,7 +19,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Point `vault-backup.sh` at a folder outside GitHub that only you control (Isaac), and do the restore drill once.
 - [ ] Run the [[Junior Checks]] once in a scratch project, and again after any Claude model change (Isaac).
 
-- [ ] Decide whether to run the DPCO validation sprint from [[Undeify Opportunity Scan]]: 12–15 DPCO conversations by 30 Nov 2026, kill if fewer than 3 prepay ≥₦50K for a Jan–Mar 2027 pilot (Isaac).
+- [ ] DPCO sprint (Isaac said yes 2026-10-06; see [[Undeify Opportunity Scan]]). Kit is in `C:\Users\HP\Downloads\Undeify DPCO Sprint` (local only; it holds DPCO contact details, so keep it off GitHub and out of the vault). By 19 Oct: finish and publish the Undeify NDPA pack. 13 Oct – 30 Nov: 12–15 DPCO calls. Gate on 30 Nov: at least 3 DPCOs prepay ≥₦50K or kill (Isaac).
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 

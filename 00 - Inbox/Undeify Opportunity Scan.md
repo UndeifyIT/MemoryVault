@@ -22,7 +22,10 @@ Findings of the 2026-10-05 search for the next software business Undeify can get
 - Payments: Polar's docs list Nigeria as a payout country (currency/fees/KYC unconfirmed); Dodo Payments closed to new Nigerian merchants since 23 Mar 2026; Stripe Atlas not needed yet.
 - Idea A model (DPCO-only, unvalidated prices): ≈ $6K / $24K / $84K a year by month 24.
 
-## Recommended next steps (not decided)
+## Status
+- 2026-10-06: Isaac said yes to running the DPCO sprint. Sprint kit (target list, outreach, interview guide, pilot offer, Undeify NDPA drafts) is at `C:\Users\HP\Downloads\Undeify DPCO Sprint` on Isaac's machine; not in Git because it contains public-register contact details.
+
+## Recommended next steps
 1. By 19 Oct: fix ShiftOS C1; open a Polar test account; publish Undeify's own NDPA documentation.
 2. By 30 Nov: 12–15 DPCO conversations; kill gate = fewer than 3 prepay ≥₦50K for a hand-delivered pilot in the Jan–Mar 2027 filing season.
 3. List ShiftOS on Polar for a 90-day test; kill below 5 paying accounts.
