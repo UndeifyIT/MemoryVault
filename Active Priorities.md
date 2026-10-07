@@ -52,7 +52,8 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Confirm whether Lingora (repo UndeifyIT/Lingora) is the same project as Linhora, so [[Lingora Market Validation]] can move out of the Inbox (Isaac).
 - [ ] Lingora: pick a new name and run a trademark search before any brand spend; 12+ App Store apps are already called "Lingora" (Isaac). See [[Lingora Market Validation]].
 - [ ] Lingora: hire a native Yorùbá linguist to QA every string and tone mark; the prototype spells its first greeting two ways (Isaac, Tolu).
-- [ ] Lingora: decide whether to run the 90-day validation sprint and fix its kill criteria in advance (Isaac). Gates are in the report.
+- [ ] Lingora: fix the validation sprint gates and its start date (Isaac). The sprint and proposed gates are in the repo's `docs/roadmap.md` stage 3; no production code until they pass.
+- [ ] Lingora: check that Apple can pay Undeify's bank (search the bank in App Store Connect) and get a D-U-N-S number before Apple enrolment (Isaac). See roadmap stage 12.
 - [ ] Lingora: pick ONE launch buyer (research recommends diaspora parents on a family plan) and decide the language order after Yorùbá (research recommends Igbo → Twi, not Hausa or Swahili/Zulu) (Isaac).
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
