@@ -55,6 +55,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Lingora: fix the validation sprint gates and its start date (Isaac). The sprint and proposed gates are in the repo's `docs/roadmap.md` stage 3; no production code until they pass.
 - [ ] Lingora: check that Apple can pay Undeify's bank (search the bank in App Store Connect) and get a D-U-N-S number before Apple enrolment (Isaac). See roadmap stage 12.
 - [ ] Lingora: pick ONE launch buyer (research recommends diaspora parents on a family plan) and decide the language order after Yorùbá (research recommends Igbo → Twi, not Hausa or Swahili/Zulu) (Isaac).
+- [ ] Lingora: engage a lawyer before the build (Isaac). Top question: whether Nigeria's NDPA (under-18s are children; verified parental consent) applies to UK and US users, plus the full list in the repo's `docs/open-questions.md`.
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
