@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-09-28
 ---
 # Memory Standard
 
@@ -60,7 +60,7 @@ updated: 2026-09-26
 ---
 ```
 
-- `status`, `project`, `type` use the values in `VAULT-INDEX.md`.
+- `status`, `project`, `type` use the values in [[Vault Rules]].
 - `author` is who wrote it: `isaac`, `tolu`, or `junior`. If an AI drafted it for someone, use `junior`. If several people edit it, keep the original author and add the editor to the change log line at the bottom.
 - `created` is the date first written. `updated` changes on every edit. Check the real system date first.
 
@@ -131,9 +131,10 @@ One sentence: the idea.
 ## 5. Who writes what
 
 - **Junior writes directly, then reports what it saved:** daily notes, project facts, tool notes, lessons, ideas, and updates to existing notes.
-- **Junior drafts and waits for "lock it":** decisions, security findings, and anything that changes a Job's procedure. Until locked, the note carries `status: idea` or the line "Draft, not confirmed".
+- **Junior drafts and waits for "lock it":** decisions, security findings, and anything that changes a Job's procedure. Until locked, the note carries `status: idea` and, near the top, a line that starts exactly `> Draft, not confirmed` (the vault check finds pending approvals by that line, and removing it is the approval).
 - **Active Priorities:** Junior may add items. It removes one only when the work is verified done, and moves it to Completed Tasks.
-- **Only Isaac, in a direct session, changes:** the rules in `VAULT-INDEX.md`, this standard, and the boot file `CLAUDE.md`.
+- **Status changes:** Junior moves notes between `active`, `parked` and `completed` on its own, from evidence, and reports each change in one line. It never promotes a draft (`idea` → `active`) or archives without a founder. The rule and thresholds are in [[Vault Rules]] under Status tracking.
+- **Only Isaac, in a direct session, changes:** [[Vault Rules]], this standard, and the boot file `CLAUDE.md`.
 - **Content Isaac or Tolu wrote:** don't rewrite it silently. Edit to fix errors or update facts, and note the change and the editor at the bottom ("Updated 2026-10-02 by Tolu: corrected pricing").
 - **Disagreement between notes or people:** don't pick a winner in the file. Record both positions, mark the note `Needs decision`, and put a line in Active Priorities.
 
@@ -145,7 +146,7 @@ Without being asked, Junior saves when it sees any of these: a decision made, a 
 
 Every write follows the same steps:
 
-1. **Pull first.** Update the local copy of the vault from the shared repo so you don't write over the other person's changes.
+1. **Pull first, with rebase.** Run `git pull --rebase` so your copy has the other person's changes before you write, and again just before you push.
 2. **Search before creating.** Look for an existing note on the topic. Update it if there is one.
 3. **Check it against section 2.** Nothing secret, nothing personal, nothing derivable.
 4. **Write it** in the right home, with full frontmatter and the right shape.
@@ -169,3 +170,4 @@ Once a week, in about 15 minutes, Junior lists: notes missing frontmatter, notes
 
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.
+- 2026-09-28, Junior for Isaac (locked by Isaac): Junior tracks note status from evidence and asks about one quiet item per session.

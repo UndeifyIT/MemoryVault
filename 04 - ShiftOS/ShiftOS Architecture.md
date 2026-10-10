@@ -14,7 +14,7 @@ ShiftOS is a multi-tenant workforce platform built as a pnpm monorepo on Supabas
 Shift scheduling, attendance, tasks, shift notes, announcements, swap and leave requests, reports and notifications for organizations with branches. Four roles: Manager (organization-wide), Admin, Supervisor (branch-scoped) and Staff. The screens follow the design handoff in the repo's `Local file check/design_handoff_shiftos` folder. The docs also describe "Shifty", an AI assistant (`docs/shifty`).
 
 ## Repos and folders
-- **GitHub:** `UndeifyIT/ShiftOS`, default branch `main`. Work lands through pull requests.
+- **GitHub:** https://github.com/UndeifyIT/ShiftOS, default branch `main` (previously recorded as `github.com/ShiftOS`, which is an unrelated org). Work lands through pull requests.
 - **Layout:** `apps/web` (React, Vite, Tailwind), `apps/mobile` (Expo React Native), `packages/` (api, auth, authorization, backend, config, constants, database, errors, geography, repositories, services, tests, types, ui, utils, validation), `supabase/migrations`, `docs/`, `audit/`, and `tools/handoff-preview` (renders the design handoff locally for comparison).
 
 ## Stack

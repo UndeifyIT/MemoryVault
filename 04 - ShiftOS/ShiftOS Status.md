@@ -13,7 +13,7 @@ ShiftOS is live in production: the Manager, Supervisor and Staff screens are bui
 This note is a living snapshot. Overwrite it as things change; history goes in [[ShiftOS Log]].
 
 ## Snapshot
-- **Repo:** `UndeifyIT/ShiftOS` on GitHub, default branch `main`. Head is `1a11443` (PR 28, the Admin console, merged 2026-09-28). 40 commits landed on `main` since 2026-09-20.
+- **Repo:** https://github.com/UndeifyIT/ShiftOS, default branch `main`. Head is `1a11443` (PR 28, the Admin console, merged 2026-09-28). 40 commits landed on `main` since 2026-09-20.
 - **Live:** web on Vercel (project `shiftos-web`) and backend on Render (service `shiftos-backend-api`), both running `1a11443` as of 2026-09-28. Details in [[ShiftOS Architecture]].
 - **Database:** Supabase migrations applied through 074, matching `main` since PR 28 merged.
 - **Built to the design handoff and merged:**

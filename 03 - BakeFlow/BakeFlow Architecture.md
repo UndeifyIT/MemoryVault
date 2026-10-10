@@ -8,7 +8,9 @@ updated: 2026-09-26
 ---
 # BakeFlow Architecture
 
-BakeFlow is a mobile-first operations platform for independent Nigerian bakeries, built as an Expo mobile app on a Supabase backend. Draft, not confirmed: written by Junior from the repo's own documents on 2026-09-26.
+BakeFlow is a mobile-first operations platform for independent Nigerian bakeries, built as an Expo mobile app on a Supabase backend.
+
+> Draft, not confirmed. Written by Junior from the repo's own documents on 2026-09-26.
 
 ## What it is
 Connects orders, inventory, production, deliveries and finance so a bakery owner gets accurate financial visibility without bookkeeping knowledge. It is multi-tenant: the tenant is the Organization (one bakery business), which owns Branches (locations). All operational data is scoped to a Branch and its Organization.

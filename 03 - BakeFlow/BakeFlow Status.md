@@ -8,7 +8,9 @@ updated: 2026-09-26
 ---
 # BakeFlow Status
 
-BakeFlow's backend is live and its mobile app is mostly built; offline sync and the web app are not. Draft, not confirmed: written by Junior from the repo's own documents on 2026-09-26. Isaac to confirm or correct.
+BakeFlow's backend is live and its mobile app is mostly built; offline sync and the web app are not.
+
+> Draft, not confirmed. Written by Junior from the repo's own documents on 2026-09-26. Isaac to confirm or correct.
 
 This note is a living snapshot. Overwrite it as things change; history goes in [[BakeFlow Log]]. The repo keeps its own detailed control files (`CURRENT_TASK.md`, `BLOCKERS.md`, `NOTIFICATIONS.md`, `ARCHITECTURE_DECISIONS.md`, `TECHNICAL_DEBT.md`, `IMPLEMENTATION_LOG.md`). They are the source of truth for task-level detail; this note summarizes and points to them and never copies them.
 

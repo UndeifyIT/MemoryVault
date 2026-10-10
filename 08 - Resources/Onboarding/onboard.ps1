@@ -180,13 +180,21 @@ function Set-ClaudeHook {
   $found = 0; $stale = 0
   foreach ($e in $existing) {
     foreach ($h in @($e.hooks)) {
-      if ($h.command -match $Needle) { $found++; if ($h.command -ne $Command) { $stale++; $h.command = $Command } }
+      if ($h.command -match $Needle) {
+        $found++
+        if ($h.command -ne $Command) { $stale++; $h.command = $Command }
+        # a wider matcher (a new tool to watch) must reach machines that already have the hook
+        if ($Matcher -and $e.PSObject.Properties['matcher'] -and $e.matcher -ne $Matcher) { $stale++; $e.matcher = $Matcher }
+      }
     }
   }
   if ($found -gt 0) { if ($stale -gt 0) { return 'updated' } else { return 'unchanged' } }
   $hook = [ordered]@{ type = 'command'; command = $Command; timeout = 10 }
   if ($IfRule) { $hook['if'] = $IfRule }
-  $entry = [pscustomobject]@{ matcher = $Matcher; hooks = @([pscustomobject]$hook) }
+  $entry = [ordered]@{}
+  if ($Matcher) { $entry['matcher'] = $Matcher }
+  $entry['hooks'] = @([pscustomobject]$hook)
+  $entry = [pscustomobject]$entry
   $all = @($existing) + $entry
   if ($Settings.hooks.PSObject.Properties[$Event]) { $Settings.hooks.$Event = $all }
   else { $Settings.hooks | Add-Member -NotePropertyName $Event -NotePropertyValue $all }
@@ -201,6 +209,10 @@ if ((Test-Path $srcNudge) -and (Test-Path $srcGuard)) {
   New-Item -ItemType Directory -Force -Path $hookDir | Out-Null
   Copy-Item $srcNudge (Join-Path $hookDir 'junior-handoff-nudge.json') -Force
   Copy-Item $srcGuard (Join-Path $hookDir 'junior-read-guard.sh') -Force
+  foreach ($h in 'junior-taint-mark.sh', 'junior-taint-gate.sh', 'junior-taint-clear.sh') {
+    $s = Join-Path $VaultDir "08 - Resources\Onboarding\kit\$h"
+    if (Test-Path $s) { Copy-Item $s (Join-Path $hookDir $h) -Force } else { Warn "$h is missing from the vault kit." }
+  }
   $settingsFile = Join-Path $claudeHome 'settings.json'
   $nudgeCmd = 'grep -Eq ''"command":"[^"]*git commit'' && cat "$HOME/.claude/hooks/junior-handoff-nudge.json" ; true'
   $guardCmd = 'sh "$HOME/.claude/hooks/junior-read-guard.sh"'
@@ -214,12 +226,16 @@ if ((Test-Path $srcNudge) -and (Test-Path $srcGuard)) {
   } else {
     $r1 = Set-ClaudeHook -Settings $settings -Event 'PostToolUse' -Matcher 'Bash' -Needle 'junior-handoff-nudge' -Command $nudgeCmd -IfRule 'Bash(git commit *)'
     $r2 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Read' -Needle 'junior-read-guard' -Command $guardCmd -IfRule ''
-    if ($r1 -eq 'unchanged' -and $r2 -eq 'unchanged') {
-      Say 'Claude hooks (handoff nudge, read guard) are already up to date.'
+    # prompt-injection gate: mark after external reads, ask before risky actions, clear on a new human prompt
+    $r3 = Set-ClaudeHook -Settings $settings -Event 'PostToolUse' -Matcher 'WebFetch|mcp__.*' -Needle 'junior-taint-mark' -Command 'sh "$HOME/.claude/hooks/junior-taint-mark.sh"' -IfRule ''
+    $r4 = Set-ClaudeHook -Settings $settings -Event 'PreToolUse' -Matcher 'Write|Edit|MultiEdit|NotebookEdit|Bash|PowerShell|WebFetch|mcp__.*' -Needle 'junior-taint-gate' -Command 'sh "$HOME/.claude/hooks/junior-taint-gate.sh"' -IfRule ''
+    $r5 = Set-ClaudeHook -Settings $settings -Event 'UserPromptSubmit' -Matcher '' -Needle 'junior-taint-clear' -Command 'sh "$HOME/.claude/hooks/junior-taint-clear.sh"' -IfRule ''
+    if (-not (@($r1,$r2,$r3,$r4,$r5) | Where-Object { $_ -ne 'unchanged' })) {
+      Say 'Claude hooks (handoff nudge, read guard, injection gate) are already up to date.'
     } else {
       if (Test-Path $settingsFile) { Copy-Item $settingsFile "$settingsFile.bak" -Force }
       [IO.File]::WriteAllText($settingsFile, ($settings | ConvertTo-Json -Depth 20), $utf8)
-      try { $null = Get-Content -Raw $settingsFile | ConvertFrom-Json; Say "Claude hooks: handoff nudge $r1, read guard $r2." }
+      try { $null = Get-Content -Raw $settingsFile | ConvertFrom-Json; Say "Claude hooks: handoff nudge $r1, read guard $r2, injection gate $r3/$r4/$r5." }
       catch {
         if (Test-Path "$settingsFile.bak") { Copy-Item "$settingsFile.bak" $settingsFile -Force }
         Warn 'The settings edit did not verify, so I restored your backup. Add the Junior hooks by hand (see Onboarding.md).'
@@ -297,6 +313,26 @@ if ($SkipPlugins) {
     if ($LASTEXITCODE -ne 0) { Warn "Could not install $id. Try it by hand: claude plugin install $id"; continue }
     if ($p.needs) { Warn "$($p.plugin) needs: $($p.needs)" }
   }
+}
+
+# 6e. Kit version stamp (vault-check compares it with the vault's kit\VERSION) and a health check of the hooks
+$verSrc = Join-Path $VaultDir '08 - Resources\Onboarding\kit\VERSION'
+if (Test-Path $verSrc) {
+  $claudeHome2 = Split-Path $SkillsDir
+  [IO.File]::WriteAllText((Join-Path $claudeHome2 'junior-kit-version'), ((Get-Content -Raw $verSrc).Trim() + "`n"), $utf8)
+  Say "Stamped this machine with kit version $((Get-Content -Raw $verSrc).Trim())."
+}
+$shExe = (Get-Command sh -ErrorAction SilentlyContinue).Source
+if (-not $shExe -and (Test-Path "$env:ProgramFiles\Git\usr\bin\sh.exe")) { $shExe = "$env:ProgramFiles\Git\usr\bin\sh.exe" }
+if ($shExe) {
+  $env:JUNIOR_CLAUDE_HOME = (Split-Path $SkillsDir)
+  $env:Path = (Split-Path $shExe) + ';' + $env:Path      # give sh its usual companions (tr, grep, awk) as Git Bash does
+  $doc = & $shExe (Join-Path $VaultDir '08 - Resources\Onboarding\kit\vault-check.sh') --doctor 2>&1
+  $failed = @($doc | Where-Object { $_ -match '^FAIL' })
+  if ($failed.Count -gt 0) { $failed | ForEach-Object { Warn $_ } } else { Say 'Doctor: the tools and every Junior hook check out.' }
+  Remove-Item Env:JUNIOR_CLAUDE_HOME -ErrorAction SilentlyContinue
+} else {
+  Warn 'No sh found (install Git for Windows). Junior''s hooks and vault checks cannot run without it.'
 }
 
 # 7. Desktop launcher

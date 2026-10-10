@@ -82,6 +82,15 @@ The vault's secret scan only covers the vault. To guard a project repo on your o
 powershell -ExecutionPolicy Bypass -File "$HOME\Undeify\08 - Resources\Onboarding\kit\repo-guard.ps1" -Repo C:\path\to\repo
 ```
 It copies the same scan into that repo's `.git\hooks` folder. That folder isn't tracked by Git, so nothing in the repo's files or history changes, and each teammate runs it for themselves. It never overwrites an existing hook and stops if the repo sets its own `core.hooksPath`. It only works on a real clone with a `.git` folder.
+## Keeping the kit healthy
+
+- **Requirements:** Git for Windows (it provides `sh`, `grep`, `awk` (gawk), `sed` and `cat`, which every hook and check uses). Nothing else. The scripts are Windows-first; a Mac or Linux teammate should not need a port until there is one, but tell Junior if you hit a hook error.
+- **Startup check:** `load junior` runs `vault-check.sh --startup`, which takes about a second and prints nothing when all is well. It reports a kit that is behind, stale Status notes, notes over their size limit, drafts waiting for approval, unpushed or behind commits, and more. A line repeats only when it gets worse or after three days. You can allow that one read-only command in Claude's permission settings to avoid a prompt each time.
+- **Updating a machine:** pull the vault, then re-run `onboard.ps1`. It is safe to re-run and only changes what differs. When Isaac changes anything in the kit he bumps `kit/VERSION`, and every other machine then sees one line at `load junior` telling them to update and to run the [[Junior Checks]].
+- **Approval-gated upkeep:** when a Log or the completed priorities grow too long, Junior runs `vault-maintain.sh propose`, which prepares the change on a separate branch and pushes nothing. A founder says "lock it", and only then does `vault-maintain.sh apply <patch-id>` merge it. `kit/vault-maintain.test.sh` is the dry-run test (a scratch origin and two clones).
+- **Backup outside GitHub:** `sh vault-backup.sh [vault] [folder]` writes a verified bundle of the whole vault (default folder `~/Backups/UndeifyVault`, newest 8 kept). Point it at an external drive or a private folder you control, because a bundle contains everything in the vault. Restore drill: `git clone <bundle> <empty folder>`.
+- **Optional repo map:** to make the stale-Status check compare real repo activity, add lines like `bakeflow=C:\path\to\repo` to `~/.claude/junior-state/repos.conf` (this file is per machine and never shared). The check works without it, using the project Log as the signal.
+
 ## Loading Junior in a codebase
 
 - `load junior` triggers the `junior` skill installed at `~\.claude\skills\junior\SKILL.md`. It reads the boot file (`~\my-agent\CLAUDE.md`), becomes Junior on top of that project's own instructions, reads the vault index, yesterday's daily note and Active Priorities, and matches the codebase to a vault project.
@@ -98,7 +107,9 @@ It copies the same scan into that repo's `.git\hooks` folder. That folder isn't 
 - Backs up Obsidian's `obsidian.json`, registers the vault, and checks the path exists.
 - Turns on the vault's secret-scan hook (`git config core.hooksPath .githooks`), so a commit that adds a key, token, database URL with a password, or a `.env` or key file is blocked.
 - Adds a small hook to `~\.claude\settings.json` (backing the file up first, merging with what's there) that, after every successful `git commit` in any project, reminds Claude to run Junior's handoff routine. It only acts when Junior is loaded.
-- Adds a **read guard** hook (`PreToolUse` on the Read tool). It refuses a whole-file read of anything over about 60 KB (roughly 15,000 tokens) and tells Claude to search with Grep and read a range instead. A read that names a range, and images and PDFs, are always allowed. It needs `sh` (Git for Windows provides it). To change the limit, set `JUNIOR_READ_LIMIT_BYTES` in the `env` section of `~\.claude\settings.json`.
+- Adds a **read guard** hook (`PreToolUse` on the Read tool). It works only while Junior is active in that conversation: the `junior` skill leaves a marker in the conversation, `junior-off` leaves an opposite marker, and the guard obeys the latest one (a session started in the `my-agent` folder counts as active). While active, it refuses a whole-file read of anything over about 60 KB (roughly 15,000 tokens) and tells Claude to search with Grep and read a range instead. A read that names a range, and images and PDFs, are always allowed. It needs `sh` (Git for Windows provides it). To change the limit, set `JUNIOR_READ_LIMIT_BYTES` in the `env` section of `~\.claude\settings.json`.
+- Adds the **prompt-injection gate**: three small hooks. After Claude reads external content (an email or chat through a connector, Composio, or a web page) it remembers that for the session; while that is true it asks you before an edit, a command that isn't plainly read-only, or a connector action that isn't plainly a read, and a new prompt from you clears it. Web reads are treated more loosely than email and Composio, so normal coding after a web fetch isn't interrupted; only outward actions and writes into the vault ask. It covers the Bash and PowerShell tools and WebFetch as well as edits and connector calls, and it runs whether or not Junior is active. It is a speed bump, not a wall: keep connector scopes read-only.
+- Stamps the machine with the kit version (`kit/VERSION`) and runs a **doctor** check that every hook can actually run here. If `sh` or `gawk` is missing the hooks would silently do nothing, so the script warns.
 - Installs the baseline kit: the marketing skill and the core plugins (see "The baseline kit" below), plus any `-Extras` you ask for.
 - Installs the `junior` and `junior-off` skills (from `junior-SKILL.txt` and `junior-off-SKILL.txt`) into `~\.claude\skills`, updating them on every run.
 - Puts a **Chat with Junior** launcher on the Desktop. It does not start at login.
@@ -118,7 +129,12 @@ On a person's first session Junior asks a few questions and saves their profile 
 - `junior-off-SKILL.txt`: the source of the `junior-off` skill that makes `kill junior` work.
 - `junior-handoff-nudge.json`: the message the commit hook feeds Claude. The hook runs on `PostToolUse` with matcher `Bash`, and its command checks that the Bash command that just ran contained `git commit` before printing that file, so it stays silent for anything else. It needs no Node. It doesn't match `git -C ... commit` or `git -c ... commit`.
 - The vault's own `.githooks/pre-commit` is the secret scan. To silence a false positive, add `allowlist secret` to that line. Never bypass it for a real secret: rotate the secret instead.
-- `kit/junior-read-guard.sh`: the read-guard hook script.
+- `kit/junior-read-guard.sh`: the read-guard hook script (active only while Junior is).
+- `kit/VERSION`: the kit version number, bumped when anything in the kit changes.
+- `kit/vault-check.sh` and `kit/vault-check.awk`: the mechanical checks (startup, report, pre-commit warnings, doctor).
+- `kit/vault-maintain.sh` and `kit/vault-maintain.test.sh`: the approval-gated rotation and its dry-run test.
+- `kit/vault-backup.sh`: the verified backup bundle.
+- `kit/junior-taint-mark.sh`, `kit/junior-taint-gate.sh`, `kit/junior-taint-clear.sh`: the prompt-injection gate; `kit/junior-gate.test.sh` tests it.
 - `kit/repo-guard.ps1`: installs the secret scan into a project repo on this machine only.
 - `kit/plugins.json`: the list of core plugins and opt-in extras the script installs.
 - `kit/jaredrhod-marketing.zip` and `kit/jaredrhod-marketing.SOURCE.txt`: the vendored marketing skill and where it came from.

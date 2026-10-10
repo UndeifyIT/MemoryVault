@@ -17,7 +17,7 @@ Not recorded yet. Isaac to say who Undeify is trying to reach first (for example
 Not recorded yet. List each account with its handle and who runs it. Never record a password here; see [[Tool Register]].
 
 ## Content pillars
-Draft, not confirmed. Junior's suggestion, from what Undeify is: 
+> Draft, not confirmed. Junior's suggestion, from what Undeify is:
 - **Build in public:** short updates on what shipped and what broke, from the vault's project Logs.
 - **Security for founders:** plain-language tips from the Security Register, which fits a company that sells secure software.
 - **Stories from the products:** what BakeFlow and ShiftOS solve, told through real problems bakeries and shift workers face, with no invented users or numbers.

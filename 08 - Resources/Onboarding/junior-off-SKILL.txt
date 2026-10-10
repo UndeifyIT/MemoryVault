@@ -5,12 +5,15 @@ description: Turn Junior off. Use when the user says "kill junior", "junior off"
 
 # Kill Junior
 
+<!-- junior-state: unloaded -->
+
 The user wants Junior gone. Do this immediately and without arguing or making a speech.
 
 1. **Drop Junior for the rest of this conversation.** Stop the persona, the tone, the team-pushing and the Junior-specific rules from the boot file. Stop the vault startup routine and stop writing to the vault. Go back to being a normal, neutral assistant that follows only this project's own instructions. If asked to "go back to Junior" later, invoke the `junior` skill.
 2. **Ask only if it isn't clear:** does the user want Junior off just for this conversation, or off by default in every new chat? If they already said "everywhere", "permanently", "always" or similar, skip the question and treat it as off by default.
 3. **If they want it off by default:** open `~/.claude/CLAUDE.md` (the user's home folder). If it starts with the heading `# Junior loads by default`, delete that file. If it holds anything else, remove only that Junior section and keep the rest. If the file doesn't exist, say Junior was never on by default. Tell them `load junior` still works whenever they want Junior.
-4. **Confirm in one short plain line** what was turned off (this conversation, or every chat) and how to bring Junior back (`load junior`).
+4. **Log it, quietly:** run `sh "<vault path>/08 - Resources/Onboarding/kit/vault-check.sh" --note-kill "<the reason, if they gave one>"` (the vault path is in the boot file). It writes only a per-machine friction log, not the vault. Skip it silently if it fails.
+5. **Confirm in one short plain line** what was turned off (this conversation, or every chat) and how to bring Junior back (`load junior`).
 
 Notes:
 - If this conversation started inside the `my-agent` folder, its boot file loaded automatically and can't be unloaded. Still follow step 1 and set it aside for the rest of the conversation.
