@@ -17,3 +17,11 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-09 | junior | Decision 0025 (proposed): review loop (needed, correct, legal, security, HCI; three risk tiers) in docs/review-loop.md; Checks section added to the decision template | uncommitted
 2026-10-09 | junior | 0025 locked (Accepted); CLAUDE.md now points to docs/review-loop.md | uncommitted
 2026-10-09 | junior | Learner journey Q1–Q8 decided with edge-case passes; decisions 0026 (edge-case passes) locked; legal list at 52 items | uncommitted
+2026-10-10 | junior | Reviewed PR #1 (Tolu's culture proposal, docs/product/culture-proposal.md, Proposed); flagged the public repo, the PR account, a missing legal-list item and the teen card default | PR #1, 0adf5ca
+2026-10-10 | junior | Family-plan journey decided (F1 adults-only family plans through step 6 cancel/lapse/refund); spec section 5 rewritten; legal item 53 (web checkout tax) | uncommitted
+2026-10-10 | junior | Culture proposal sign-off started; item 1 done: decision 0028 (culture ownership: Tolu runs it, both founders sign off, Isaac breaks ties, 24-hour silence rule) | uncommitted
+2026-10-10 | junior | Culture proposal item 2 done: decision 0029 (school-standard Yorùbá, regional forms as notes only, original content); legal items 36 and 51 amended | uncommitted
+2026-10-10 | junior | Vision summary reconciliation row 1: decision 0031 (diaspora families stay the main buyer; sprint measures every group; legal item 50 now V) | uncommitted
+2026-10-10 | junior | Vision summary row 2: decision 0032 (one scripted market scene in the MVP); legal item 56 (AI-generated output ownership) | uncommitted
+2026-10-10 | junior | Concept video set up with Remotion in design/video/ (decision 0030, proposed; legal item 55); 14-scene video for Isaac's mentor under a placeholder name | e764c9c (Isaac), later copy edits uncommitted
+2026-10-10 | junior | 0033 (Proposed: short market scene in the sprint build; fixes 1-6 await Tolu); Isaac handed decisions to Tolu | uncommitted

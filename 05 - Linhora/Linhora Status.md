@@ -4,7 +4,7 @@ project: linhora
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-10-09
+updated: 2026-10-10
 ---
 # Linhora Status
 
@@ -21,7 +21,10 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 Each person keeps their own section current. Say what is half-done, the branch, the files touched, the next command to run, and how to test it.
 
 ### Isaac
-The live tracker is in the repo: `docs/roadmap.md`, section "Start here" (what is in progress, what is next, who it waits on). As of 2026-10-09 (evening): stage 5 user journeys in progress. Learner journey (`docs/product/learner-journey.md`) has all 10 steps shaped (Q1–Q11; offline mode deferred). Family-plan journey (`docs/product/family-journey.md`): steps 1–3 decided (F1 adults-only family plans, F2 forwarded-link undo, F3 re-tap link after install, under-13 invite feedback ideas 1–4); next is step 4 (manage members). Open spec item S1 (device-wide under-13 lock on shared tablets). Decisions 0024 (UK, US, Nigeria only), 0025–0027 (review loop and edge-case passes, all locked). Accounts spec review resumes from section 2 after the journeys; it triggers the tech stack. Repo changes are uncommitted (Isaac commits).
+The live tracker is in the repo: `docs/roadmap.md`, "Start here". As of 2026-10-10 (night) **Isaac handed the decisions to Tolu** and went offline. Pushed to GitHub (Isaac's commit e764c9c): decisions 0028 (culture ownership), 0029 (school-standard Yorùbá), 0031 (diaspora families stay the main buyer; sprint measures every group), 0032 (one scripted market scene in the MVP), plus the parallel session's 0030 (concept video). **Not yet pushed** (on Isaac's machine, waiting for his OK to commit): 0033 (Proposed: a short Unit 1 market scene in the sprint build; Isaac chose A; passes done; six fixes listed in the record), the decisions index row and the roadmap "Start here" handoff line.
+**Tolu, pick up here, in order:** (1) decide 0033: approve or change fixes 1–6 (legal item 36 to V; stylised banknotes only; new legal item 57 for test-build privacy, Spitch agreement and tester-data deletion; test-build security baseline; culture reviewer hired before sprint week 6; cut of 2–3 minutes), then "lock it". If 0033 is not on GitHub yet, its full text is in Isaac's local repo; ask Isaac to push. (2) Lock 0029 and 0032, and accept or object to the rules Isaac added to 0028 (tie-break, 24-hour silence rule, experts never overruled). (3) Review the three stage 5 journeys (learner, family, internal). (4) Continue the vision summary reconciliation: next, what the sprint measures for each of its three assumptions (culture depth, interactive scenarios, immersion cost); then the core feel (3D adventure vs guided tour); then the learning cycle. (5) Then culture proposal item 3 (Unit 1 deadline: Junior recommends keeping "before sprint week 6") and the remaining items, the outside brief's ideas, stage 6, the accounts spec review from section 2 plus S1. Every decision runs the review loop with at least three passes (docs/review-loop.md). Legal list at 56 items (57 proposed in 0033).
+
+Side task 2026-10-10 (late): concept video for Isaac's mentor in the repo's `design/video/` (Remotion 4.0.534, decision 0030 proposed). Setup committed by Isaac in e764c9c; later edits committed in 044e552 (copy aligned to 0031/0032, logo as app icon, 720p composition, `scripts/stills.mjs`). Placeholder name in `src/brand.ts`. Render: `out/concept-video.mp4` at 720p (laptop too slow for 1080p in time); Yorùbá strings are the prototype's and not linguist-checked, so it stays private. Next on the main track is unchanged.
 
 ### Tolu
 Not recorded yet.
