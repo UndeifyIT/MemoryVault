@@ -17,3 +17,5 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-09 | junior | Decision 0025 (proposed): review loop (needed, correct, legal, security, HCI; three risk tiers) in docs/review-loop.md; Checks section added to the decision template | uncommitted
 2026-10-09 | junior | 0025 locked (Accepted); CLAUDE.md now points to docs/review-loop.md | uncommitted
 2026-10-09 | junior | Learner journey Q1–Q8 decided with edge-case passes; decisions 0026 (edge-case passes) locked; legal list at 52 items | uncommitted
+2026-10-10 | junior | Reviewed PR #1 (Tolu's culture proposal, docs/product/culture-proposal.md, Proposed); flagged the public repo, the PR account, a missing legal-list item and the teen card default | PR #1, 0adf5ca
+2026-10-10 | junior | Family-plan journey decided (F1 adults-only family plans through step 6 cancel/lapse/refund); spec section 5 rewritten; legal item 53 (web checkout tax) | uncommitted
