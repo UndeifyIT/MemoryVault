@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-10
 ---
 # Tool Register
 
@@ -33,6 +33,7 @@ Never put a password, key or token in this note. "Credentials live in" names the
 | superpowers, code-review, security-guidance | Debugging, review, security | Free (uses Claude tokens) | Each person | Run inside Claude | none | In the kit |
 | jaredrhod-marketing skill | Marketing playbook | Free (CC BY-SA 4.0) | Each person | Read-only markdown | none | In the kit |
 | Gmail (claude.ai connector) | Reading and drafting email | Free | Isaac | Mailbox access | His Google account | Connected on Isaac's account |
+| Remotion (Lingora concept video) | Making videos from React code; repo `design/video/` | Free while Undeify has 3 or fewer employees (LICENSE.md, checked 2026-10-10); company licence after that (price at remotion.pro/license, not recorded) | Isaac | Local only; downloads Chrome Headless Shell to render | none | In use since 2026-10-10 |
 | Composio | Connecting other apps through one MCP server | Not recorded yet | Isaac | Whatever apps are connected to it | Password manager | Planned; see [[Onboarding]] |
 
 ## Monthly review
