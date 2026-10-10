@@ -20,3 +20,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-10 | junior | Reviewed PR #1 (Tolu's culture proposal, docs/product/culture-proposal.md, Proposed); flagged the public repo, the PR account, a missing legal-list item and the teen card default | PR #1, 0adf5ca
 2026-10-10 | junior | Family-plan journey decided (F1 adults-only family plans through step 6 cancel/lapse/refund); spec section 5 rewritten; legal item 53 (web checkout tax) | uncommitted
 2026-10-10 | junior | Culture proposal sign-off started; item 1 done: decision 0028 (culture ownership: Tolu runs it, both founders sign off, Isaac breaks ties, 24-hour silence rule) | uncommitted
+2026-10-10 | junior | Culture proposal item 2 done: decision 0029 (school-standard Yorùbá, regional forms as notes only, original content); legal items 36 and 51 amended | uncommitted
