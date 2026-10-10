@@ -22,3 +22,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-10 | junior | Culture proposal sign-off started; item 1 done: decision 0028 (culture ownership: Tolu runs it, both founders sign off, Isaac breaks ties, 24-hour silence rule) | uncommitted
 2026-10-10 | junior | Culture proposal item 2 done: decision 0029 (school-standard Yorùbá, regional forms as notes only, original content); legal items 36 and 51 amended | uncommitted
 2026-10-10 | junior | Vision summary reconciliation row 1: decision 0031 (diaspora families stay the main buyer; sprint measures every group; legal item 50 now V) | uncommitted
+2026-10-10 | junior | Vision summary row 2: decision 0032 (one scripted market scene in the MVP); legal item 56 (AI-generated output ownership) | uncommitted
