@@ -33,3 +33,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-11 | junior | Concept video v2 built and rendered (landscape + vertical, 4:28, voice + music); Yorùbá strings await Isaac/Tolu check | uncommitted
 2026-10-11 | junior | Tolu settled the wrong-age fix (13+ self-service, older once; under-13 one-time email code); legal item 58; Duolingo compared | 8d88c82 (PR #3)
 2026-10-11 | junior | 0034 proposed: three vision assumptions (third proposed by Junior, Tolu approved) read in the sprint, never gates; Tolu agreed | PR #3
+2026-10-11 | junior | 0035 journey map and 0036 learning cycle with spaced-repetition practice (both proposed, Tolu chose B); vision summary reconciliation complete | 5509d53 (PR #3)
