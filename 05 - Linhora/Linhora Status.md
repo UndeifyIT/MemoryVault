@@ -27,7 +27,7 @@ The live tracker is in the repo: `docs/roadmap.md`, "Start here". As of 2026-10-
 Side task 2026-10-10 (late): concept video for Isaac's mentor in the repo's `design/video/` (Remotion 4.0.534, decision 0030 proposed). Setup committed by Isaac in e764c9c; later edits committed in 044e552 (copy aligned to 0031/0032, logo as app icon, 720p composition, `scripts/stills.mjs`). Placeholder name in `src/brand.ts`. Render: `out/concept-video.mp4` at 720p (laptop too slow for 1080p in time); Yorùbá strings are the prototype's and not linguist-checked, so it stays private. Next on the main track is unchanged.
 
 ### Tolu
-Not recorded yet.
+As of 2026-10-11 (with Junior, on Tolu's machine): locked 0033 (short market scene in the sprint build) with fixes 1–6, changing fix 1 so art may start AI-made (tool licence recorded per image, culture reviewer checks every frame, voices human or linguist-checked; contracts when humans are hired). Agreed 0029 (school-standard Yorùbá) and the teen completion-card default (name hidden; nickname optional, never the account ID). Reopened 0028's tie-break: Tolu wants culture decisions unanimous (talk within 48 hours, else the current plan stands); waiting for Isaac. Held, not written: the age lock on the phone (Tolu wants a way to fix a wrong age; settle later). Not yet locked: 0032 (market scene in the MVP). Repo edits are uncommitted in 8 files. Next: Junior walks Tolu through the learner journey (steps 6–10 next), then the family and internal journeys, so Tolu can sign off stage 5. Open: the repo is public and the concept video is in it (`design/video/out/`, its .gitignore has no pattern); making it private needs Tolu or Isaac.
 
 ## Next steps
 1. Not recorded yet.
