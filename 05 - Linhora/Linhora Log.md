@@ -30,3 +30,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-11 | junior | Culture checkpoints added to internal journey step 1 (brief, storyboard, full cut; expensive work last; changes reopen sign-offs); AI labelling and tracking sheet held for Isaac | ef0159a (PR #2)
 2026-10-11 | junior | Concept video v2: Isaac's brief captured, 3.5-minute script drafted (design/video/SCRIPT.md), 0030 amended (proposed) | uncommitted
 2026-10-11 | junior | Tolu locked 0032; culture proposal items 3–11 passes run, Tolu answered six questions (maturity, weekly streak, card, AI art, narrator, Unit 1 deadline); waiting for Isaac | 846c31b (PR #3)
+2026-10-11 | junior | Concept video v2 built and rendered (landscape + vertical, 4:28, voice + music); Yorùbá strings await Isaac/Tolu check | uncommitted
