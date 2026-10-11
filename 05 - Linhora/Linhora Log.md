@@ -27,3 +27,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-10 | junior | 0033 (Proposed: short market scene in the sprint build; fixes 1-6 await Tolu); Isaac handed decisions to Tolu | uncommitted
 2026-10-11 | junior | Concept video v2: Isaac's brief captured, 3.5-minute script drafted (design/video/SCRIPT.md), 0030 amended (proposed) | uncommitted
 2026-10-11 | junior | Concept video v2 built and rendered (landscape + vertical, 4:28, voice + music); Yorùbá strings await Isaac/Tolu check | uncommitted
+2026-10-11 | junior | Concept video v4: 2-minute cut, UK voice (Sonia), full motion; rendered landscape + vertical 1:51 | uncommitted
