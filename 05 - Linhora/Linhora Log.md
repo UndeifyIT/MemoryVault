@@ -35,3 +35,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-11 | junior | 0034 proposed: three vision assumptions (third proposed by Junior, Tolu approved) read in the sprint, never gates; Tolu agreed | PR #3
 2026-10-11 | junior | 0035 journey map and 0036 learning cycle with spaced-repetition practice (both proposed, Tolu chose B); vision summary reconciliation complete | 5509d53 (PR #3)
 2026-10-11 | junior | MVP feature list drafted with Tolu (Must / Should agreed); next the launch bar | 4b287cc (PR #3)
+2026-10-11 | junior | Release criteria and not-building return gates drafted with Tolu; 0037 records stage 6 (proposed) | 85f94b7, 0854c8d (PR #3)
