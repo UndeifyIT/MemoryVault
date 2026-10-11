@@ -26,3 +26,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-10 | junior | Concept video set up with Remotion in design/video/ (decision 0030, proposed; legal item 55); 14-scene video for Isaac's mentor under a placeholder name | e764c9c (Isaac), later copy edits uncommitted
 2026-10-10 | junior | 0033 (Proposed: short market scene in the sprint build; fixes 1-6 await Tolu); Isaac handed decisions to Tolu | uncommitted
 2026-10-11 | junior | Tolu locked 0033 (fix 1 changed for AI art), agreed 0029 and the teen card default; reopened 0028's tie-break (unanimity, waiting for Isaac); legal item 36 to V, new item 57; age lock held | uncommitted
+2026-10-11 | junior | Tolu reviewed the three stage 5 journeys; internal journey step 2 matched to 0029; staff sign-in passkeys, no SMS; SPF/DKIM/DMARC on all our email | uncommitted
