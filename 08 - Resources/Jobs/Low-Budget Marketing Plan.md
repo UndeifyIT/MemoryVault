@@ -15,7 +15,7 @@ updated: 2026-09-28
 2. The `jaredrhod-marketing` Claude skill (installed in your `.claude\skills` folder): read `jareds-takes.md` first, then the playbook that fits the task (copywriting, email, lead magnets, content, funnel).
 3. [[Marketing Hub]] — audience, platforms, content pillars, calendar and metrics. Update it as part of the work.
 4. [[Active Priorities]] — what's live right now and the budget constraint.
-5. The index of the product being marketed: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]].
+5. The index of the product being marketed: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Lingora]].
 
 ## The procedure
 1. Confirm the goal (awareness, sign-ups, first customers) and which product it's for.

@@ -10,7 +10,7 @@ type: guide
 ## Boot chain (read these, in order, and you have the skill)
 1. This note, end to end.
 2. [[Active Priorities]] — the budget constraint and current focus.
-3. The index of the project in question: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]].
+3. The index of the project in question: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Lingora]].
 
 ## The procedure
 1. Understand what the product needs to do and what already exists in it.

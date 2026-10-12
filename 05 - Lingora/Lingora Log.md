@@ -1,14 +1,14 @@
 ---
 status: active
-project: linhora
+project: lingora
 type: log
 author: junior
 created: 2026-09-26
 updated: 2026-09-26
 ---
-# Linhora Log
+# Lingora Log
 
-Append-only record of what changed in Linhora, oldest first. One line per change. Each line: date | author | what changed | commit or PR.
+Append-only record of what changed in Lingora, oldest first. One line per change. Each line: date | author | what changed | commit or PR.
 
 2026-09-26 | junior | Project notes scaffold created | none
 2026-10-09 | junior | Planning docs, 23 decision records, accounts MVP spec and progress tracker set up in UndeifyIT/Lingora | uncommitted in repo at time of writing
@@ -25,14 +25,29 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-10 | junior | Vision summary row 2: decision 0032 (one scripted market scene in the MVP); legal item 56 (AI-generated output ownership) | uncommitted
 2026-10-10 | junior | Concept video set up with Remotion in design/video/ (decision 0030, proposed; legal item 55); 14-scene video for Isaac's mentor under a placeholder name | e764c9c (Isaac), later copy edits uncommitted
 2026-10-10 | junior | 0033 (Proposed: short market scene in the sprint build; fixes 1-6 await Tolu); Isaac handed decisions to Tolu | uncommitted
+2026-10-11 | junior | Concept video v2: Isaac's brief captured, 3.5-minute script drafted (design/video/SCRIPT.md), 0030 amended (proposed) | uncommitted
+2026-10-11 | junior | Concept video v2 built and rendered (landscape + vertical, 4:28, voice + music); Yorùbá strings await Isaac/Tolu check | uncommitted
+2026-10-11 | junior | Concept video v4: 2-minute cut, UK voice (Sonia), full motion; rendered landscape + vertical 1:51 | uncommitted
 2026-10-11 | junior | Tolu locked 0033 (fix 1 changed for AI art), agreed 0029 and the teen card default; reopened 0028's tie-break (unanimity, waiting for Isaac); legal item 36 to V, new item 57; age lock held | 1f28702 (PR #2)
 2026-10-11 | junior | Tolu reviewed the three stage 5 journeys; internal journey step 2 matched to 0029; staff sign-in passkeys, no SMS; SPF/DKIM/DMARC on all our email | 1f28702 (PR #2)
 2026-10-11 | junior | Culture checkpoints added to internal journey step 1 (brief, storyboard, full cut; expensive work last; changes reopen sign-offs); AI labelling and tracking sheet held for Isaac | ef0159a (PR #2)
-2026-10-11 | junior | Concept video v2: Isaac's brief captured, 3.5-minute script drafted (design/video/SCRIPT.md), 0030 amended (proposed) | uncommitted
 2026-10-11 | junior | Tolu locked 0032; culture proposal items 3–11 passes run, Tolu answered six questions (maturity, weekly streak, card, AI art, narrator, Unit 1 deadline); waiting for Isaac | 846c31b (PR #3)
-2026-10-11 | junior | Concept video v2 built and rendered (landscape + vertical, 4:28, voice + music); Yorùbá strings await Isaac/Tolu check | uncommitted
 2026-10-11 | junior | Tolu settled the wrong-age fix (13+ self-service, older once; under-13 one-time email code); legal item 58; Duolingo compared | 8d88c82 (PR #3)
 2026-10-11 | junior | 0034 proposed: three vision assumptions (third proposed by Junior, Tolu approved) read in the sprint, never gates; Tolu agreed | PR #3
 2026-10-11 | junior | 0035 journey map and 0036 learning cycle with spaced-repetition practice (both proposed, Tolu chose B); vision summary reconciliation complete | 5509d53 (PR #3)
 2026-10-11 | junior | MVP feature list drafted with Tolu (Must / Should agreed); next the launch bar | 4b287cc (PR #3)
 2026-10-11 | junior | Release criteria and not-building return gates drafted with Tolu; 0037 records stage 6 (proposed) | 85f94b7, 0854c8d (PR #3)
+2026-10-12 | junior | Concept video v5 walkthrough for Tolu: ten ChatGPT illustrations, Kokoro offline voice (edge-tts blocked), open world and AI chat tagged Coming later; vertical rendered 3:19 | uncommitted
+2026-10-12 | junior | Resume check: notes were stale; repo shows PR #3 merged (0032, 0033 locked; 0034–0037, MVP feature list, release criteria proposed) and v5 pushed; Status rewritten | 256f92f
+2026-10-12 | junior | Isaac's outcome research reviewed; 0038 drafted (goal paths, three stages with outcome scenes, answer feedback, positioning; proposed, passes done); legal 59; research note in research/competitors | uncommitted
+2026-10-12 | junior | 0038 launch paths chosen (Family; Visiting or living in Nigeria); Summary for Tolu added; waits for Tolu's lock | uncommitted
+2026-10-12 | junior | 0034 locked by Isaac (speaking is assumption 3); now Accepted by both | uncommitted (0038 committed by Isaac in 1679f15)
+2026-10-12 | junior | 0035 locked (3D look deferred, recorded); 0036 locked after four passes against 0038 (three rules added to 0038 for Tolu, one to 0036) | 0035 committed by Isaac; 0036 uncommitted
+2026-10-12 | junior | 0037 review: Isaac set the ads trigger (50,000 monthly active free users for 3 months running opens an ads decision); four passes; no rewarded ads for beads without a decision, never for teens; ad category blocking required | uncommitted
+2026-10-12 | junior | 0037 review: country gates set (Canada 500, EU 1,000 confirmed sign-ups after launch); Quebec Law 25 (under-14) and Bill 96 (French interface?) added to legal item 49; EU items to 29 | uncommitted
+2026-10-12 | junior | 0037 review finished: seven gates accepted; release criteria gain payments end-to-end and cheap-phone audio/progress lines; Summary for Tolu added; 0037 and 0038 wait for Tolu | uncommitted
+2026-10-12 | junior | 0028 stalemate rule proposed (Isaac chose C); Tolu's culture proposal checked against today's decisions (3 conflicts fixed, section 10); vault notes reconciled with the repo (priorities, snapshot, architecture, repo link, research commit lines) | repo uncommitted
+2026-10-12 | junior | Isaac confirmed the vault's "Linhora" is Lingora; folder, notes, links, slug and VAULT-INDEX renamed; market validation note filed here | vault only
+2026-10-12 | junior | Isaac signed off culture items 3–12 with passes: gender choice only where customs differ; no culture streak (culture counts to daily goal); main characters human-designed by Isaac (AI-assisted, Blender); card, speaking, report and narrator additions; legal items 36 and 56 extended | repo uncommitted
+2026-10-12 | junior | Accounts MVP spec review finished (sections 2–13, passes); data-map process rule proposed as a 0025 amendment; legal items 10, 49, 58 extended | repo uncommitted
+2026-10-12 | junior | Accounts MVP spec locked by Isaac (0023 Accepted); tech stack discussion started | repo uncommitted

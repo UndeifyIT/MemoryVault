@@ -4,13 +4,13 @@ project: meta
 type: reference
 author: junior
 created: 2026-10-05
-updated: 2026-10-05
+updated: 2026-10-12
 ---
 # Undeify Opportunity Scan
 
 Findings of the 2026-10-05 search for the next software business Undeify can get paid for. Verdict: build nothing new yet; validate a workflow tool for Nigeria's licensed data-protection audit firms (DPCOs) through prepaid pilots, and test ShiftOS in USD as a side bet.
 
-- **Full report (private artifact):** https://claude.ai/artifact/6QLHQBvbkTDJWYhgQPacT3. Source HTML and aggregate data: `research/` in the Lingora folder (local, not committed). Raw NDPC register files contain contact details and stay in the session scratchpad only.
+- **Full report (private artifact):** https://claude.ai/artifact/6QLHQBvbkTDJWYhgQPacT3. Source HTML and aggregate data: `research/company-opportunity-scan/` in the Lingora repo, which is public (committed; scanned 2026-10-12 for emails and Nigerian phone numbers, none found). Raw NDPC register files contain contact details and stay in the session scratchpad only.
 - **Constraints given by Isaac:** sell to global USD customers, Nigerian businesses, or the rest of Africa; B2B SaaS, B2C or dev/security tools; 6–12 months to revenue is fine; $100–$500 to spend over 3 months.
 - **Method:** 470 HN comments, 14,449 Reddit posts (25 subs), TrustMRR verified revenue, NDPC public registers, regulator and payment-provider docs. A critic agent attacked every claim over two rounds. Private Discord/WhatsApp groups were not accessed (needs consent).
 
