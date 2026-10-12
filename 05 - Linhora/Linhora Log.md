@@ -30,3 +30,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-11 | junior | Concept video v4: 2-minute cut, UK voice (Sonia), full motion; rendered landscape + vertical 1:51 | uncommitted
 2026-10-12 | junior | Concept video v5 walkthrough for Tolu: ten ChatGPT illustrations, Kokoro offline voice (edge-tts blocked), open world and AI chat tagged Coming later; vertical rendered 3:19 | uncommitted
 2026-10-12 | junior | Resume check: notes were stale; repo shows PR #3 merged (0032, 0033 locked; 0034–0037, MVP feature list, release criteria proposed) and v5 pushed; Status rewritten | 256f92f
+2026-10-12 | junior | Isaac's outcome research reviewed; 0038 drafted (goal paths, three stages with outcome scenes, answer feedback, positioning; proposed, passes done); legal 59; research note in research/competitors | uncommitted
