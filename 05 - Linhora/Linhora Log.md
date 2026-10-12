@@ -33,3 +33,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-12 | junior | Isaac's outcome research reviewed; 0038 drafted (goal paths, three stages with outcome scenes, answer feedback, positioning; proposed, passes done); legal 59; research note in research/competitors | uncommitted
 2026-10-12 | junior | 0038 launch paths chosen (Family; Visiting or living in Nigeria); Summary for Tolu added; waits for Tolu's lock | uncommitted
 2026-10-12 | junior | 0034 locked by Isaac (speaking is assumption 3); now Accepted by both | uncommitted (0038 committed by Isaac in 1679f15)
+2026-10-12 | junior | 0035 locked (3D look deferred, recorded); 0036 locked after four passes against 0038 (three rules added to 0038 for Tolu, one to 0036) | 0035 committed by Isaac; 0036 uncommitted
