@@ -13,9 +13,9 @@ Planning stage for the Lingora app (repo UndeifyIT/Lingora); no production code.
 This note is a living snapshot. Overwrite it as things change; history goes in [[Linhora Log]].
 
 ## Snapshot
-- **Stage:** Not recorded yet.
-- **What works:** Not recorded yet.
-- **Known issues:** Not recorded yet.
+- **Stage:** planning (checked 2026-10-12). No production code; none until the validation sprint gates pass (decision 0014). Sprint start date not set.
+- **What works:** 38 decision records and the product specs in the repo's `docs/`; a clickable HTML prototype (`design/prototype/`); a concept video for Isaac's mentor (`design/video/`, v5, 3:19).
+- **Known issues:** the name "Lingora" is taken by 12+ App Store apps; the first greeting's spelling is unsettled; no linguist, culture reviewer or lawyer engaged yet; Spitch terms not in writing; the repo is public (GitHub API, checked 2026-10-12) while it holds plans, the legal action list and the company opportunity scan.
 
 ## Where we stopped
 Each person keeps their own section current. Say what is half-done, the branch, the files touched, the next command to run, and how to test it.

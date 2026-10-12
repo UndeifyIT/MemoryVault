@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-10-05
-updated: 2026-10-05
+updated: 2026-10-12
 ---
 # Lingora Market Validation
 
@@ -21,7 +21,7 @@ Findings of the 2026-10-05 market validation of Lingora (pan-African heritage-la
 - Nigerian private schools: 91,252 schools / 13.7M pupils (UBEC 2022); South-West 3.38M pupils. Fit is weak: they teach Yorùbá to children who already speak it. Churches/mosques = distribution, not revenue.
 - Spitch (docs): speech in/out for en, yo, ha, ig, am; tone marking Yorùbá only; STT $0.00042/s ≈ $0.025 per learner-minute → about $400–$3,000/month per 10K free users. Cap Speak in the free tier. No published accuracy figures. Twi has no Spitch or Google speech support.
 
-- **Full report (private artifact):** https://claude.ai/artifact/1SBwmj3XAMTdJdn1fwukhh. Source HTML and data: `research/` in the Lingora repo folder (local, not yet committed).
+- **Full report (private artifact):** https://claude.ai/artifact/1SBwmj3XAMTdJdn1fwukhh. Source HTML and data: `research/market-validation/` in the Lingora repo (committed in 5d9830a and cb4fd26; corrected 2026-10-12).
 - **Method:** 23 claims, each attacked by a separate critic agent over three rounds; none survived unchanged, 21 amended, 2 cut to hypotheses. Sources: ONS Census 2021, US ACS 2019–2024, StatCan 2021, Duolingo FY2025 10-K, Google Play/iTunes data, Google Trends, competitor press. All checked 2026-10-05.
 
 ## Key facts (checked 2026-10-05)

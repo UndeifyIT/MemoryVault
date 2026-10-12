@@ -4,11 +4,11 @@ project: linhora
 type: index
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-12
 ---
 # Linhora
 
-Repo: not recorded yet.
+Repo: https://github.com/UndeifyIT/Lingora (default branch `main`, public). Unverified that "Linhora" is Lingora; see [[Linhora Status]].
 
 ## Start here
 - [[Linhora Status]] — where the project stands and where we stopped.
