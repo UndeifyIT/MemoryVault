@@ -10,7 +10,20 @@ updated: 2026-10-13
 
 This note is a background check, competitor teardown and validation plan for Isaac's two consumer ideas: LIFE, a personal memory layer, and NOW, a place-first social network. Verdict: neither should be built as briefed. Each has one narrow version worth a zero-code test. Unverified until tested.
 
-> Draft, not confirmed. These are research findings and a recommendation. Nothing here is decided until Isaac or [[Tolu]] says "lock it".
+> Draft, not confirmed. Isaac said on 2026-10-13: "let's drop LIFE and focus on NOW". That is recorded as the decision below, and it waits for "lock it" from Isaac or [[Tolu]].
+
+## Decision (draft): drop LIFE, focus on NOW
+- **Decided by:** Isaac, on 2026-10-13. Pending "lock it".
+- **Context:** we researched two consumer ideas (sections 2 and 3).
+- **Options considered:**
+  - LIFE lost. The platforms already ship it, the WhatsApp channel is banned and there's no network moat.
+  - NOW won. It is the only one with a moat and a local path to money.
+- **Why:** NOW's narrow version, "Beli for Lagos", can build a dense local network that incumbents don't curate.
+- **Cost and risk:**
+  - The cold start (an empty map, few people posting) is the main risk.
+  - Location safety is the security risk (section 5).
+  - Timing collides with the DPCO sprint (section 7).
+- **Revisit when:** the NOW concierge test misses its week-4 bar. Or Google lifts Nigeria's Gemini exclusion, which closes LIFE's gap for good.
 
 **Sources and confidence.**
 - Five research agents ran on 2026-10-13. Every claim below was tagged verified, inference or hypothesis. Main source links are listed at the end.
@@ -118,7 +131,26 @@ This note is a background check, competitor teardown and validation plan for Isa
   - Foursquare Open Source Places: 100M+ places, Apache 2.0, free for commercial use.
   - Overture Places.
   - Avoid basing the core database on OpenStreetMap: its share-alike licence (ODbL) conflicts with any future proprietary data business.
-  - **Lagos coverage of these datasets is unverified. Check it first.**
+
+**Data coverage check: done 2026-10-13, Overture release 2026-09-23.1.**
+- **Box queried:** lon 3.39–3.50, lat 6.415–6.455. Covers VI, Oniru, Lekki Phase 1 and part of Ikoyi.
+- **What's there:** 8,679 places in total, about 691 of them food and drink (restaurants, lounges, bars, cafés, bakeries). 320 of those have confidence of 0.7 or higher.
+- **Where the data comes from:**
+  - About 97% of records come from Meta, i.e. Facebook pages.
+  - Foursquare supplies only 47 records in the box, 12 of them food and drink. So Foursquare's open dataset adds almost nothing in Lagos.
+- **Established venues: mostly there.**
+  - Junior picked 18 well-known venues; 16 are in (NOK, Shiro, RSVP, Cactus, Bature Brewery and others). That's about 89%.
+  - Duplicates exist: Shiro and Yellow Chilli each appear twice.
+- **New venues: mostly missing.**
+  - Only 2 of the 14 new Sep–Dec 2025 openings in the zone (Lagos Weekender list) appear: Bamboa and Rora.
+  - Missing include Set Lagos, Haven 11, Veil, Hunger Game, Old Street and Vein.
+- **Meaning:**
+  - Free data solves the empty map for established places.
+  - It is badly stale on what's new, which is the exact gap NOW's "what's new and what real visitors saw this week" fills.
+  - Seeding plan: import Overture places, merge the duplicates, and add new openings by hand weekly from curator lists until users take over.
+- **Licence:**
+  - Meta-sourced records are CDLA-Permissive-2.0 and Foursquare-sourced records are Apache 2.0. Both are fine for commercial use, with attribution.
+  - Re-check the licence on each release.
 
 **Narrow version worth testing: "Beli for Lagos" in one zone**
 - **Where and what:** food, lounges and bars in Lekki Phase 1 and VI. That is where venues spend and where new openings cluster.
@@ -208,7 +240,6 @@ These numbers are not added up on purpose. Several are hypotheses, and the 2-wee
 
 ## 8. What we didn't verify
 
-- How many Lagos venues the Foursquare and Overture datasets actually contain (the most important gap for NOW).
 - Swarm's current usage; why the 2023 Gowalla relaunch stopped.
 - Whether Ask Photos, Meta AI memory and Instagram Map are live in Nigeria.
 - Whether Nothing and Pixel phones are sold in Nigeria through grey-market channels.
@@ -255,3 +286,4 @@ These numbers are not added up on purpose. Several are hypotheses, and the 2-wee
 
 ## Change log
 - 2026-10-13, Junior for Isaac: first version, from five research agents.
+- 2026-10-13, Junior for Isaac: added Isaac's draft decision (drop LIFE, focus on NOW) and the Overture data coverage check for Lekki and VI.

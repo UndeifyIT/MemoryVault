@@ -22,7 +22,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] DPCO sprint (Isaac said yes 2026-10-06; see [[Undeify Opportunity Scan]]). Kit is in `C:\Users\HP\Downloads\Undeify DPCO Sprint` (local only; it holds DPCO contact details, so keep it off GitHub and out of the vault). By 19 Oct: finish and publish the Undeify NDPA pack. 13 Oct – 30 Nov: 12–15 DPCO calls. Gate on 30 Nov: at least 3 DPCOs prepay ≥₦50K or kill (Isaac).
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
-- [ ] LIFE / NOW consumer ideas: read [[LIFE and NOW Concept Research]] and decide whether to run either 2-week zero-code test, and when (Isaac). Junior recommends nothing before the DPCO gate on 30 Nov.
+- [ ] NOW (place-first social, "Beli for Lagos"): Isaac dropped LIFE on 2026-10-13 (draft decision in [[LIFE and NOW Concept Research]], awaiting "lock it"). Next: set the start date for the 2-week concierge test in Lekki/VI. Junior recommends after the DPCO gate on 30 Nov unless something else comes off the list (Isaac).
 
 #### MindBridge
 - [ ] [[MindBridge]] is our most important project. Tell Junior where its repo is so its notes can be drafted, and record its context, status and next steps (Isaac).
