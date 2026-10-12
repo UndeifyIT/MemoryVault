@@ -36,3 +36,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-12 | junior | 0035 locked (3D look deferred, recorded); 0036 locked after four passes against 0038 (three rules added to 0038 for Tolu, one to 0036) | 0035 committed by Isaac; 0036 uncommitted
 2026-10-12 | junior | 0037 review: Isaac set the ads trigger (50,000 monthly active free users for 3 months running opens an ads decision); four passes; no rewarded ads for beads without a decision, never for teens; ad category blocking required | uncommitted
 2026-10-12 | junior | 0037 review: country gates set (Canada 500, EU 1,000 confirmed sign-ups after launch); Quebec Law 25 (under-14) and Bill 96 (French interface?) added to legal item 49; EU items to 29 | uncommitted
+2026-10-12 | junior | 0037 review finished: seven gates accepted; release criteria gain payments end-to-end and cheap-phone audio/progress lines; Summary for Tolu added; 0037 and 0038 wait for Tolu | uncommitted
