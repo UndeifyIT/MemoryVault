@@ -32,3 +32,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-12 | junior | Resume check: notes were stale; repo shows PR #3 merged (0032, 0033 locked; 0034–0037, MVP feature list, release criteria proposed) and v5 pushed; Status rewritten | 256f92f
 2026-10-12 | junior | Isaac's outcome research reviewed; 0038 drafted (goal paths, three stages with outcome scenes, answer feedback, positioning; proposed, passes done); legal 59; research note in research/competitors | uncommitted
 2026-10-12 | junior | 0038 launch paths chosen (Family; Visiting or living in Nigeria); Summary for Tolu added; waits for Tolu's lock | uncommitted
+2026-10-12 | junior | 0034 locked by Isaac (speaking is assumption 3); now Accepted by both | uncommitted (0038 committed by Isaac in 1679f15)
