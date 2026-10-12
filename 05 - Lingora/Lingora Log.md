@@ -41,3 +41,4 @@ Append-only record of what changed in Lingora, oldest first. One line per change
 2026-10-12 | junior | Isaac confirmed the vault's "Linhora" is Lingora; folder, notes, links, slug and VAULT-INDEX renamed; market validation note filed here | vault only
 2026-10-12 | junior | Isaac signed off culture items 3–12 with passes: gender choice only where customs differ; no culture streak (culture counts to daily goal); main characters human-designed by Isaac (AI-assisted, Blender); card, speaking, report and narrator additions; legal items 36 and 56 extended | repo uncommitted
 2026-10-12 | junior | Accounts MVP spec review finished (sections 2–13, passes); data-map process rule proposed as a 0025 amendment; legal items 10, 49, 58 extended | repo uncommitted
+2026-10-12 | junior | Accounts MVP spec locked by Isaac (0023 Accepted); tech stack discussion started | repo uncommitted
