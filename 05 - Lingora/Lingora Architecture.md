@@ -1,12 +1,12 @@
 ---
 status: active
-project: linhora
+project: lingora
 type: reference
 author: junior
 created: 2026-09-26
 updated: 2026-10-12
 ---
-# Linhora Architecture
+# Lingora Architecture
 
 Planning stage: no application code yet; the tech stack is chosen after the accounts MVP spec is locked (repo `docs/roadmap.md`, Track D). Checked 2026-10-12.
 
@@ -21,5 +21,5 @@ Planning stage: no application code yet; the tech stack is chosen after the acco
 - **Open questions:** Not recorded yet.
 
 ## Related
-- [[Linhora Status]]
-- [[Linhora Log]]
+- [[Lingora Status]]
+- [[Lingora Log]]

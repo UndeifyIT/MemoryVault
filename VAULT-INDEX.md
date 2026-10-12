@@ -40,9 +40,10 @@ Repo: https://github.com/isaaCecurity/-Davila-B-B. Isaac's local copies (machine
 GitHub: https://github.com/UndeifyIT/ShiftOS. Isaac's local copy (machine-specific): `C:\Users\HP\ShiftOS-main`.
 - **Status:** Not recorded yet.
 
-## Linhora (05 - Linhora)
+## Lingora (05 - Lingora)
 
-- **Status:** Not recorded yet.
+Repo: https://github.com/UndeifyIT/Lingora (public). Isaac's local copy (machine-specific): `C:\Users\HP\Downloads\Mobile app foundations prototype (4)`. "Lingora" is a working name; it may change after the trademark search.
+- **Status:** Planning stage, no production code; see [[Lingora Status]].
 
 ## Vault Structure
 
@@ -52,7 +53,7 @@ GitHub: https://github.com/UndeifyIT/ShiftOS. Isaac's local copy (machine-specif
 02 - MindBridge     ← Our most important project
 03 - BakeFlow       ← BakeFlow project notes
 04 - ShiftOS        ← ShiftOS project notes
-05 - Linhora        ← Linhora project notes
+05 - Lingora        ← Lingora project notes
 06 - Personal       ← Life outside work
 07 - Archive        ← Completed projects and old notes
 08 - Resources      ← Cross-project reference material, templates, Jobs

@@ -24,7 +24,7 @@ Every project folder has the same shape:
   ...other notes, flat, only when a note has nowhere else to go
 ```
 
-The same three core notes exist for BakeFlow, ShiftOS and Linhora. A new project gets the same set, named `<Project> Status`, `<Project> Architecture`, `<Project> Log`.
+The same three core notes exist for BakeFlow, ShiftOS and Lingora. A new project gets the same set, named `<Project> Status`, `<Project> Architecture`, `<Project> Log`.
 
 ## 2. What each note holds
 

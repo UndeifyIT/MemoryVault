@@ -10,7 +10,7 @@ type: guide
 ## Boot chain (read these, in order, and you have the skill)
 1. This note, end to end.
 2. [[Active Priorities]] — so ideas are weighed against what's already open and against the tight budget.
-3. The index of any project the idea touches: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]].
+3. The index of any project the idea touches: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Lingora]].
 
 ## The procedure
 1. Restate the idea in one or two plain sentences and check I've understood it.

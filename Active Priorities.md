@@ -47,9 +47,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Marketing P0 before any traffic (Isaac decides, Junior or Tolu builds): pick the name and a domain we control, since `shiftos.app` is another company's product and receives our hello@ and privacy@ email; and make the demo and newsletter forms store leads, with a bot check and rate limit (both discard submissions today). See [[ShiftOS Marketing Review]].
 - [ ] Decide ShiftOS pricing (Isaac): the pricing page and PF-012 disagree, and nothing in code enforces plans or takes payment.
 
-#### Linhora
-- [ ] Tell Junior where the Linhora repo is so its notes can be drafted (Isaac).
-- [ ] Confirm whether Lingora (repo UndeifyIT/Lingora) is the same project as Linhora, so [[Lingora Market Validation]] can move out of the Inbox (Isaac).
+#### Lingora
 - [ ] Lingora: pick a new name and run a trademark search before any brand spend; 12+ App Store apps are already called "Lingora" (Isaac). See [[Lingora Market Validation]].
 - [ ] Lingora: hire a native Yorùbá linguist to QA every string and tone mark; the prototype spells its first greeting two ways (Isaac, Tolu).
 - [ ] Lingora: set the validation sprint start date (Isaac). The gates are drafted in decision 0014 (proposed; Isaac may still revise them until the sprint starts, then they freeze); no production code until they pass. Corrected 2026-10-12: the gates were already drafted.
@@ -62,6 +60,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
+- [x] 2026-10-12: Isaac confirmed the vault's "Lingora" project is Lingora (repo UndeifyIT/Lingora); folder and notes renamed to Lingora, links fixed, market validation note moved out of the Inbox.
 - [x] 2026-10-12: Lingora 0029, 0032 and 0033 accepted by both founders and the stage 5 journeys reviewed by Tolu (PR #3, merged into UndeifyIT/Lingora main).
 - [x] 2026-10-06: Lingora `research/` is in the repo (committed in 5d9830a and cb4fd26, verified with git log).
 - [x] 2026-09-28: ShiftOS repo made private after the audit was pushed to it (verified 00:35). Batch 5 live checks written into the audit folder.

@@ -20,5 +20,5 @@ A service marketplace where customers find and book trusted technicians and serv
 Isaac's "Ndebu — Founder & Startup Build Roadmap" (PDF, location not recorded) sets out 15 stages: problem and customer, market research, customer validation, business model, product strategy, MVP scope, brand and UX, technical planning, build with AI, testing and security, operations, legal and privacy, marketing, beta launch, and learn and iterate. It runs three tracks in parallel (business, product and technology, go-to-market) and has one rule: no production code until the problem, users, validation approach and MVP hypothesis are clear. Junior reviewed it against Lingora on 2026-10-07 and recommended adopting it as Undeify's standard project roadmap, with additions for decision gates and kill criteria.
 
 ## Related
-- [[Linhora]]
+- [[Lingora]]
 - [[Lingora Market Validation]]

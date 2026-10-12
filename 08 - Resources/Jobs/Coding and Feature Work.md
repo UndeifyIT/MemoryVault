@@ -12,7 +12,7 @@ updated: 2026-09-27
 
 ## Boot chain (read these, in order, and you have the skill)
 1. This note, end to end.
-2. The project being worked on: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Linhora]]. Read its Status and Architecture notes (see [[Session Handoff and Resume]]) — where the code lives, where we stopped, what's next.
+2. The project being worked on: [[MindBridge]], [[BakeFlow]], [[ShiftOS]], or [[Lingora]]. Read its Status and Architecture notes (see [[Session Handoff and Resume]]) — where the code lives, where we stopped, what's next.
 3. [[Active Priorities]] — whether this work is tied to a current priority.
 
 ## The procedure

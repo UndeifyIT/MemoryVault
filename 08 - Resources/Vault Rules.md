@@ -53,7 +53,7 @@ When creating or editing a note, add `wikilinks`:
 - `02 - MindBridge/*` → `mindbridge`
 - `03 - BakeFlow/*` → `bakeflow`
 - `04 - ShiftOS/*` → `shiftos`
-- `05 - Linhora/*` → `linhora`
+- `05 - Lingora/*` → `lingora`
 - `06 - Personal/*` → `personal`
 - `01 - Daily Notes/*` → `personal`
 - `07 - Archive/*` → infer from content / original project
@@ -71,7 +71,7 @@ When creating or editing a note, add `wikilinks`:
 ## Valid Field Values
 
 **status:** `active` | `completed` | `parked` | `idea` | `archived`
-**project:** `mindbridge` | `bakeflow` | `shiftos` | `linhora` | `personal` | `meta`
+**project:** `mindbridge` | `bakeflow` | `shiftos` | `lingora` | `personal` | `meta`
 **type:** `index` | `reference` | `guide` | `plan` | `log`
 
 ## Folder Indexes (keep them in sync)

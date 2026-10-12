@@ -1,6 +1,6 @@
 ---
 status: active
-project: meta
+project: lingora
 type: reference
 author: junior
 created: 2026-10-05
@@ -8,7 +8,7 @@ updated: 2026-10-12
 ---
 # Lingora Market Validation
 
-Findings of the 2026-10-05 market validation of Lingora (pan-African heritage-language app, Yorùbá first; repo https://github.com/UndeifyIT/Lingora): feasible as a bootstrapped, family-first studio that adds languages only when evidence says so; not a fast-growth platform. Unverified whether Lingora is the vault's "Linhora" project; sort into that folder once Isaac confirms.
+Findings of the 2026-10-05 market validation of Lingora (pan-African heritage-language app, Yorùbá first; repo https://github.com/UndeifyIT/Lingora): feasible as a bootstrapped, family-first studio that adds languages only when evidence says so; not a fast-growth platform.
 
 ## Scope (Isaac, 2026-10-05)
 - All African languages, Yorùbá first; English UI only for now. Bootstrapping, no raise planned. No traction yet; waitlist and socials planned after the research. Existing partnership with Spitch AI (speech API).

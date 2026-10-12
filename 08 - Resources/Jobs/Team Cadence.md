@@ -13,7 +13,7 @@ updated: 2026-09-26
 ## Boot chain (read these, in order, and you have the skill)
 1. This note, end to end.
 2. [[Active Priorities]] — what's open and who owns it.
-3. The Status note of each active project, for example [[MindBridge Status]], [[BakeFlow Status]], [[ShiftOS Status]] and [[Linhora Status]].
+3. The Status note of each active project, for example [[MindBridge Status]], [[BakeFlow Status]], [[ShiftOS Status]] and [[Lingora Status]].
 4. For the weekly review only: [[Memory Standard]] (section 8, Upkeep), [[Security Register]], [[Tool Register]] (on the 1st of the month), [[Marketing Hub]] and [[Junior Checks]].
 
 ## The mechanical part (no model, run first)

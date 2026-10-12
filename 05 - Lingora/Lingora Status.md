@@ -1,16 +1,16 @@
 ---
 status: active
-project: linhora
+project: lingora
 type: reference
 author: junior
 created: 2026-09-26
 updated: 2026-10-12
 ---
-# Linhora Status
+# Lingora Status
 
-Planning stage for the Lingora app (repo UndeifyIT/Lingora); no production code. Unverified assumption: "Linhora" in this vault is the Lingora project (Isaac has not corrected it).
+Planning stage for the Lingora app (repo UndeifyIT/Lingora); no production code. Confirmed by Isaac 2026-10-12: this is the Lingora project (filed as "Linhora" until then). "Lingora" is a working name and may change after the trademark search.
 
-This note is a living snapshot. Overwrite it as things change; history goes in [[Linhora Log]].
+This note is a living snapshot. Overwrite it as things change; history goes in [[Lingora Log]].
 
 ## Snapshot
 - **Stage:** planning (checked 2026-10-12). No production code; none until the validation sprint gates pass (decision 0014). Sprint start date not set.
@@ -34,5 +34,5 @@ Not recorded yet.
 1. Not recorded yet.
 
 ## Related
-- [[Linhora Architecture]]
-- [[Linhora Log]]
+- [[Lingora Architecture]]
+- [[Lingora Log]]

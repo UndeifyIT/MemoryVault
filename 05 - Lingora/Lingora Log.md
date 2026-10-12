@@ -1,14 +1,14 @@
 ---
 status: active
-project: linhora
+project: lingora
 type: log
 author: junior
 created: 2026-09-26
 updated: 2026-09-26
 ---
-# Linhora Log
+# Lingora Log
 
-Append-only record of what changed in Linhora, oldest first. One line per change. Each line: date | author | what changed | commit or PR.
+Append-only record of what changed in Lingora, oldest first. One line per change. Each line: date | author | what changed | commit or PR.
 
 2026-09-26 | junior | Project notes scaffold created | none
 2026-10-09 | junior | Planning docs, 23 decision records, accounts MVP spec and progress tracker set up in UndeifyIT/Lingora | uncommitted in repo at time of writing
@@ -38,3 +38,4 @@ Append-only record of what changed in Linhora, oldest first. One line per change
 2026-10-12 | junior | 0037 review: country gates set (Canada 500, EU 1,000 confirmed sign-ups after launch); Quebec Law 25 (under-14) and Bill 96 (French interface?) added to legal item 49; EU items to 29 | uncommitted
 2026-10-12 | junior | 0037 review finished: seven gates accepted; release criteria gain payments end-to-end and cheap-phone audio/progress lines; Summary for Tolu added; 0037 and 0038 wait for Tolu | uncommitted
 2026-10-12 | junior | 0028 stalemate rule proposed (Isaac chose C); Tolu's culture proposal checked against today's decisions (3 conflicts fixed, section 10); vault notes reconciled with the repo (priorities, snapshot, architecture, repo link, research commit lines) | repo uncommitted
+2026-10-12 | junior | Isaac confirmed the vault's "Linhora" is Lingora; folder, notes, links, slug and VAULT-INDEX renamed; market validation note filed here | vault only
