@@ -48,8 +48,10 @@ Isaac locked the test plan's pass marks on 2026-10-13 (b2a03d1). Tolu may challe
 
 New local competitor: Niibow, a Lagos restaurant finder by mood (self-reported 1,000+ venues; no social features on its website). Junior recommends option D, the "Tonight / This weekend" deck with "Send to the group". Open for Isaac: the start date for the concierge test. Junior recommends after the DPCO gate on 30 Nov.
 
+Evening of 2026-10-13: Tolu sent Isaac a "social discovery" product brief (9 docs, a zip and 5 screenshots), sitting untracked in the repo's `Now/` and `__MACOSX/` folders. Junior reviewed all of it. The screenshots Tolu's brief calls "Kona" are Corner's App Store screenshots (Corner, the closest live analog in our research). The brief is generic (no Lagos, trust rule, price, Nigerian constraints) and conflicts with 0003 (map and follow-feed home, voting only inside the app) and 0002's 24-hour friend delay. Worth adopting: per-item visibility and invite-link rules, lock-screen notification leaks, server-side access-control test cases, SSRF controls for link import, behaviour interviews before the test, empty states. Nothing applied; waiting for Isaac's OK on the adopt list and Tolu's answer on whether the brief is his 0003 position.
+
 ### Tolu
-Not recorded yet. Waiting on Tolu: accept or challenge 0001 and 0002, and decide 0003 in the repo.
+Sent the social discovery brief (2026-10-13), not yet in the repo. Waiting on Tolu: accept or challenge 0001 and 0002, and decide 0003 in the repo, saying whether the brief's map/feed/in-app plan is his answer.
 
 ## Next steps
 1. Tolu decides 0003 and reviews 0001 and 0002.
