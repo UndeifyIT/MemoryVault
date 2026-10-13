@@ -23,7 +23,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 - [ ] NOW: answer T1–T3 in the repo's `docs/open-questions.md` (capacity, zone, seed budget), then give Junior the test start date, due 2026-10-14 (Isaac). Measures were changed by Isaac on 2026-10-13 before day 1; Tolu may challenge them until then. See [[NOW Status]].
-- [ ] NOW, needs decision: Tolu's pushback (social app first, no launch zone, user reviews, share-in from TikTok/Instagram, live location toggle) conflicts with Isaac's 0002–0004; settle together (Isaac, Tolu). See [[NOW Status]].
+- [ ] NOW, needs decision: Isaac reviews Tolu's decision 0006 (NOW as a social map) and the private beta plan point by point with Tolu, including Tolu's proposal to put Lingora on hold while NOW goes first (Isaac, Tolu). See [[NOW Status]].
 - [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D; Isaac's MVP cuts apply to any option) and accept or challenge 0001, 0002 (including section 6), 0004 (rating rules), 0005 (working name) and the changed test measures in UndeifyIT/Now (Tolu). Start at the repo's `docs/roadmap.md`.
 
 #### MindBridge

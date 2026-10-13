@@ -28,7 +28,7 @@ The live tracker is in the repo: `docs/roadmap.md`, "Start here" (checked agains
 **Concept video (0030, proposed):** v5 walkthrough rendered 3:19. Open: full-size `culture-walk.jpg`; three drafted Yorùbá lines need Tolu; greeting spelling; 8 old render files (stills, logs, one mp4 from b61f18e) still tracked in `design/video/out/` on GitHub, awaiting Isaac's OK to untrack.
 
 ### Tolu
-Not recorded yet.
+On 2026-10-13 (late evening, in a NOW session) Tolu said Undeify is continuing with Lingora but holding off on it for now while NOW goes first. Not confirmed by Isaac; see [[NOW Status]].
 
 ## Next steps
 1. Not recorded yet.
