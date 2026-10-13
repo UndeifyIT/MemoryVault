@@ -57,6 +57,7 @@ Repo: https://github.com/UndeifyIT/Lingora (public). Isaac's local copy (machine
 06 - Personal       ← Life outside work
 07 - Archive        ← Completed projects and old notes
 08 - Resources      ← Cross-project reference material, templates, Jobs
+09 - NOW            ← NOW project notes (place discovery for Lagos Gen Z)
 ```
 
 ## What's Active Right Now
