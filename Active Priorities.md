@@ -22,8 +22,8 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] DPCO sprint (Isaac said yes 2026-10-06; see [[Undeify Opportunity Scan]]). Kit is on Isaac's machine (machine-specific path: `C:\Users\HP\Downloads\Undeify DPCO Sprint`; local only; it holds DPCO contact details, so keep it off GitHub and out of the vault). By 19 Oct: finish and publish the Undeify NDPA pack. 13 Oct – 30 Nov: 12–15 DPCO calls. Gate on 30 Nov: at least 3 DPCOs prepay ≥₦50K or kill (Isaac).
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
-- [ ] NOW: give Junior the start date for the test on 2026-10-14 (Isaac). Pass marks were locked 2026-10-13; Tolu may challenge them before day 1. See [[NOW Status]].
-- [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D; say whether your social discovery brief is your answer) and accept or challenge 0001 (drop LIFE) and 0002 (trust rule, Lekki/VI focus, new section 6 on privacy and access control) in UndeifyIT/Now (Tolu).
+- [ ] NOW: answer T1–T3 in the repo's `docs/open-questions.md` (capacity, zone, seed budget), then give Junior the test start date, due 2026-10-14 (Isaac). Measures were changed by Isaac on 2026-10-13 before day 1; Tolu may challenge them until then. See [[NOW Status]].
+- [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D; Isaac's MVP cuts apply to any option) and accept or challenge 0001, 0002 (including section 6), 0004 (rating rules), 0005 (working name) and the changed test measures in UndeifyIT/Now (Tolu). Start at the repo's `docs/roadmap.md`.
 
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).
