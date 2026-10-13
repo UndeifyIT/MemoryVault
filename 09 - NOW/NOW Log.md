@@ -23,3 +23,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-13 | junior | Tolu's proposal written as decision 0006 (NOW as a social map) and a private beta plan replacing the concierge test; waiting for Isaac | Now (uncommitted)
 2026-10-13 | junior | Tolu settled the 1-hour post delay, private-until-checked new places and stack-before-beta; 0006 and the beta plan pushed | Now b8069e9
 2026-10-13 | junior | Tolu: price per head optional on every post (range shown only once 3+ gave one; team seeds always include it); committed on the laptop at 00:05 on 14 Oct | Now 276291a
+2026-10-14 | junior | Isaac accepted 0006 and the beta, NOW first and Lingora on hold; locked in the repo with the user walkthrough and following-and-friends rules; roadmap v2 | Now 824fe1b

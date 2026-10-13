@@ -22,9 +22,10 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] DPCO sprint (Isaac said yes 2026-10-06; see [[Undeify Opportunity Scan]]). Kit is on Isaac's machine (machine-specific path: `C:\Users\HP\Downloads\Undeify DPCO Sprint`; local only; it holds DPCO contact details, so keep it off GitHub and out of the vault). By 19 Oct: finish and publish the Undeify NDPA pack. 13 Oct – 30 Nov: 12–15 DPCO calls. Gate on 30 Nov: at least 3 DPCOs prepay ≥₦50K or kill (Isaac).
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
-- [ ] NOW: answer T1–T3 in the repo's `docs/open-questions.md` (capacity, zone, seed budget), then give Junior the test start date, due 2026-10-14 (Isaac). Measures were changed by Isaac on 2026-10-13 before day 1; Tolu may challenge them until then. See [[NOW Status]].
-- [ ] NOW, needs decision: Isaac reviews Tolu's decision 0006 (NOW as a social map) and the private beta plan point by point with Tolu, including Tolu's proposal to put Lingora on hold while NOW goes first (Isaac, Tolu). See [[NOW Status]].
-- [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D; Isaac's MVP cuts apply to any option) and accept or challenge 0001, 0002 (including section 6), 0004 (rating rules), 0005 (working name) and the changed test measures in UndeifyIT/Now (Tolu). Start at the repo's `docs/roadmap.md`.
+
+- [ ] NOW (first priority): Tolu chooses the tech stack, needed before the private beta (repo open questions E1–E5, E9–E11) (Tolu).
+- [ ] NOW: lock the beta pass marks and confirm Junior's proposals in `docs/product/` (open questions T14, P13) (Isaac, Tolu).
+- [ ] NOW: answer capacity, area and seed budget (T1–T3); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).
@@ -45,6 +46,7 @@ Checked against GitHub `main` and production on 2026-10-13: the audit fixes in P
 - [ ] Decide ShiftOS pricing (Isaac): the pricing page and PF-012 disagree, and nothing in code enforces plans or takes payment.
 
 #### Lingora
+**On hold until further notice (Isaac, 2026-10-14)** while NOW goes first; resume when there is data on user need (expected end of 2026 or early 2027). The items below wait; none is cancelled. See [[Lingora Status]].
 - [ ] Lingora: pick a new name and run a trademark search before any brand spend; 12+ App Store apps are already called "Lingora" (Isaac). See [[Lingora Market Validation]].
 - [ ] Lingora: hire a native Yorùbá linguist to QA every string and tone mark; the prototype spells its first greeting two ways (Isaac, Tolu).
 - [ ] Lingora: set the validation sprint start date (Isaac). The gates are drafted in decision 0014 (proposed; Isaac may still revise them until the sprint starts, then they freeze); no production code until they pass. Corrected 2026-10-12: the gates were already drafted.
@@ -57,6 +59,7 @@ Checked against GitHub `main` and production on 2026-10-13: the audit fixes in P
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
+- [x] 2026-10-14: NOW decision 0006 (social map, proposed by Tolu) and the private beta accepted by Isaac and locked in the repo (824fe1b); Lingora put on hold.
 - [x] 2026-09-28/29: ShiftOS audit fixes merged (PRs #29–#37), including Critical C1+H1. Production backend verified on `59801cf` via `/health` on 2026-10-13. Migrations still to be confirmed (open item above).
 - [x] 2026-10-12: Lingora accounts MVP spec reviewed (sections 2–13 with passes) and locked by Isaac (decision 0023 Accepted).
 - [x] 2026-10-12: Isaac confirmed the vault's "Lingora" project is Lingora (repo UndeifyIT/Lingora); folder and notes renamed to Lingora, links fixed, market validation note moved out of the Inbox.

@@ -4,11 +4,11 @@ project: now
 type: index
 author: junior
 created: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-14
 ---
 # NOW
 
-NOW is a place-discovery app for Lagos Gen Z ("the influencer that doesn't lie"). Repo: https://github.com/UndeifyIT/Now (default branch `main`, private). Research and design stage; no product code.
+NOW is a social map of places, starting in Lagos: users post about places they've been, follow each other and see where people actually go (decision 0006). Repo: https://github.com/UndeifyIT/Now (default branch `main`, private). Design stage, moving to a private beta; no product code. Undeify's first priority since 2026-10-14.
 
 ## Start here
 - [[NOW Status]]: where the project stands and where we stopped.

@@ -1,5 +1,5 @@
 ---
-status: active
+status: parked
 project: lingora
 type: index
 author: junior

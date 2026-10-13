@@ -1,5 +1,5 @@
 ---
-status: active
+status: parked
 project: lingora
 type: reference
 author: junior
@@ -7,6 +7,8 @@ created: 2026-09-26
 updated: 2026-10-12
 ---
 # Lingora Status
+
+**On hold until further notice (Isaac, 2026-10-14).** Undeify is putting NOW first. Reason: there is no data yet on whether users really need Lingora; Isaac expects that data by the end of 2026 or early 2027, then Lingora resumes. Nothing is cancelled; the repo and decisions stay as they are.
 
 Planning stage for the Lingora app (repo UndeifyIT/Lingora); no production code. Confirmed by Isaac 2026-10-12: this is the Lingora project (filed as "Linhora" until then). "Lingora" is a working name and may change after the trademark search.
 
@@ -28,7 +30,7 @@ The live tracker is in the repo: `docs/roadmap.md`, "Start here" (checked agains
 **Concept video (0030, proposed):** v5 walkthrough rendered 3:19. Open: full-size `culture-walk.jpg`; three drafted Yorùbá lines need Tolu; greeting spelling; 8 old render files (stills, logs, one mp4 from b61f18e) still tracked in `design/video/out/` on GitHub, awaiting Isaac's OK to untrack.
 
 ### Tolu
-On 2026-10-13 (late evening, in a NOW session) Tolu said Undeify is continuing with Lingora but holding off on it for now while NOW goes first. Not confirmed by Isaac; see [[NOW Status]].
+On 2026-10-13 (late evening, in a NOW session) Tolu said Undeify is continuing with Lingora but holding off on it for now while NOW goes first. Isaac confirmed it on 2026-10-14 (above); see [[NOW Status]].
 
 ## Next steps
 1. Not recorded yet.
