@@ -23,8 +23,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 - [ ] NOW: give Junior the start date for the test on 2026-10-14 (Isaac). Pass marks were locked 2026-10-13; Tolu may challenge them before day 1. See [[NOW Status]].
-- [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D) and accept or challenge 0001 (drop LIFE) and 0002 (trust rule, Lekki/VI focus) in UndeifyIT/Now (Tolu).
-- [ ] NOW: approve or edit Junior's adopt list from Tolu's social discovery brief and the repo clean-up (Isaac); Tolu says in 0003 whether the brief's map/feed/in-app plan is his answer. See [[NOW Status]].
+- [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D; say whether your social discovery brief is your answer) and accept or challenge 0001 (drop LIFE) and 0002 (trust rule, Lekki/VI focus, new section 6 on privacy and access control) in UndeifyIT/Now (Tolu).
 
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).

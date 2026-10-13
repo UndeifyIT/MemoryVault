@@ -17,3 +17,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-13 | junior | ChatGPT market analysis reviewed; six points adopted into 0002, 0003 and a new test plan; Niibow found as the closest Lagos competitor | Now 867e69e
 2026-10-13 | junior | Test plan pass marks locked by Isaac; Tolu may challenge before day 1; start date due from Isaac on 2026-10-14 | Now b2a03d1
 2026-10-13 | junior | Reviewed Tolu's uncommitted "social discovery" brief (9 docs, generated 18:20) and 5 screenshots: "Kona" is Corner; brief conflicts with 0003 (map/feed home, in-app voting) and 0002 safety; privacy/SSRF/access-control and interview parts worth adopting; nothing applied yet | Now (uncommitted)
+2026-10-13 | junior | Isaac approved the adopt list: brief filed under docs/research/external, review doc added, 0002 section 6 (privacy and access control, proposed), interviews added to the test plan, 0003 question for Tolu | Now dc899c5
