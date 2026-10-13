@@ -15,3 +15,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-13 | junior | Content model, trust rule and launch zone recorded (0002, proposed); home-screen brainstorm with an agent, options A–D, D recommended, left for Tolu (0003, open) | Now facdd69
 2026-10-13 | junior | Repo UndeifyIT/Now set up with research, decisions, place data and rebuild script; vault project folder created | Now facdd69
 2026-10-13 | junior | ChatGPT market analysis reviewed; six points adopted into 0002, 0003 and a new test plan; Niibow found as the closest Lagos competitor | Now 867e69e
+2026-10-13 | junior | Test plan pass marks locked by Isaac; Tolu may challenge before day 1; start date due from Isaac on 2026-10-14 | Now b2a03d1

@@ -14,7 +14,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 
 ## Snapshot
 - **Stage:** research and design. No code until the home screen is decided and the 2-week concierge test has a start date.
-- **What exists in the repo** (latest commit 867e69e, 2026-10-13):
+- **What exists in the repo** (latest commit b2a03d1, 2026-10-13):
   - `docs/research/2026-10-13-concept-research.md`
   - decisions 0001–0003 in `docs/decisions/`
   - the test plan in `docs/validation/test-plan.md`
@@ -43,6 +43,8 @@ He asked Tolu to decide the home screen (0003). Later on 2026-10-13 Isaac brough
 - a "Your city life" profile
 - pasting a Reel into the group shortlist
 - choosing the first zone by who we can recruit
+
+Isaac locked the test plan's pass marks on 2026-10-13 (b2a03d1). Tolu may challenge them until day 1. Isaac will give the start date on 2026-10-14.
 
 New local competitor: Niibow, a Lagos restaurant finder by mood (self-reported 1,000+ venues; no social features on its website). Junior recommends option D, the "Tonight / This weekend" deck with "Send to the group". Open for Isaac: the start date for the concierge test. Junior recommends after the DPCO gate on 30 Nov.
 
