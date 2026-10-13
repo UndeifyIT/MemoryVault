@@ -4,7 +4,7 @@ project: bakeflow
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-13
 ---
 # BakeFlow Status
 
@@ -16,6 +16,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 
 ## Snapshot
 - **Stage:** Active development. The repo says the backend is live on Supabase (44 tables in `public`, all with row-level security) and the Expo mobile app has 48 route files, 44 of 46 routes implemented on live data, and 47 of 57 prototype screens ported (repo status as of 2026-09-20).
+- **Last repo activity:** 2026-10-06. Dependabot dependency bumps merged (react-dom 19.3.0, codeql-action v4, victory-native 42.0.1). No feature commits since. Checked with `git log` on 2026-10-13.
 - **What works:** sign-in and organization selection, catalog, inventory, production, delivery, sales reports, search, invites (create, resend, revoke), profile editing, in-app notifications, and branch-scoped evidence storage for receipts and delivery proofs (AD-030).
 - **Not built:** the offline sync client (the server-side `sync_pull` and `apply_sync_operation` exist) and the web app (`apps/web` is only a `package.json`).
 - **Known issues and open items (from the repo docs):**
