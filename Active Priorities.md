@@ -26,7 +26,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] NOW: decide the home screen (repo decision 0003, Junior recommends D) and accept or challenge 0001 (drop LIFE) and 0002 (trust rule, Lekki/VI focus) in UndeifyIT/Now (Tolu).
 
 #### MindBridge
-- [ ] [[MindBridge]] is our most important project. Tell Junior where its repo is so its notes can be drafted, and record its context, status and next steps (Isaac).
+- [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).
 
 #### BakeFlow
 - [ ] Confirm or correct the BakeFlow Status and Architecture drafts (Isaac). See [[BakeFlow Status]].

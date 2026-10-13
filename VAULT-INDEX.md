@@ -27,8 +27,8 @@ Undeify wants to make a name for itself. What I care about most is innovation, s
 
 ## MindBridge (02 - MindBridge)
 
-Our most important project right now.
-- **Status:** Top priority. Other details not recorded yet; I'll add context myself.
+Parked by Isaac on 2026-10-13.
+- **Status:** Parked. Repo and other details not recorded yet; see [[MindBridge Status]].
 
 ## BakeFlow (03 - BakeFlow)
 
@@ -55,7 +55,7 @@ Repo: https://github.com/UndeifyIT/Now (private). Place discovery for Lagos Gen 
 ```
 00 - Inbox          ← Capture everything, sort later
 01 - Daily Notes    ← Dated logs of what got done, one file per day
-02 - MindBridge     ← Our most important project
+02 - MindBridge     ← MindBridge project notes (parked)
 03 - BakeFlow       ← BakeFlow project notes
 04 - ShiftOS        ← ShiftOS project notes
 05 - Lingora        ← Lingora project notes

@@ -4,11 +4,11 @@ project: mindbridge
 type: index
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-13
 ---
 # MindBridge
 
-Undeify's most important project. Repo: not recorded yet.
+Parked by Isaac on 2026-10-13. Repo: not recorded yet.
 
 ## Start here
 - [[MindBridge Status]] — where the project stands and where we stopped.
