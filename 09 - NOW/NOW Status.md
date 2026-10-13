@@ -1,6 +1,6 @@
 ---
 status: active
-project: meta
+project: now
 type: reference
 author: junior
 created: 2026-10-13
@@ -24,7 +24,6 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
   - Location safety needs a DPIA (data protection impact assessment) before launch.
   - The open-source plan is parked because of the AI-cloning concern.
   - Phone sign-in codes (OTP by SMS) cost money per message; not yet priced.
-  - The vault project slug `now` doesn't exist yet. Notes use `meta` until Isaac adds it to the Vault Rules.
 
 ## Where we stopped
 Each person keeps their own section current.

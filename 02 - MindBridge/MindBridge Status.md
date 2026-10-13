@@ -1,14 +1,14 @@
 ---
-status: active
+status: parked
 project: mindbridge
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-13
 ---
 # MindBridge Status
 
-One sentence: the current state of MindBridge. Not recorded yet.
+Parked by Isaac on 2026-10-13. Nothing else recorded yet; the repo location is still unknown.
 
 This note is a living snapshot. Overwrite it as things change; history goes in [[MindBridge Log]].
 

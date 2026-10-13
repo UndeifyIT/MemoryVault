@@ -4,7 +4,7 @@ project: meta
 type: plan
 author: junior
 created: 2026-09-26
-updated: 2026-09-26
+updated: 2026-10-13
 ---
 # Marketing Hub
 
@@ -42,3 +42,4 @@ Add one row per week. Track a few numbers only: reach, new followers, sign-ups o
 
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.
+- 2026-10-13, Junior for Isaac: Isaac confirmed this is still on (quiet-note check).

@@ -4,7 +4,7 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-09-28
+updated: 2026-10-13
 ---
 # Vault Rules
 
@@ -54,6 +54,7 @@ When creating or editing a note, add `wikilinks`:
 - `03 - BakeFlow/*` → `bakeflow`
 - `04 - ShiftOS/*` → `shiftos`
 - `05 - Lingora/*` → `lingora`
+- `09 - NOW/*` → `now`
 - `06 - Personal/*` → `personal`
 - `01 - Daily Notes/*` → `personal`
 - `07 - Archive/*` → infer from content / original project
@@ -71,7 +72,7 @@ When creating or editing a note, add `wikilinks`:
 ## Valid Field Values
 
 **status:** `active` | `completed` | `parked` | `idea` | `archived`
-**project:** `mindbridge` | `bakeflow` | `shiftos` | `lingora` | `personal` | `meta`
+**project:** `mindbridge` | `bakeflow` | `shiftos` | `lingora` | `now` | `personal` | `meta`
 **type:** `index` | `reference` | `guide` | `plan` | `log`
 
 ## Folder Indexes (keep them in sync)

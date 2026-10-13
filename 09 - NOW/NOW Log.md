@@ -1,6 +1,6 @@
 ---
 status: active
-project: meta
+project: now
 type: log
 author: junior
 created: 2026-10-13

@@ -45,6 +45,11 @@ GitHub: https://github.com/UndeifyIT/ShiftOS. Isaac's local copy (machine-specif
 Repo: https://github.com/UndeifyIT/Lingora (public). Isaac's local copy (machine-specific): `C:\Users\HP\Downloads\Mobile app foundations prototype (4)`. "Lingora" is a working name; it may change after the trademark search.
 - **Status:** Planning stage, no production code; see [[Lingora Status]].
 
+## NOW (09 - NOW)
+
+Repo: https://github.com/UndeifyIT/Now (private). Place discovery for Lagos Gen Z: "the influencer that doesn't lie".
+- **Status:** Research and design. No code yet; decisions 0001–0003 wait for Tolu. See [[NOW Status]].
+
 ## Vault Structure
 
 ```

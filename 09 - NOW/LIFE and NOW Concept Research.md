@@ -1,6 +1,6 @@
 ---
 status: idea
-project: meta
+project: now
 type: plan
 author: junior
 created: 2026-10-13
