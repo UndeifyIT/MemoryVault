@@ -60,7 +60,17 @@ Later on 2026-10-13 Isaac asked for NOW to be mapped out the way Lingora is. Jun
 Most urgent for Isaac before day 1: T1 capacity, T2 zone and T3 seed budget (estimated ₦600k–1M for 40 visits).
 
 ### Tolu
-Sent the social discovery brief (2026-10-13), now filed in the repo. Waiting on Tolu: accept or challenge 0001, 0002 (including section 6), 0004, 0005 and the changed pass marks, and decide 0003 in the repo, saying whether a map or follow-feed home is still his answer.
+**Needs decision (both founders).** On 2026-10-13 at about 11 PM Tolu, on Isaac's laptop, got a full briefing from Junior and pushed back. His positions, not yet in the repo:
+- NOW is a social app first: users post, follow each other and are found by username (real names optional), TikTok-style. The team only seeds a few places so the map isn't empty.
+- No launch zone: anyone posts anywhere, including outside Lagos (conflicts with 0002's Lekki/VI focus).
+- Users must be able to write their own reviews and comments (conflicts with 0004 R2 and 0003 change 4).
+- AI search should not be ruled out.
+- Share from TikTok or Instagram into NOW should work, with the app saying when no place was found (conflicts with Isaac's deferral of link pasting, 0003 change 2).
+- Live location as an on/off setting, as on Snapchat (conflicts with 0002 section 5).
+- Agrees to defer events, ticketing, bookings, groups and voting; chat deferred for now, though he thinks it matters. Keep the map.
+Junior's view was given in the chat; neither version is settled until Isaac and Tolu agree.
+
+Earlier: sent the social discovery brief (2026-10-13), now filed in the repo. Waiting on Tolu: accept or challenge 0001, 0002 (including section 6), 0004, 0005 and the changed pass marks, and decide 0003 in the repo, saying whether a map or follow-feed home is still his answer.
 
 ## Next steps
 1. Tolu decides 0003 and reviews 0001, 0002, 0004, 0005 and the pass marks.
