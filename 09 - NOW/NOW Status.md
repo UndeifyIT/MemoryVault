@@ -69,6 +69,7 @@ Most urgent for Isaac before day 1: T1 capacity, T2 zone and T3 seed budget (est
 - Live location as an on/off setting, as on Snapchat (conflicts with 0002 section 5).
 - Agrees to defer events, ticketing, bookings, groups and voting; chat deferred for now, though he thinks it matters. Keep the map.
 Junior's view was given in the chat; neither version is settled until Isaac and Tolu agree.
+- Later the same night Tolu agreed with Junior's full app walkthrough (social map, public pins for everyone without an account, "Been here" tap, posts with Worth it / Mid / No and price per head, date never time, "after I leave" default, 18+, venue side), with two changes: mutual follows are **not** friends (instead suggest people followed by people you follow), and places show how many people saved them ("80 people saved this"). He asked why sharing from TikTok/Instagram is deferred.
 
 Earlier: sent the social discovery brief (2026-10-13), now filed in the repo. Waiting on Tolu: accept or challenge 0001, 0002 (including section 6), 0004, 0005 and the changed pass marks, and decide 0003 in the repo, saying whether a map or follow-feed home is still his answer.
 
