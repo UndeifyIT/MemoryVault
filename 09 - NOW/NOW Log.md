@@ -21,3 +21,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-13 | junior | NOW mapped like Lingora: roadmap (17 stages), open questions (42, T1–T13 before day 1), legal action list (31 items) | Now (uncommitted)
 2026-10-13 | junior | Seven gaps settled with Isaac: groups, voting and link pasting cut from the MVP (share link stays); two-step rating; test measures now share rate and visit rate; venue interviews back in; rating rules 0004 and working name 0005 proposed; roadmap, open questions and legal list committed | Now 9942ce6
 2026-10-13 | junior | Tolu's proposal written as decision 0006 (NOW as a social map) and a private beta plan replacing the concierge test; waiting for Isaac | Now (uncommitted)
+2026-10-13 | junior | Tolu settled the 1-hour post delay, private-until-checked new places and stack-before-beta; 0006 and the beta plan pushed | Now b8069e9
