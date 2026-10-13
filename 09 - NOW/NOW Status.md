@@ -14,9 +14,11 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 
 ## Snapshot
 - **Stage:** research and design. No code until the home screen is decided and the 2-week concierge test has a start date.
-- **What exists in the repo** (commit facdd69, 2026-10-13):
+- **What exists in the repo** (latest commit 867e69e, 2026-10-13):
   - `docs/research/2026-10-13-concept-research.md`
   - decisions 0001–0003 in `docs/decisions/`
+  - the test plan in `docs/validation/test-plan.md`
+  - the ChatGPT report in `docs/research/external/`
   - an Overture Maps extract for VI and Lekki in `data/`, plus `scripts/overture_places.py` to rebuild it
 - **Known issues:**
   - The cold start is the main risk.
@@ -34,7 +36,15 @@ On 2026-10-13 Isaac dropped LIFE to focus on NOW (decision 0001). With Junior he
 - the trust rule: vendors pay for visibility, never for the verdict
 - open across Lagos, with effort focused on Lekki Phase 1 and VI (decision 0002)
 
-He asked Tolu to decide the home screen (0003). Junior recommends option D, the "Tonight / This weekend" deck with "Send to the group". Open for Isaac: the start date for the concierge test. Junior recommends after the DPCO gate on 30 Nov.
+He asked Tolu to decide the home screen (0003). Later on 2026-10-13 Isaac brought a ChatGPT market analysis. Junior reviewed it and Isaac adopted six points (commit 867e69e):
+- the WhatsApp-vs-prototype test with six measures, now in `docs/validation/test-plan.md`, pass marks to lock before starting
+- practical tags on places (dress code, transport, noise, group fit)
+- outing spots plus a "free or cheap" chip in v1
+- a "Your city life" profile
+- pasting a Reel into the group shortlist
+- choosing the first zone by who we can recruit
+
+New local competitor: Niibow, a Lagos restaurant finder by mood (self-reported 1,000+ venues; no social features on its website). Junior recommends option D, the "Tonight / This weekend" deck with "Send to the group". Open for Isaac: the start date for the concierge test. Junior recommends after the DPCO gate on 30 Nov.
 
 ### Tolu
 Not recorded yet. Waiting on Tolu: accept or challenge 0001 and 0002, and decide 0003 in the repo.
