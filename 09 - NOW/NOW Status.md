@@ -26,7 +26,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 Each person keeps their own section current.
 
 ### Isaac
-On 2026-10-14 Isaac accepted everything Tolu proposed (0006, the beta, NOW first, Lingora on hold) and asked Junior to lock it. Junior locked it in the repo (824fe1b), wrote the full user walkthrough and the following-and-friends rules, and marked its own new proposals for both founders to confirm (open question P13). Later on 2026-10-14 Isaac reviewed Junior's proposals: accepted the comment controls and the four visibility rules (selected friends from friends only; private accounts never public pins; anonymous totals from 3; "people you follow went" counts only visible posts); asked for Snapchat-style saved audience lists (a "private story" of pre-chosen friends); wants sign-in by email, Google and Apple, not only phone; questioned follow limits (Junior explained: they cap speed, not totals). Then: Worth it / Mid / No kept over stars (wording may change later); saved lists accepted with Junior's rules; sign-in by Google/Apple/email open until Tolu decides (E13). Written into the repo (Now 970c93c).
+On 2026-10-14 Isaac accepted everything Tolu proposed (0006, the beta, NOW first, Lingora on hold) and asked Junior to lock it. Junior locked it in the repo (824fe1b), wrote the full user walkthrough and the following-and-friends rules, and marked its own new proposals for both founders to confirm (open question P13). Later on 2026-10-14 Isaac reviewed Junior's proposals: accepted the comment controls and the four visibility rules (selected friends from friends only; private accounts never public pins; anonymous totals from 3; "people you follow went" counts only visible posts); asked for Snapchat-style saved audience lists (a "private story" of pre-chosen friends); wants sign-in by email, Google and Apple, not only phone; questioned follow limits (Junior explained: they cap speed, not totals). Then: Worth it / Mid / No kept over stars (wording may change later); saved lists accepted with Junior's rules; sign-in by Google/Apple/email open until Tolu decides (E13). Written into the repo (Now 970c93c). Isaac then accepted all of Junior's remaining proposals except the welcome screen, which is Tolu's call (Now 92d8561).
 
 Open for Isaac: capacity, area and seed budget (T1–T3), the beta pass marks with Tolu (T14), the start date once the build date is known.
 
@@ -37,7 +37,7 @@ On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 
 
 ## Next steps
 1. Tolu chooses the tech stack.
-2. Both founders lock the beta pass marks and confirm Junior's proposals (T14, P13).
+2. Both founders lock the beta pass marks (T14); Tolu decides sign-in (E13) and the welcome screen (P13).
 3. Isaac answers T1–T3; the start date follows the build date.
 4. Junior drafts the participant notice, community rules and interview script.
 

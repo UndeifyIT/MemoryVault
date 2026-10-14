@@ -25,3 +25,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-13 | junior | Tolu: price per head optional on every post (range shown only once 3+ gave one; team seeds always include it); committed on the laptop at 00:05 on 14 Oct | Now 276291a
 2026-10-14 | junior | Isaac accepted 0006 and the beta, NOW first and Lingora on hold; locked in the repo with the user walkthrough and following-and-friends rules; roadmap v2 | Now 824fe1b
 2026-10-14 | junior | Isaac: Worth it / Mid / No kept over stars; Snapchat-style saved audience lists; comment controls and four visibility rules accepted; sign-in by Google/Apple/email open until Tolu decides | Now 970c93c
+2026-10-14 | junior | Isaac accepted Junior's remaining walkthrough and following proposals (incl. follow limits); welcome screen left to Tolu | Now 92d8561

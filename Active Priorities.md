@@ -24,7 +24,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
 - [ ] NOW (first priority): Tolu chooses the tech stack, needed before the private beta (repo open questions E1–E5, E9–E11) (Tolu).
-- [ ] NOW: lock the beta pass marks and confirm Junior's proposals in `docs/product/` (open questions T14, P13) (Isaac, Tolu).
+- [ ] NOW: lock the beta pass marks (T14) (Isaac, Tolu); Tolu decides sign-in (E13) and the welcome screen (P13).
 - [ ] NOW: answer capacity, area and seed budget (T1–T3); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
 #### MindBridge
