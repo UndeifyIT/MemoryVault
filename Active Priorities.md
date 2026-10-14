@@ -25,6 +25,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
 - [ ] NOW (first priority): Isaac accepts or challenges decision 0008, the tech stack proposed by Tolu (Isaac). Then Tolu runs the week-1 spike: low-end phone, tile failure, share-in (Tolu). Lawyer review of hosting and data flows before real tester data (legal items 12, 24) (Isaac).
+- [ ] NOW: review the system architecture draft (`docs/engineering/system-architecture.md`) after its review passes and decide its section 15 list; it changes parts of 0008, so decide 0008 first (Isaac, Tolu). Tolu: EC-78 (FR-POST-13 hold vs flag mode in the beta).
 - [ ] NOW: lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09) (Isaac, Tolu).
 - [ ] NOW documents (Junior reminds at the trigger; see the repo's `docs/document-register.md`): technical design when the stack is chosen (Tolu); privacy notice, terms and DPIA when hosting and vendors are chosen (Junior drafts, lawyer); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts (Isaac).
 - [ ] NOW: switch on branch protection on `main` with code-owner review, and confirm Tolu's GitHub handle for CODEOWNERS.

@@ -21,6 +21,9 @@ Stack **proposed** in the Now repo's decision 0008 by [[Tolu]] on 2026-10-14, wa
 - **Planning budget:** about $50 a month with spending alerts; prices are third-party 2026 figures, not quotes.
 
 
+## Architecture draft (2026-10-14, not decided)
+Full design in the repo's `docs/engineering/system-architecture.md` (Draft v2 after review pass 1), with a tested prototype in `prototypes/architecture-check/`. Main proposals beyond 0008: photos on Cloudflare R2 behind a Worker that re-encodes them and serves signed links valid 30–60 minutes; AI search where Haiku 5.5 only picks filters (no posts sent; Jev not adopted for now); guest and shared reads through a Cloudflare `edge` Worker; Following feed from a per-member inbox; friendship and public-ness computed when read; dates only, random IDs, encrypted cursors; posts appear 60–105 minutes after posting; hourly totals; staff functions need multi-factor sign-in from separate staff logins; no over-the-air updates in production; weekly encrypted backups in a separate Cloudflare account. Founder decisions it needs are in its section 15.
+
 ## Known constraints
 From the repo's research, decision 0006 and `docs/product/`.
 - **Android and iOS** from the beta (0006). About 82% of Nigerian phones are Android, mostly low-end Tecno and Infinix with 3–4 GB of RAM.
