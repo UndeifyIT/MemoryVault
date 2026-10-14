@@ -26,3 +26,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-14 | junior | Isaac accepted 0006 and the beta, NOW first and Lingora on hold; locked in the repo with the user walkthrough and following-and-friends rules; roadmap v2 | Now 824fe1b
 2026-10-14 | junior | Isaac: Worth it / Mid / No kept over stars; Snapchat-style saved audience lists; comment controls and four visibility rules accepted; sign-in by Google/Apple/email open until Tolu decides | Now 970c93c
 2026-10-14 | junior | Isaac accepted Junior's remaining walkthrough and following proposals (incl. follow limits); welcome screen left to Tolu | Now 92d8561
+2026-10-14 | junior | SRS (101 FR, 46 NFR, 10 out of scope) and risk register (28 risks, 5 High) added to the repo | Now 26dc46c

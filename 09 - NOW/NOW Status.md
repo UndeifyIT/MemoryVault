@@ -19,6 +19,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 - **Deferred:** live location, chat, groups and voting, events and bookings, money from venues (until users and interactions are proven).
 - **The test:** a 4-week private beta of the real app (`docs/validation/beta-plan.md`), replacing the WhatsApp concierge test. Pass marks are still Junior's draft.
 - **Repo** (latest commit 824fe1b, 2026-10-14): decisions 0001–0006, roadmap v2, open questions, legal action list (34 items), the user walkthrough and following-and-friends rules in `docs/product/`, the beta plan, research and the Lekki/VI place data.
+- **Requirements and risks** (2026-10-14): `docs/requirements/srs.md` (101 functional, 46 non-functional requirements, each with ID, priority, release, source and status) and `docs/requirements/risk-register.md` (28 risks, 5 High: posting cold start, founder capacity, fake ratings, access-control leaks, legal action over reviews). Markdown in the repo, chosen by Isaac.
 - **Company priority (Isaac, 2026-10-14):** NOW goes first; Lingora on hold until further notice (see [[Lingora Status]]).
 - **Known issues:** cold start and whether people post (the beta measures it); daily moderation load; Corner-clone risk (the Nigerian layer is the difference); the stack must be chosen before the beta; SMS code costs not priced; DPIA needed before public launch.
 
