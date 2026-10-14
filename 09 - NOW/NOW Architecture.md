@@ -8,7 +8,18 @@ updated: 2026-10-14
 ---
 # NOW Architecture
 
-Not decided yet (checked 2026-10-14). There is no application code, and no tech stack has been chosen. The stack is now needed before the private beta (repo open questions E1–E5, E9–E11; owner [[Tolu]]).
+Stack **proposed** in the Now repo's decision 0008 by [[Tolu]] on 2026-10-14, waiting for Isaac; once accepted it is "Accepted with conditions" (11 conditions, each met before its part ships to testers). No application code yet.
+
+## Proposed stack (decision 0008)
+- **App:** Expo (React Native), TypeScript, one codebase for Android and iOS. Minimum OS versions set at project setup (MapLibre needs Android 6.0+; Expo's default may be higher).
+- **Backend:** Supabase (Postgres, PostGIS, Row Level Security, Auth, Storage), Pro plan, London (`eu-west-2`); provisional until the lawyer answers legal item 12 (Supabase has no Africa region). Separate staging and production projects; production credentials never in test config (ShiftOS H3 lesson).
+- **Maps:** MapLibre + OpenFreeMap tiles (commercial use allowed, no SLA). Google Maps rejected as the map layer (its places and ratings compete with ours). Mapbox is the paid fallback; no self-hosted map backup yet. Map failure falls back to the list view.
+- **Sign-in:** Google, Apple, email one-time code via Resend; no SMS in the beta.
+- **Public place pages:** Cloudflare Pages. **Share-in:** Expo share extension plus TikTok's official oEmbed; Instagram fetches nothing; spike on both platforms first.
+- **AI search:** Claude Haiku 5.5, public posts only in the beta, model returns IDs only and facts come from the database; switched off until the NFR-AI-01 test set passes, otherwise the beta ships without it (0006 unchanged).
+- **Third parties receiving data:** OpenFreeMap (IP and map area), Cloudflare (IP and page), Anthropic (question and public posts), Resend (email). In the repo's data map and legal items 12 and 24.
+- **Planning budget:** about $50 a month with spending alerts; prices are third-party 2026 figures, not quotes.
+
 
 ## Known constraints
 From the repo's research, decision 0006 and `docs/product/`.

@@ -38,14 +38,15 @@ Open for Isaac: capacity, area and seed budget (T1–T3), the beta pass marks wi
 History of 2026-10-13 (Isaac's concierge-test design, the seven gaps, the ChatGPT and Tolu brief reviews) is in [[NOW Log]] and the repo.
 
 ### Tolu
-On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 0006), answered the open questions and agreed Junior's guards (1-hour delay, private-until-checked places, stack before the beta, price optional). On 2026-10-14, on the DELL laptop, Tolu caught up on Isaac's night session, decided sign-in (E13), accepted 0007 and answered T16 (founding posters 14 days early). Written in the Now repo working tree across 13 files, trace check clean (115 FR, 59 NFR); **not committed**, waiting for Isaac. Next for Tolu: the tech stack (open questions E1–E5, E9–E11), the welcome screen (P13), then the beta build.
+On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 0006), answered the open questions and agreed Junior's guards (1-hour delay, private-until-checked places, stack before the beta, price optional). On 2026-10-14, on the DELL laptop, Tolu caught up on Isaac's night session, decided sign-in (E13), accepted 0007 and answered T16 (founding posters 14 days early). Written in the Now repo working tree across 13 files, trace check clean (115 FR, 59 NFR); **not committed**, waiting for Isaac. Then Tolu proposed the tech stack as decision 0008 (Expo, Supabase London, MapLibre + OpenFreeMap, no SMS, Claude Haiku 5.5 AI search behind a test-set gate), after Junior's research and two outside reviews; written in the repo with NFR-REL-06, NFR-SEC-20, NFR-AI-03 to 05, data map and legal updates; trace check clean (115 FR, 64 NFR); **not committed**. Next for Tolu: once Isaac accepts 0008, the week-1 spike (low-end phone, tile failure, share-in), then the welcome screen (P13) and the beta build.
 
 ## Next steps
-1. Tolu chooses the tech stack.
-2. Isaac reviews and commits Tolu's 2026-10-14 changes in the Now repo.
-3. Both founders lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09); Tolu decides the welcome screen (P13).
-4. Isaac answers T1 and T2 and recruits founding posters at least 14 days before the beta; the start date follows the build date.
-5. Junior drafts the participant notice, community rules and interview script.
+1. Isaac reviews decision 0008 (tech stack, proposed by Tolu) and accepts or challenges it.
+2. Isaac reviews and commits Tolu's 2026-10-14 changes in the Now repo (E13, 0007, T16, 0008).
+3. Tolu runs the week-1 spike (0008 conditions 1, 4, 9).
+4. Both founders lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09); Tolu decides the welcome screen (P13).
+5. Isaac answers T1 and T2 and recruits founding posters at least 14 days before the beta; the start date follows the build date.
+6. Junior drafts the participant notice, community rules and interview script.
 
 ## Related
 - [[NOW Architecture]]
