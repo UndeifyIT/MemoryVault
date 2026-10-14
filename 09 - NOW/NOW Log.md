@@ -42,3 +42,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-14 | junior | Review branch pushed with Isaac's OK (as Mednova-lifesciences, Tolu's account; Steezy7 has no repo access) and pull request #1 opened for Isaac | Now PR #1 (b616bbd)
 2026-10-14 | junior | Isaac reviewed Tolu's 2026-10-14 decisions; review and consistency fixes (FR-VEN-06, FR-AUTH-11 proposed, FR-MAP-12 counts people, Resend data flow, legal 12/24/26 before the beta, T17); merged into main and pushed | Now 8ac1e5e
 2026-10-14 | junior | Tolu answered T17: FR-POST-12 clarified (retroactive full weight), FR-POST-17 amended (flag mode in the private beta, hold before launch), FR-TEAM-04 added; playbook 24-hour review; 0006 note; committed to main on Isaac's no-branches instruction | Now 33e63e0
+2026-10-14 | junior | Tolu decided the welcome screen (P13): one screen, no slideshow, line without unprovable claims; FR-AUTH-12 added | Now b73a21a
