@@ -24,11 +24,10 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
 - [ ] NOW (first priority): Tolu chooses the tech stack, needed before the private beta (repo open questions E1–E5, E9–E11) (Tolu).
-- [ ] NOW: lock the beta pass marks (T14) (Isaac, Tolu); Tolu decides sign-in (E13) and the welcome screen (P13).
+- [ ] NOW: lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09) (Isaac, Tolu); Tolu decides the welcome screen (P13).
 - [ ] NOW documents (Junior reminds at the trigger; see the repo's `docs/document-register.md`): technical design when the stack is chosen (Tolu); privacy notice, terms and DPIA when hosting and vendors are chosen (Junior drafts, lawyer); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts (Isaac).
-- [ ] NOW: commit and push the drafted project documents in the Now repo when you're ready (Isaac). Then switch on branch protection on `main` with code-owner review, and confirm Tolu's GitHub handle for CODEOWNERS.
-- [ ] NOW: Tolu accepts or challenges decision 0007 (low-cost seeding, proposed by Isaac) and answers T16 (Tolu).
-- [ ] NOW: answer capacity and area (T1, T2); seed budget now proposed in 0007; set the beta start date once the build date is known (Isaac). See [[NOW Status]].
+- [ ] NOW: review and commit Tolu's 2026-10-14 changes in the Now repo (E13, 0007, T16, rating-integrity requirements; 13 files, uncommitted on the DELL laptop clone) (Isaac). Then switch on branch protection on `main` with code-owner review, and confirm Tolu's GitHub handle for CODEOWNERS.
+- [ ] NOW: answer capacity and area (T1, T2); recruit founding posters at least 14 days before the beta (0007); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).
@@ -62,6 +61,7 @@ Checked against GitHub `main` and production on 2026-10-13: the audit fixes in P
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
+- [x] 2026-10-14: NOW sign-in decided by Tolu (E13: Google, Apple or email code, phone optional); 0007 low-cost seeding accepted by Tolu; T16 answered (founding posters 14 days early). In the Now repo, uncommitted.
 - [x] 2026-10-14: NOW decision 0006 (social map, proposed by Tolu) and the private beta accepted by Isaac and locked in the repo (824fe1b); Lingora put on hold.
 - [x] 2026-09-28/29: ShiftOS audit fixes merged (PRs #29–#37), including Critical C1+H1. Production backend verified on `59801cf` via `/health` on 2026-10-13. Migrations still to be confirmed (open item above).
 - [x] 2026-10-12: Lingora accounts MVP spec reviewed (sections 2–13 with passes) and locked by Isaac (decision 0023 Accepted).

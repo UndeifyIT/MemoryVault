@@ -19,6 +19,6 @@ From the repo's research, decision 0006 and `docs/product/`.
 - **Sharing out** through ordinary links to a public place page with a preview card; no WhatsApp Business API bot (banned by Meta since 15 Jan 2026).
 - **Sharing in** from TikTok and Instagram: our server calls only TikTok's official lookup, never the user's link (SSRF); Instagram links fetch nothing; the user picks the place.
 - **AI search** only finds and summarises real posts; never invents a place, hours or a price. Billed in dollars per question.
-- **Phone-number sign-in by SMS code.** Plan account recovery around SIM-swap attacks.
+- **Sign-in by Google, Apple or email one-time code, phone optional** (decided 2026-10-14, E13). No passwords. SIM-swap-proof recovery only matters for members who add a phone. Rating integrity rests on new-account weighting, per-account limits, multi-signal burst detection and review, not on phone numbers; these reduce abuse, they don't eliminate it.
 - **Privacy enforced on the server:** post audiences, friends, private accounts, blocks; the access-control tests in decision 0002 §6 and `docs/product/following-and-friends.md` run before the beta.
 - **Location safety:** no live location; posts appear 1 hour later by default and show the date, never the time; place totals only from 3 contributors.

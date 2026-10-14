@@ -22,7 +22,8 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 - **Requirements and risks** (2026-10-14): `docs/requirements/srs.md` (108 functional, 52 non-functional requirements, each with ID, priority, release, source and status) and `docs/requirements/risk-register.md` (33 NOW-only risks, 7 High: posting cold start, founder capacity, fake ratings, scope too big for the beta, access-control leaks, legal action over reviews, photo location metadata). Secret-scan hook installed on Isaac's clone and the DELL laptop clone (2026-10-14); Tolu's own machine unverified. Markdown in the repo, chosen by Isaac.
 - **Project documents** (2026-10-14, committed; Isaac commits and pushes project repos himself or on his explicit word): `docs/document-register.md` (every doc, owner, change control: only Isaac, Tolu or Junior; planned docs with triggers), threat model, data model and data map, `CONTRIBUTING.md` and `.github/CODEOWNERS` (Tolu's GitHub handle assumed Steezy7, to confirm), analytics plan, test strategy, moderation playbook, seeding guide, incident runbook, tester pack. SRS now 108 functional, 58 non-functional.
 - **Planned documents and their triggers** (Junior reminds): technical design when Tolu picks the stack; privacy notice, terms and DPIA when hosting and vendors are chosen (tester version before the beta); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts.
-- **Seeding (decision 0007, proposed by Isaac, waiting for Tolu):** option C plus past visits (last 3 months, shown "visited [month]"), 5–10 founding posters left out of the beta measures, one-drink visits, free spots, a smaller dense area: about 40–80 posts for roughly ₦30–80k (Junior's estimate). Open for Tolu: T16 (new-account half weight for founding posters).
+- **Seeding (decision 0007, accepted by Tolu 2026-10-14):** option C plus past visits (last 3 months, shown "visited [month]"), 5–10 founding posters left out of the beta measures and recruited **at least 14 days before the beta** so they pass the new-account half weight with no exemption in the code (T16), one-drink visits, free spots, a smaller dense area: about 40–80 posts for roughly ₦30–80k (Junior's estimate).
+- **Sign-in (E13, decided by Tolu 2026-10-14):** Google, Apple or email one-time code, phone optional, as Isaac proposed. Rating integrity without a required phone: FR-POST-16 to 18, FR-MAP-12, FR-MOD-08 and NFR-PRIV-09 added (held ratings out of totals, multi-signal burst detection, no verdict under 3 ratings, extra checks for suspicious accounts, abuse signals in the data map). Retention for abuse signals still to be set by both founders.
 - **Company priority (Isaac, 2026-10-14):** NOW goes first; Lingora on hold until further notice (see [[Lingora Status]]).
 - **Known issues:** cold start and whether people post (the beta measures it); daily moderation load; Corner-clone risk (the Nigerian layer is the difference); the stack must be chosen before the beta; SMS code costs not priced; DPIA needed before public launch.
 
@@ -37,13 +38,14 @@ Open for Isaac: capacity, area and seed budget (T1–T3), the beta pass marks wi
 History of 2026-10-13 (Isaac's concierge-test design, the seven gaps, the ChatGPT and Tolu brief reviews) is in [[NOW Log]] and the repo.
 
 ### Tolu
-On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 0006), answered the open questions and agreed Junior's guards (1-hour delay, private-until-checked places, stack before the beta, price optional). Next for Tolu: the tech stack (open questions E1–E5, E9–E11), then the beta build.
+On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 0006), answered the open questions and agreed Junior's guards (1-hour delay, private-until-checked places, stack before the beta, price optional). On 2026-10-14, on the DELL laptop, Tolu caught up on Isaac's night session, decided sign-in (E13), accepted 0007 and answered T16 (founding posters 14 days early). Written in the Now repo working tree across 13 files, trace check clean (115 FR, 59 NFR); **not committed**, waiting for Isaac. Next for Tolu: the tech stack (open questions E1–E5, E9–E11), the welcome screen (P13), then the beta build.
 
 ## Next steps
 1. Tolu chooses the tech stack.
-2. Both founders lock the beta pass marks (T14); Tolu decides sign-in (E13) and the welcome screen (P13).
-3. Isaac answers T1–T3; the start date follows the build date.
-4. Junior drafts the participant notice, community rules and interview script.
+2. Isaac reviews and commits Tolu's 2026-10-14 changes in the Now repo.
+3. Both founders lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09); Tolu decides the welcome screen (P13).
+4. Isaac answers T1 and T2 and recruits founding posters at least 14 days before the beta; the start date follows the build date.
+5. Junior drafts the participant notice, community rules and interview script.
 
 ## Related
 - [[NOW Architecture]]
