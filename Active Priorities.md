@@ -10,6 +10,7 @@ The single queue of open work across everything. Items sit under a project headi
 ### Open Tasks
 
 #### Company
+- [ ] Push rule (Isaac): confirm the three pushes made from Tolu's session on 2026-10-14 (Now b616bbd/PR #1, 33e63e0, b73a21a) and decide whether Tolu's own word covers project-repo pushes in his sessions; your 'No pushing to project repos without my word' rule says only you, in the conversation. See the 2026-10-14 daily note, session 13.
 - [ ] Marketing and strategy: build a plan Isaac and Tolu can run themselves, since neither is strong here. See [[Low-Budget Marketing Plan]].
 - [ ] Budget: funds are tight, so no paid ads for now. Every marketing and tooling suggestion starts with free or cheap options. Fill in the costs, budget and runway in [[Tool Register]] (Isaac).
 - [ ] Awareness: grow Undeify's presence on social media platforms organically.
