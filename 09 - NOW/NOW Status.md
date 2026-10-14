@@ -46,6 +46,8 @@ On 2026-10-13, on Isaac's laptop, Tolu reworked NOW into a social map (decision 
 
 Latest (2026-10-14, DELL laptop): Tolu answered T17. FR-POST-12 clarified (earlier half-weight ratings count in full once the account passes); FR-POST-17 amended (flag mode in the private beta, reviewed within 24 hours, hold mode before public launch; one global founder-only setting, logged); FR-TEAM-04 added (invite group for moderators only). Committed straight to `main` and pushed (Now 33e63e0), because Isaac told Tolu to stop creating branches. Then Tolu decided the welcome screen (P13: one screen, no slideshow, line without unprovable claims; FR-AUTH-12), pushed to `main` (Now b73a21a). Next for Tolu: the week-1 spike once Isaac accepts 0008.
 
+Latest (2026-10-15, 00:27, DELL laptop): Tolu proposed decision 0009, phone number and SMS code as the only sign-in in the beta (+234 only; guests still explore and open shared links without an account). It amends accepted 0006 row 20 and changes proposed 0008. Written in the Now repo on `main`, **uncommitted** (Isaac's push rule): 15 files, trace check clean (126 FR, 67 NFR). Next: Isaac decides 0009; if accepted, Tolu runs the SMS provider spike and the four-network delivery test.
+
 ## Next steps
 1. Isaac reviews decision 0008 (tech stack, proposed by Tolu) and accepts or challenges it.
 2. Tolu runs the week-1 spike (0008 conditions 1, 4, 9).
