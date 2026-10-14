@@ -26,7 +26,9 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 Each person keeps their own section current.
 
 ### Isaac
-On 2026-10-14 Isaac accepted everything Tolu proposed (0006, the beta, NOW first, Lingora on hold) and asked Junior to lock it. Junior locked it in the repo (824fe1b), wrote the full user walkthrough and the following-and-friends rules, and marked its own new proposals for both founders to confirm (open question P13). Open for Isaac: capacity, area and seed budget (T1–T3), the beta pass marks with Tolu (T14), the start date once the build date is known.
+On 2026-10-14 Isaac accepted everything Tolu proposed (0006, the beta, NOW first, Lingora on hold) and asked Junior to lock it. Junior locked it in the repo (824fe1b), wrote the full user walkthrough and the following-and-friends rules, and marked its own new proposals for both founders to confirm (open question P13). Later on 2026-10-14 Isaac reviewed Junior's proposals: accepted the comment controls and the four visibility rules (selected friends from friends only; private accounts never public pins; anonymous totals from 3; "people you follow went" counts only visible posts); asked for Snapchat-style saved audience lists (a "private story" of pre-chosen friends); wants sign-in by email, Google and Apple, not only phone; questioned follow limits and proposed star ratings instead of Worth it / Mid / No (Junior pushed back; open). Not yet written into the repo.
+
+Open for Isaac: capacity, area and seed budget (T1–T3), the beta pass marks with Tolu (T14), the start date once the build date is known.
 
 History of 2026-10-13 (Isaac's concierge-test design, the seven gaps, the ChatGPT and Tolu brief reviews) is in [[NOW Log]] and the repo.
 
