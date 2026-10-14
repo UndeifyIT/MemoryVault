@@ -10,7 +10,7 @@ The single queue of open work across everything. Items sit under a project headi
 ### Open Tasks
 
 #### Company
-- [ ] Push rule (Isaac): confirm the three pushes made from Tolu's session on 2026-10-14 (Now b616bbd/PR #1, 33e63e0, b73a21a) and decide whether Tolu's own word covers project-repo pushes in his sessions; your 'No pushing to project repos without my word' rule says only you, in the conversation. See the 2026-10-14 daily note, session 13.
+- [ ] Push rule (Isaac): confirm the three pushes made from Tolu's session on 2026-10-14 (Now b616bbd/PR #1, 33e63e0, b73a21a) and decide whether Tolu's own word covers project-repo pushes in his sessions; your 'No pushing to project repos without my word' rule says only you, in the conversation. See the 2026-10-14 daily note, session 13. **Update 2026-10-15:** a fourth push (Now a57e3cf, decision 0009) was made on Tolu's explicit instruction as co-founder, after Junior declined once and pointed to this rule; Tolu overrode it.
 - [ ] Marketing and strategy: build a plan Isaac and Tolu can run themselves, since neither is strong here. See [[Low-Budget Marketing Plan]].
 - [ ] Budget: funds are tight, so no paid ads for now. Every marketing and tooling suggestion starts with free or cheap options. Fill in the costs, budget and runway in [[Tool Register]] (Isaac).
 - [ ] Awareness: grow Undeify's presence on social media platforms organically.
@@ -25,7 +25,7 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
 - [ ] NOW (first priority): Isaac accepts or challenges decision 0008, the tech stack proposed by Tolu (Isaac). Then Tolu runs the week-1 spike: low-end phone, tile failure, share-in (Tolu). Lawyer review of hosting and data flows before real tester data (legal items 12, 24) (Isaac).
-- [ ] NOW: Isaac accepts or challenges decision 0009 (phone number and SMS code sign-in for the beta, proposed by Tolu 2026-10-15; amends 0006 row 20); 15 files uncommitted on Tolu's DELL laptop clone, on `main` (Isaac). If accepted, Tolu runs the SMS provider spike and delivery test (Tolu).
+- [ ] NOW: Isaac accepts or challenges decision 0009 (phone number and SMS code sign-in for the beta, proposed by Tolu 2026-10-15; amends 0006 row 20); on `main` (Now a57e3cf), pushed on Tolu's instruction (Isaac). If accepted, Tolu runs the SMS provider spike and delivery test (Tolu).
 - [ ] NOW: review the system architecture draft (`docs/engineering/system-architecture.md`) after its review passes and decide its section 15 list; it changes parts of 0008, so decide 0008 first (Isaac, Tolu). Tolu: EC-78 (FR-POST-13 hold vs flag mode in the beta).
 - [ ] NOW: lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09) (Isaac, Tolu).
 - [ ] NOW documents (Junior reminds at the trigger; see the repo's `docs/document-register.md`): technical design when the stack is chosen (Tolu); privacy notice, terms and DPIA when hosting and vendors are chosen (Junior drafts, lawyer); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts (Isaac).

@@ -45,3 +45,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-14 | junior | Tolu decided the welcome screen (P13): one screen, no slideshow, line without unprovable claims; FR-AUTH-12 added | Now b73a21a
 2026-10-14 | junior | Architecture Draft v3 after review pass 2 (24 findings, 2 High, all fixed; prototype schema v3, block clean-up repro), committed and pushed by Isaac; baseline 79/79 scenarios, 21/21 signing, 14/14 AI output | Now b77f5fd
 2026-10-15 | junior | Tolu proposed decision 0009: phone number and SMS code sign-in only in the beta (+234), guests still explore without an account; FR-AUTH-13 to 19, NFR-REL-07, NFR-SEC-21, NFR-SEC-22, E14, R-34 added; amendment notes on 0006 and 0008; trace check clean (126 FR, 67 NFR) | Now (uncommitted, waiting for Isaac)
+2026-10-15 | junior | Decision 0009 committed and pushed to main on Tolu's explicit instruction as co-founder, overriding Isaac's push rule (logged for Isaac) | Now a57e3cf
