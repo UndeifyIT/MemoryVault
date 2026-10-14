@@ -25,6 +25,8 @@ The single queue of open work across everything. Items sit under a project headi
 
 - [ ] NOW (first priority): Tolu chooses the tech stack, needed before the private beta (repo open questions E1–E5, E9–E11) (Tolu).
 - [ ] NOW: lock the beta pass marks (T14) (Isaac, Tolu); Tolu decides sign-in (E13) and the welcome screen (P13).
+- [ ] NOW documents (Junior reminds at the trigger; see the repo's `docs/document-register.md`): technical design when the stack is chosen (Tolu); privacy notice, terms and DPIA when hosting and vendors are chosen (Junior drafts, lawyer); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts (Isaac).
+- [ ] NOW: commit and push the drafted project documents in the Now repo when you're ready (Isaac). Then switch on branch protection on `main` with code-owner review, and confirm Tolu's GitHub handle for CODEOWNERS.
 - [ ] NOW: answer capacity, area and seed budget (T1–T3); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
 #### MindBridge

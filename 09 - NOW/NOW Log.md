@@ -28,3 +28,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-14 | junior | Isaac accepted Junior's remaining walkthrough and following proposals (incl. follow limits); welcome screen left to Tolu | Now 92d8561
 2026-10-14 | junior | SRS (101 FR, 46 NFR, 10 out of scope) and risk register (28 risks, 5 High) added to the repo | Now 26dc46c
 2026-10-14 | junior | Secret-scan hook installed and tested on Isaac's clone; SRS and risk register reviewed (108 FR, 52 NFR; 33 NOW-only risks, 7 High; EXIF stripping and public-surface visibility added) | Now c9adc32
+2026-10-14 | junior | Engineering and operations documents drafted (document register, threat model, data model, CONTRIBUTING and CODEOWNERS, analytics plan, test strategy, moderation playbook, seeding guide, incident runbook, tester pack); 6 security requirements added from the threat model | Now (uncommitted, waiting for Isaac)
