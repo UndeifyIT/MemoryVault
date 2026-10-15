@@ -4,7 +4,7 @@ project: now
 type: index
 author: junior
 created: 2026-10-13
-updated: 2026-10-14
+updated: 2026-10-15
 ---
 # NOW
 
@@ -20,3 +20,4 @@ NOW is a social map of places, starting in Lagos: users post about places they'v
 - [[NOW Architecture]]: stack and structure (nothing chosen yet).
 - [[NOW Log]]: append-only change record.
 - [[LIFE and NOW Concept Research]]: summary of the 2026-10-13 background check. The full report is in the repo.
+- [[NOW Architecture Review Pass 3]]: draft. The 24 findings of the last architecture review pass, what the prototype fixed, what the document still needs, and the founder decisions it raised.
