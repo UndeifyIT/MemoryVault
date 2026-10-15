@@ -56,3 +56,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-15 | junior | Isaac committed architecture v5 (AWS hosting); kept Cloudflare Access and Turnstile; CSAM detection options researched and listed in EC-49, data map row for Cloudflare | Now c2bdfaf, then uncommitted
 2026-10-15 | junior | Tolu agreed to Isaac's AWS change to 0008 and proposed decision 0011 (FR-PLC-11, FR-POST-20, fixed spots only in the beta, P15, all-Lagos Overture import) | Now 40fc014
 2026-10-15 | junior | Tolu added 0011 point 6: proposed amendment to NFR-PRIV-02 (three allowed uses of location; a place pin is map data; no background location) | Now 8d597d1
+2026-10-15 | junior | Architecture Draft v6: 0009 and 0010 brought in, Junior's AWS self-review, docs-consistency review (2 High, 8 Medium) fixed across 9 files; CSAM-in-beta and v6 proposals added as founder decisions; prototype untouched | Now (uncommitted)
