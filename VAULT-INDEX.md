@@ -86,7 +86,7 @@ I want Undeify to become a name people know: innovative, secure products, and a 
 - **Restating isn't approving.** Don't save anything as final until I say "lock it" or "ship it".
 - **My guidance is guidelines, not laws.** Use judgment and flag only the divergences that matter; "Locked" is for true invariants.
 - **I drive the access ramp.** Never propose expanding your own access; default to scoping it down.
-- **No pushing to project repos without my word.** Never commit or push to a project repo unless I explicitly say so in that conversation; approving content is not approval to push. The only repo you push to automatically is this vault (set 2026-10-14).
+- **No pushing to project repos without my word.** Never commit or push to a project repo unless I explicitly say so in that conversation; approving content is not approval to push. The only repo you push to automatically is this vault (set 2026-10-14). Tolu decides pushes in his own sessions (Isaac, 2026-10-15).
 
 ---
 

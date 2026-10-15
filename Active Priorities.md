@@ -10,7 +10,7 @@ The single queue of open work across everything. Items sit under a project headi
 ### Open Tasks
 
 #### Company
-- [ ] Push rule (Isaac): confirm the three pushes made from Tolu's session on 2026-10-14 (Now b616bbd/PR #1, 33e63e0, b73a21a) and decide whether Tolu's own word covers project-repo pushes in his sessions; your 'No pushing to project repos without my word' rule says only you, in the conversation. See the 2026-10-14 daily note, session 13. **Update 2026-10-15:** a fourth push (Now a57e3cf, decision 0009) was made on Tolu's explicit instruction as co-founder, after Junior declined once and pointed to this rule; Tolu overrode it. A fifth push (Now adc862e, decision 0010) followed on Tolu's instruction.
+- [ ] Push rule follow-through (Isaac): CONTRIBUTING.md still requires a pull request approved by Isaac or Tolu, and the planned branch protection on `main` would block Tolu's direct pushes. Decide whether to change CONTRIBUTING.md to match and whether branch protection lets Tolu bypass it.
 - [ ] Marketing and strategy: build a plan Isaac and Tolu can run themselves, since neither is strong here. See [[Low-Budget Marketing Plan]].
 - [ ] Budget: funds are tight, so no paid ads for now. Every marketing and tooling suggestion starts with free or cheap options. Fill in the costs, budget and runway in [[Tool Register]] (Isaac).
 - [ ] Awareness: grow Undeify's presence on social media platforms organically.
@@ -25,8 +25,8 @@ The single queue of open work across everything. Items sit under a project headi
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
 - [ ] NOW (first priority): Isaac accepts or challenges decision 0008, the tech stack proposed by Tolu, including the map provider (Junior's pick, not decided: Protomaps on our own Cloudflare R2, second Stadia; see [[NOW Status]]) and whether Jev gets a bake-off against Haiku 5.5 (Isaac). Then Tolu runs the week-1 spike: low-end phone, tile failure, share-in (Tolu). Lawyer review of hosting and data flows before real tester data (legal items 12, 24) (Isaac).
-- [ ] NOW 0009 follow-ups: commit the lock (uncommitted on Isaac's clone, 16 doc files) (Isaac); pick the country allowlist for phone sign-in, E15 (Isaac, Tolu); SMS provider spike and delivery test on the four networks and each allowlisted country (Tolu).
-- [ ] NOW: Isaac accepts or challenges decision 0010 (Tolu, 2026-10-15: member-set post timer, seeding with no focus area, hard caps only on SMS and AI, Tolu accepts the architecture except the fail-closed cap) and agrees or not with Tolu's answers to T2, T4, T13, T14, NFR-PRIV-09 and P14 (Now adc862e) (Isaac). Junior's advice: accept, with stored IP signals under a keyed hash (HMAC), since a plain hash of an IPv4 address is reversible.
+- [ ] NOW 0009 follow-ups: pick the country allowlist for phone sign-in, E15 (Isaac, Tolu); SMS provider spike and delivery test on the four networks and each allowlisted country (Tolu).
+- [ ] NOW 0010 follow-ups: commit the 0010 lock (uncommitted on Isaac's clone, 15 doc files) (Isaac). Change the architecture design to the member's post timer: F-03 step 6, section 7.2, AD-12 (Junior, before the design is locked). Write the written no-freebies rule into the tester and team onboarding when the participant notice is drafted (Junior).
 - [ ] NOW architecture: Draft v4 after the last review pass, with all 24 pass-3 findings fixed. The prototype fixes are tested; the document-only fixes are untested at Isaac's request. Committed and pushed by Isaac (Now fdbbf86, 2026-10-15). Still not run: the full v4 property and speed tests, and the docs-consistency review. Founders: decide the section 15 list plus the pass-3 decisions in [[NOW Architecture Review Pass 3]]; it changes parts of 0008 and now 0009 (sign-in), so decide those first (Isaac, Tolu).
 - [ ] NOW: lock the beta pass marks (T14) and set the abuse-signal retention (NFR-PRIV-09) (Isaac, Tolu).
 - [ ] NOW documents (Junior reminds at the trigger; see the repo's `docs/document-register.md`): technical design when the stack is chosen (Tolu); privacy notice, terms and DPIA when hosting and vendors are chosen (Junior drafts, lawyer); app store checklist about 2 weeks before the first test build; beta cut line and cost model once there is a build estimate; device and account policy before the build starts (Isaac).
@@ -65,6 +65,9 @@ Checked against GitHub `main` and production on 2026-10-13: the audit fixes in P
 - [ ] Lingora: get the Spitch partnership terms (pricing, accuracy on learner speech) in writing before designing the free tier (Isaac).
 
 ### Completed Tasks
+- [x] 2026-10-15: NOW decision 0010 (post timer, seeding anywhere, caps only on SMS and AI) accepted by Isaac with Tolu's answers to T2, T4, T13, T14, NFR-PRIV-09 (keyed hash) and P14; beta pass marks locked; locked in the Now repo working tree (uncommitted).
+- [x] 2026-10-15: push rule decided by Isaac: Tolu may push to project repos as he sees fit in his own sessions. Junior still does not commit or push in an Isaac session without Isaac's explicit word.
+- [x] 2026-10-15: NOW 0009 lock committed by Isaac (Now 56a949c).
 - [x] 2026-10-15: NOW decision 0009 (phone and SMS sign-in) accepted by Isaac with foreign numbers from an allowlist; locked in the Now repo working tree (uncommitted).
 - [x] 2026-10-14: NOW T17 answered and welcome screen decided by Tolu (P13); both on main (Now 33e63e0, b73a21a).
 - [x] NOW: Isaac reviewed and merged Tolu's 2026-10-14 decisions with review fixes into main, pushed (Now 8ac1e5e, 2026-10-14).
