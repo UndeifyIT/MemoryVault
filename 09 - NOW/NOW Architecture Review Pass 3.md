@@ -8,7 +8,7 @@ updated: 2026-10-15
 ---
 # NOW Architecture Review Pass 3
 
-> Draft, not confirmed: review pass 3 findings on the NOW system architecture Draft v3. The fixes are in the prototype; the document still says v3. Waiting for Isaac.
+> Draft, not confirmed: review pass 3 findings on the NOW system architecture Draft v3. All are now fixed in the uncommitted Draft v4 and prototype v4. The prototype fixes are tested; the document-only fixes are untested at Isaac's request (2026-10-15). Waiting for Isaac.
 
 Review pass 3 (night of 2026-10-14 to 15) of the Now repo's `docs/engineering/system-architecture.md` Draft v3 found 24 issues: 0 Critical, 3 High, 11 Medium, 10 Low, so v3 does not pass. It was the last pass: Isaac said to stop after pass 3, then to wrap up without more tests. Source: an independent reviewer agent; Junior reproduced the three Highs on the prototype. The reviewer's full report and scripts were in a temporary folder and are not kept; this note is the record.
 
@@ -37,7 +37,8 @@ Uncommitted in the Now repo, `prototypes/architecture-check/` (schema.sql, test-
   - A small property-test run found 0 disagreements over 99,056 viewer–post pairs.
   - **Not run on v4:** the full-size property test and the performance test, both stopped on Isaac's instruction.
 
-## Not done: document fixes (the architecture doc still says Draft v3)
+## Fixed in the document only (Draft v4, 2026-10-15, untested at Isaac's request)
+The design changes, new edge cases EC-98 to EC-120 and founder decisions are in the doc's sections 15 and 16 and Appendix C. Each item below is addressed there:
 - RV3-07: two remaining ways to test whether an email uses NOW (the hook's timing, and adding a backup email).
 - RV3-08: photo backups can be deleted from production; dumps never expire; the doc contradicts itself on where the dump runs (§4.13, §6.2, §7.4).
 - RV3-09: the restore replay misses sessions, identity unlinks, staff removals and place rejections.
