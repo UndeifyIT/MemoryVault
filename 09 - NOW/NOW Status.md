@@ -56,6 +56,8 @@ Latest (2026-10-15, 00:27, DELL laptop): Tolu proposed decision 0009, phone numb
 
 Latest (2026-10-15, DELL laptop): Tolu answered E7 (web-only staff console, FR-MOD-09) and E12 (ranking formula, FR-MAP-04); E14 after the beta; P7 deferred. Proposed decision 0010 (member-set post timer with no live location; seeding anywhere with no focus area; hard caps only on SMS and AI; accepts Isaac's architecture except the fail-closed cap) and his answers to T2, T4, T13, T14, NFR-PRIV-09 and P14 for Isaac to agree. Pushed to `main` on Tolu's instruction (Now adc862e); trace check clean (128 FR, 67 NFR). Next: Isaac decides 0008, 0009 and 0010.
 
+Latest (2026-10-15, afternoon, DELL laptop): Tolu agreed to Isaac's AWS change to 0008 and proposed decision 0011 (same-place prompt FR-PLC-11; photo-location check on the phone FR-POST-20, three results, moderators only, measured not weighted; fixed spots only in the beta, P15 mobile sellers; all-Lagos Overture import). Pushed (Now 40fc014); trace check clean (130 FR, 67 NFR). Next for Tolu: SMS provider spike and E15 with Isaac (0009 accepted); the week-1 spike once 0008 is accepted.
+
 ## Next steps
 1. Isaac decides 0008 (map host now AWS by Isaac's change; the Jev call), and whether Cloudflare Access and Turnstile stay. Tolu sees the AWS change.
 2. Tolu runs the week-1 spike (0008 conditions 1, 4, 9) and the SMS provider spike (0009 conditions 1 to 3); both founders pick the country allowlist (E15).
