@@ -48,6 +48,8 @@ Latest (2026-10-14, DELL laptop): Tolu answered T17. FR-POST-12 clarified (earli
 
 Latest (2026-10-15, 00:27, DELL laptop): Tolu proposed decision 0009, phone number and SMS code as the only sign-in in the beta (+234 only; guests still explore and open shared links without an account). It amends accepted 0006 row 20 and changes proposed 0008. Committed and pushed to `main` (Now a57e3cf) on Tolu's explicit instruction as co-founder, overriding Isaac's push rule (logged for Isaac): 15 files, trace check clean (126 FR, 67 NFR). Next: Isaac decides 0009; if accepted, Tolu runs the SMS provider spike and the four-network delivery test.
 
+Latest (2026-10-15, DELL laptop): Tolu answered E7 (web-only staff console, FR-MOD-09) and E12 (ranking formula, FR-MAP-04); E14 after the beta; P7 deferred. Proposed decision 0010 (member-set post timer with no live location; seeding anywhere with no focus area; hard caps only on SMS and AI; accepts Isaac's architecture except the fail-closed cap) and his answers to T2, T4, T13, T14, NFR-PRIV-09 and P14 for Isaac to agree. Pushed to `main` on Tolu's instruction (Now adc862e); trace check clean (128 FR, 67 NFR). Next: Isaac decides 0008, 0009 and 0010.
+
 ## Next steps
 1. Isaac reviews decision 0008 (tech stack, proposed by Tolu) and accepts or challenges it.
 2. Tolu runs the week-1 spike (0008 conditions 1, 4, 9).
