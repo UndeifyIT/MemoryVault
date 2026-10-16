@@ -9,7 +9,7 @@ updated: 2026-10-16
 # Undeify Website Status
 
 ## Snapshot
-- **Stage:** redesigned in Vercel's design language on Isaac's call (CompanyWebsite 939fc6b, 2026-10-16); Isaac wants it matched to Vercel's layout as closely as possible next. Not deployed yet.
+- **Stage:** redesigned in Vercel's design language on Isaac's call (CompanyWebsite 939fc6b, 2026-10-16); Home page now matches Vercel's layout (b71250c). Not deployed yet.
 - **What works:** home page with the pinned scroll hero (night room → frame swings into a window in 3D → sunrise → daylight rises), intro, product folders (NOW, ShiftOS, a Yorùbá app "in research"), about, contact, footer; privacy notice, terms, security page, security.txt, strict security headers. Checked with the taste-skill lint and browser inspector at 1440, 768 and 390px: 0 fails, 2 defended warnings (no video; hero text sits on the night picture's dark space by design).
 - **Figma:** https://www.figma.com/design/Hwsdaunvh7t4BMdTTnmM9U holds the dropped first design only.
 - **Known issues:** the hero scenes are upscaled from the low-resolution ChatGPT collage and look soft on big screens; hello@undeify.com forwarding not confirmed; no street address or hours on the site yet (Apple may ask); CAC registration not complete, so no legal name or RC number on the site.
