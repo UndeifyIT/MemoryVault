@@ -1,0 +1,12 @@
+---
+status: active
+project: website
+type: log
+author: junior
+created: 2026-10-16
+---
+# Undeify Website Log
+
+2026-10-16 | isaac | Repo created in the UndeifyLTD organisation | 82b106c
+2026-10-16 | isaac | Spec skeleton and Copilot instructions (Junior) | e7996b6
+2026-10-16 | isaac | v1 site built by Junior: scroll hero, products, legal pages, security headers; screens exported to Figma | 1ed3a1e

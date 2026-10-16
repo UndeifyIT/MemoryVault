@@ -50,6 +50,11 @@ Repo: https://github.com/UndeifyIT/Lingora (public). Isaac's local copy (machine
 Repo: https://github.com/UndeifyIT/Now (private). A social map of places, starting in Lagos (decision 0006).
 - **Status:** Undeify's first priority since 2026-10-14. Design stage, moving to a private beta; no code yet. See [[NOW Status]].
 
+## Undeify Website (10 - Website)
+
+Repo: https://github.com/UndeifyLTD/CompanyWebsite (private). The company website for undeify.com.
+- **Status:** v1 built and pushed 2026-10-16, not deployed yet. See [[Undeify Website Status]].
+
 ## Vault Structure
 
 ```
@@ -63,6 +68,7 @@ Repo: https://github.com/UndeifyIT/Now (private). A social map of places, starti
 07 - Archive        ← Completed projects and old notes
 08 - Resources      ← Cross-project reference material, templates, Jobs
 09 - NOW            ← NOW project notes (place discovery for Lagos Gen Z)
+10 - Website        ← Undeify company website (undeify.com)
 ```
 
 ## What's Active Right Now
