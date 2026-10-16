@@ -22,7 +22,7 @@ The single queue of open work across everything. Items sit under a project headi
 
 - [ ] DPCO sprint (Isaac said yes 2026-10-06; see [[Undeify Opportunity Scan]]). Kit is on Isaac's machine (machine-specific path: `C:\Users\HP\Downloads\Undeify DPCO Sprint`; local only; it holds DPCO contact details, so keep it off GitHub and out of the vault). By 19 Oct: finish and publish the Undeify NDPA pack. 13 Oct – 30 Nov: 12–15 DPCO calls. Gate on 30 Nov: at least 3 DPCOs prepay ≥₦50K or kill (Isaac).
 - [ ] Open a free Polar test account and confirm how payouts reach Nigeria (currency, fees, KYC) before pricing anything in USD (Isaac or Tolu).
-- [ ] Undeify website (started 2026-10-16): spec in `C:\Users\HP\undeify-website` (machine-specific), decisions W1–W9 in its `docs/decisions.md`. Isaac decides where the repo lives (SR-013), then confirms brand in Figma; Copilot codes after. Tolu buys the domain (registrar account with two-step sign-in and registrar lock).
+- [ ] Undeify website (started 2026-10-16): spec in `C:\Users\HP\undeify-website` (machine-specific), decisions W1–W9 in its `docs/decisions.md`. Repo: https://github.com/UndeifyLTD/CompanyWebsite (private, in the new UndeifyLTD organisation, created by Isaac 2026-10-16; local clone tracks it, spec files not pushed yet). Next: Isaac confirms brand in Figma; Copilot codes after. Tolu buys the domain (registrar account with two-step sign-in and registrar lock).
 - [ ] Finish the CAC registration of Undeify (reserved as "UndeifyLTD") (Isaac). Blocks Apple, the Google Play organisation account, D-U-N-S, and using "Ltd" on the site.
 - [ ] Publish Undeify's own NDPA documentation (privacy notice, data inventory, hosting/transfer basis) before selling any compliance product (Isaac).
 
