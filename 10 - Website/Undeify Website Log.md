@@ -14,3 +14,4 @@ created: 2026-10-16
 2026-10-16 | isaac | Home page matched to Vercel's layout on Isaac's instruction: hanging 3D crate hero, alternating feature sections, Recently shipped grid, About page | b71250c
 2026-10-16 | isaac | Hero crate made front-on and fixed at screen centre like Vercel's; app-window and phone mockups for NOW and ShiftOS | aa0f799
 2026-10-16 | isaac | Hanging crate removed from the hero on Isaac's call | 610946f
+2026-10-20 | junior | Updated the separate handoff prototype with full Privacy and Terms pages, removed security and cookie-consent UI, added metadata, keyboard skip link and bundled brand assets; production repo untouched | local prototype
