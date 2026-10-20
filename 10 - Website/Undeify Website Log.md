@@ -16,3 +16,5 @@ created: 2026-10-16
 2026-10-16 | isaac | Hanging crate removed from the hero on Isaac's call | 610946f
 2026-10-20 | junior | Updated the separate handoff prototype with full Privacy and Terms pages, removed security and cookie-consent UI, added metadata, keyboard skip link and bundled brand assets; production repo untouched | local prototype
 2026-10-20 | junior | Refined the handoff prototype header to match the supplied reference: 64px height, larger 24px logo mark, 36px left inset, tighter nav and 8px action gap; checked at desktop/tablet/phone widths | local prototype
+2026-10-20 | junior | Added a shared [Formspree](https://formspree.io/) contact form for Email us and Contact, updated the privacy notice and setup notes; submissions remain blocked until a form ID is supplied | local prototype
+2026-10-21 | junior | Made the local prototype facts strip a continuous, pausable slider with a static reduced-motion fallback; browser-checked desktop and phone layouts | local prototype
