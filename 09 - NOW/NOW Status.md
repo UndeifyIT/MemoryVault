@@ -68,6 +68,8 @@ Latest (2026-10-15, afternoon, DELL laptop): Tolu agreed to Isaac's AWS change t
 
 Latest (2026-10-21): Isaac had Junior decide CON-01's open point: `acting_member` in `create_post` is a shared-phone guard only (EC-61). The server rejects it unless it matches the token and always takes the author from the token; no account posts as another, team accounts included. Recorded in contracts.md, roadmap and plan (uncommitted); Tolu to confirm, since contracts need both founders. Still waiting jointly: DES-01, GitHub Team, E16, CAC, the beta cut line.
 
+Latest (2026-10-21, later): ambition pass (Altitude, Depth, Range) on the plan. Finding: 108 of 135 beta requirements are Must, so cutting Shoulds and Coulds saves only about 22 days; Isaac's 10-hour days end 2026-11-30 and cover about a third of M0 and M1. Drafted decision 0013 (cut line candidates of at least 39 days, rebalance, size test for the visibility rule, measure-first). Proposed by Isaac, waiting for Tolu; uncommitted. Stack check: self-hosting AWS is about 30 days of 510, no change. Isaac's ready code tasks: DB-04, DB-06, DB-18, FND-07 (in progress), FND-09, FND-04, QA-03.
+
 ## Next steps
 1. Isaac decides 0008 (map host now AWS by Isaac's change; the Jev call), and whether Cloudflare Access and Turnstile stay. Tolu sees the AWS change.
 2. Tolu runs the week-1 spike (0008 conditions 1, 4, 9) and the SMS provider spike (0009 conditions 1 to 3); both founders pick the country allowlist (E15). Tolu agrees the tester list and accepts or changes `sms-gate` and the verify-rate cut-off (architecture v6.1); the spike adds Play Integrity quota, attestation on Tecno, Infinix and TestFlight, the trusted IP header (EC-13) and how successful sign-ins are counted.
