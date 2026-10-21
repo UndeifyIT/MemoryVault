@@ -19,3 +19,4 @@ created: 2026-10-16
 2026-10-20 | junior | Added a shared [Formspree](https://formspree.io/) contact form for Email us and Contact, updated the privacy notice and setup notes; submissions remain blocked until a form ID is supplied | local prototype
 2026-10-21 | junior | Made the local prototype facts strip a continuous, pausable slider with a static reduced-motion fallback; browser-checked desktop and phone layouts | local prototype
 2026-10-21 | junior | Fixed the ticker's desktop end gap by repeating the facts four times and moving by one run-width; verified continuous coverage at desktop, tablet and phone widths | local prototype
+2026-10-21 | junior | Removed the ticker pause control and desktop/phone preview toggle; verified uninterrupted motion on hover and responsive layouts. Production replacement/deployment remains unauthorized | local prototype
