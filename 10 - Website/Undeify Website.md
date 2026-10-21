@@ -8,7 +8,7 @@ updated: 2026-10-21
 ---
 # Undeify Website
 
-The company website for undeify.com. Its job is to get Undeify through verification checks (Apple, Google Play, D-U-N-S, payment providers) and make a stranger trust us in 30 seconds. Repo: https://github.com/UndeifyLTD/CompanyWebsite (private, default branch `main`). A separate local prototype has a shared [Formspree](https://formspree.io/) contact form and an automatically looping facts strip, but the form ID and public submission flow are not configured.
+The company website for undeify.com. Its job is to get Undeify through verification checks (Apple, Google Play, D-U-N-S, payment providers) and make a stranger trust us in 30 seconds. Repo: https://github.com/UndeifyLTD/CompanyWebsite (private). Isaac selected the local handoff prototype to replace the production interface; the React port is in progress and has not been deployed. Its [Formspree](https://formspree.io/) form ID and public submission flow remain unconfigured.
 
 ## Start here
 - [[Undeify Website Status]]: where the project stands and where we stopped.
