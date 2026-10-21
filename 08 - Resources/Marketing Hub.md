@@ -4,7 +4,7 @@ project: meta
 type: plan
 author: junior
 created: 2026-09-26
-updated: 2026-10-13
+updated: 2026-10-21
 ---
 # Marketing Hub
 
@@ -17,7 +17,6 @@ Not recorded yet. Isaac to say who Undeify is trying to reach first (for example
 Not recorded yet. List each account with its handle and who runs it. Never record a password here; see [[Tool Register]].
 
 ## Content pillars
-> Draft, not confirmed. Junior's suggestion, from what Undeify is:
 - **Build in public:** short updates on what shipped and what broke, from the vault's project Logs.
 - **Security for founders:** plain-language tips from the Security Register, which fits a company that sells secure software.
 - **Stories from the products:** what BakeFlow and ShiftOS solve, told through real problems bakeries and shift workers face, with no invented users or numbers.
@@ -43,3 +42,4 @@ Add one row per week. Track a few numbers only: reach, new followers, sign-ups o
 ## Change log
 - 2026-09-26, Junior for Isaac: first version.
 - 2026-10-13, Junior for Isaac: Isaac confirmed this is still on (quiet-note check).
+- 2026-10-21, Junior for Isaac: Isaac locked the draft.

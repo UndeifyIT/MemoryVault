@@ -4,13 +4,13 @@ project: meta
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-10-14
+updated: 2026-10-21
 ---
 # Tolu
 
 Undeify's co-founder and lead developer.
 
-> Draft, not confirmed. Written by Junior from what Isaac shared on 2026-09-26. Tolu to confirm and correct this at his first session.
+> Locked by Isaac, 2026-10-21. Tolu can still correct it.
 
 - **Role:** co-founder and lead developer of Undeify.
 - **Relationship:** a very close friend of Isaac and one of the most important people in the company.

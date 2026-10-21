@@ -1,14 +1,14 @@
 ---
-status: idea
+status: active
 project: now
 type: reference
 author: junior
 created: 2026-10-15
-updated: 2026-10-15
+updated: 2026-10-21
 ---
 # NOW Architecture Review Pass 3
 
-> Draft, not confirmed: review pass 3 findings on the NOW system architecture Draft v3. All are now fixed in the uncommitted Draft v4 and prototype v4. The prototype fixes are tested; the document-only fixes are untested at Isaac's request (2026-10-15). Waiting for Isaac.
+> Locked by Isaac, 2026-10-21.
 
 Review pass 3 (night of 2026-10-14 to 15) of the Now repo's `docs/engineering/system-architecture.md` Draft v3 found 24 issues: 0 Critical, 3 High, 11 Medium, 10 Low, so v3 does not pass. It was the last pass: Isaac said to stop after pass 3, then to wrap up without more tests. Source: an independent reviewer agent; Junior reproduced the three Highs on the prototype. The reviewer's full report and scripts were in a temporary folder and are not kept; this note is the record.
 

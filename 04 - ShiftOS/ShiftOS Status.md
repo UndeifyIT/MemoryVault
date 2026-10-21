@@ -4,13 +4,13 @@ project: shiftos
 type: reference
 author: junior
 created: 2026-09-26
-updated: 2026-10-13
+updated: 2026-10-21
 ---
 # ShiftOS Status
 
 ShiftOS is a workforce scheduling and operations platform whose backend is marked complete in the repo's own audit; the state of its web and mobile apps is not confirmed.
 
-> Draft, not confirmed. Written by Junior from the repo's documents on 2026-09-26. Isaac to confirm or correct.
+> Locked by Isaac, 2026-10-21.
 
 This note is a living snapshot. Overwrite it as things change; history goes in [[ShiftOS Log]].
 

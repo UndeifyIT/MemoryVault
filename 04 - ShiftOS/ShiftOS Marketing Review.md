@@ -1,16 +1,16 @@
 ---
-status: idea
+status: active
 project: shiftos
 type: reference
 author: junior
 created: 2026-09-28
-updated: 2026-09-28
+updated: 2026-10-21
 ---
 # ShiftOS Marketing Review
 
 Junior's evaluation of the ShiftOS marketing site and funnel against the `jaredrhod-marketing` playbook: the site looks finished but can't capture a single lead yet, and the brand name and contact domain belong to other companies.
 
-> Draft, not confirmed. Findings verified against repo `main` at `1defe67` and live DNS/HTTP on 2026-09-28. The domain and privacy findings are security findings and wait for "lock it". Isaac to decide pricing and the name.
+> Locked by Isaac, 2026-10-21. Findings verified against repo `main` at `1defe67` and live DNS/HTTP on 2026-09-28. Pricing and the name are still Isaac's to decide.
 
 ## Verdict
 Don't send traffic to the site yet. Marketing amplifies what's there, and right now it would amplify lost leads, a name we don't own, and security claims the audit contradicts. Fix the P0 list first (about a week of work), then start the organic engine.

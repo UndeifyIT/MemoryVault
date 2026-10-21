@@ -1,16 +1,16 @@
 ---
-status: idea
+status: active
 project: now
 type: plan
 author: junior
 created: 2026-10-13
-updated: 2026-10-13
+updated: 2026-10-21
 ---
 # LIFE and NOW Concept Research
 
 Summary of the 2026-10-13 background check on Isaac's two consumer ideas. LIFE was dropped and NOW is the focus. The full report, the decision records and the data live in the repo https://github.com/UndeifyIT/Now, which is the source of truth. This note only summarises it.
 
-> Draft, not confirmed. Decisions 0001 (drop LIFE) and 0002 (content model, trust rule, launch zone) are proposed by Isaac and waiting for [[Tolu]]. Decision 0003 (home screen) is open for Tolu to decide.
+> Locked by Isaac, 2026-10-21. Decisions 0001 (drop LIFE) and 0002 were accepted on 2026-10-14 (0002 as amended by 0006); 0003 (home screen) was decided by 0006.
 
 ## Where the detail is (repo `main`, commit facdd69)
 - `docs/research/2026-10-13-concept-research.md`: the full report. It covers competitors, demand, Nigeria, failed products, open source, security and law, scores, the 2-week tests, and what we didn't verify.
@@ -44,3 +44,4 @@ Summary of the 2026-10-13 background check on Isaac's two consumer ideas. LIFE w
 - 2026-10-13, Junior for Isaac: first version, from five research agents.
 - 2026-10-13, Junior for Isaac: added the draft decision and the Overture coverage check.
 - 2026-10-13, Junior for Isaac: moved from the Inbox to `09 - NOW`. Cut down to a summary once the full report went into the repo (one source of truth).
+- 2026-10-21, Junior for Isaac: Isaac locked the draft.
