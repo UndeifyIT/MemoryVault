@@ -9,25 +9,23 @@ updated: 2026-10-21
 # Undeify Website Status
 
 ## Snapshot
-- **Stage:** Isaac selected the handoff prototype to replace the production site's interface, with a precompiled React app, preserved production consent/analytics, and local testing before any deployment. No deployment is authorized.
-- **What works:** home page with the pinned scroll hero (night room → frame swings into a window in 3D → sunrise → daylight rises), intro, product folders (NOW, ShiftOS, a Yorùbá app "in research"), about, contact, footer; privacy notice, terms, security page, security.txt, strict security headers. Checked with the taste-skill lint and browser inspector at 1440, 768 and 390px: 0 fails, 2 defended warnings (no video; hero text sits on the night picture's dark space by design).
-- **Production port in progress:** React source files, prototype CSS, logo and icons have been copied into CompanyWebsite. The production app shell, build pipeline, routing, consent/analytics integration and accurate privacy copy are not implemented yet. The Formspree ID remains blank; the form must continue to fail closed with a direct-email fallback.
+- **Stage:** The handoff prototype is now built into the CompanyWebsite worktree as a self-hosted React app with JSX precompiled at build time. It was tested locally; production has not been deployed, and deployment is not authorized.
+- **What works:** Home, About, Privacy, Terms and Contact direct URLs; browser history navigation; the uninterrupted facts ticker; responsive header and layouts; local fonts, logo and icons; opt-in Google Analytics consent and Cookie settings; Vercel Web Analytics loader on Vercel hosts; updated privacy metadata/copy. The Security page and `security.txt` are removed while protective response headers remain. Formspree is blank, so the form is disabled and gives a direct-email fallback. Browser-checked at 1440, 768 and 390px, including consent accept/decline/withdrawal, reduced motion, navigation, form fail-closed state, and no horizontal overflow.
+- **Build and security checks:** `npm ci`, `npm run build`, JavaScript syntax checks and `npm audit` pass; npm reports zero known vulnerabilities. A read-only security review found no vulnerabilities in the changed app/build/consent/CSP scope.
 - **Figma:** https://www.figma.com/design/Hwsdaunvh7t4BMdTTnmM9U holds the dropped first design only.
 - **Known issues:** the hero scenes are upscaled from the low-resolution ChatGPT collage and look soft on big screens; hello@undeify.com forwarding not confirmed; no street address or hours on the site yet (Apple may ask); CAC registration not complete, so no legal name or RC number on the site.
 
 ## Where we stopped
 
 ### Isaac
-The `CompanyWebsite` worktree is on `agents/website-cleanup-and-analysis`, at `e8e453d`, matching `origin/main` before local edits. Prototype React components, styles, `logo-mark.svg` and ten icons are now copied into `site/src/` and `site/assets/`; `site/assets/site.css` has been replaced with the prototype stylesheet. No app entry, build script, URL routing, consent/analytics integration, privacy rewrite, or Security page removal has been completed. The next action is to finish the production app and run it locally. Keep Vercel Analytics and opt-in GA consent; remove the Security page and `security.txt` but retain protective response headers. JSX must be compiled before visitors load the site; no runtime Babel or `unsafe-eval`. Do not deploy. The shared Formspree form is still deliberately unconfigured, so do not claim it submits.
+The `CompanyWebsite` worktree is on `agents/website-cleanup-and-analysis`, at `e8e453d`; changes are uncommitted and the branch has not been pushed. The app source is in `site/src/`; `npm run build` compiles JSX and writes five static page shells (`index.html`, `about.html`, `privacy.html`, `terms.html`, `contact.html`) plus the self-hosted React runtime. The local preview server is running at `http://127.0.0.1:5174/`. To reproduce: `npm ci`, `npm run build`, then `npm start`. Direct URLs and browser history work; Google Analytics loads only after explicit acceptance, Vercel analytics is skipped on localhost and loads on Undeify/Vercel hosts, and the Formspree submit control remains disabled. CSP has no `unsafe-eval` or `unsafe-inline`; protective response headers are retained. The Security page and `security.txt` return 404. Next: Isaac must separately authorize deployment. Before enabling form submission, supply and review the Formspree ID and provider privacy, retention and transfer settings. No production deploy, project commit, or push occurred.
 
 ### Tolu
 Nothing yet. Confirm undeify.com is ours in Namecheap and that hello@ forwards to a founder inbox.
 
 ## Next steps
-1. Finish the precompiled React app and route direct requests to Home, About, Privacy, Terms and Contact.
-2. Integrate the existing consent controls and opt-in Google Analytics with the React app; retain Vercel Analytics.
-3. Update the Privacy notice to accurately describe analytics, consent and the unconfigured contact form.
-4. Remove the production Security page and `security.txt`, while preserving protective HTTP headers.
-5. Build and test locally, including direct links, navigation, consent choices, reduced motion and form fallback. Do not deploy without separate authorization.
-6. Confirm `hello@undeify.com` forwarding (Tolu); obtain and review a real Formspree endpoint only before enabling submissions.
-7. Founders approve or change the remaining "Junior's call" decisions in `docs/decisions.md`; after CAC registration, add the registered name and RC number to About and Privacy.
+1. Isaac separately authorizes deployment before anyone deploys or pushes this replacement.
+2. Confirm `hello@undeify.com` forwarding (Tolu); before enabling submissions, supply a Formspree ID and review its privacy, retention and transfer settings (Isaac).
+3. Send the full-size originals of the hero scene images (Isaac) if they are still wanted; current images are soft when enlarged.
+4. Founders approve or change remaining "Junior's call" decisions in `docs/decisions.md`.
+5. After CAC registration, add the registered name and RC number to About and Privacy.
