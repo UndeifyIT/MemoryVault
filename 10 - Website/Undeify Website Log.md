@@ -25,3 +25,4 @@ created: 2026-10-16
 2026-10-21 | junior | Matched the local cookie-choice card to production's normal-flow lower-left placement and responsive styling; verified build, syntax, route persistence, accept/decline dismissal, and 390px layout; local only | CompanyWebsite `agents/website-cleanup-and-analysis`
 2026-10-21 | junior | Pushed the approved local replacement, including consent placement and footer copy, to `isaac-revision` for review; project worktree clean, no merge or deployment | CompanyWebsite
 2026-10-21 | junior | Applied every pre-merge review fix on `isaac-revision` (decision W16): headline, NOW beta waitlist, shipped section and NDPA badge removed, click-open menus, CSP form-action for Formspree; tested locally | uncommitted
+2026-10-21 | junior | Forms removed (W4: Contact and NOW waitlist by email to hello@, confirmed active by Isaac); cookie card fixed lower-left with professional wording (W17); tested locally | uncommitted
