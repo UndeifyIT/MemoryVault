@@ -24,6 +24,7 @@ The `CompanyWebsite` worktree is on the pushed `isaac-revision` branch, based on
 Nothing yet. Confirm undeify.com is ours in Namecheap and that hello@ forwards to a founder inbox.
 
 ## Next steps
+0. **Pre-merge review (2026-10-21, design-critique + jaredrhod-marketing on `isaac-revision` 8b6341e):** blockers before merge: confirm hello@ forwarding (every CTA ends there); verify or soften "ShiftOS running in production" and the NDPA 2023 badge; fix the About page's "use our contact form" while the form is disabled; CSP `form-action 'none'` must allow Formspree when enabled; test GA under COEP on a Vercel preview. Then: benefit headline instead of "Our Own Software", a NOW beta waitlist as the main CTA, drop the "This website" shipped tile and the duplicate About button. Waiting for Isaac to pick fixes.
 1. Isaac separately authorizes deployment before anyone deploys or pushes this replacement.
 2. Confirm `hello@undeify.com` forwarding (Tolu); before enabling submissions, supply a Formspree ID and review its privacy, retention and transfer settings (Isaac).
 3. Send the full-size originals of the hero scene images (Isaac) if they are still wanted; current images are soft when enlarged.
