@@ -4,7 +4,7 @@ project: now
 type: reference
 author: junior
 created: 2026-10-13
-updated: 2026-10-15
+updated: 2026-10-22
 ---
 # NOW Status
 
@@ -31,7 +31,7 @@ This note is a living snapshot. Overwrite it as things change; history goes in [
 Each person keeps their own section current.
 
 ### Isaac
-**Latest (2026-10-22):** APP-04 done: merged in #46 and #47 (c6d71cd) after Junior's security review (5 findings in [[NOW Security Findings]], locked by Isaac; NOW-SF-003 and 004 wait in APP-10, NOW-SF-002 in APP-27 and MAP-11). The plan tick sits uncommitted on branch `docs/app-04-done`, waiting for Isaac's commit word.
+**Latest (2026-10-22, later):** Isaac reopened the base map after researching a free Snap-Map-style stack: decision 0014 proposed (OpenFreeMap tiles through our own style file; Protomaps on AWS kept as a measured fallback with an exit drill and switch triggers; R-35). Isaac pushed 0014 straight to `main` (b5bd424); the wiring in 8 docs is uncommitted. Waiting for Tolu. Note: on 2026-10-15 the move off OpenFreeMap was driven by "no SLA", which is unchanged. **Earlier 2026-10-22:** APP-04 done: merged in #46 and #47 (c6d71cd) after Junior's security review (5 findings in [[NOW Security Findings]], locked by Isaac; NOW-SF-003 and 004 wait in APP-10, NOW-SF-002 in APP-27 and MAP-11). The plan tick sits uncommitted on branch `docs/app-04-done`, waiting for Isaac's commit word.
 
 **Latest (2026-10-21 night):** DB-04 member half: Tolu built and pushed `feature/db-04-require-member` (32e8742, 9a038d5) 11 minutes before Junior's parallel version (local 28ab106, not pushed). Tolu's version settles PT403: "profile required" and "rules" (403), banned or deleting = "signed out". Isaac took Tolu's branch: local reset to 9a038d5 (Junior's version kept only on local branch `backup/db-04-junior-28ab106`); issue #43 closed. Next: Isaac reviews and merges Tolu's branch.
 

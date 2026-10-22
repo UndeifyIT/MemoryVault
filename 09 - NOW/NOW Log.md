@@ -100,3 +100,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-22 | junior | NOW-SF-005 fixed: PGRST301/PGRST303 now count as signed out and aren't retried; tests red then green, 23/23. Uncommitted | Now working tree
 2026-10-22 | junior | NOW-SF-001 to 005 locked by Isaac; APP-04 fixes committed and pushed to feature/app-04-data-layer; PR not opened (GitHub connector 403), Isaac to open it | Now df12767
 2026-10-22 | junior | APP-04 merged (#47, c6d71cd); plan tick on branch docs/app-04-done, uncommitted | Now c6d71cd
+2026-10-22 | junior | Isaac reopened the base map: decision 0014 proposed (OpenFreeMap tiles via our own style file, Protomaps on AWS as measured fallback, exit drill, switch triggers, R-35); waiting for Tolu. 0014 pushed by Isaac; wiring uncommitted | Now b5bd424
