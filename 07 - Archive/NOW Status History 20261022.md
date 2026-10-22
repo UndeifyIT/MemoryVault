@@ -57,6 +57,18 @@ Latest (2026-10-15, DELL laptop): Tolu answered E7 (web-only staff console, FR-M
 
 Latest (2026-10-15, afternoon, DELL laptop): Tolu agreed to Isaac's AWS change to 0008 and proposed decision 0011 (same-place prompt FR-PLC-11; photo-location check on the phone FR-POST-20, three results, moderators only, measured not weighted; fixed spots only in the beta, P15 mobile sellers; all-Lagos Overture import), plus point 6 on where location may be used (a proposed amendment to NFR-PRIV-02: three allowed uses; a place's pin is map data, not the member's location). Pushed (Now 40fc014, 8d597d1); trace check clean (130 FR, 67 NFR). Next for Tolu: SMS provider spike and E15 with Isaac (0009 accepted); the week-1 spike once 0008 is accepted.
 
+## Tolu's entries, 2026-10-21 (moved 2026-10-22)
+
+**Latest (2026-10-21 late night, DELL laptop):** DB-10 merged (#40, c048074) and on staging. **Staging is one migration ahead of `main`:** Tolu's push ran while the clone was on #41's branch, so `20261021220000_db_04_require_member` was applied before #41 merged (#41 has since merged, edc70e0). DB-11 in PR #42 (`feature/db-11-create-profile`, head 3e01715): `api.create_profile` and `api.accept_rules`; security review (3 Medium: incident switches, look-alike names, CI check that member functions call `require_member`; plus Lows) all fixed, 57 pgTAP tests plus an API test that a client can't force `Prefer: tx=rollback`. Tolu accepted FR-PROF-10 (reserved names, widened to look-alikes and staff-posing display names). The `identity_key` in Vault never rotates (rotation means rehashing; runbook step). Bash stopped launching on the DELL laptop mid-session; Junior switched to PowerShell.
+
+**Latest (2026-10-21 night, DELL laptop): DB-10 in PR #40** (`members`, `member_private`, `invites`, `age_refusals`, `beta_testers`, all closed to API roles; usernames per FR-PROF-01; invites with 12-32 character random codes; `member_private.rules_version`; tester list deleted 30 days after the beta). now-security-reviewer: no Critical/High; 5 Medium and the Lows fixed. 50 pgTAP tests. Later-task notes: never delete or ban users in the Supabase dashboard (runbook); `restore_account` needs a session-plus-status check, not `require_member`.
+
+**Latest (2026-10-21):** Tolu merged DB-04, DB-06 and DB-19 (#36 to #38, `main` CI green, 129 pgTAP tests) and decided rules acceptance lives in `members.rules_version`. Staging is synced and verified by Junior on 2026-10-21. The Expo SDK 58 upgrade (the Dependabot backlog) is to be done in one go with `npx expo install --fix`. The shared `UndeifyIT` account opened PR #10 (SR-013). Full entry, with the Dependabot triage and CI fixes: [[NOW Status History 20261022]].
+
+**Latest (2026-10-21, Isaac's call on a joint item):** `acting_member` in `create_post` is a shared-phone guard only (EC-61). The server rejects it unless it matches the token and always takes the author from the token; recorded in contracts.md, roadmap and plan. Tolu to confirm, since contracts need both founders.
+
+**Latest (2026-10-21, later):** ambition pass on the plan. 108 of 135 beta requirements are Must, so cutting Shoulds and Coulds saves only about 22 days. Drafted decision 0013 (cut line candidates of at least 39 days, rebalance, size test for the visibility rule, measure-first), proposed by Isaac, waiting for Tolu. Stack check: self-hosting AWS is about 30 days of 510, no change.
+
 ## Old next steps (2026-10-15)
 
 1. Isaac decides 0008 (map host now AWS by Isaac's change; the Jev call), and whether Cloudflare Access and Turnstile stay. Tolu sees the AWS change.

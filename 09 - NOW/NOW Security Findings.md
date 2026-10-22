@@ -40,6 +40,23 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-022 | 2026-10-22 | DB-21 | Comment says "false" is always safe; for `is_blocked` and `is_muted` it means allow | Low | Fixed (94f8cb8); part 2 test owed | Draft |
 | NOW-SF-023 | 2026-10-22 | DB-21 | Forcing row level security would make `is_blocked` quietly answer "not blocked" | Low | Partly fixed (94f8cb8) | Draft |
 | NOW-SF-024 | 2026-10-22 | DB-21 | Comment and contracts row drifted from §7.1 and left out two helpers | Low | Fixed (94f8cb8) | Draft |
+| NOW-SF-025 | 2026-10-22 | DB-12 | Changing a username frees the old one at once; anyone can take it and inherit its trust | Medium | Handed to E18 (Tolu) | Draft |
+| NOW-SF-026 | 2026-10-22 | DB-12 | No test that refused profile edits count toward the rate limit | Medium | Fixed (#52, 98b0a38) | Draft |
+| NOW-SF-027 | 2026-10-22 | DB-12 | The 30-day username rule compared exact times, so the date shown could still refuse | Low | Fixed (#52, 98b0a38) | Draft |
+| NOW-SF-028 | 2026-10-22 | DB-12 | Rate-limit comment said every attempt counts; malformed calls roll back | Low | Fixed (#52, 98b0a38) | Draft |
+| NOW-SF-029 | 2026-10-22 | DB-12 | A reserved word added later blocks resending an unchanged display name | Low | Fixed (#52, 98b0a38) | Draft |
+| NOW-SF-030 | 2026-10-22 | DB-12 | `get_settings` marked STABLE while `require_member` is VOLATILE | Low | Fixed (#52, 98b0a38) | Draft |
+| NOW-SF-031 | 2026-10-22 | DB-47 | Migration numbered before migrations already on main; `db push` refuses it | Medium | Fixed (07c77f9, #48 not merged) | Draft |
+| NOW-SF-032 | 2026-10-22 | DB-47 | Import's FOR UPDATE locks make members' posts, saves and ratings wait | Medium | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-033 | 2026-10-22 | DB-47 | Import trusts the CSV's coordinates: places could be created outside Lagos | Medium | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-034 | 2026-10-22 | DB-47 | No licence check on source datasets; OpenStreetMap data could enter the core database | Medium | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-035 | 2026-10-22 | DB-47 | `same_place` reads the candidate without a lock; a concurrent merge can leave a dead link | Medium | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-036 | 2026-10-22 | DB-47 | Script SSL check trusted PGHOST/PGSSLMODE and could echo a malformed connection string | Low | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-037 | 2026-10-22 | DB-47 | Script builds the sources array by hand; None or a comma breaks it | Low | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-038 | 2026-10-22 | DB-47 | `extract` downloads DuckDB's httpfs extension at run time, undocumented | Low | Fixed, documented (cc044da) | Draft |
+| NOW-SF-039 | 2026-10-22 | DB-47 | `near_pending_place` reviews keep a member's pending place ID | Low | Handed to DB-60, DB-61 (contracts §2 note) | Draft |
+| NOW-SF-040 | 2026-10-22 | DB-47 | An import running while the team answers reviews can hit a unique-key error and roll back | Low | Fixed, documented: one at a time (cc044da) | Draft |
+| NOW-SF-041 | 2026-10-22 | DB-47 | Contract said `resolve_place_import_review` sets corrected_fields; it doesn't | Low | Fixed (cc044da, #48 not merged) | Draft |
 
 ## Findings
 
@@ -140,3 +157,19 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-024** (agent L5): the comment said an inline copy of the place rule is checked against this function; §7.1 says every copy is checked against the independent model. The contracts row also left out `is_follower` and `place_visible`. Fix: comment reworded; both signatures added to contracts.md §2.
 - **Also raised, for Isaac:** (Q1) a banned or deleting adder's pending place stays visible to their friends; §7.1 doesn't say otherwise, and Junior recommends leaving it because staff reject such places. Changing it means changing §7.1 and the property test's model too. (Q2) whether DB-34 leaves muted authors out when it writes inbox rows, or filters them at read time (the agent suggests read time); `followers_of` correctly ignores mutes.
 - **Evidence:** 33/33 tests on the local PGlite stand-in (places shimmed, no PostGIS), plus db_03 8/8, db_20 17/17, db_51 44/44; 10 mutants each fail at least one test. Real CI not run.
+
+### NOW-SF-025 to NOW-SF-030: review of DB-12 (profile editing)
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet (Tolu's request) on DB-12 (`api.update_profile`, `api.get_settings`). Nothing Critical or High. Authorization (no member ID argument; everything keyed on `require_member`), grants, data exposure (never `legal_hold`, dates only), concurrency (`FOR UPDATE` on the member's row, unique index as backstop) and logging (one boolean) checked and clean.
+- **SF-025** (M1): the old username is free the moment a member renames, so someone can take a known handle and inherit links and mentions; the owner can't take it back for 30 days. Not fixed in DB-12, since the hold length is a product call: open question E18 in the repo (Claude proposes a 90-day hold for the former owner and a staff-visible username history).
+- **SF-026** (M2): no test proved a refused edit uses up a rate-limit slot. Fix: a fresh bucket, limit 2, one refused and one accepted edit, the third gets PT429.
+- **SF-027** (L1): a member told "allowed on D" was refused on the morning of D. Fix: the rule compares Lagos dates; a test sets the allowed time to the end of today.
+- **SF-028 to SF-030** (L2 to L4): comment reworded; an unchanged display name is not re-checked against reserved words; `get_settings` made VOLATILE.
+- **Evidence:** 44 pgTAP tests pass in CI with the whole suite (run 39834498789, #52).
+
+### NOW-SF-031 to NOW-SF-041: second review of DB-47 (Overture import)
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet, a fresh pass on #48's final code after an earlier pass whose fixes are in f4fdbfb. Nothing Critical or High. Grants (four tables and three functions closed to API roles, SECURITY INVOKER), re-import safety, pending places never changed, and hostile staged data checked and clean.
+- **SF-031:** renumbered to `20261022150000`. **SF-032:** `FOR NO KEY UPDATE` at three places, and the script sets `lock_timeout` 5 s and `statement_timeout` 10 min. **SF-033:** the database skips rows outside the Lagos State box (`skipped_out_of_area`). **SF-034:** `app.overture_licensed_sources`, the seven sources `data/NOTICE.md` checked (Foursquare Apache-2.0; Overture, meta, Microsoft, AllThePlaces, DAC, PinMeTo CDLA-Permissive-2.0), counted as `skipped_licence`. Why an allow-list and not an OpenStreetMap block: an unchecked new source stays out until someone checks its licence. Sources were read from the committed research extract, not guessed. **SF-035:** `FOR SHARE` on the candidate.
+- **SF-036 to SF-041:** the script trusts only the connection string's own host and prints a fixed message for a bad string; source names are filtered; httpfs and one-import-at-a-time are documented; contracts §2 says import reviews are staff-only and that `corrected_fields` is set by DB-67/DB-68.
+- **Evidence:** 55 pgTAP tests in CI on `219bea2`, all green (run 39836187056).
