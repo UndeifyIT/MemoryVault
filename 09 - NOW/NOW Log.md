@@ -112,3 +112,5 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-22 | junior | Tolu: DB-12 profile editing merged (#52): update_profile, get_settings, 44 pgTAP; Sonnet review, NOW-SF-025 to 030; username hold is open question E18; #52 also fixed main's stale types (red since #50) and the app test hang (Jest never exited) | Now 98b0a38
 2026-10-22 | junior | Isaac's DB-18, DB-20, DB-51 marked done and DB-21 part 1 merged in database.md (#53) | Now 3b8a7c8
 2026-10-22 | junior | DB-47 (#48): second Sonnet review, 5 Medium fixed (NOW-SF-031 to 041), licence allow-list, migration 20261022150000, main merged, CI green; still draft, waiting on Tolu over the three contract changes | Now PR #48 (219bea2)
+2026-10-22 | junior | #48 (DB-47) merged by Tolu via the shared UndeifyIT account (auto mode refused Junior's merge); Isaac reviews its contract changes after | Now c16b51c
+2026-10-22 | junior | Tolu: DB-31 post tables built (PR #54, CI green): 5 tables, RV3-02 checks plus guards, 55 pgTAP; Sonnet review no Critical/High, fixes in; DB-02 finished (real-table factories), DB-03 marked done; text limits 500/300 proposed | Now PR #54
