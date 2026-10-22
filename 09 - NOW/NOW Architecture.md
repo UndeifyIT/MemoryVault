@@ -4,17 +4,17 @@ project: now
 type: reference
 author: junior
 created: 2026-10-13
-updated: 2026-10-15
+updated: 2026-10-22
 ---
 # NOW Architecture
 
-Stack **proposed** in the Now repo's decision 0008 by [[Tolu]] on 2026-10-14, waiting for Isaac; once accepted it is "Accepted with conditions" (11 conditions, each met before its part ships to testers). No application code yet.
+Stack proposed in the Now repo's decision 0008 by [[Tolu]] on 2026-10-14 and **accepted with conditions by Isaac on 2026-10-15** (status checked in the decision file 2026-10-22; conditions are met before each part ships to testers). The app skeleton, data layer and first database tables are in the repo. The full design (Draft v6.1) is in the repo's `docs/engineering/system-architecture.md`.
 
-## Proposed stack (decision 0008)
+## Stack (decision 0008, accepted with conditions 2026-10-15)
 - **App:** Expo (React Native), TypeScript, one codebase for Android and iOS. Minimum OS versions set at project setup (MapLibre needs Android 6.0+; Expo's default may be higher).
 - **Backend:** Supabase (Postgres, PostGIS, Row Level Security, Auth, Storage), Pro plan, London (`eu-west-2`); provisional until the lawyer answers legal item 12 (Supabase has no Africa region). Separate staging and production projects; production credentials never in test config (ShiftOS H3 lesson).
-- **Maps:** MapLibre (the open-source code that draws the map in the app) on a Protomaps base map of Nigeria hosted on our own AWS (S3 + CloudFront, served as ordinary tiles by a small function). Isaac's change on 2026-10-15, replacing OpenFreeMap (no SLA) and the Mapbox fallback; recorded in 0008, not yet accepted. Google Maps rejected as the map layer (its places and ratings compete with ours). Map failure falls back to the list view. Map detail is OpenStreetMap's whatever the host; only Google has more.
-- **Sign-in:** Google, Apple, email one-time code via Resend; no SMS in the beta.
+- **Maps:** MapLibre (the open-source code that draws the map in the app) on a Protomaps base map of Nigeria hosted on our own AWS (S3 + CloudFront, served as ordinary tiles by a small function). Isaac's change on 2026-10-15, replacing OpenFreeMap (no SLA) and the Mapbox fallback; recorded in 0008 (accepted). Decision 0014 (proposed by Isaac 2026-10-22, waiting for Tolu) would use OpenFreeMap tiles through our own style file instead, with Protomaps on AWS as the measured fallback. Google Maps rejected as the map layer (its places and ratings compete with ours). Map failure falls back to the list view. Map detail is OpenStreetMap's whatever the host; only Google has more.
+- **Sign-in:** phone number and SMS code only in the beta (decision 0009, with the VerifyNow beta route in 0012). Previously (2026-10-14): Google, Apple, email one-time code via Resend, no SMS.
 - **Public place pages:** AWS (CloudFront), Isaac's change on 2026-10-15 (was Cloudflare Pages). **Share-in:** Expo share extension plus TikTok's official oEmbed; Instagram fetches nothing; spike on both platforms first.
 - **AI search:** Claude Haiku 5.5, public posts only in the beta, model returns IDs only and facts come from the database; switched off until the NFR-AI-01 test set passes, otherwise the beta ships without it (0006 unchanged).
 - **Third parties receiving data:** AWS (IP, map area and page at CloudFront; photos; backups), Anthropic (question and public posts), Resend (email). In the repo's data map and legal items 12 and 24.
@@ -35,6 +35,6 @@ From the repo's research, decision 0006 and `docs/product/`.
 - **Sharing out** through ordinary links to a public place page with a preview card; no WhatsApp Business API bot (banned by Meta since 15 Jan 2026).
 - **Sharing in** from TikTok and Instagram: our server calls only TikTok's official lookup, never the user's link (SSRF); Instagram links fetch nothing; the user picks the place.
 - **AI search** only finds and summarises real posts; never invents a place, hours or a price. Billed in dollars per question.
-- **Sign-in by Google, Apple or email one-time code, phone optional** (decided 2026-10-14, E13). No passwords. SIM-swap-proof recovery only matters for members who add a phone. Rating integrity rests on new-account weighting, per-account limits, multi-signal burst detection and review, not on phone numbers; these reduce abuse, they don't eliminate it.
+- **Sign-in by phone number and SMS code** (decision 0009, 2026-10-15; previously Google, Apple or email, E13). No passwords. SIM-swap-proof recovery only matters for members who add a phone. Rating integrity rests on new-account weighting, per-account limits, multi-signal burst detection and review, not on phone numbers; these reduce abuse, they don't eliminate it.
 - **Privacy enforced on the server:** post audiences, friends, private accounts, blocks; the access-control tests in decision 0002 §6 and `docs/product/following-and-friends.md` run before the beta.
 - **Location safety:** no live location; posts appear 1 hour later by default and show the date, never the time; place totals only from 3 contributors.
