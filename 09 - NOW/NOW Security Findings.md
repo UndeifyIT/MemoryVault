@@ -21,6 +21,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
+| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (uncommitted) | Draft |
+| NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (uncommitted) | Draft |
+| NOW-SF-008 | 2026-10-22 | DB-51 | Two ticket requests at once can both pass the 10-waiting-photos cap | Low | Open (proposed accept) | Draft |
+| NOW-SF-009 | 2026-10-22 | DB-51 | Uploaded but never-posted photos stay in S3 until the daily clean-up and the BE-26 drain | Low | Handed to BE-20, BE-26 | Draft |
 
 ## Findings
 
@@ -64,3 +68,33 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Why this fix:** these three codes all mean "this token is no good", whichever layer said it. Other PGRST3xx codes are server misconfiguration (for example a missing JWT secret), not a member's ended session, so signing the member out on them would be wrong; they were left out on purpose.
 - **Evidence:** the shared-phone wipe test now runs for each of the three codes; the two PostgREST cases failed on the old code and pass now. Data and session tests 23/23, ESLint and `tsc` clean.
 - **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (merged to `main` in #47, c6d71cd, 2026-10-22).
+
+### NOW-SF-006: A mutual block is lost, and one unblock lifts both
+- **Found:** 2026-10-22, Junior's ambition pass and audit of the prototype schema (`prototypes/architecture-check/schema.sql`) before porting it to DB-20.
+- **Where:** prototype `app.block_pairs`, key `(a_id, b_id)`, and its block function (`ON CONFLICT DO NOTHING`).
+- **What was wrong:** if A blocks B and B then blocks A, B's block hits the existing rows and is silently dropped. When A later unblocks, both rows go, and B is unblocked without doing anything.
+- **Impact:** safety. An abuser who blocks first, then unblocks after the victim blocks back, gets through the victim's block.
+- **Fix:** the blocker is part of the key `(a_id, b_id, blocker_id)`, so each person's block is its own pair of rows; a self-referencing "mirror" key keeps every row paired (half a pair can't be committed, and deleting one row deletes its mirror). In `supabase/migrations/20261022110000_db_20_social_tables.sql`.
+- **Why this fix:** it keeps the one-lookup check ("either blocked by the other") that the visibility rule needs for speed, and puts the invariant in the schema, so DB-23's functions can't get it wrong.
+- **Evidence:** `supabase/tests/db_20_social_tables.sql` 17/17 on a local PGlite run; with the old key put back, tests 11 and 13 fail (the second block can't be stored; one unblock lifts both). Real CI not run yet.
+- **Status:** Fixed (uncommitted), on Isaac's clone.
+
+### NOW-SF-007: A photo receipt works more than once
+- **Found:** 2026-10-22, same audit, prototype `private.verify_receipt`.
+- **What was wrong:** the prototype checks the receipt's signature, owner and expiry but records nothing, so one receipt can be used in many posts until it expires. The contract (contracts.md §2) says a receipt is valid once.
+- **Fix:** DB-51's `verify_receipt` claims the photo in the same step (`UPDATE ... WHERE status = 'ticketed' RETURNING`). The claim is part of `create_post`'s transaction, so a failed post leaves the receipt usable, and of two posts racing with one receipt the second waits on the row and then finds it taken. Every failure is the same "bad request".
+- **Why this fix:** no extra table and no extra state. The `img` function can't write to the database, so the old `upload_tickets.used` flag could never have been set; that table was dropped (Isaac, 2026-10-22).
+- **Evidence:** `supabase/tests/db_51_photos.sql` 39/39 on PGlite (pgcrypto shimmed with SQL HMAC; ticket and receipt test vectors computed in Node match); with the single-use condition removed, "a receipt works only once" fails. The two-connection race is reasoned from Postgres row locking, not tested: pgTAP runs on one connection.
+- **Status:** Fixed (uncommitted), on Isaac's clone.
+
+### NOW-SF-008: The waiting-photos cap can be overshot
+- **Found:** 2026-10-22, DB-51 build (Junior's inline review).
+- **What:** `request_photo_uploads` counts waiting photos and then issues tickets without a lock, so two calls at the same moment can both pass and leave up to 15 waiting instead of 10.
+- **Why it is Low:** the hourly limit (20 tickets) still bounds it, and the files are small re-encoded WebP. A lock would cost a row lock on every request.
+- **Status:** Open; proposed to accept (Isaac decides).
+
+### NOW-SF-009: Never-posted photos wait in S3
+- **Found:** 2026-10-22, DB-51 build.
+- **What:** a photo that is uploaded but never posted stays in S3 until the daily clean-up marks it `deleting` (after 24 hours) and BE-26 deletes the files. It is never served (signing needs a post the viewer can see), but it is still stored, which matters for illegal images.
+- **Fix:** BE-20 adds an S3 lifecycle rule on `incoming/` as a backstop; BE-26 drains `deleting` rows.
+- **Status:** Handed to BE-20, BE-26.
