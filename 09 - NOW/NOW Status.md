@@ -4,7 +4,7 @@ project: now
 type: reference
 author: junior
 created: 2026-10-13
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 # NOW Status
 
@@ -28,6 +28,8 @@ This note is a living snapshot. Overwrite it as things change; one-line history 
 Each person keeps their own section current.
 
 ### Isaac
+**Latest (2026-10-23, DB-21 part 2 security review):** part 2 (`can_view`, `post_audience`, `post_audience_pending`, `public_posts`) is built and uncommitted on `feature/db-21-visibility-rule` in the second worktree (machine-specific: `Now-db21p2` beside Isaac's clone), off `main` 6e5c0e8; tests also pass on top of `main` a1efefe. Junior's inline review: no Critical or High; NOW-SF-064 to 066 drafted (2 Medium, 1 Low), each reproduced, fixes proposed. **Next:** Isaac OKs the fixes, then commit, PR, CI, lock-it on SF-064 to 066; Tolu confirms dropping the RV3-14 wrapper (AD-03).
+
 **Latest (2026-10-22, DB-21 part 1, Now 94f8cb8 pushed to `feature/db-21-visibility`, off `main` 16a7442, not merged):** Isaac said go on DB-21 in this session, so the part that needs no posts table was built: `private.is_follower`, `is_friend`, `is_blocked`, `is_muted`, `followers_of` (active followers only, proposed for Tolu to confirm) and `place_visible` (with a block backstop, NOW-SF-019). Built in a second worktree (machine-specific: `Now-db21` beside Isaac's clone) because another session was using the shared clone for DB-18. Two independent security reviews: no Critical/High/Medium; NOW-SF-019 to 024 drafted and fixed. 33/33 on PGlite, real CI not run (CI runs on pull requests; no PR yet, Junior's token can't open one). **Next:** Isaac opens the PR; lock-it on SF-019 to 024; part 2 (`can_view`, `post_audience`, public projection) once Tolu's DB-31 lands. Q1 (banned adder's pending place) left as is on Junior's recommendation; Q2 (mutes at inbox write or read) is DB-34's call.
 
 **Latest (2026-10-22, later):** DB-51 and DB-20 are on `main` (#49, 16a7442, checked 2026-10-22). Isaac locked NOW-SF-007 to 017, accepting SF-008 (the soft cap). DB-21 is held for Tolu's DB-31 (posts table), on Isaac's call. DB-18 (Isaac's contract stubs) built on `feature/db-18-isaac-stubs` with a contract test and a stub register that the SEC-33 sign-off must find empty; committed b387f8c and pushed on Isaac's word; the PR isn't open because the GitHub connector's token gets 403 on creating PRs, so Isaac opens it from the compare page. Next: DB-62, the real risky-word check (FR-POST-06 is a beta Must).

@@ -4,7 +4,7 @@ project: now
 type: reference
 author: junior
 created: 2026-10-22
-updated: 2026-10-22
+updated: 2026-10-23
 ---
 # NOW Security Findings
 
@@ -37,7 +37,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-019 | 2026-10-22 | DB-21 | A pending place stays visible to a blocked "friend" if the block's follow clean-up is missed | Low | Fixed (94f8cb8, `feature/db-21-visibility`, not merged) | Draft |
 | NOW-SF-020 | 2026-10-22 | DB-21 | No test for merged places or a guest on a rejected place | Low | Fixed (94f8cb8) | Draft |
 | NOW-SF-021 | 2026-10-22 | DB-21 | `followers_of` tested only against a banned follower | Low | Fixed (94f8cb8) | Draft |
-| NOW-SF-022 | 2026-10-22 | DB-21 | Comment says "false" is always safe; for `is_blocked` and `is_muted` it means allow | Low | Fixed (94f8cb8); part 2 test owed | Draft |
+| NOW-SF-022 | 2026-10-22 | DB-21 | Comment says "false" is always safe; for `is_blocked` and `is_muted` it means allow | Low | Fixed (94f8cb8); part 2 test written ("a guest sees public posts only", every author has a block) | Draft |
 | NOW-SF-023 | 2026-10-22 | DB-21 | Forcing row level security would make `is_blocked` quietly answer "not blocked" | Low | Partly fixed (94f8cb8) | Draft |
 | NOW-SF-024 | 2026-10-22 | DB-21 | Comment and contracts row drifted from §7.1 and left out two helpers | Low | Fixed (94f8cb8) | Draft |
 | NOW-SF-025 | 2026-10-22 | DB-12 | Changing a username frees the old one at once; anyone can take it and inherit its trust | Medium | Handed to E18 (Tolu) | Draft |
@@ -59,7 +59,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-041 | 2026-10-22 | DB-47 | Contract said `resolve_place_import_review` sets corrected_fields; it doesn't | Low | Fixed (cc044da, #48 not merged) | Draft |
 | NOW-SF-042 | 2026-10-22 | DB-02 | Profile-member clean-up could skip deleting the login after a failed delete | Medium | Fixed (#54, 619c8df) | Draft |
 | NOW-SF-043 | 2026-10-22 | DB-02 | A place delete in clean-up failed when a post survived an earlier failure | Medium | Fixed (#54, 619c8df) | Draft |
-| NOW-SF-044 | 2026-10-22 | DB-31 | A list post whose list is deleted keeps no list; safe only if can_view treats it as author-only | Low | Handed to DB-21 part 2, DB-27 | Draft |
+| NOW-SF-044 | 2026-10-22 | DB-31 | A list post whose list is deleted keeps no list; safe only if can_view treats it as author-only | Low | Handed to DB-27; DB-21 part 2 side done (deleting a list deletes its snapshot rows, tested) | Draft |
 | NOW-SF-045 | 2026-10-22 | DB-31 | A removed or deleted post's other columns could still change | Low | Fixed (#54, 619c8df) | Draft |
 | NOW-SF-046 | 2026-10-22 | DB-31 | Inbox rows weren't tied to the post's date and rank | Low | Fixed (#54, 619c8df) | Draft |
 | NOW-SF-047 | 2026-10-22 | DB-31 | likes.created_at kept an exact time nothing needs | Low | Fixed (#54, 619c8df) | Draft |
@@ -79,6 +79,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-061 | 2026-10-22 | E19 | A pick can go stale between posting and publish (no follow lock) | Low | Handed to DB-26 (re-trim at publish) | Draft |
 | NOW-SF-062 | 2026-10-22 | DB-32 | A dialled delay under an hour lets a watcher guess when someone was there, as "Post now" does | Medium | Accepted by Tolu as the member's choice; app warning (APP-33) | Draft |
 | NOW-SF-063 | 2026-10-22 | DB-32 | Minutes were accepted without a custom timer or with "Post now" | Low | Fixed (#57, a1efefe) | Draft |
+| NOW-SF-064 | 2026-10-23 | DB-21 | A snapshot row left after an unfollow reopens old list and picked posts once the two follow each other again | Medium | Open, fix proposed | Draft |
+| NOW-SF-065 | 2026-10-23 | DB-21 | The snapshot check doesn't require, or lock, the member's place on the source list, so a removal racing the publish keeps access | Medium | Open, fix proposed | Draft |
+| NOW-SF-066 | 2026-10-23 | DB-21 | Snapshot rows from a post's earlier list or picks keep granting after its audience changes | Low | Open, fix proposed | Draft |
 
 ## Findings
 
@@ -179,7 +182,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-024** (agent L5): the comment said an inline copy of the place rule is checked against this function; §7.1 says every copy is checked against the independent model. The contracts row also left out `is_follower` and `place_visible`. Fix: comment reworded; both signatures added to contracts.md §2.
 - **Also raised, for Isaac:** (Q1) a banned or deleting adder's pending place stays visible to their friends; §7.1 doesn't say otherwise, and Junior recommends leaving it because staff reject such places. Changing it means changing §7.1 and the property test's model too. (Q2) whether DB-34 leaves muted authors out when it writes inbox rows, or filters them at read time (the agent suggests read time); `followers_of` correctly ignores mutes.
 - **Evidence:** 33/33 tests on the local PGlite stand-in (places shimmed, no PostGIS), plus db_03 8/8, db_20 17/17, db_51 44/44; 10 mutants each fail at least one test. Real CI not run.
-
+
+
 ### NOW-SF-025 to NOW-SF-030: review of DB-12 (profile editing)
 > Draft, not confirmed
 - **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet (Tolu's request) on DB-12 (`api.update_profile`, `api.get_settings`). Nothing Critical or High. Authorization (no member ID argument; everything keyed on `require_member`), grants, data exposure (never `legal_hold`, dates only), concurrency (`FOR UPDATE` on the member's row, unique index as backstop) and logging (one boolean) checked and clean.
@@ -188,7 +192,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-027** (L1): a member told "allowed on D" was refused on the morning of D. Fix: the rule compares Lagos dates; a test sets the allowed time to the end of today.
 - **SF-028 to SF-030** (L2 to L4): comment reworded; an unchanged display name is not re-checked against reserved words; `get_settings` made VOLATILE.
 - **Evidence:** 44 pgTAP tests pass in CI with the whole suite (run 39834498789, #52).
-
+
+
 ### NOW-SF-031 to NOW-SF-041: second review of DB-47 (Overture import)
 > Draft, not confirmed
 - **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet, a fresh pass on #48's final code after an earlier pass whose fixes are in f4fdbfb. Nothing Critical or High. Grants (four tables and three functions closed to API roles, SECURITY INVOKER), re-import safety, pending places never changed, and hostile staged data checked and clean.
@@ -228,3 +233,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-062:** a dialled 5-15 minutes tells a watcher about as much as "Post now", and round values are guessable. Kept by Tolu's decision (the member's own choice); the app shows the "people may know you're there" warning under 60 minutes (APP-33, 0010 amendment). Totals can't leak it: they count only after an hour (AD-12).
 - **SF-063:** minutes are now refused unless the timer is custom, and with "Post now".
 - **Evidence:** 60 pgTAP tests in CI (#57).
+
+### NOW-SF-064 to NOW-SF-066: review of DB-21 part 2 (the visibility rule)
+> Draft, not confirmed
+- **Found:** 2026-10-23, Junior's inline review (Isaac's call, no agent) of DB-21 part 2, uncommitted on `feature/db-21-visibility-rule` (`supabase/migrations/20261022210000_db_21_visibility_rule.sql`: `can_view`, `post_audience`, `post_audience_pending`, the snapshot trigger, the list-removal trigger, `public_posts`). Nothing Critical or High. Checked and clean: `can_view` matches system architecture §7.1 line by line (guests go to the public branch before any block check, so SF-022's worry can't happen; a missing post is false; author sees every state but deleted); member and post statuses match DB-10 and DB-31; the projection carries no exact time, pending text, client ID or audience; grants, row rules and `security_invoker` on the view; `posts` stays closed to the API roles, so dropping the RV3-14 policy wrapper opens nothing. All three gaps below were reproduced on PGlite before writing them up.
+- **SF-064:** the trigger header says "a row a clean-up missed opens nothing", and the test checks that only while the two are still apart. When they follow each other again, `is_friend` is true and the old row grants the old list or picked post, which FR-AUD-04 says they lost. Everything hangs on DB-22, DB-23, DB-14 and the revocation replay each deleting the rows. Proposed fix: an AFTER DELETE trigger on `app.follows` that deletes `post_audience` and `post_audience_pending` rows between the two, both ways, the same pattern this migration already uses for list removals. Why: any follow ending (unfollow, remove follower, block, purge, replay) then cleans up with no task having to remember.
+- **SF-065:** `post_audience_check` checks the list is the author's but not that the member is on it, and it locks only the follow rows. If DB-26 reads the list, a removal commits, and DB-26 then inserts the removed person, the removal's clean-up ran too early and the row stays. Proposed fix: for a list row, the trigger requires the `audience_list_members` row and locks it (FOR KEY SHARE), so the removal waits and then deletes the new row. Why: the same RV3-04 lock-first rule the follow rows already get.
+- **SF-066:** `can_view` accepts any snapshot row for the post. If DB-27 moves a post from one list to another, or from a list to picks, and misses deleting the old rows, the old people keep it. Proposed fix: a list post's row must come from the post's current list, a picked post's row from no list. Why: one condition on a row `can_view` already reads; it fits AD-14's "only people in both old and new audience" during a widening.
+- **Evidence:** DB-21 part 2 tests 31/31 on PGlite, also on top of current `main` (a1efefe); the other failures there (vault shim, PostGIS) fail on `main` too. Repro tests for SF-064, SF-065 and SF-066 each fail on the current code. Real CI not run.
