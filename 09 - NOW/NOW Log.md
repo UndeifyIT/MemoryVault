@@ -117,3 +117,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-22 | junior | Tolu: #54 merged (DB-31 post tables, DB-02 real-table factories, DB-03 done; text limits 500/300 accepted by Tolu) | Now 619c8df
 2026-10-22 | junior | Tolu: #55 merged (DB-33 ratings, DB-32 api.create_post); Sonnet reviews NOW-SF-042 to 057, fixes in; E19 (picks storage) opened; CI caught a PL/pgSQL CASE-in-IF bug before merge | Now c296437
 2026-10-22 | junior | Tolu answered E19: post_picks table and set_post_picks built (#56), create_post accepts Choose people; Sonnet review NOW-SF-058 to 061, fixes in; Isaac reviews the contract after the fact | Now 6e5c0e8
+2026-10-22 | junior | Tolu: 20 posts an hour accepted; post timer dial (FR-POST-19, 0010 amended; Isaac's agreement reported by Tolu) built and merged (#57); Sonnet review NOW-SF-062/063 | Now a1efefe

@@ -77,6 +77,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-059 | 2026-10-22 | E19 | set_post_picks didn't check the post is a picked post | Medium | Fixed (#56, 6e5c0e8) | Draft |
 | NOW-SF-060 | 2026-10-22 | E19 | Readers and writers of post_picks need rules (author check, re-trim, never a grant) | Low | Handed to DB-26, DB-27, DB-21 part 2 (contracts §2) | Draft |
 | NOW-SF-061 | 2026-10-22 | E19 | A pick can go stale between posting and publish (no follow lock) | Low | Handed to DB-26 (re-trim at publish) | Draft |
+| NOW-SF-062 | 2026-10-22 | DB-32 | A dialled delay under an hour lets a watcher guess when someone was there, as "Post now" does | Medium | Accepted by Tolu as the member's choice; app warning (APP-33) | Draft |
+| NOW-SF-063 | 2026-10-22 | DB-32 | Minutes were accepted without a custom timer or with "Post now" | Low | Fixed (#57, a1efefe) | Draft |
 
 ## Findings
 
@@ -219,3 +221,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-058, SF-059:** the tests now prove replacement and the cascade; `set_post_picks` refuses a post that isn't an unpublished picked post.
 - **SF-060, SF-061:** contracts §2 now says DB-27 checks the author and clears picks when leaving picked, DB-26 reads picks only for picked posts and trims them again under the follow locks, and `can_view` never reads `post_picks`.
 - **Evidence:** 17 pgTAP tests in CI with the whole suite (#56).
+
+### NOW-SF-062 and NOW-SF-063: review of the post timer dial
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet, on #57 before merge. Nothing Critical or High; grants after the DROP and CREATE, validation, Lagos times and the jitter on the default, tonight and tomorrow morning checked and clean.
+- **SF-062:** a dialled 5-15 minutes tells a watcher about as much as "Post now", and round values are guessable. Kept by Tolu's decision (the member's own choice); the app shows the "people may know you're there" warning under 60 minutes (APP-33, 0010 amendment). Totals can't leak it: they count only after an hour (AD-12).
+- **SF-063:** minutes are now refused unless the timer is custom, and with "Post now".
+- **Evidence:** 60 pgTAP tests in CI (#57).
