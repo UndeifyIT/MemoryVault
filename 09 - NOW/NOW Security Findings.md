@@ -16,11 +16,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 
 | ID | Date | Task | Finding | Severity | Status | Locked |
 |---|---|---|---|---|---|---|
-| NOW-SF-001 | 2026-10-22 | APP-04 | Session key and ciphertext written in two steps; a read in between signs the member out | Medium | Fixed (df12767) | 2026-10-22 (Isaac) |
+| NOW-SF-001 | 2026-10-22 | APP-04 | Session key and ciphertext written in two steps; a read in between signs the member out | Medium | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
 | NOW-SF-002 | 2026-10-22 | APP-04 | The image library keeps friends-only photos on disk until sign-out | Medium | Handed to APP-27, MAP-11 | 2026-10-22 (Isaac) |
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
-| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (df12767) | 2026-10-22 (Isaac) |
+| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
 
 ## Findings
 
@@ -32,7 +32,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** one key per session, made at the first write and deleted at sign-out. Later writes change only the ciphertext with a fresh random nonce, which is one atomic write. The key is read from secure storage each time (no in-memory copy that could go stale after a reinstall or keychain wipe); only a key being made is shared, so two first writes can't make two keys. Before a new key is made, ciphertext left by a cut-off sign-out is dropped. The "tampered" path deletes only if the ciphertext it read is still the stored one.
 - **Why this fix:** the auth-js `lock` option is deprecated (it warns and goes away in v3), so the fix belongs in our storage, not in a lock. Reusing one AES-GCM key with random 96-bit nonces is safe up to about 2^32 writes, and a session is written roughly once an hour. Sign-out still deletes the key, so a left-behind copy stays unreadable.
 - **Evidence:** a new test (overlapping reads and writes) failed on the old code with a `null` read and passes now. Further tests: a new session after sign-out gets a new key; leftover ciphertext from a cut-off sign-out doesn't cost the next session its key. `app/src/data` tests 14/14, ESLint, Prettier and `tsc` clean.
-- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (pushed 2026-10-22; PR to `main` waiting to be opened and merged).
+- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (merged to `main` in #47, c6d71cd, 2026-10-22).
 
 ### NOW-SF-002: Friends-only photos kept on disk
 - **Found:** 2026-10-22, APP-04 security review.
@@ -63,4 +63,4 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** `isSignedOut` now treats PT401, PGRST301 (token can't be decoded) and PGRST303 (expired or invalid claims) as signed out, so any of them runs the sign-out and wipe. The query retry rule also stops retrying them, since a rejected token never gets better on retry.
 - **Why this fix:** these three codes all mean "this token is no good", whichever layer said it. Other PGRST3xx codes are server misconfiguration (for example a missing JWT secret), not a member's ended session, so signing the member out on them would be wrong; they were left out on purpose.
 - **Evidence:** the shared-phone wipe test now runs for each of the three codes; the two PostgREST cases failed on the old code and pass now. Data and session tests 23/23, ESLint and `tsc` clean.
-- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (pushed 2026-10-22; PR to `main` waiting to be opened and merged).
+- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (merged to `main` in #47, c6d71cd, 2026-10-22).
