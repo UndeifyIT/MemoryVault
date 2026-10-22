@@ -73,6 +73,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-055 | 2026-10-22 | DB-32 | Photo-list checks could raise a raw error on a non-list | Low | Fixed (#55, c296437) | Draft |
 | NOW-SF-056 | 2026-10-22 | DB-32 | Malformed and not-found calls roll back their rate-limit count | Low | Open (same as create_profile; noted) | Draft |
 | NOW-SF-057 | 2026-10-22 | DB-33 | ratings.created_at keeps an exact time for good | Low | Handed to DB-35 | Draft |
+| NOW-SF-058 | 2026-10-22 | E19 | The picks cascade test passed without testing anything | Medium | Fixed (#56, 6e5c0e8) | Draft |
+| NOW-SF-059 | 2026-10-22 | E19 | set_post_picks didn't check the post is a picked post | Medium | Fixed (#56, 6e5c0e8) | Draft |
+| NOW-SF-060 | 2026-10-22 | E19 | Readers and writers of post_picks need rules (author check, re-trim, never a grant) | Low | Handed to DB-26, DB-27, DB-21 part 2 (contracts §2) | Draft |
+| NOW-SF-061 | 2026-10-22 | E19 | A pick can go stale between posting and publish (no follow lock) | Low | Handed to DB-26 (re-trim at publish) | Draft |
 
 ## Findings
 
@@ -208,3 +212,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-053:** a retry answers only held or scheduled. **SF-055:** the photo-list checks run only on a list (bracketed so PL/pgSQL doesn't end the IF at the CASE's THEN; CI caught that).
 - **SF-056:** not changed: failing calls roll back their count, as in `create_profile`; receipts are signed, so nothing leaks.
 - **Evidence:** 37 + 53 pgTAP tests in CI with the whole suite (#55).
+
+### NOW-SF-058 to NOW-SF-061: review of E19 (post picks)
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet, on #56 before merge. Nothing Critical or High. Picks reach only current, unblocked, active friends; grants, RLS and the replaced `create_post` checked and clean.
+- **SF-058, SF-059:** the tests now prove replacement and the cascade; `set_post_picks` refuses a post that isn't an unpublished picked post.
+- **SF-060, SF-061:** contracts §2 now says DB-27 checks the author and clears picks when leaving picked, DB-26 reads picks only for picked posts and trims them again under the follow locks, and `can_view` never reads `post_picks`.
+- **Evidence:** 17 pgTAP tests in CI with the whole suite (#56).
