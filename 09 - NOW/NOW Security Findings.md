@@ -22,7 +22,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-002 | 2026-10-22 | APP-04 | The image library keeps friends-only photos on disk until sign-out | Medium | Handed to APP-27, MAP-11 | Draft |
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | Draft |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | Draft |
-| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Open | Draft |
+| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (uncommitted) | Draft |
 
 ## Findings
 
@@ -62,5 +62,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Found:** 2026-10-22, APP-04 security review.
 - **Where:** `app/src/data/api.ts`, `isSignedOut`.
 - **What was wrong:** PostgREST answers a rejected token with `PGRST301`/`PGRST303`, not PT401, so the wipe doesn't run from that path. The sign-in library's SIGNED_OUT event covers most of these cases.
-- **Fix:** treat those codes as signed out too. Not yet applied.
-- **Status:** Open.
+- **Fix:** `isSignedOut` now treats PT401, PGRST301 (token can't be decoded) and PGRST303 (expired or invalid claims) as signed out, so any of them runs the sign-out and wipe. The query retry rule also stops retrying them, since a rejected token never gets better on retry.
+- **Why this fix:** these three codes all mean "this token is no good", whichever layer said it. Other PGRST3xx codes are server misconfiguration (for example a missing JWT secret), not a member's ended session, so signing the member out on them would be wrong; they were left out on purpose.
+- **Evidence:** the shared-phone wipe test now runs for each of the three codes; the two PostgREST cases failed on the old code and pass now. Data and session tests 23/23, ESLint and `tsc` clean.
+- **Status:** Fixed (uncommitted, in Isaac's working tree on `feature/app-04-data-layer`).
