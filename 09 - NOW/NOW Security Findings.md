@@ -21,10 +21,19 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
-| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (uncommitted) | Draft |
-| NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (uncommitted) | Draft |
+| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (bbf3939, not merged) | Draft |
+| NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (bbf3939, not merged) | Draft |
 | NOW-SF-008 | 2026-10-22 | DB-51 | Two ticket requests at once can both pass the 10-waiting-photos cap | Low | Open (proposed accept) | Draft |
 | NOW-SF-009 | 2026-10-22 | DB-51 | Uploaded but never-posted photos stay in S3 until the daily clean-up and the BE-26 drain | Low | Handed to BE-20, BE-26 | Draft |
+| NOW-SF-010 | 2026-10-22 | FND-10 | Guardrail SCP doesn't deny creating IAM users or access keys | Medium | Fixed (af78cfe, not merged) | Draft |
+| NOW-SF-011 | 2026-10-22 | FND-10 | GitHub deploy role is admin in effect; GitHub environment protections undocumented | Medium | Open | Draft |
+| NOW-SF-012 | 2026-10-22 | FND-09 | IAM-change alert misses MFA deactivation, tag changes and all Identity Center events | Medium | Fixed (af78cfe, not merged) | Draft |
+| NOW-SF-013 | 2026-10-22 | DB-51 | `verify_receipt` puts no ceiling on a receipt's expiry | Low | Fixed (af78cfe, not merged) | Draft |
+| NOW-SF-014 | 2026-10-22 | DB-51 | Key rotation comment gives the wrong order for ticket keys | Low | Fixed (af78cfe, not merged) | Draft |
+| NOW-SF-015 | 2026-10-22 | DB-51 | Signing keys copied by hand from Vault to Parameter Store | Low | Handed to FND-11 | Draft |
+| NOW-SF-016 | 2026-10-22 | DB-51 | Members whose posting is paused can still get upload tickets | Low | Fixed (af78cfe, not merged) | Draft |
+| NOW-SF-017 | 2026-10-22 | FND-09 | `cdk.json` alertEmails would commit founders' email addresses | Low | Open | Draft |
+| NOW-SF-018 | 2026-10-22 | FND-09 | Audit trail bucket and alert rules can be deleted without a trace | Low | Open | Draft |
 
 ## Findings
 
@@ -77,7 +86,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** the blocker is part of the key `(a_id, b_id, blocker_id)`, so each person's block is its own pair of rows; a self-referencing "mirror" key keeps every row paired (half a pair can't be committed, and deleting one row deletes its mirror). In `supabase/migrations/20261022110000_db_20_social_tables.sql`.
 - **Why this fix:** it keeps the one-lookup check ("either blocked by the other") that the visibility rule needs for speed, and puts the invariant in the schema, so DB-23's functions can't get it wrong.
 - **Evidence:** `supabase/tests/db_20_social_tables.sql` 17/17 on a local PGlite run; with the old key put back, tests 11 and 13 fail (the second block can't be stored; one unblock lifts both). Real CI not run yet.
-- **Status:** Fixed (uncommitted), on Isaac's clone.
+- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (pushed 2026-10-22, not merged; no PR yet, so CI hasn't run).
 
 ### NOW-SF-007: A photo receipt works more than once
 - **Found:** 2026-10-22, same audit, prototype `private.verify_receipt`.
@@ -85,7 +94,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** DB-51's `verify_receipt` claims the photo in the same step (`UPDATE ... WHERE status = 'ticketed' RETURNING`). The claim is part of `create_post`'s transaction, so a failed post leaves the receipt usable, and of two posts racing with one receipt the second waits on the row and then finds it taken. Every failure is the same "bad request".
 - **Why this fix:** no extra table and no extra state. The `img` function can't write to the database, so the old `upload_tickets.used` flag could never have been set; that table was dropped (Isaac, 2026-10-22).
 - **Evidence:** `supabase/tests/db_51_photos.sql` 39/39 on PGlite (pgcrypto shimmed with SQL HMAC; ticket and receipt test vectors computed in Node match); with the single-use condition removed, "a receipt works only once" fails. The two-connection race is reasoned from Postgres row locking, not tested: pgTAP runs on one connection.
-- **Status:** Fixed (uncommitted), on Isaac's clone.
+- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (pushed 2026-10-22, not merged; no PR yet, so CI hasn't run).
 
 ### NOW-SF-008: The waiting-photos cap can be overshot
 - **Found:** 2026-10-22, DB-51 build (Junior's inline review).
@@ -98,3 +107,19 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **What:** a photo that is uploaded but never posted stays in S3 until the daily clean-up marks it `deleting` (after 24 hours) and BE-26 deletes the files. It is never served (signing needs a post the viewer can see), but it is still stored, which matters for illegal images.
 - **Fix:** BE-20 adds an S3 lifecycle rule on `incoming/` as a backstop; BE-26 drains `deleting` rows.
 - **Status:** Handed to BE-20, BE-26.
+
+### NOW-SF-010 to NOW-SF-018: review of commit bbf3939
+- **Found:** 2026-10-22, `now-security-reviewer` agent on `git diff b3cb719 bbf3939` (DB-51, DB-20, AWS CDK infra). No Critical or High. Tables, function grants, token signing and single-use receipts checked clean.
+- **SF-010** `aws/infra/src/policies.ts:6-34`: a stolen admin session in a member account can mint a long-lived key (`iam:CreateUser`, `CreateAccessKey`), breaking T-30. Fix: deny `iam:CreateUser`, `iam:CreateAccessKey`, `iam:CreateLoginProfile` in `guardrailsPolicy`, with a test.
+- **SF-011** `aws/infra/src/stacks.ts:181-187`: the deploy role can assume the CDK bootstrap roles, and a default bootstrap gives `cfn-exec-role` AdministratorAccess. Fix: bootstrap with a scoped `--cloudformation-execution-policies`; README must require `main`-only deployment branches, required reviewers and no self-review on `staging` and `production`.
+- **SF-012** `aws/infra/src/stacks.ts:129-149`: alert matches name prefixes only, so `DeactivateMFADevice` is silent and `aws.sso*` events aren't watched. Fix: match `readOnly: false`; add a rule for `aws.sso` and `aws.sso-directory`.
+- **SF-013** migration line 200: a buggy `img` function could sign a far-future receipt. Fix: refuse expiry beyond now + 1 hour + 60 s.
+- **SF-014** migration lines 40-41, 120: tickets are signed with the newest key immediately. Ticket key: give it to the function first, then Vault. Receipt key: Vault first, then function. Fix the comment and the FND-11 runbook.
+- **SF-015** migration lines 252-254: put a no-echo procedure (`aws ssm put-parameter --type SecureString` from stdin) in the FND-11 runbook.
+- **SF-016** migration line 98: `request_photo_uploads` ignores `posting_paused_until`. Bounded by the hourly limit and the 24-hour expiry. Fix: reject paused members, or accept in writing.
+- **SF-017** `aws/infra/cdk.json`: use a role mailbox or pass `-c alertEmails=...` from a GitHub environment variable.
+- **SF-018** `aws/infra/src/stacks.ts:48-54, 106-151`: trail bucket has no versioning or deny-delete; alert rules and topic can be removed. Fix: versioning plus deny-delete bucket policy; SCP deny on `events:DeleteRule`, `events:RemoveTargets`, `sns:Unsubscribe` for alert resources, except the CloudFormation role.
+- **Also raised, not findings yet:** a blocked person who deletes their account loses the block (cascade, DB-20 migration lines 36-37), so re-signing up with the same number clears it; now open question E17 in the Now repo (`docs/open-questions.md`, owner Isaac, blocks DB-23 and DB-65), added 2026-10-22. Missing DB-51 tests: deleted key, unknown key tag, banned or no-profile caller, racing receipts. BE-20 must refuse at the `p/` write before issuing a receipt, since the receipt carries no SHA-256.
+- **Fixes (2026-10-22, af78cfe on `feature/db-51-photos`, pushed, not merged):** SF-010 `DenyLongLivedCredentials` statement plus test; SF-012 IAM rule matches `readOnly: false`, new `IdentityCenterChange` rule in both regions plus tests (infra tests 5/5, `tsc` clean); SF-013 receipts with expiry beyond now + 3,660 s refused; SF-014 rotation comment split by key type; SF-016 paused members get `{"status": "posting_paused"}` (contracts.md updated). New DB-51 tests: paused, banned, far-future receipt, unknown key tag, deleted key. `db_51_photos.sql` 44/44 on PGlite; with SF-013 and SF-016 reverted the new tests fail. Real CI not run.
+- **Not read by the reviewer:** generated types, lockfile, `infra.test.ts` in full, following-and-friends, decisions 0002 and 0006, most of the threat model.
+
