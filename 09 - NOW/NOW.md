@@ -19,5 +19,6 @@ NOW is a social map of places, starting in Lagos: users post about places they'v
 - [[NOW Status]]: living snapshot and handoff.
 - [[NOW Architecture]]: stack and structure (nothing chosen yet).
 - [[NOW Log]]: append-only change record.
+- [[NOW Security Findings]]: every security review finding, its fix and why that fix (NOW-SF IDs).
 - [[LIFE and NOW Concept Research]]: summary of the 2026-10-13 background check. The full report is in the repo.
 - [[NOW Architecture Review Pass 3]]: draft. The 24 findings of the last architecture review pass, what the prototype fixed, what the document still needs, and the founder decisions it raised.
