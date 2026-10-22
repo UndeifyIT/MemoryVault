@@ -21,19 +21,25 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
-| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (bbf3939, not merged) | 2026-10-22 (Isaac) |
-| NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (bbf3939, not merged) | Draft |
-| NOW-SF-008 | 2026-10-22 | DB-51 | Two ticket requests at once can both pass the 10-waiting-photos cap | Low | Open (proposed accept) | Draft |
-| NOW-SF-009 | 2026-10-22 | DB-51 | Uploaded but never-posted photos stay in S3 until the daily clean-up and the BE-26 drain | Low | Handed to BE-20, BE-26 | Draft |
-| NOW-SF-010 | 2026-10-22 | FND-10 | Guardrail SCP doesn't deny creating IAM users or access keys | Medium | Fixed (af78cfe, not merged) | Draft |
-| NOW-SF-011 | 2026-10-22 | FND-10 | GitHub deploy role is admin in effect; GitHub environment protections undocumented | Medium | Open | Draft |
-| NOW-SF-012 | 2026-10-22 | FND-09 | IAM-change alert misses MFA deactivation, tag changes and all Identity Center events | Medium | Fixed (af78cfe, not merged) | Draft |
-| NOW-SF-013 | 2026-10-22 | DB-51 | `verify_receipt` puts no ceiling on a receipt's expiry | Low | Fixed (af78cfe, not merged) | Draft |
-| NOW-SF-014 | 2026-10-22 | DB-51 | Key rotation comment gives the wrong order for ticket keys | Low | Fixed (af78cfe, not merged) | Draft |
-| NOW-SF-015 | 2026-10-22 | DB-51 | Signing keys copied by hand from Vault to Parameter Store | Low | Handed to FND-11 | Draft |
-| NOW-SF-016 | 2026-10-22 | DB-51 | Members whose posting is paused can still get upload tickets | Low | Fixed (af78cfe, not merged) | Draft |
-| NOW-SF-017 | 2026-10-22 | FND-09 | `cdk.json` alertEmails would commit founders' email addresses | Low | Open | Draft |
+| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (bbf3939, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (bbf3939, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-008 | 2026-10-22 | DB-51 | Two ticket requests at once can both pass the 10-waiting-photos cap | Low | Accepted (Isaac, 2026-10-22) | 2026-10-22 (Isaac) |
+| NOW-SF-009 | 2026-10-22 | DB-51 | Uploaded but never-posted photos stay in S3 until the daily clean-up and the BE-26 drain | Low | Handed to BE-20, BE-26 | 2026-10-22 (Isaac) |
+| NOW-SF-010 | 2026-10-22 | FND-10 | Guardrail SCP doesn't deny creating IAM users or access keys | Medium | Fixed (af78cfe, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-011 | 2026-10-22 | FND-10 | GitHub deploy role is admin in effect; GitHub environment protections undocumented | Medium | Open | 2026-10-22 (Isaac) |
+| NOW-SF-012 | 2026-10-22 | FND-09 | IAM-change alert misses MFA deactivation, tag changes and all Identity Center events | Medium | Fixed (af78cfe, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-013 | 2026-10-22 | DB-51 | `verify_receipt` puts no ceiling on a receipt's expiry | Low | Fixed (af78cfe, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-014 | 2026-10-22 | DB-51 | Key rotation comment gives the wrong order for ticket keys | Low | Fixed (af78cfe, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-015 | 2026-10-22 | DB-51 | Signing keys copied by hand from Vault to Parameter Store | Low | Handed to FND-11 | 2026-10-22 (Isaac) |
+| NOW-SF-016 | 2026-10-22 | DB-51 | Members whose posting is paused can still get upload tickets | Low | Fixed (af78cfe, merged in #49, 16a7442) | 2026-10-22 (Isaac) |
+| NOW-SF-017 | 2026-10-22 | FND-09 | `cdk.json` alertEmails would commit founders' email addresses | Low | Open | 2026-10-22 (Isaac) |
 | NOW-SF-018 | 2026-10-22 | FND-09 | Audit trail bucket and alert rules can be deleted without a trace | Low | Open | 2026-10-22 (Isaac) |
+| NOW-SF-019 | 2026-10-22 | DB-21 | A pending place stays visible to a blocked "friend" if the block's follow clean-up is missed | Low | Fixed (94f8cb8, `feature/db-21-visibility`, not merged) | Draft |
+| NOW-SF-020 | 2026-10-22 | DB-21 | No test for merged places or a guest on a rejected place | Low | Fixed (94f8cb8) | Draft |
+| NOW-SF-021 | 2026-10-22 | DB-21 | `followers_of` tested only against a banned follower | Low | Fixed (94f8cb8) | Draft |
+| NOW-SF-022 | 2026-10-22 | DB-21 | Comment says "false" is always safe; for `is_blocked` and `is_muted` it means allow | Low | Fixed (94f8cb8); part 2 test owed | Draft |
+| NOW-SF-023 | 2026-10-22 | DB-21 | Forcing row level security would make `is_blocked` quietly answer "not blocked" | Low | Partly fixed (94f8cb8) | Draft |
+| NOW-SF-024 | 2026-10-22 | DB-21 | Comment and contracts row drifted from §7.1 and left out two helpers | Low | Fixed (94f8cb8) | Draft |
 
 ## Findings
 
@@ -86,7 +92,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** the blocker is part of the key `(a_id, b_id, blocker_id)`, so each person's block is its own pair of rows; a self-referencing "mirror" key keeps every row paired (half a pair can't be committed, and deleting one row deletes its mirror). In `supabase/migrations/20261022110000_db_20_social_tables.sql`.
 - **Why this fix:** it keeps the one-lookup check ("either blocked by the other") that the visibility rule needs for speed, and puts the invariant in the schema, so DB-23's functions can't get it wrong.
 - **Evidence:** `supabase/tests/db_20_social_tables.sql` 17/17 on a local PGlite run; with the old key put back, tests 11 and 13 fail (the second block can't be stored; one unblock lifts both). Real CI not run yet.
-- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (pushed 2026-10-22, not merged; no PR yet, so CI hasn't run).
+- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (merged to `main` in #49, 16a7442).
 
 ### NOW-SF-007: A photo receipt works more than once
 - **Found:** 2026-10-22, same audit, prototype `private.verify_receipt`.
@@ -94,13 +100,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** DB-51's `verify_receipt` claims the photo in the same step (`UPDATE ... WHERE status = 'ticketed' RETURNING`). The claim is part of `create_post`'s transaction, so a failed post leaves the receipt usable, and of two posts racing with one receipt the second waits on the row and then finds it taken. Every failure is the same "bad request".
 - **Why this fix:** no extra table and no extra state. The `img` function can't write to the database, so the old `upload_tickets.used` flag could never have been set; that table was dropped (Isaac, 2026-10-22).
 - **Evidence:** `supabase/tests/db_51_photos.sql` 39/39 on PGlite (pgcrypto shimmed with SQL HMAC; ticket and receipt test vectors computed in Node match); with the single-use condition removed, "a receipt works only once" fails. The two-connection race is reasoned from Postgres row locking, not tested: pgTAP runs on one connection.
-- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (pushed 2026-10-22, not merged; no PR yet, so CI hasn't run).
+- **Status:** Fixed in bbf3939 on `feature/db-51-photos` (merged to `main` in #49, 16a7442).
 
 ### NOW-SF-008: The waiting-photos cap can be overshot
 - **Found:** 2026-10-22, DB-51 build (Junior's inline review).
 - **What:** `request_photo_uploads` counts waiting photos and then issues tickets without a lock, so two calls at the same moment can both pass and leave up to 15 waiting instead of 10.
 - **Why it is Low:** the hourly limit (20 tickets) still bounds it, and the files are small re-encoded WebP. A lock would cost a row lock on every request.
-- **Status:** Open; proposed to accept (Isaac decides).
+- **Status:** Accepted by Isaac, 2026-10-22 (locked with SF-007 to SF-017): the hourly limit bounds it.
 
 ### NOW-SF-009: Never-posted photos wait in S3
 - **Found:** 2026-10-22, DB-51 build.
@@ -120,6 +126,17 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-017** `aws/infra/cdk.json`: use a role mailbox or pass `-c alertEmails=...` from a GitHub environment variable.
 - **SF-018** `aws/infra/src/stacks.ts:48-54, 106-151`: trail bucket has no versioning or deny-delete; alert rules and topic can be removed. Fix: versioning plus deny-delete bucket policy; SCP deny on `events:DeleteRule`, `events:RemoveTargets`, `sns:Unsubscribe` for alert resources, except the CloudFormation role.
 - **Also raised, not findings yet:** a blocked person who deletes their account loses the block (cascade, DB-20 migration lines 36-37), so re-signing up with the same number clears it; now open question E17 in the Now repo (`docs/open-questions.md`, owner Isaac, blocks DB-23 and DB-65), added 2026-10-22. Missing DB-51 tests: deleted key, unknown key tag, banned or no-profile caller, racing receipts. BE-20 must refuse at the `p/` write before issuing a receipt, since the receipt carries no SHA-256.
-- **Fixes (2026-10-22, af78cfe on `feature/db-51-photos`, pushed, not merged):** SF-010 `DenyLongLivedCredentials` statement plus test; SF-012 IAM rule matches `readOnly: false`, new `IdentityCenterChange` rule in both regions plus tests (infra tests 5/5, `tsc` clean); SF-013 receipts with expiry beyond now + 3,660 s refused; SF-014 rotation comment split by key type; SF-016 paused members get `{"status": "posting_paused"}` (contracts.md updated). New DB-51 tests: paused, banned, far-future receipt, unknown key tag, deleted key. `db_51_photos.sql` 44/44 on PGlite; with SF-013 and SF-016 reverted the new tests fail. Real CI not run.
+- **Fixes (2026-10-22, af78cfe on `feature/db-51-photos`, merged to `main` in #49, 16a7442):** SF-010 `DenyLongLivedCredentials` statement plus test; SF-012 IAM rule matches `readOnly: false`, new `IdentityCenterChange` rule in both regions plus tests (infra tests 5/5, `tsc` clean); SF-013 receipts with expiry beyond now + 3,660 s refused; SF-014 rotation comment split by key type; SF-016 paused members get `{"status": "posting_paused"}` (contracts.md updated). New DB-51 tests: paused, banned, far-future receipt, unknown key tag, deleted key. `db_51_photos.sql` 44/44 on PGlite; with SF-013 and SF-016 reverted the new tests fail. Real CI not run.
 - **Not read by the reviewer:** generated types, lockfile, `infra.test.ts` in full, following-and-friends, decisions 0002 and 0006, most of the threat model.
 
+### NOW-SF-019 to NOW-SF-024: review of DB-21 part 1
+> Draft, not confirmed
+- **Found:** 2026-10-22, Junior's inline review and the `now-security-reviewer` agent, run independently on DB-21 part 1 (committed and pushed as 94f8cb8 on `feature/db-21-visibility`, not merged) (`supabase/migrations/20261022130000_db_21_relationship_helpers.sql`: `is_follower`, `is_friend`, `is_blocked`, `is_muted`, `followers_of`, `place_visible`). Nothing Critical, High or Medium from either. Grants, guest handling, block mirroring and SECURITY INVOKER were checked and found clean.
+- **SF-019** (Junior): `place_visible` showed a pending place to the adder's friends without checking blocks, relying on DB-23 deleting follows when someone blocks. Fix: the friend branch also requires `NOT is_blocked(adder, viewer)`. Why: one extra index lookup, and a missed clean-up then can't show a blocked person a place that may be a home (NFR-SAFE-02). New test; with the check removed it fails.
+- **SF-020** (agent L1): a mutant adding `merged` to the visible statuses passed every test. Fix: tests for a merged place and for a guest on a rejected place.
+- **SF-021** (agent L2): a mutant changing the filter to `status <> 'banned'` passed, so followers who are deleting their accounts would get inbox rows. Fix: tests for a `pending_deletion` follower and for a waiting follow request.
+- **SF-022** (agent L3): the header said false-not-null keeps callers safe. For `is_blocked` and `is_muted`, false means allow, so a `can_view` that checks blocks before sending guests to the public projection would let a null viewer through. Fix: comment and contracts.md now say so. Still owed: a part 2 `can_view` test with a null viewer on a blocked author's non-public post.
+- **SF-023** (agent L4): the helpers read as the table owner, who skips row level security. If it were ever forced on these tables, every read would come back empty and `is_blocked` would say false with no error. Fix: a test that fails if `relforcerowsecurity` is set on `follows`, `block_pairs`, `mutes`, `places` or `members`. Not done: a test through a SECURITY DEFINER wrapper owned like the api functions. Unverified: whether Supabase's `postgres` role has BYPASSRLS.
+- **SF-024** (agent L5): the comment said an inline copy of the place rule is checked against this function; §7.1 says every copy is checked against the independent model. The contracts row also left out `is_follower` and `place_visible`. Fix: comment reworded; both signatures added to contracts.md §2.
+- **Also raised, for Isaac:** (Q1) a banned or deleting adder's pending place stays visible to their friends; §7.1 doesn't say otherwise, and Junior recommends leaving it because staff reject such places. Changing it means changing §7.1 and the property test's model too. (Q2) whether DB-34 leaves muted authors out when it writes inbox rows, or filters them at read time (the agent suggests read time); `followers_of` correctly ignores mutes.
+- **Evidence:** 33/33 tests on the local PGlite stand-in (places shimmed, no PostGIS), plus db_03 8/8, db_20 17/17, db_51 44/44; 10 mutants each fail at least one test. Real CI not run.
