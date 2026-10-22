@@ -21,7 +21,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
 | NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (#47, c6d71cd) | 2026-10-22 (Isaac) |
-| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (bbf3939, not merged) | Draft |
+| NOW-SF-006 | 2026-10-22 | DB-20 | Prototype `block_pairs` key loses a second, mutual block; one unblock lifts both | High | Fixed (bbf3939, not merged) | 2026-10-22 (Isaac) |
 | NOW-SF-007 | 2026-10-22 | DB-51 | Prototype `verify_receipt` never marks a receipt used, so one photo receipt works many times | Medium | Fixed (bbf3939, not merged) | Draft |
 | NOW-SF-008 | 2026-10-22 | DB-51 | Two ticket requests at once can both pass the 10-waiting-photos cap | Low | Open (proposed accept) | Draft |
 | NOW-SF-009 | 2026-10-22 | DB-51 | Uploaded but never-posted photos stay in S3 until the daily clean-up and the BE-26 drain | Low | Handed to BE-20, BE-26 | Draft |
@@ -33,7 +33,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-015 | 2026-10-22 | DB-51 | Signing keys copied by hand from Vault to Parameter Store | Low | Handed to FND-11 | Draft |
 | NOW-SF-016 | 2026-10-22 | DB-51 | Members whose posting is paused can still get upload tickets | Low | Fixed (af78cfe, not merged) | Draft |
 | NOW-SF-017 | 2026-10-22 | FND-09 | `cdk.json` alertEmails would commit founders' email addresses | Low | Open | Draft |
-| NOW-SF-018 | 2026-10-22 | FND-09 | Audit trail bucket and alert rules can be deleted without a trace | Low | Open | Draft |
+| NOW-SF-018 | 2026-10-22 | FND-09 | Audit trail bucket and alert rules can be deleted without a trace | Low | Open | 2026-10-22 (Isaac) |
 
 ## Findings
 
