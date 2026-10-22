@@ -82,6 +82,14 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-064 | 2026-10-23 | DB-21 | A snapshot row left after an unfollow reopens old list and picked posts once the two follow each other again | Medium | Open, fix proposed | Draft |
 | NOW-SF-065 | 2026-10-23 | DB-21 | The snapshot check doesn't require, or lock, the member's place on the source list, so a removal racing the publish keeps access | Medium | Open, fix proposed | Draft |
 | NOW-SF-066 | 2026-10-23 | DB-21 | Snapshot rows from a post's earlier list or picks keep granting after its audience changes | Low | Open, fix proposed | Draft |
+| NOW-SF-067 | 2026-10-23 | DB-34 | The publish job locked its whole batch of posts until the run ended | Medium | Fixed (#58, 0b848bc) | Draft |
+| NOW-SF-068 | 2026-10-23 | DB-34 | A list or picked post goes live with an empty snapshot until DB-26 | Medium | Handed to DB-21 part 2 (author-only test) | Draft |
+| NOW-SF-069 | 2026-10-23 | DB-34 | Inbox rows are candidates; a public post at an unchecked place reached non-friends | Medium | Partly fixed (#58); read re-check handed to DB-41 | Draft |
+| NOW-SF-070 | 2026-10-23 | DB-34 | held_reason wasn't tied to the held status | Low | Fixed (#58, 0b848bc) | Draft |
+| NOW-SF-071 | 2026-10-23 | DB-34 | A waiting post could be set straight to hidden by hand | Low | Fixed (#58, 0b848bc) | Draft |
+| NOW-SF-072 | 2026-10-23 | DB-34 | A banned author was sent a "post held" notice | Low | Fixed (#58, 0b848bc) | Draft |
+| NOW-SF-073 | 2026-10-23 | DB-34 | A transient error holds a post as publish_failed until staff clear it | Low | Open (by design; noted) | Draft |
+| NOW-SF-074 | 2026-10-23 | DB-34 | Supabase Cron's run log grows without limit | Low | Fixed (#58: prune_cron_runs) | Draft |
 
 ## Findings
 
@@ -241,3 +249,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-065:** `post_audience_check` checks the list is the author's but not that the member is on it, and it locks only the follow rows. If DB-26 reads the list, a removal commits, and DB-26 then inserts the removed person, the removal's clean-up ran too early and the row stays. Proposed fix: for a list row, the trigger requires the `audience_list_members` row and locks it (FOR KEY SHARE), so the removal waits and then deletes the new row. Why: the same RV3-04 lock-first rule the follow rows already get.
 - **SF-066:** `can_view` accepts any snapshot row for the post. If DB-27 moves a post from one list to another, or from a list to picks, and misses deleting the old rows, the old people keep it. Proposed fix: a list post's row must come from the post's current list, a picked post's row from no list. Why: one condition on a row `can_view` already reads; it fits AD-14's "only people in both old and new audience" during a widening.
 - **Evidence:** DB-21 part 2 tests 31/31 on PGlite, also on top of current `main` (a1efefe); the other failures there (vault shim, PostGIS) fail on `main` too. Repro tests for SF-064, SF-065 and SF-066 each fail on the current code. Real CI not run.
+
+### NOW-SF-067 to NOW-SF-074: review of DB-34 (the publish step)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #58 before merge. Nothing Critical or High. No member path can make a post live: `now.go_live` and `now.bulk_mode` are transaction settings PostgREST can't set, and bulk mode is refused when a member is signed in. Concurrency, hold reasons, notifications and `pg_cron` checked.
+- **SF-067:** the job selects due posts without locking and locks each one only as it publishes it, 100 a run; the cron command stops a run at 50 seconds.
+- **SF-068:** `can_view` (DB-21 part 2) must show a live list or picked post with no snapshot rows to its author only, with a test.
+- **SF-069:** inbox rows now skip followers who can't see the place; DB-41's read must re-check `can_view`, `place_visible`, blocks and mutes, with an access test.
+- **SF-070 to SF-072, SF-074:** a held post always has its reason; nothing jumps from waiting to hidden; no notice to a banned or deleting author; `prune_cron_runs` keeps 3 days of the cron log.
+- **SF-073:** kept: a failed publish waits for staff rather than retrying.
+- **Evidence:** 33 pgTAP tests in CI with the whole suite (#58).
