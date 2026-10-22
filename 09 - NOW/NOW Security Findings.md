@@ -57,6 +57,22 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-039 | 2026-10-22 | DB-47 | `near_pending_place` reviews keep a member's pending place ID | Low | Handed to DB-60, DB-61 (contracts §2 note) | Draft |
 | NOW-SF-040 | 2026-10-22 | DB-47 | An import running while the team answers reviews can hit a unique-key error and roll back | Low | Fixed, documented: one at a time (cc044da) | Draft |
 | NOW-SF-041 | 2026-10-22 | DB-47 | Contract said `resolve_place_import_review` sets corrected_fields; it doesn't | Low | Fixed (cc044da, #48 not merged) | Draft |
+| NOW-SF-042 | 2026-10-22 | DB-02 | Profile-member clean-up could skip deleting the login after a failed delete | Medium | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-043 | 2026-10-22 | DB-02 | A place delete in clean-up failed when a post survived an earlier failure | Medium | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-044 | 2026-10-22 | DB-31 | A list post whose list is deleted keeps no list; safe only if can_view treats it as author-only | Low | Handed to DB-21 part 2, DB-27 | Draft |
+| NOW-SF-045 | 2026-10-22 | DB-31 | A removed or deleted post's other columns could still change | Low | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-046 | 2026-10-22 | DB-31 | Inbox rows weren't tied to the post's date and rank | Low | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-047 | 2026-10-22 | DB-31 | likes.created_at kept an exact time nothing needs | Low | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-048 | 2026-10-22 | DB-31 | photos.owner_id can change after a photo is attached | Low | Handed to DB-51 (Isaac) | Draft |
+| NOW-SF-049 | 2026-10-22 | DB-31 | A deleted comment could come back | Low | Fixed (#54, 619c8df) | Draft |
+| NOW-SF-050 | 2026-10-22 | DB-33 | A reused rating could stay pending, or stop counting while the member had a live post | Medium | Fixed (#55, c296437) | Draft |
+| NOW-SF-051 | 2026-10-22 | DB-33 | Held ratings were never superseded, so a later release could make two current ratings | Medium | Fixed (#55, c296437) | Draft |
+| NOW-SF-052 | 2026-10-22 | DB-33 | Merging places can collide two current ratings (unique index) | Medium | Handed to DB-48 | Draft |
+| NOW-SF-053 | 2026-10-22 | DB-32 | A retry returned the raw status, revealing hidden or removed | Low | Fixed (#55, c296437) | Draft |
+| NOW-SF-054 | 2026-10-22 | DB-33 | A staff-removed rating let the member re-rate at once | Low | Fixed (#55, c296437) | Draft |
+| NOW-SF-055 | 2026-10-22 | DB-32 | Photo-list checks could raise a raw error on a non-list | Low | Fixed (#55, c296437) | Draft |
+| NOW-SF-056 | 2026-10-22 | DB-32 | Malformed and not-found calls roll back their rate-limit count | Low | Open (same as create_profile; noted) | Draft |
+| NOW-SF-057 | 2026-10-22 | DB-33 | ratings.created_at keeps an exact time for good | Low | Handed to DB-35 | Draft |
 
 ## Findings
 
@@ -173,3 +189,22 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-031:** renumbered to `20261022150000`. **SF-032:** `FOR NO KEY UPDATE` at three places, and the script sets `lock_timeout` 5 s and `statement_timeout` 10 min. **SF-033:** the database skips rows outside the Lagos State box (`skipped_out_of_area`). **SF-034:** `app.overture_licensed_sources`, the seven sources `data/NOTICE.md` checked (Foursquare Apache-2.0; Overture, meta, Microsoft, AllThePlaces, DAC, PinMeTo CDLA-Permissive-2.0), counted as `skipped_licence`. Why an allow-list and not an OpenStreetMap block: an unchecked new source stays out until someone checks its licence. Sources were read from the committed research extract, not guessed. **SF-035:** `FOR SHARE` on the candidate.
 - **SF-036 to SF-041:** the script trusts only the connection string's own host and prints a fixed message for a bad string; source names are filtered; httpfs and one-import-at-a-time are documented; contracts §2 says import reviews are staff-only and that `corrected_fields` is set by DB-67/DB-68.
 - **Evidence:** 55 pgTAP tests in CI on `219bea2`, all green (run 39836187056).
+
+### NOW-SF-042 to NOW-SF-049: review of DB-31 (post tables) and DB-02 factories
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet (Tolu's request), on #54 before merge. Nothing Critical or High. Grants and row rules, random IDs, RV3-02's checks and the photo-owner guard checked and clean.
+- **SF-042, SF-043:** the factory clean-up now deletes posts and photos before the profile, always removes the login, and clears posts by place before a place.
+- **SF-044:** a list post whose list is deleted keeps `audience = 'list'` with no list; DB-21 part 2's `can_view` must treat a list or picked post with no audience rows as author-only (with a test), and DB-27 must cancel a waiting widening when its list goes.
+- **SF-045 to SF-047, SF-049:** a removed or deleted post freezes except the time cut and a place merge; inbox rows reference the post's author, date and rank; likes keep no time; a deleted comment stays deleted.
+- **SF-048:** suggest a guard on Isaac's `photos` so the owner never changes once attached.
+- **Evidence:** 55 pgTAP tests in CI with the whole suite (#54).
+
+### NOW-SF-050 to NOW-SF-057: review of DB-32 (create_post) and DB-33 (ratings)
+> Draft, not confirmed
+- **Found:** 2026-10-22, the `now-security-reviewer` agent on Sonnet, on #55 before merge. Nothing Critical or High. Author from the token, the acting-member guard, receipts bound and single-use, places and lists not leaked, no times in answers, all checked and clean.
+- **SF-050:** publishing activates the author's pending rating of the place whichever of their posts made it, and a rating counts while the member has any live post there. Why: "a verdict on every post" with one rating per place; the first post may be held or deleted.
+- **SF-051:** a new rating after 30 days supersedes a held one too. **SF-054:** a staff-removed rating still blocks a new one for its 30 days.
+- **SF-052:** DB-48 must supersede one of two ratings before moving it, keeping the earlier date. **SF-057:** DB-35's time cut covers ratings and comments.
+- **SF-053:** a retry answers only held or scheduled. **SF-055:** the photo-list checks run only on a list (bracketed so PL/pgSQL doesn't end the IF at the CASE's THEN; CI caught that).
+- **SF-056:** not changed: failing calls roll back their count, as in `create_profile`; receipts are signed, so nothing leaks.
+- **Evidence:** 37 + 53 pgTAP tests in CI with the whole suite (#55).

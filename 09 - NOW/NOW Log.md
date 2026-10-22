@@ -114,3 +114,5 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-22 | junior | DB-47 (#48): second Sonnet review, 5 Medium fixed (NOW-SF-031 to 041), licence allow-list, migration 20261022150000, main merged, CI green; still draft, waiting on Tolu over the three contract changes | Now PR #48 (219bea2)
 2026-10-22 | junior | #48 (DB-47) merged by Tolu via the shared UndeifyIT account (auto mode refused Junior's merge); Isaac reviews its contract changes after | Now c16b51c
 2026-10-22 | junior | Tolu: DB-31 post tables built (PR #54, CI green): 5 tables, RV3-02 checks plus guards, 55 pgTAP; Sonnet review no Critical/High, fixes in; DB-02 finished (real-table factories), DB-03 marked done; text limits 500/300 proposed | Now PR #54
+2026-10-22 | junior | Tolu: #54 merged (DB-31 post tables, DB-02 real-table factories, DB-03 done; text limits 500/300 accepted by Tolu) | Now 619c8df
+2026-10-22 | junior | Tolu: #55 merged (DB-33 ratings, DB-32 api.create_post); Sonnet reviews NOW-SF-042 to 057, fixes in; E19 (picks storage) opened; CI caught a PL/pgSQL CASE-in-IF bug before merge | Now c296437
