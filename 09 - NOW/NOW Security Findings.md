@@ -8,21 +8,19 @@ updated: 2026-10-22
 ---
 # NOW Security Findings
 
-> Draft, not confirmed: NOW-SF-001 to NOW-SF-005 wait for Isaac's or Tolu's "lock it". When every finding is locked, this line goes; a new draft finding brings it back.
-
 Every security gap found in a NOW security review, with the fix and why that fix was chosen, so anyone can see later why a piece of code is the way it is. Started on Isaac's request, 2026-10-22. Cross-project risks stay in [[Security Register]]; this note holds NOW's findings in detail.
 
 **How to read it.** IDs (`NOW-SF-NNN`) are permanent and never reused. Severity is Junior's judgment: Critical, High, Medium, Low. Status is one of: **Open** (no fix yet), **Fixed (uncommitted)**, **Fixed** (with the commit), **Handed to** a task, or **Accepted** (a founder chose to live with it; Isaac only, per [[Vault Rules]]). A finding stays a **draft** until Isaac or Tolu says "lock it".
 
 ## Index
 
-| ID | Date | Task | Finding | Severity | Status | Draft? |
+| ID | Date | Task | Finding | Severity | Status | Locked |
 |---|---|---|---|---|---|---|
-| NOW-SF-001 | 2026-10-22 | APP-04 | Session key and ciphertext written in two steps; a read in between signs the member out | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-002 | 2026-10-22 | APP-04 | The image library keeps friends-only photos on disk until sign-out | Medium | Handed to APP-27, MAP-11 | Draft |
-| NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | Draft |
-| NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | Draft |
-| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-001 | 2026-10-22 | APP-04 | Session key and ciphertext written in two steps; a read in between signs the member out | Medium | Fixed (df12767) | 2026-10-22 (Isaac) |
+| NOW-SF-002 | 2026-10-22 | APP-04 | The image library keeps friends-only photos on disk until sign-out | Medium | Handed to APP-27, MAP-11 | 2026-10-22 (Isaac) |
+| NOW-SF-003 | 2026-10-22 | APP-04 | No foreground/background handling for token refresh | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
+| NOW-SF-004 | 2026-10-22 | APP-04 | On reopen, the stored public cache shows before the server confirms the session | Low | Handed to APP-10 | 2026-10-22 (Isaac) |
+| NOW-SF-005 | 2026-10-22 | APP-04 | Only PT401 counts as signed out; PostgREST token errors don't trigger the wipe | Low | Fixed (df12767) | 2026-10-22 (Isaac) |
 
 ## Findings
 
@@ -34,13 +32,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** one key per session, made at the first write and deleted at sign-out. Later writes change only the ciphertext with a fresh random nonce, which is one atomic write. The key is read from secure storage each time (no in-memory copy that could go stale after a reinstall or keychain wipe); only a key being made is shared, so two first writes can't make two keys. Before a new key is made, ciphertext left by a cut-off sign-out is dropped. The "tampered" path deletes only if the ciphertext it read is still the stored one.
 - **Why this fix:** the auth-js `lock` option is deprecated (it warns and goes away in v3), so the fix belongs in our storage, not in a lock. Reusing one AES-GCM key with random 96-bit nonces is safe up to about 2^32 writes, and a session is written roughly once an hour. Sign-out still deletes the key, so a left-behind copy stays unreadable.
 - **Evidence:** a new test (overlapping reads and writes) failed on the old code with a `null` read and passes now. Further tests: a new session after sign-out gets a new key; leftover ciphertext from a cut-off sign-out doesn't cost the next session its key. `app/src/data` tests 14/14, ESLint, Prettier and `tsc` clean.
-- **Status:** Fixed (uncommitted, in Isaac's working tree on `feature/app-04-data-layer`).
+- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (pushed 2026-10-22; PR to `main` waiting to be opened and merged).
 
 ### NOW-SF-002: Friends-only photos kept on disk
 - **Found:** 2026-10-22, APP-04 security review.
 - **Where:** `expo-image` default caching (`cachePolicy` defaults to disk); affects every screen that shows photos.
 - **What was wrong:** EC-100 says non-public posts and photos are held in memory only. `expo-image` writes every photo it shows to disk. The APP-04 wipe clears that cache at sign-out, but a lost phone that stays offline keeps every friends-only photo it has shown.
-- **Fix:** photos from non-public posts use `cachePolicy="memory"`. Written into the APP-27 row of `docs/implementation/workstreams/app.md` (uncommitted). MAP-11 must follow it for "People I follow" pins with photos.
+- **Fix:** photos from non-public posts use `cachePolicy="memory"`. Written into the APP-27 row of `docs/implementation/workstreams/app.md` (Now df12767). MAP-11 must follow it for "People I follow" pins with photos.
 - **Why this fix:** no APP-04 code shows images yet, so the rule belongs where photos are built (APP-27). Memory-only keeps EC-100 true at the cost of re-downloading friends' photos, which is the cost the founders already accepted for non-public posts.
 - **Status:** Handed to APP-27 and MAP-11. Junior checks it at their security review.
 
@@ -65,4 +63,4 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fix:** `isSignedOut` now treats PT401, PGRST301 (token can't be decoded) and PGRST303 (expired or invalid claims) as signed out, so any of them runs the sign-out and wipe. The query retry rule also stops retrying them, since a rejected token never gets better on retry.
 - **Why this fix:** these three codes all mean "this token is no good", whichever layer said it. Other PGRST3xx codes are server misconfiguration (for example a missing JWT secret), not a member's ended session, so signing the member out on them would be wrong; they were left out on purpose.
 - **Evidence:** the shared-phone wipe test now runs for each of the three codes; the two PostgREST cases failed on the old code and pass now. Data and session tests 23/23, ESLint and `tsc` clean.
-- **Status:** Fixed (uncommitted, in Isaac's working tree on `feature/app-04-data-layer`).
+- **Status:** Fixed in Now df12767 on `feature/app-04-data-layer` (pushed 2026-10-22; PR to `main` waiting to be opened and merged).

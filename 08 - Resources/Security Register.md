@@ -38,7 +38,7 @@ Append-only, newest last. One line each: `date | project | what was found or hap
 2026-09-28 | ShiftOS | Full production-readiness audit (C1 invitation takeover and H8 leave-reading steps included) committed to public repo UndeifyIT/ShiftOS as `1f2c19c` at 00:11, by the isaaCecurity account. Found ~6 min later; 0 forks/stars/watchers at that point | high | open: repo still public | make repo private; then fix C1 first
 2026-09-28 | ShiftOS | Incident above contained: repo made private by Isaac, verified 00:35 (GitHub returns 404 unauthenticated). Window ~00:11–00:35. C1 now treated as public knowledge | high | contained | fix C1 first (audit I1)
 2026-09-28 | ShiftOS | Live DB check: `anon` can SELECT and INSERT `security_events` rows with null organization_id (2 rows exposed, each with a signup IP); any org member can INSERT and SELECT `audit_logs` via REST; `anon`/`authenticated` hold DELETE/UPDATE/TRUNCATE on `audit_logs` | high | open, draft | 2026-09-28 daily note
-2026-10-22 | NOW | APP-04 data layer review: 2 Medium, 3 Low; no Critical/High. From now on each project keeps its findings, fixes and the reasons for them in its own findings note | medium | 2 fixed (uncommitted), 3 handed to tasks | [[NOW Security Findings]]
+2026-10-22 | NOW | APP-04 data layer review: 2 Medium, 3 Low; no Critical/High. From now on each project keeps its findings, fixes and the reasons for them in its own findings note | medium | locked by Isaac; 2 fixed (Now df12767), 3 handed to tasks | [[NOW Security Findings]]
 
 ## 3. Incident-response runbook
 Use it for a leaked secret, a suspected breach, a compromised account or a data exposure.
