@@ -119,6 +119,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-108 | 2026-10-23 | DB-57 | The keep test passed in bulk mode, so it never exercised the go-live guard | Medium | Fixed (#62, 1823c6c) | Draft |
 | NOW-SF-109 | 2026-10-23 | DB-57 | Keep and unban aren't logged, so a restore's replay undoes them | Low | Accepted (restore procedure: staff re-apply) | Draft |
 | NOW-SF-110 | 2026-10-23 | DB-57 | Keep could restore a banned author's post; a rating restriction waits for the hourly refresh | Low | Fixed keep (#62); refresh delay accepted | Draft |
+| NOW-SF-111 | 2026-10-23 | DB-15 | The clean-up could delete a returning sign-up's login mid-flow; one failing step undid the rest | Medium | Fixed (#63, c6b3983) | Draft |
+| NOW-SF-112 | 2026-10-23 | DB-15 | Staff logins are safe only by convention (no phone) until DB-07's staff table exists | Medium | Handed to DB-07 (Isaac) | Draft |
+| NOW-SF-113 | 2026-10-23 | DB-15 | Phone-less logins (future sign-in methods) aren't cleaned; other clean-up steps belong to other tasks | Low | Open (noted in DB-15 row) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -341,3 +344,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-109:** accepted: `revocation_log` holds removals only, so after a restore staff re-apply keeps and unbans (system architecture's restore procedure).
 - **SF-110:** keep refuses an inactive author; a rating restriction counts from the next hourly refresh (accepted).
 - **Evidence:** 54 pgTAP tests in CI with the whole suite (#62).
+
+### NOW-SF-111 to NOW-SF-113: review of DB-15 (daily clean-up)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #63 before merge. Nothing Critical or High: no member, staff login, tester, used invite or evidence can be deleted; `app.members` blocks deleting any login with a profile.
+- **SF-111:** logins signed in to within 7 days are left, locked ones are skipped, and each step runs on its own.
+- **SF-112:** for Isaac: once DB-07 adds `app.staff`, `private.cleanup` must also skip staff logins, with a pgTAP case.
+- **SF-113:** logins with no phone stay until the rule covers future sign-in methods (E13); abuse signals, analytics and inboxes are cleaned by DB-63, DB-46 and DB-41.
+- **Evidence:** 17 pgTAP tests in CI with the whole suite (#63).
