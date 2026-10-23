@@ -146,6 +146,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-135 | 2026-10-23 | DB-48 | A newer pending or "Did you go?" rating could replace one that counts publicly | Medium | Fixed (#68) | Draft |
 | NOW-SF-136 | 2026-10-23 | DB-48 | Undo could fail, revive a place whose survivor moved on, or bring back what members removed; member IDs kept forever in merge records | Medium | Fixed (#68): 90-day undo window, purge in the clean-up (proposed); DB-14 scrubs deleted members | Draft |
 | NOW-SF-137 | 2026-10-23 | DB-48 | Totals, pins and inbox rows not rebuilt by a merge; small edge cases | Medium | Survivor gets a totals row; readers show live and closed places only and re-check inbox rows (DB-38, DB-41, pins) | Draft |
+| NOW-SF-138 | 2026-10-23 | DB-13 | Recovery-email requests could flood any inbox through many accounts | Medium | Fixed (#69, 384de6a): 3 a day per address | Draft |
+| NOW-SF-139 | 2026-10-23 | DB-13 | `change_phone` trusts its caller fully and left the phone identity stale | Medium | Fixed (#69): identity updated, 3 a day; BE-03 must take the member from the checked code (test) | Draft |
+| NOW-SF-140 | 2026-10-23 | DB-13 | Confirming a link shared the add limit | Medium | Fixed (#69) | Draft |
+| NOW-SF-141 | 2026-10-23 | DB-13 | A stolen session can replace the recovery email with no fresh code | Medium | Partly: the current address is told when a replacement starts; founders decide a fresh code or 24-hour hold | Draft |
+| NOW-SF-142 | 2026-10-23 | DB-13 | Logout needed a registered device; a bad address could block the email queue; two races | Low | Fixed (#69) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -425,3 +430,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-136:** undo checks the survivor and later merges, restores dropped rows only if the kept one still exists, skips departed members; member data purged after 90 days or on undo.
 - **SF-137:** handed on: DB-38, DB-41 and pins show only live and closed places and resolve old IDs.
 - **Evidence:** 42 pgTAP tests in CI with the whole suite (#68).
+
+### NOW-SF-138 to NOW-SF-142: review of DB-13 (devices and recovery)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #69 before merge (a first run stalled and was rerun). Nothing Critical or High: the device check is bound to the session and member, tokens are 256-bit, hashed, single-use and member-bound, and the add answer is the same in every branch.
+- **SF-138:** `recovery_email_target` limit, counted in both branches.
+- **SF-139:** `auth.identities` phone data updated; BE-03 test that check-code never takes the member from the request.
+- **SF-140:** `recovery_email_confirm` limit.
+- **SF-141:** open for the founders: a fresh phone code or a 24-hour hold to replace a recovery email, before recovery by email goes live.
+- **SF-142:** `log_out_all_devices` needs only a live session; `claim_emails` archives an address that won't decrypt; races on confirm and register answer cleanly.
+- **Evidence:** 47 pgTAP tests in CI with the whole suite (#69).
