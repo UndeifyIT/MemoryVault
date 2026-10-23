@@ -107,6 +107,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-096 | 2026-10-23 | DB-03 | The function-body guards can still be met by a string literal | Low | Open, note proposed | Draft |
 | NOW-SF-097 | 2026-10-23 | DB-07 | Phone numbers split by `_`, `*`, letters or non-ASCII digits pass the reason check | Low | Proposed: accept (guards honest mistakes) | Draft |
 | NOW-SF-098 | 2026-10-23 | DB-07 | If the old migration version was ever pushed to a shared database, DB-32's same-numbered migration is skipped there | Low | Open: check staging | Draft |
+| NOW-SF-099 | 2026-10-23 | DB-52 | A tie, or a margin set to 0, called one tag the clear leader | Medium | Fixed (#60, 73b5052) | Draft |
+| NOW-SF-100 | 2026-10-23 | DB-52 | The refresh scanned every post twice per rating | Medium | Fixed (#60, 73b5052) | Draft |
+| NOW-SF-101 | 2026-10-23 | DB-52 | Malformed or unknown tag pairs in the settings made odd Mixed entries | Low | Fixed (#60, 73b5052) | Draft |
+| NOW-SF-102 | 2026-10-23 | DB-52 | Tags need 3 people, stricter than FR-PLC-14's 3 posts | Low | Open (Tolu to confirm) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -306,3 +310,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-092:** contracts §2 tells DB-38 and DB-55 what they may show (raters only beside a verdict; no raw counts below the thresholds; never the weights).
 - **SF-093:** accepted as EC-99 already records it.
 - **Evidence:** 32 pgTAP tests in CI with the whole suite (#59).
+
+### NOW-SF-099 to NOW-SF-102: review of DB-52 (summary rules)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #60 before merge. Nothing Critical or High: tags and "Varies" come only from what DB-37 already counts, and every floor holds.
+- **SF-099 to SF-101:** a tie is never a clear lead and the margin floors at 0.01; one scan of each person's posts; only real pairs of two different NOW tags.
+- **SF-102:** the code needs 3 people for a tag (one person's posts can't make one); FR-PLC-14 says 3 posts. Tolu to confirm the stricter rule and the wording.
+- **Evidence:** 15 pgTAP tests in CI with the whole suite (#60).
