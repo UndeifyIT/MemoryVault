@@ -131,6 +131,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-120 | 2026-10-23 | DB-44 | Push tokens outlive "log out of all devices" and bans; removing a phone was rate-limited | Low | Rate limit fixed (#65); token removal handed to DB-13 | Draft |
 | NOW-SF-121 | 2026-10-23 | DB-44 | A queued push ignored a switch turned off while it waited; follower notifications outlived the follow | Low | Fixed (#65) | Draft |
 | NOW-SF-122 | 2026-10-23 | DB-44 | Unconfirmed pushes come back (possible duplicates); first page marks hidden rows seen | Low | Accepted; idempotent sends handed to BE-07 | Draft |
+| NOW-SF-123 | 2026-10-23 | DB-36 | The 30-day erasure of rejected places could fail silently | Medium | Fixed (#66, 4258856): `rejected_places_overdue` in health facts | Draft |
+| NOW-SF-124 | 2026-10-23 | DB-36 | The server's same-place check could be skipped with six or more similar places | Medium | Fixed (#66) | Draft |
+| NOW-SF-125 | 2026-10-23 | DB-36 | Nothing slowed a member whose pins keep getting rejected; no view of the pending backlog | Medium | Fixed (#66): 3 rejections in 30 days stop adds (proposed); pending counts in health facts | Draft |
+| NOW-SF-126 | 2026-10-23 | DB-36 | A pending place keeps its adder and creation time until the team acts | Medium | Open: auto-reject after 30 to 60 days proposed for the founders (DB-68 or clean-up) | Draft |
+| NOW-SF-127 | 2026-10-23 | DB-36 | A same-place answer used up an add; long names processed before the length check | Low | Fixed (#66) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -380,3 +385,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-121:** `claim_pushes` drops a push whose type was switched off; `new_follower` and `follow_back` show only while the follow stands.
 - **SF-122:** BE-07 sends idempotently; marking all rows seen on the first page accepted.
 - **Evidence:** 70 pgTAP tests in CI with the whole suite (#65).
+
+### NOW-SF-123 to NOW-SF-127: review of DB-36 (adding a place)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #66 before merge. Nothing Critical or High: no lookup or same-place answer shows a pending place the member can't already see, and `added_by` is never returned.
+- **SF-123:** the health check counts rejected places still holding details after 30 days.
+- **SF-124:** places the member ruled out leave the candidates before the 5-place cap.
+- **SF-125:** 3 rejections in 30 days return `too_many_rejected` (proposed); `places_pending` and `oldest_pending_place_days` show the backlog.
+- **SF-126:** open, for the founders: a pending place links its adder, pin and creation time until reviewed; proposed auto-reject after 30 to 60 days.
+- **SF-127:** only a place made counts against the 10 a day; names over 500 characters are refused first.
+- **Evidence:** 45 pgTAP tests in CI with the whole suite (#66).
