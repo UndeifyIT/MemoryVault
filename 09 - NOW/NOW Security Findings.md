@@ -90,6 +90,17 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-072 | 2026-10-23 | DB-34 | A banned author was sent a "post held" notice | Low | Fixed (#58, 0b848bc) | Draft |
 | NOW-SF-073 | 2026-10-23 | DB-34 | A transient error holds a post as publish_failed until staff clear it | Low | Open (by design; noted) | Draft |
 | NOW-SF-074 | 2026-10-23 | DB-34 | Supabase Cron's run log grows without limit | Low | Fixed (#58: prune_cron_runs) | Draft |
+| NOW-SF-076 | 2026-10-23 | DB-07 | The staff check trusted the token's multi-factor claims, so a leaked service key could swap a staff login's authenticator and get full staff power, founder powers included | High | Fixed (uncommitted) | Draft |
+| NOW-SF-077 | 2026-10-23 | DB-07 | Removing staff left the login and its authenticators, so an authenticator a thief added survived a later re-add | Medium | Fixed (uncommitted) | Draft |
+| NOW-SF-078 | 2026-10-23 | DB-07 | Free-text audit reasons could hold phone numbers or emails, kept for good | Medium | Fixed (uncommitted) | Draft |
+| NOW-SF-079 | 2026-10-23 | DB-07 | The member-or-staff lock doesn't hold under repeatable read | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-080 | 2026-10-23 | DB-07 | The SMS-factor test used a method name Supabase never issues | Low | Fixed (uncommitted; moot, the token's amr is no longer read) | Draft |
+| NOW-SF-081 | 2026-10-23 | DB-03 | The function-body guards were satisfied by a commented-out call | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-082 | 2026-10-23 | DB-07 | Staff rows could be edited in place, unlogged, and direct changes aren't attributed | Low | Fixed (uncommitted: edits blocked); attribution handed to DB-08 (pgaudit) | Draft |
+| NOW-SF-083 | 2026-10-23 | DB-07 | A login with a phone number could be made staff | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-084 | 2026-10-23 | DB-07 | No tests for schema and sequence access; the 100-target cap will split bulk staff actions | Low | Fixed (uncommitted: tests); cap handed to DB-61 | Draft |
+| NOW-SF-085 | 2026-10-23 | DB-07 | A staff login's first sign-in step can only come from the service-key code path today | Medium | Handed to open question E20 (Isaac) | Draft |
+| NOW-SF-086 | 2026-10-23 | DB-07 | The audit log had no purge, so the data map's 12 months could never be kept | Low | Fixed (uncommitted) | Draft |
 
 ## Findings
 
@@ -259,3 +270,14 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-070 to SF-072, SF-074:** a held post always has its reason; nothing jumps from waiting to hidden; no notice to a banned or deleting author; `prune_cron_runs` keeps 3 days of the cron log.
 - **SF-073:** kept: a failed publish waits for staff rather than retrying.
 - **Evidence:** 33 pgTAP tests in CI with the whole suite (#58).
+
+### NOW-SF-076 to NOW-SF-086: review of DB-07 (staff logins and the audit log)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on the DB-07 draft (uncommitted, `feature/db-07-staff-audit`), plus SF-086 by Junior. One High: the rest of the draft held (empty `search_path`, no API role reaches the tables, sequence or functions, refusals unlogged by design, append-only log).
+- **SF-076 (High, NFR-SEC-24):** `require_staff` read `aal` and `amr` from the token. With the service key, an attacker can delete a staff login's authenticator through the Auth admin API, start a session for that login, enrol a new authenticator (allowed when none is verified) and get a valid `aal2` token. **Fix:** each role is pinned to one verified TOTP factor at `add_staff`; `require_staff` reads the session's `aal` and factor from `auth.sessions` and the TOTP time from `auth.mfa_amr_claims`, and the factor must be the pinned, still-verified one. **Why this fix:** the database already holds the truth about how a session was raised, and a swapped factor can't match the pin, so it fails closed and only a founder over a direct connection can re-pin. Columns confirmed on a live Supabase project (read-only schema query).
+- **SF-077:** `remove_staff` now deletes the staff login itself; sessions, refresh tokens and authenticators cascade. A returning moderator gets a new login.
+- **SF-078:** the reason is capped at 200 characters and refuses 10 or more digits in a row, `@` and new lines; IDs go in `target_ids`. The role moved into the action name (`founder_added`, `moderator_added`).
+- **SF-079 to SF-084:** repeatable read refused in the member-or-staff trigger; the test fixture rewritten (amr no longer read); the DB-03 guards strip comments before matching (all three, not only the staff one); `UPDATE` on `app.staff` refused; `add_staff` refuses a login with a phone number; schema and sequence privilege tests added. Attribution of direct changes waits for DB-08's pgaudit; the 100-target cap is noted for DB-61.
+- **SF-085:** with email sign-in and the phone provider off (system architecture §4.10), only the service-key path can create a staff session. SF-076's pin means a stolen key still gets no staff power, but the first step shouldn't depend on that key. Written up as open question E20 for Isaac; blocks DB-61 and APP-51.
+- **SF-086:** the audit log's append-only trigger blocked every delete, so the data map's 12-month retention could never be applied. `private.purge_audit_log()` (same pattern as DB-06), run daily by Supabase Cron.
+- **Evidence:** `db_07_staff_audit.sql` 56/56 and `db_03` 9/9 on the PGlite stand-in (Auth's MFA tables and a cron shim added to mirror the live schema); seven mutants (factor pin, verified check, phone regex, phone-login check, keeping the login on removal, purge age check, a commented-out staff check) each fail at least one test. Real CI not run. Second review pass pending.
