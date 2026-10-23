@@ -131,3 +131,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-23 | junior | Tolu: DB-57 state helpers merged (#62): set_post_state, approve_held_edit, hide_comments_between, set_member_status, mark_cohort, apply_sanction, set_rating_status, set_app_config, health_facts; Sonnet review SF-106 to 110 | Now 1823c6c
 2026-10-23 | junior | Tolu: DB-15 daily clean-up merged (#63); Sonnet review SF-111 to 113; DB-07 must make the clean-up skip staff logins | Now c6b3983
 2026-10-23 | junior | Tolu: DB-40 saves, Been here, Did you go? merged (#64); Sonnet review SF-114 to 117 | Now 33aa527
+2026-10-23 | junior | Tolu: DB-44 notifications merged (#65): notify, alert_founders, get_notifications, prefs, push tokens, pgmq queues for BE-07; Sonnet review SF-118 to 122 | Now 96cb3bf

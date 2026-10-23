@@ -126,6 +126,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-115 | 2026-10-23 | DB-40 | A private "Did you go?" rating could cancel a member's public post rating | Medium | Fixed (#64, 33aa527) | Draft |
 | NOW-SF-116 | 2026-10-23 | DB-40 | The saved list gave public IDs but the other calls take place IDs | Medium | Fixed (#64, 33aa527) | Draft |
 | NOW-SF-117 | 2026-10-23 | DB-40 | No cap on saves; a flaky ordering test; merges must merge saves too | Low | Fixed (#64); merge note handed to DB-48 | Draft |
+| NOW-SF-118 | 2026-10-23 | DB-44 | Founder safety alerts had no overall cap: a wave of reports could flood both founders | Medium | Fixed (#65, 96cb3bf) | Draft |
+| NOW-SF-119 | 2026-10-23 | DB-44 | Registering a phone at the same moment as another member could answer "registered" with nothing stored | Medium | Fixed (#65) | Draft |
+| NOW-SF-120 | 2026-10-23 | DB-44 | Push tokens outlive "log out of all devices" and bans; removing a phone was rate-limited | Low | Rate limit fixed (#65); token removal handed to DB-13 | Draft |
+| NOW-SF-121 | 2026-10-23 | DB-44 | A queued push ignored a switch turned off while it waited; follower notifications outlived the follow | Low | Fixed (#65) | Draft |
+| NOW-SF-122 | 2026-10-23 | DB-44 | Unconfirmed pushes come back (possible duplicates); first page marks hidden rows seen | Low | Accepted; idempotent sends handed to BE-07 | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -365,3 +370,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-116:** `get_saved` gives the place ID (random, as every other place call takes it) with the public ID.
 - **SF-117:** 2,000 saves a member (proposed); DB-48 merges saves and "Been here" like ratings.
 - **Evidence:** 37 pgTAP tests in CI with the whole suite (#64).
+
+### NOW-SF-118 to NOW-SF-122: review of DB-44 (notifications)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #65 before merge. Nothing Critical or High: every read and every push re-checks that the member may still see what it is about (T-23); the push carries only the notification ID; the `pgmq` schema and the four tables give API roles nothing.
+- **SF-118:** `alert_founders` sends at most 10 of a kind an hour; the rest are kept unsent and counted by `health_facts`.
+- **SF-119:** `register_push_token` retries once and otherwise raises a retryable error.
+- **SF-120:** `remove_push_token` is never rate-limited; DB-13's "log out of all devices" (and a ban) must delete the member's tokens.
+- **SF-121:** `claim_pushes` drops a push whose type was switched off; `new_follower` and `follow_back` show only while the follow stands.
+- **SF-122:** BE-07 sends idempotently; marking all rows seen on the first page accepted.
+- **Evidence:** 70 pgTAP tests in CI with the whole suite (#65).
