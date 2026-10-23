@@ -102,6 +102,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-084 | 2026-10-23 | DB-07 | No tests for schema and sequence access; the 100-target cap will split bulk staff actions | Low | Fixed (uncommitted: tests); cap handed to DB-61 | Draft |
 | NOW-SF-085 | 2026-10-23 | DB-07 | A staff login's first sign-in step can only come from the service-key code path today | Medium | Handed to open question E20 (Isaac) | Draft |
 | NOW-SF-086 | 2026-10-23 | DB-07 | The audit log had no purge, so the data map's 12 months could never be kept | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-094 | 2026-10-23 | DB-07 | A staff login deleted through the Auth admin API leaves no audit row, only a revocation entry purged after 40 days | Low | Open, fix proposed | Draft |
+| NOW-SF-095 | 2026-10-23 | DB-07 | The 12-month audit purge has no legal-hold exemption, and 12 months is still a lawyer proposal | Low | Handed to legal item 36 (before 2027-10) | Draft |
+| NOW-SF-096 | 2026-10-23 | DB-03 | The function-body guards can still be met by a string literal | Low | Open, note proposed | Draft |
+| NOW-SF-097 | 2026-10-23 | DB-07 | Phone numbers split by `_`, `*`, letters or non-ASCII digits pass the reason check | Low | Proposed: accept (guards honest mistakes) | Draft |
+| NOW-SF-098 | 2026-10-23 | DB-07 | If the old migration version was ever pushed to a shared database, DB-32's same-numbered migration is skipped there | Low | Open: check staging | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -281,7 +286,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-073:** kept: a failed publish waits for staff rather than retrying.
 - **Evidence:** 33 pgTAP tests in CI with the whole suite (#58).
 
-### NOW-SF-076 to NOW-SF-086: review of DB-07 (staff logins and the audit log)
+### NOW-SF-076 to NOW-SF-086 and NOW-SF-094 to NOW-SF-098: review of DB-07 (staff logins and the audit log)
 > Draft, not confirmed
 - **Found:** 2026-10-23, the `now-security-reviewer` agent on the DB-07 draft (uncommitted, `feature/db-07-staff-audit`), plus SF-086 by Junior. One High: the rest of the draft held (empty `search_path`, no API role reaches the tables, sequence or functions, refusals unlogged by design, append-only log).
 - **SF-076 (High, NFR-SEC-24):** `require_staff` read `aal` and `amr` from the token. With the service key, an attacker can delete a staff login's authenticator through the Auth admin API, start a session for that login, enrol a new authenticator (allowed when none is verified) and get a valid `aal2` token. **Fix:** each role is pinned to one verified TOTP factor at `add_staff`; `require_staff` reads the session's `aal` and factor from `auth.sessions` and the TOTP time from `auth.mfa_amr_claims`, and the factor must be the pinned, still-verified one. **Why this fix:** the database already holds the truth about how a session was raised, and a swapped factor can't match the pin, so it fails closed and only a founder over a direct connection can re-pin. Columns confirmed on a live Supabase project (read-only schema query).
@@ -291,6 +296,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-085:** with email sign-in and the phone provider off (system architecture §4.10), only the service-key path can create a staff session. SF-076's pin means a stolen key still gets no staff power, but the first step shouldn't depend on that key. Written up as open question E20 for Isaac; blocks DB-61 and APP-51.
 - **SF-086:** the audit log's append-only trigger blocked every delete, so the data map's 12-month retention could never be applied. `private.purge_audit_log()` (same pattern as DB-06), run daily by Supabase Cron.
 - **Evidence:** `db_07_staff_audit.sql` 56/56 and `db_03` 9/9 on the PGlite stand-in (Auth's MFA tables and a cron shim added to mirror the live schema); seven mutants (factor pin, verified check, phone regex, phone-login check, keeping the login on removal, purge age check, a commented-out staff check) each fail at least one test. Real CI not run. Second review pass pending.
+- **Second pass (2026-10-23, same agent, on the fixed code):** SF-076 to SF-084 and SF-086 confirmed fixed; nothing Critical, High or Medium. Checked read-only on a live Supabase project's Auth schema (MindBridge's, the only one the connector sees; schema metadata only): the service key can't write `auth.sessions`, `auth.mfa_factors` or `auth.mfa_amr_claims`; `postgres` can delete from `auth.users`; no Storage foreign key points at `auth.users`; Auth times are `timestamptz`. New Lows: **SF-094** (proposed fix: the `staff_removed` trigger writes the audit row, so an admin-API deletion is audited too); **SF-095** (legal item 36); **SF-096** (contrived, a reviewer catches it; note it in the test); **SF-097** (accept); **SF-098** (the old file was never committed, so CI and Tolu's pushes never saw it; only a local `supabase db push` by Isaac could have applied it to staging).
 
 ### NOW-SF-087 to NOW-SF-093: review of DB-37 (place totals)
 > Draft, not confirmed
