@@ -136,6 +136,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-125 | 2026-10-23 | DB-36 | Nothing slowed a member whose pins keep getting rejected; no view of the pending backlog | Medium | Fixed (#66): 3 rejections in 30 days stop adds (proposed); pending counts in health facts | Draft |
 | NOW-SF-126 | 2026-10-23 | DB-36 | A pending place keeps its adder and creation time until the team acts | Medium | Open: auto-reject after 30 to 60 days proposed for the founders (DB-68 or clean-up) | Draft |
 | NOW-SF-127 | 2026-10-23 | DB-36 | A same-place answer used up an add; long names processed before the length check | Low | Fixed (#66) | Draft |
+| NOW-SF-128 | 2026-10-23 | DB-46 | Guest app opens and share-page opens always failed: `check_rate` refused their keys | High | Fixed (#67, a842da3) | Draft |
+| NOW-SF-129 | 2026-10-23 | DB-46 | A guest could write up to 400,000 event rows an hour, and one abuser could use up every guest's limit | High | Fixed (#67): one guest app open a call, lower ceilings; per-visitor limits stay with AWS WAF | Draft |
+| NOW-SF-130 | 2026-10-23 | DB-46 | Phone events took any properties (numbers could carry coordinates) and a malformed one failed the batch | Medium | Fixed (#67): allowlist per event, platform from the server only | Draft |
+| NOW-SF-131 | 2026-10-23 | DB-46 | Turning exact times off kept old times; nothing runs the beta deletion; cascades logged as members' acts | Medium | Fixed (#67) except the beta-end job, handed to the beta-end clean-up | Draft |
+| NOW-SF-132 | 2026-10-23 | DB-46 | Small numbers in kept weekly reports; events stay pseudonymous after account deletion | Low | Accepted (founders-only; recorded in the data map) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -395,3 +400,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-126:** open, for the founders: a pending place links its adder, pin and creation time until reviewed; proposed auto-reject after 30 to 60 days.
 - **SF-127:** only a place made counts against the 10 a day; names over 500 characters are refused first.
 - **Evidence:** 45 pgTAP tests in CI with the whole suite (#66).
+
+### NOW-SF-128 to NOW-SF-132: review of DB-46 (analytics)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #67 before merge. No event stores a member ID, free text or location.
+- **SF-128:** guest and share-page calls now use the all-zero UUID as their rate key (CI confirmed the failure first).
+- **SF-129:** one guest `app_opened` a call; 5,000 guest calls and 20,000 share-page opens an hour (proposed), behind AWS WAF.
+- **SF-130:** `private.ui_event_props` fixes each phone event's properties; `analytics_props_ok` never errors on a value that isn't an object.
+- **SF-131:** turning `exact_times` off clears kept times; cascade deletes log nothing (detected by the missing other end, since FK cascades don't raise `pg_trigger_depth`); the beta-end clean-up must call `delete_beta_events`.
+- **SF-132:** accepted.
+- **Evidence:** 43 pgTAP tests in CI with the whole suite (#67).
