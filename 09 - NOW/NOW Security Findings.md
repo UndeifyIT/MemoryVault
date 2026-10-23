@@ -122,6 +122,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-111 | 2026-10-23 | DB-15 | The clean-up could delete a returning sign-up's login mid-flow; one failing step undid the rest | Medium | Fixed (#63, c6b3983) | Draft |
 | NOW-SF-112 | 2026-10-23 | DB-15 | Staff logins are safe only by convention (no phone) until DB-07's staff table exists | Medium | Handed to DB-07 (Isaac) | Draft |
 | NOW-SF-113 | 2026-10-23 | DB-15 | Phone-less logins (future sign-in methods) aren't cleaned; other clean-up steps belong to other tasks | Low | Open (noted in DB-15 row) | Draft |
+| NOW-SF-114 | 2026-10-23 | DB-40 | A "Did you go?" push that never arrives lost the question | Medium | Fixed (#64, 33aa527) | Draft |
+| NOW-SF-115 | 2026-10-23 | DB-40 | A private "Did you go?" rating could cancel a member's public post rating | Medium | Fixed (#64, 33aa527) | Draft |
+| NOW-SF-116 | 2026-10-23 | DB-40 | The saved list gave public IDs but the other calls take place IDs | Medium | Fixed (#64, 33aa527) | Draft |
+| NOW-SF-117 | 2026-10-23 | DB-40 | No cap on saves; a flaky ordering test; merges must merge saves too | Low | Fixed (#64); merge note handed to DB-48 | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -352,3 +356,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-112:** for Isaac: once DB-07 adds `app.staff`, `private.cleanup` must also skip staff logins, with a pgTAP case.
 - **SF-113:** logins with no phone stay until the rule covers future sign-in methods (E13); abuse signals, analytics and inboxes are cleaned by DB-63, DB-46 and DB-41.
 - **Evidence:** 17 pgTAP tests in CI with the whole suite (#63).
+
+### NOW-SF-114 to NOW-SF-117: review of DB-40 (saves, Been here, Did you go?)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #64 before merge. Nothing Critical or High: rows are owner-only, never reach a public output, and pending places give the same "not found".
+- **SF-114:** `get_saved` shows `did_you_go_pending`, so the app can ask even if the push is dropped.
+- **SF-115:** a "yes" leaves a post rating alone; `take_rating` lets a post supersede a "Did you go?" rating rather than inherit it (its verdict counts in public; the private one never does).
+- **SF-116:** `get_saved` gives the place ID (random, as every other place call takes it) with the public ID.
+- **SF-117:** 2,000 saves a member (proposed); DB-48 merges saves and "Been here" like ratings.
+- **Evidence:** 37 pgTAP tests in CI with the whole suite (#64).
