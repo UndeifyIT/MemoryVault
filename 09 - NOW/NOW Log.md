@@ -134,3 +134,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-23 | junior | Tolu: DB-44 notifications merged (#65): notify, alert_founders, get_notifications, prefs, push tokens, pgmq queues for BE-07; Sonnet review SF-118 to 122 | Now 96cb3bf
 2026-10-23 | junior | Tolu: DB-36 adding a place merged (#66): find_same_place, add_place with a server-side same-place check, rejected-place erasure; Sonnet review SF-123 to 127 | Now 4258856
 2026-10-23 | junior | Tolu: DB-46 analytics merged (#67): analytics.events, log_event with member, triggers, phone and share-page logging, weekly report; Sonnet review SF-128 to 132 (two Highs fixed) | Now a842da3
+2026-10-23 | junior | Tolu: DB-48 place merge merged (#68): merge_places, unmerge_places, resolve_place; Sonnet review SF-133 to 137 (two Highs fixed) | Now db80682

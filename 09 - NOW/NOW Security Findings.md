@@ -141,6 +141,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-130 | 2026-10-23 | DB-46 | Phone events took any properties (numbers could carry coordinates) and a malformed one failed the batch | Medium | Fixed (#67): allowlist per event, platform from the server only | Draft |
 | NOW-SF-131 | 2026-10-23 | DB-46 | Turning exact times off kept old times; nothing runs the beta deletion; cascades logged as members' acts | Medium | Fixed (#67) except the beta-end job, handed to the beta-end clean-up | Draft |
 | NOW-SF-132 | 2026-10-23 | DB-46 | Small numbers in kept weekly reports; events stay pseudonymous after account deletion | Low | Accepted (founders-only; recorded in the data map) | Draft |
+| NOW-SF-133 | 2026-10-23 | DB-48 | A save, "Been here" or rating written while a merge ran landed on the merged place and was lost | High | Fixed (#68, db80682): `place_not_merged` trigger | Draft |
+| NOW-SF-134 | 2026-10-23 | DB-48 | The merge could deadlock with `take_rating` | High | Fixed (#68): rating locks first, sorted | Draft |
+| NOW-SF-135 | 2026-10-23 | DB-48 | A newer pending or "Did you go?" rating could replace one that counts publicly | Medium | Fixed (#68) | Draft |
+| NOW-SF-136 | 2026-10-23 | DB-48 | Undo could fail, revive a place whose survivor moved on, or bring back what members removed; member IDs kept forever in merge records | Medium | Fixed (#68): 90-day undo window, purge in the clean-up (proposed); DB-14 scrubs deleted members | Draft |
+| NOW-SF-137 | 2026-10-23 | DB-48 | Totals, pins and inbox rows not rebuilt by a merge; small edge cases | Medium | Survivor gets a totals row; readers show live and closed places only and re-check inbox rows (DB-38, DB-41, pins) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -410,3 +415,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-131:** turning `exact_times` off clears kept times; cascade deletes log nothing (detected by the missing other end, since FK cascades don't raise `pg_trigger_depth`); the beta-end clean-up must call `delete_beta_events`.
 - **SF-132:** accepted.
 - **Evidence:** 43 pgTAP tests in CI with the whole suite (#67).
+
+### NOW-SF-133 to NOW-SF-137: review of DB-48 (place merge)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #68 before merge. Nothing shows a hidden or pending place's posts reaching anyone who shouldn't see them.
+- **SF-133:** writes at a place wait for a merge and follow it (saves, "Been here") or are refused (ratings).
+- **SF-134:** the merge takes take_rating's per-member locks, sorted, before the place locks.
+- **SF-135:** kept rating ranked: a post's over "Did you go?", active over pending over held, then newer.
+- **SF-136:** undo checks the survivor and later merges, restores dropped rows only if the kept one still exists, skips departed members; member data purged after 90 days or on undo.
+- **SF-137:** handed on: DB-38, DB-41 and pins show only live and closed places and resolve old IDs.
+- **Evidence:** 42 pgTAP tests in CI with the whole suite (#68).
