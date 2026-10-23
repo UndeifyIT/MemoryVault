@@ -149,7 +149,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-138 | 2026-10-23 | DB-13 | Recovery-email requests could flood any inbox through many accounts | Medium | Fixed (#69, 384de6a): 3 a day per address | Draft |
 | NOW-SF-139 | 2026-10-23 | DB-13 | `change_phone` trusts its caller fully and left the phone identity stale | Medium | Fixed (#69): identity updated, 3 a day; BE-03 must take the member from the checked code (test) | Draft |
 | NOW-SF-140 | 2026-10-23 | DB-13 | Confirming a link shared the add limit | Medium | Fixed (#69) | Draft |
-| NOW-SF-141 | 2026-10-23 | DB-13 | A stolen session can replace the recovery email with no fresh code | Medium | Partly: the current address is told when a replacement starts; founders decide a fresh code or 24-hour hold | Draft |
+| NOW-SF-141 | 2026-10-23 | DB-13 | A stolen session can replace the recovery email with no fresh code | Medium | Fixed (#70): a replacement, or a first address from a phone first used within a day, waits 24 hours unless a fresh code confirms it; cancelled by the member or by logging out everywhere (decided by Tolu) | Draft |
 | NOW-SF-142 | 2026-10-23 | DB-13 | Logout needed a registered device; a bad address could block the email queue; two races | Low | Fixed (#69) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
