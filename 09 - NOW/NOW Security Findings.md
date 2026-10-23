@@ -101,6 +101,13 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-084 | 2026-10-23 | DB-07 | No tests for schema and sequence access; the 100-target cap will split bulk staff actions | Low | Fixed (uncommitted: tests); cap handed to DB-61 | Draft |
 | NOW-SF-085 | 2026-10-23 | DB-07 | A staff login's first sign-in step can only come from the service-key code path today | Medium | Handed to open question E20 (Isaac) | Draft |
 | NOW-SF-086 | 2026-10-23 | DB-07 | The audit log had no purge, so the data map's 12 months could never be kept | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
+| NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
+| NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
+| NOW-SF-090 | 2026-10-23 | DB-37 | Ranking settings unchecked: floors could go below 3, a bad value stopped the job | Medium | Fixed (#59, 098a58b) | Draft |
+| NOW-SF-091 | 2026-10-23 | DB-37 | A ban or removal at a quiet place stayed public until the nightly run | Medium | Fixed (#59, 098a58b) | Draft |
+| NOW-SF-092 | 2026-10-23 | DB-37 | Raw counts and weights must stay out of place reads and pins | Low | Handed to DB-38, DB-55 (contracts §2) | Draft |
+| NOW-SF-093 | 2026-10-23 | DB-37 | At a quiet place, hourly differences can show someone joined or left | Low | Accepted (EC-99; readers round) | Draft |
 
 ## Findings
 
@@ -281,3 +288,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-085:** with email sign-in and the phone provider off (system architecture §4.10), only the service-key path can create a staff session. SF-076's pin means a stolen key still gets no staff power, but the first step shouldn't depend on that key. Written up as open question E20 for Isaac; blocks DB-61 and APP-51.
 - **SF-086:** the audit log's append-only trigger blocked every delete, so the data map's 12-month retention could never be applied. `private.purge_audit_log()` (same pattern as DB-06), run daily by Supabase Cron.
 - **Evidence:** `db_07_staff_audit.sql` 56/56 and `db_03` 9/9 on the PGlite stand-in (Auth's MFA tables and a cron shim added to mirror the live schema); seven mutants (factor pin, verified check, phone regex, phone-login check, keeping the login on removal, purge age check, a commented-out staff check) each fail at least one test. Real CI not run. Second review pass pending.
+
+### NOW-SF-087 to NOW-SF-093: review of DB-37 (place totals)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #59 before merge. One High; nothing Critical.
+- **SF-087 (High):** every post takes a rating (DB-32) and a post 30 days later replaces it, so a member with an old public post who later posted Friends-only had their private verdict and price counted publicly. Fix: a rating counts only if an eligible public post made it or showed it later (`source_id`, or a public post written after the rating). Tested both ways.
+- **SF-088 to SF-091:** an hour from going live too; 3 people for a verdict; settings validated with floors of 3 and a prior of at least 1; places with public totals refresh hourly.
+- **SF-092:** contracts §2 tells DB-38 and DB-55 what they may show (raters only beside a verdict; no raw counts below the thresholds; never the weights).
+- **SF-093:** accepted as EC-99 already records it.
+- **Evidence:** 32 pgTAP tests in CI with the whole suite (#59).
