@@ -114,6 +114,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-103 | 2026-10-23 | DB-09 | The seed's guard passed on an empty staging or production database | Medium | Partly fixed (#61, df43003); hand-running against an empty remote accepted | Draft |
 | NOW-SF-104 | 2026-10-23 | DB-09 | The seed's phone-number comment overstated why the numbers are safe | Low | Fixed (#61, df43003) | Draft |
 | NOW-SF-105 | 2026-10-23 | DB-09 | Seed ratings depended on row order; direct status changes looked like the app's path | Low | Fixed (#61, df43003) | Draft |
+| NOW-SF-106 | 2026-10-23 | DB-57 | set_app_config could empty the ranking settings or a budget, freezing totals or lifting a cap | Medium | Fixed (#62, 1823c6c) | Draft |
+| NOW-SF-107 | 2026-10-23 | DB-57 | set_rating_status and take_rating took their locks in opposite orders (deadlock) | Medium | Fixed (#62, 1823c6c) | Draft |
+| NOW-SF-108 | 2026-10-23 | DB-57 | The keep test passed in bulk mode, so it never exercised the go-live guard | Medium | Fixed (#62, 1823c6c) | Draft |
+| NOW-SF-109 | 2026-10-23 | DB-57 | Keep and unban aren't logged, so a restore's replay undoes them | Low | Accepted (restore procedure: staff re-apply) | Draft |
+| NOW-SF-110 | 2026-10-23 | DB-57 | Keep could restore a banned author's post; a rating restriction waits for the hourly refresh | Low | Fixed keep (#62); refresh delay accepted | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -327,3 +332,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-103:** the seed now also refuses any login or tester it didn't make, which staging and production have from the first tester (tested). Accepted: someone deliberately running the file by hand against an empty remote database; the README says never to.
 - **SF-104, SF-105:** the numbers are 12 digits, one short of a Nigerian number, so no SMS reaches them; ratings in post order; direct status changes marked as seed shortcuts.
 - **Evidence:** CI loaded the seed (16 posts in every status, 7 members, 2 inbox rows) and saw it refuse a stranger and skip a second run (#61).
+
+### NOW-SF-106 to NOW-SF-110: review of DB-57 (state helpers)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #62 before merge. Nothing Critical or High; transitions (no re-publish, no resurrection, never two current ratings), logging of hides, removals, comment hides and bans, and the held-edit hash check are clean.
+- **SF-106:** `private.config_shape_ok`: a setting keeps its keys and types, numbers stay at least 0, and only a monthly cap may go back to null (its feature then fails closed).
+- **SF-107:** the advisory lock first, then the row, in both functions. **SF-108:** keep is tested with the guard on, with a negative control.
+- **SF-109:** accepted: `revocation_log` holds removals only, so after a restore staff re-apply keeps and unbans (system architecture's restore procedure).
+- **SF-110:** keep refuses an inactive author; a rating restriction counts from the next hourly refresh (accepted).
+- **Evidence:** 54 pgTAP tests in CI with the whole suite (#62).
