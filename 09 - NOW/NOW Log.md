@@ -127,3 +127,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-23 | junior | For Isaac: DB-07's migration version 20261023110000 collides with DB-37 on main; DB-21 part 2 fixtures must use bulk mode or publish_post since DB-34's go-live guard; DB-38 waits for DB-21 part 2 and DB-50 | Now 098a58b
 2026-10-23 | junior | SF-075 fixed on Isaac's OK (posts_guard replaced in DB-21 part 2 migration); part 2 40/40, db_31 55/55, db_34 33/33 on PGlite; uncommitted | Now feature/db-21-visibility-rule
 2026-10-23 | junior | Tolu: DB-52 summary rules merged (#60): top_tags, price_varies, settings in place_ranking; Sonnet review SF-099 to 102 | Now 73b5052
+2026-10-23 | junior | Tolu: DB-09 development seed merged (#61): supabase/seeds/dev.sql via pnpm db:seed, refuses non-seed logins, members or testers; Sonnet review SF-103 to 105 | Now df43003

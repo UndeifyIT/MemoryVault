@@ -111,6 +111,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-100 | 2026-10-23 | DB-52 | The refresh scanned every post twice per rating | Medium | Fixed (#60, 73b5052) | Draft |
 | NOW-SF-101 | 2026-10-23 | DB-52 | Malformed or unknown tag pairs in the settings made odd Mixed entries | Low | Fixed (#60, 73b5052) | Draft |
 | NOW-SF-102 | 2026-10-23 | DB-52 | Tags need 3 people, stricter than FR-PLC-14's 3 posts | Low | Open (Tolu to confirm) | Draft |
+| NOW-SF-103 | 2026-10-23 | DB-09 | The seed's guard passed on an empty staging or production database | Medium | Partly fixed (#61, df43003); hand-running against an empty remote accepted | Draft |
+| NOW-SF-104 | 2026-10-23 | DB-09 | The seed's phone-number comment overstated why the numbers are safe | Low | Fixed (#61, df43003) | Draft |
+| NOW-SF-105 | 2026-10-23 | DB-09 | Seed ratings depended on row order; direct status changes looked like the app's path | Low | Fixed (#61, df43003) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -317,3 +320,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-099 to SF-101:** a tie is never a clear lead and the margin floors at 0.01; one scan of each person's posts; only real pairs of two different NOW tags.
 - **SF-102:** the code needs 3 people for a tag (one person's posts can't make one); FR-PLC-14 says 3 posts. Tolu to confirm the stricter rule and the wording.
 - **Evidence:** 15 pgTAP tests in CI with the whole suite (#60).
+
+### NOW-SF-103 to NOW-SF-105: review of DB-09 (development seed data)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #61 before merge. Nothing Critical or High; the data is made up and nothing can load it but `pnpm db:seed` (`--local`, seeding off in config.toml, enforced by the CI config guard).
+- **SF-103:** the seed now also refuses any login or tester it didn't make, which staging and production have from the first tester (tested). Accepted: someone deliberately running the file by hand against an empty remote database; the README says never to.
+- **SF-104, SF-105:** the numbers are 12 digits, one short of a Nigerian number, so no SMS reaches them; ratings in post order; direct status changes marked as seed shortcuts.
+- **Evidence:** CI loaded the seed (16 posts in every status, 7 members, 2 inbox rows) and saw it refuse a stranger and skip a second run (#61).
