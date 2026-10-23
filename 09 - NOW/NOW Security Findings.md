@@ -151,6 +151,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-140 | 2026-10-23 | DB-13 | Confirming a link shared the add limit | Medium | Fixed (#69) | Draft |
 | NOW-SF-141 | 2026-10-23 | DB-13 | A stolen session can replace the recovery email with no fresh code | Medium | Fixed (#70): a replacement, or a first address from a phone first used within a day, waits 24 hours unless a fresh code confirms it; cancelled by the member or by logging out everywhere (decided by Tolu) | Draft |
 | NOW-SF-142 | 2026-10-23 | DB-13 | Logout needed a registered device; a bad address could block the email queue; two races | Low | Fixed (#69) | Draft |
+| NOW-SF-143 | 2026-10-23 | DB-59 | The dormancy gate only works if check-code calls it before any token exchange, fails closed and shows one neutral screen | Medium | Rules in contracts §2 for BE-03, with tests there | Draft |
+| NOW-SF-144 | 2026-10-23 | DB-59 | The email check wasn't bound to the asking phone; a number's new holder could use up the owner's daily codes | Medium | Fixed (#71): bound to the install; limits per phone and per account | Draft |
+| NOW-SF-145 | 2026-10-23 | DB-59 | Session refresh time, old known phones, code lifetime, contract kinds | Low | Fixed (#71): refreshed_at counted, known phones expire after a year, 10-minute codes | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -440,3 +443,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-141:** open for the founders: a fresh phone code or a 24-hour hold to replace a recovery email, before recovery by email goes live.
 - **SF-142:** `log_out_all_devices` needs only a live session; `claim_emails` archives an address that won't decrypt; races on confirm and register answer cleanly.
 - **Evidence:** 47 pgTAP tests in CI with the whole suite (#69).
+
+### NOW-SF-143 to NOW-SF-145: review of DB-59 (recycled numbers)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #71 before merge. Nothing Critical or High in the SQL; the main risk is how check-code (BE-03, not built) uses it.
+- **SF-143:** BE-03 must gate before any token exchange, treat errors and limits as refusal, take member and install from the checked attempt, and show one neutral screen.
+- **SF-144:** checks carry the install hash; 3 codes a day per phone, 10 per account.
+- **SF-145:** fixed as listed.
+- **Evidence:** 23 pgTAP tests in CI with the whole suite (#71).

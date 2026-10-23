@@ -137,3 +137,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-23 | junior | Tolu: DB-48 place merge merged (#68): merge_places, unmerge_places, resolve_place; Sonnet review SF-133 to 137 (two Highs fixed) | Now db80682
 2026-10-23 | junior | Tolu: DB-13 devices and recovery merged (#69): register_device and the device check in require_member, log_out_all_devices, recovery email, change_phone, email queue; Sonnet review SF-138 to 142 | Now 384de6a
 2026-10-23 | junior | Tolu: recovery-email 24-hour hold merged (#70): replacement and new-phone first address wait 24 hours or a fresh code; review fixes and a fail-closed new-phone check | Now merged #70
+2026-10-23 | junior | Tolu: DB-59 recycled numbers merged (#71): sign_in_gate, verify_sign_in_email_code, sign-in codes by recovery email; Sonnet review SF-143 to 145 | Now merged #71
