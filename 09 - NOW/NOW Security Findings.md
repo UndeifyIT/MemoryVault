@@ -154,6 +154,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-143 | 2026-10-23 | DB-59 | The dormancy gate only works if check-code calls it before any token exchange, fails closed and shows one neutral screen | Medium | Rules in contracts §2 for BE-03, with tests there | Draft |
 | NOW-SF-144 | 2026-10-23 | DB-59 | The email check wasn't bound to the asking phone; a number's new holder could use up the owner's daily codes | Medium | Fixed (#71): bound to the install; limits per phone and per account | Draft |
 | NOW-SF-145 | 2026-10-23 | DB-59 | Session refresh time, old known phones, code lifetime, contract kinds | Low | Fixed (#71): refreshed_at counted, known phones expire after a year, 10-minute codes | Draft |
+| NOW-SF-146 | 2026-10-23 | DB-58 | The quiet-place hold could publish once when a place dropped below 10, and kept removed content in a verdict up to a day | Medium | Fixed (#72): held only while nothing went down; quiet while either count is under 10 | Draft |
+| NOW-SF-147 | 2026-10-23 | DB-58 | The quiet threshold could be set below 10 | Low | Fixed (#72): clamped to 10-1000 | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -451,3 +453,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-144:** checks carry the install hash; 3 codes a day per phone, 10 per account.
 - **SF-145:** fixed as listed.
 - **Evidence:** 23 pgTAP tests in CI with the whole suite (#71).
+
+### NOW-SF-146 to NOW-SF-147: review of DB-58 (quiet-place totals)
+> Draft, not confirmed
+- **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #72 before merge. No Critical or High; the hold stops the hourly verdict leak (EC-99).
+- **SF-146:** a removal (deleted or removed post, ban, rating restriction) releases the hold at once (FR-MOD-08); DB-38 and DB-41 show a verdict only with enough eligible posts.
+- **SF-147:** `quiet_contributors` clamped.
+- **Evidence:** 15 pgTAP tests in CI with the whole suite (#72).
