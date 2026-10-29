@@ -148,3 +148,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-29 | isaac | Locked NOW-SF-064 to 066, 075 (DB-21), 076 to 086 and 094 to 098 (DB-07; SF-097 accepted), 151 to 153 (DB-62; SF-151 accepted) | vault
 2026-10-29 | junior | Isaac: Waiting on Isaac updated for the locked findings | Now 25dbe4b on docs/isaac-approvals-2026-10-29
 2026-10-29 | junior | Tolu: staging restored (it had paused); already at main's migrations through 20261029100000, dry run up to date | Now 555214b
+2026-10-29 | junior | Tolu: Isaac pushed DB-21 part 2, DB-62 and his approvals (no PRs); posts_guard review pass; Dependabot batch 2 combined as #88 (green, waiting to merge); Sentry deferred to launch | Now 555214b
