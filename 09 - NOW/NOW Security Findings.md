@@ -193,6 +193,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-182 | 2026-10-30 | DB-63 | No burst check for likes, saves or "Been here" (F-17): coordinated likes can lift a post in Near you and the strip with nothing flagged | Medium | Open for Isaac: build before public launch (likes have no held state yet) or accept for the beta | Draft |
 | NOW-SF-183 | 2026-10-30 | DB-64 | Nobody but the founder who does it hears when the "NOW team" badge is handed out; a stolen founder session could badge an attacker's account to impersonate NOW, seen only in the audit log | Low | Open: alert both founders on every badge change once DB-61's console alerts exist (alert_founders takes safety kinds only today) | Draft |
 | NOW-SF-184 | 2026-10-30 | DB-64 | A late marking re-stamps the member's events, but weekly reports already written still count them | Low | Open for the founders: mark founding posters and team accounts before they post (seeding guide); regenerate a report if one was missed | Draft |
+| NOW-SF-185 | 2026-10-30 | DB-50 | Each photo link reads the key from Vault and re-runs can_view, up to 100 times for a feed page with 5 photos a post | Low | Open: measure in the feed speed tests (NFR-PERF); if slow, fetch the key once per page | Draft |
+| NOW-SF-186 | 2026-10-30 | DB-50 | sign_photo_export_url trusts its caller for whose photos to sign; a wrapper that took the member from the request would let anyone export anyone's photos | Low | Handed to BE-06 and BE-26: the wrapper takes the member from the session | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -558,3 +560,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-64-team-accounts` (63bb2fe). No Critical or High: founders only (a moderator can't hand out the badge), multi-factor through require_staff, a reason and the account in the audit log, badge and cohort kept equal by `mark_cohort`.
 - **SF-183, 184 (Low, open):** who hears about a badge change, and reports written before a late marking.
 - **Evidence:** db_64 16/16 on the harness, with DB-39 and DB-63 merged in; whole suite unchanged apart from the known harness-only failures. Real CI not run.
+
+### NOW-SF-185 to NOW-SF-186: review of DB-50 (photo links)
+> Draft, not confirmed
+- **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-50-photo-signing` (afa450b). No Critical or High: links are signed only after can_view (or, for a profile photo, an active member with no block), the viewing and export families use separate keys and paths that can't pass as tickets or receipts, and a missing key drops photos rather than failing. The shared-secret link key in CloudFront stays the accepted risk RV3-15.
+- **SF-185 (Low):** speed, to measure. **SF-186 (Low):** a rule for BE-06's wrapper.
+- **Evidence:** db_50 21/21 on the harness (Node test vectors match), stacked on DB-63 and DB-64; whole suite unchanged apart from the known harness-only failures. Real CI not run.
