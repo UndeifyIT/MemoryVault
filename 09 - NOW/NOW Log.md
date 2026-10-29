@@ -143,3 +143,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-29 | junior | Tolu: merged #73 (DB-07 with main, types and SF-112), #79 (QA-06), #80 (APP-06 events), #81 (docs); CI green | Now 166f061
 2026-10-29 | junior | Isaac: after-the-fact approvals recorded (contracts #36-38, #48, #56, #57, #68, #69; APP-01, QA-01, APP-03); DB-07 marked merged | Now 4604ec2 on docs/isaac-approvals-2026-10-29
 2026-10-29 | junior | Tolu: Dependabot #74 to 76 merged together as #82 with a TanStack group; #77, #78 closed (mismatched TanStack bumps) | Now 555214b
+2026-10-29 | junior | Isaac: DB-21 part 2 (can_view, post_audience, public_posts) brought up to main, renumbered 20261029110000, types synced, pushed; no new findings | Now de78a98 on feature/db-21-visibility-rule
