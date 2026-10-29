@@ -155,3 +155,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-29 | junior | Tolu: DB-45 findings renumbered 166 to 171 (clashed with DB-60's 162 to 165); #96 merged, CI green | Now a8c13ad
 2026-10-30 | junior | Tolu: DB-39 likes and comments built, reviewed (SF-172 to 177), uncommitted; waiting for Tolu's word to push | Now feature/db-39-likes-comments
 2026-10-30 | junior | Isaac: DB-63 rating integrity built on main after DB-45, reviewed inline (SF-178 to 182, renumbered from 172 to 176), pushed | Now f4af753 on feature/db-63-rating-integrity
+2026-10-30 | junior | Isaac: DB-64 team accounts built, reviewed inline (SF-183, 184), pushed stacked on DB-63 | Now 7e059a2 on feature/db-64-team-accounts

@@ -191,6 +191,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-180 | 2026-10-30 | DB-63 | The network signal depends on Supabase passing Cloudflare's `cf-connecting-ip` to the database; if it stops, or ratings go through our own server, every member shares one address or none | Low | Open for Tolu: check once on staging that a rating records a network signal | Draft |
 | NOW-SF-181 | 2026-10-30 | DB-63 | With the abuse key missing from Vault, signals stop being recorded with only a database log line (fails open so posting never breaks) | Low | Open: add a "signals recorded in the last day" count to the health check (BE-11) | Draft |
 | NOW-SF-182 | 2026-10-30 | DB-63 | No burst check for likes, saves or "Been here" (F-17): coordinated likes can lift a post in Near you and the strip with nothing flagged | Medium | Open for Isaac: build before public launch (likes have no held state yet) or accept for the beta | Draft |
+| NOW-SF-183 | 2026-10-30 | DB-64 | Nobody but the founder who does it hears when the "NOW team" badge is handed out; a stolen founder session could badge an attacker's account to impersonate NOW, seen only in the audit log | Low | Open: alert both founders on every badge change once DB-61's console alerts exist (alert_founders takes safety kinds only today) | Draft |
+| NOW-SF-184 | 2026-10-30 | DB-64 | A late marking re-stamps the member's events, but weekly reports already written still count them | Low | Open for the founders: mark founding posters and team accounts before they post (seeding guide); regenerate a report if one was missed | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -550,3 +552,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-178 (fixed):** an advisory lock makes the 10-minute job run one at a time.
 - **SF-179, 180, 181 (Low, open):** detection quality, not data exposure. **SF-182 (Medium, Isaac):** F-17 covers likes, saves and "Been here" too; DB-63's plan line covers ratings only.
 - **Evidence:** db_63 36/36 on the PGlite harness; whole suite unchanged apart from the known harness-only failures (db_07 #37, db_13, db_30, db_36); DB-37's and DB-45's fixtures changed for real weights. Real CI not run.
+
+### NOW-SF-183 to NOW-SF-184: review of DB-64 (team accounts)
+> Draft, not confirmed
+- **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-64-team-accounts` (63bb2fe). No Critical or High: founders only (a moderator can't hand out the badge), multi-factor through require_staff, a reason and the account in the audit log, badge and cohort kept equal by `mark_cohort`.
+- **SF-183, 184 (Low, open):** who hears about a badge change, and reports written before a late marking.
+- **Evidence:** db_64 16/16 on the harness, with DB-39 and DB-63 merged in; whole suite unchanged apart from the known harness-only failures. Real CI not run.
