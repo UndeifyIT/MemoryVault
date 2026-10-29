@@ -146,3 +146,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-29 | junior | Isaac: DB-21 part 2 (can_view, post_audience, public_posts) brought up to main, renumbered 20261029110000, types synced, pushed; no new findings | Now de78a98 on feature/db-21-visibility-rule
 2026-10-29 | junior | Isaac: DB-62 risky-word check built, reviewed inline (SF-151 to 153), pushed; loop paused on Isaac's word | Now c69055e on feature/db-62-risky-words
 2026-10-29 | isaac | Locked NOW-SF-064 to 066, 075 (DB-21), 076 to 086 and 094 to 098 (DB-07; SF-097 accepted), 151 to 153 (DB-62; SF-151 accepted) | vault
+2026-10-29 | junior | Isaac: Waiting on Isaac updated for the locked findings | Now 25dbe4b on docs/isaac-approvals-2026-10-29
