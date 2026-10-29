@@ -79,9 +79,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-061 | 2026-10-22 | E19 | A pick can go stale between posting and publish (no follow lock) | Low | Handed to DB-26 (re-trim at publish) | Draft |
 | NOW-SF-062 | 2026-10-22 | DB-32 | A dialled delay under an hour lets a watcher guess when someone was there, as "Post now" does | Medium | Accepted by Tolu as the member's choice; app warning (APP-33) | Draft |
 | NOW-SF-063 | 2026-10-22 | DB-32 | Minutes were accepted without a custom timer or with "Post now" | Low | Fixed (#57, a1efefe) | Draft |
-| NOW-SF-064 | 2026-10-23 | DB-21 | A snapshot row left after an unfollow reopens old list and picked posts once the two follow each other again | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-065 | 2026-10-23 | DB-21 | The snapshot check doesn't require, or lock, the member's place on the source list, so a removal racing the publish keeps access | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-066 | 2026-10-23 | DB-21 | Snapshot rows from a post's earlier list or picks keep granting after its audience changes | Low | Fixed (uncommitted) | Draft |
+| NOW-SF-064 | 2026-10-23 | DB-21 | A snapshot row left after an unfollow reopens old list and picked posts once the two follow each other again | Medium | Fixed (de78a98, `feature/db-21-visibility-rule`, not merged) | 2026-10-29 (Isaac) |
+| NOW-SF-065 | 2026-10-23 | DB-21 | The snapshot check doesn't require, or lock, the member's place on the source list, so a removal racing the publish keeps access | Medium | Fixed (de78a98, `feature/db-21-visibility-rule`, not merged) | 2026-10-29 (Isaac) |
+| NOW-SF-066 | 2026-10-23 | DB-21 | Snapshot rows from a post's earlier list or picks keep granting after its audience changes | Low | Fixed (de78a98, `feature/db-21-visibility-rule`, not merged) | 2026-10-29 (Isaac) |
 | NOW-SF-067 | 2026-10-23 | DB-34 | The publish job locked its whole batch of posts until the run ended | Medium | Fixed (#58, 0b848bc) | Draft |
 | NOW-SF-068 | 2026-10-23 | DB-34 | A list or picked post goes live with an empty snapshot until DB-26 | Medium | Handed to DB-21 part 2 (author-only test) | Draft |
 | NOW-SF-069 | 2026-10-23 | DB-34 | Inbox rows are candidates; a public post at an unchecked place reached non-friends | Medium | Partly fixed (#58); read re-check handed to DB-41 | Draft |
@@ -90,23 +90,23 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-072 | 2026-10-23 | DB-34 | A banned author was sent a "post held" notice | Low | Fixed (#58, 0b848bc) | Draft |
 | NOW-SF-073 | 2026-10-23 | DB-34 | A transient error holds a post as publish_failed until staff clear it | Low | Open (by design; noted) | Draft |
 | NOW-SF-074 | 2026-10-23 | DB-34 | Supabase Cron's run log grows without limit | Low | Fixed (#58: prune_cron_runs) | Draft |
-| NOW-SF-075 | 2026-10-23 | DB-31 | A member can't delete a list once any post shared with it was deleted or removed: `posts_guard` refuses the cascade's `list_id` change | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-076 | 2026-10-23 | DB-07 | The staff check trusted the token's multi-factor claims, so a leaked service key could swap a staff login's authenticator and get full staff power, founder powers included | High | Fixed (uncommitted) | Draft |
-| NOW-SF-077 | 2026-10-23 | DB-07 | Removing staff left the login and its authenticators, so an authenticator a thief added survived a later re-add | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-078 | 2026-10-23 | DB-07 | Free-text audit reasons could hold phone numbers or emails, kept for good | Medium | Fixed (uncommitted) | Draft |
-| NOW-SF-079 | 2026-10-23 | DB-07 | The member-or-staff lock doesn't hold under repeatable read | Low | Fixed (uncommitted) | Draft |
-| NOW-SF-080 | 2026-10-23 | DB-07 | The SMS-factor test used a method name Supabase never issues | Low | Fixed (uncommitted; moot, the token's amr is no longer read) | Draft |
-| NOW-SF-081 | 2026-10-23 | DB-03 | The function-body guards were satisfied by a commented-out call | Low | Fixed (uncommitted) | Draft |
-| NOW-SF-082 | 2026-10-23 | DB-07 | Staff rows could be edited in place, unlogged, and direct changes aren't attributed | Low | Fixed (uncommitted: edits blocked); attribution handed to DB-08 (pgaudit) | Draft |
-| NOW-SF-083 | 2026-10-23 | DB-07 | A login with a phone number could be made staff | Low | Fixed (uncommitted) | Draft |
-| NOW-SF-084 | 2026-10-23 | DB-07 | No tests for schema and sequence access; the 100-target cap will split bulk staff actions | Low | Fixed (uncommitted: tests); cap handed to DB-61 | Draft |
-| NOW-SF-085 | 2026-10-23 | DB-07 | A staff login's first sign-in step can only come from the service-key code path today | Medium | Handed to open question E20 (Isaac) | Draft |
-| NOW-SF-086 | 2026-10-23 | DB-07 | The audit log had no purge, so the data map's 12 months could never be kept | Low | Fixed (uncommitted) | Draft |
-| NOW-SF-094 | 2026-10-23 | DB-07 | A staff login deleted through the Auth admin API leaves no audit row, only a revocation entry purged after 40 days | Low | Open, fix proposed | Draft |
-| NOW-SF-095 | 2026-10-23 | DB-07 | The 12-month audit purge has no legal-hold exemption, and 12 months is still a lawyer proposal | Low | Handed to legal item 36 (before 2027-10) | Draft |
-| NOW-SF-096 | 2026-10-23 | DB-03 | The function-body guards can still be met by a string literal | Low | Open, note proposed | Draft |
-| NOW-SF-097 | 2026-10-23 | DB-07 | Phone numbers split by `_`, `*`, letters or non-ASCII digits pass the reason check | Low | Proposed: accept (guards honest mistakes) | Draft |
-| NOW-SF-098 | 2026-10-23 | DB-07 | If the old migration version was ever pushed to a shared database, DB-32's same-numbered migration is skipped there | Low | Open: check staging | Draft |
+| NOW-SF-075 | 2026-10-23 | DB-31 | A member can't delete a list once any post shared with it was deleted or removed: `posts_guard` refuses the cascade's `list_id` change | Medium | Fixed (de78a98, `feature/db-21-visibility-rule`, not merged) | 2026-10-29 (Isaac) |
+| NOW-SF-076 | 2026-10-23 | DB-07 | The staff check trusted the token's multi-factor claims, so a leaked service key could swap a staff login's authenticator and get full staff power, founder powers included | High | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-077 | 2026-10-23 | DB-07 | Removing staff left the login and its authenticators, so an authenticator a thief added survived a later re-add | Medium | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-078 | 2026-10-23 | DB-07 | Free-text audit reasons could hold phone numbers or emails, kept for good | Medium | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-079 | 2026-10-23 | DB-07 | The member-or-staff lock doesn't hold under repeatable read | Low | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-080 | 2026-10-23 | DB-07 | The SMS-factor test used a method name Supabase never issues | Low | Fixed (#73, b2164d7; moot, the token's amr is no longer read) | 2026-10-29 (Isaac) |
+| NOW-SF-081 | 2026-10-23 | DB-03 | The function-body guards were satisfied by a commented-out call | Low | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-082 | 2026-10-23 | DB-07 | Staff rows could be edited in place, unlogged, and direct changes aren't attributed | Low | Fixed (#73, b2164d7: edits blocked); attribution handed to DB-08 (pgaudit) | 2026-10-29 (Isaac) |
+| NOW-SF-083 | 2026-10-23 | DB-07 | A login with a phone number could be made staff | Low | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-084 | 2026-10-23 | DB-07 | No tests for schema and sequence access; the 100-target cap will split bulk staff actions | Low | Fixed (#73, b2164d7: tests); cap handed to DB-61 | 2026-10-29 (Isaac) |
+| NOW-SF-085 | 2026-10-23 | DB-07 | A staff login's first sign-in step can only come from the service-key code path today | Medium | Handed to open question E20 (Isaac) | 2026-10-29 (Isaac) |
+| NOW-SF-086 | 2026-10-23 | DB-07 | The audit log had no purge, so the data map's 12 months could never be kept | Low | Fixed (#73, b2164d7) | 2026-10-29 (Isaac) |
+| NOW-SF-094 | 2026-10-23 | DB-07 | A staff login deleted through the Auth admin API leaves no audit row, only a revocation entry purged after 40 days | Low | Open, fix proposed | 2026-10-29 (Isaac) |
+| NOW-SF-095 | 2026-10-23 | DB-07 | The 12-month audit purge has no legal-hold exemption, and 12 months is still a lawyer proposal | Low | Handed to legal item 36 (before 2027-10) | 2026-10-29 (Isaac) |
+| NOW-SF-096 | 2026-10-23 | DB-03 | The function-body guards can still be met by a string literal | Low | Open, note proposed | 2026-10-29 (Isaac) |
+| NOW-SF-097 | 2026-10-23 | DB-07 | Phone numbers split by `_`, `*`, letters or non-ASCII digits pass the reason check | Low | Accepted (Isaac, 2026-10-29) | 2026-10-29 (Isaac) |
+| NOW-SF-098 | 2026-10-23 | DB-07 | If the old migration version was ever pushed to a shared database, DB-32's same-numbered migration is skipped there | Low | Open: check staging | 2026-10-29 (Isaac) |
 | NOW-SF-099 | 2026-10-23 | DB-52 | A tie, or a margin set to 0, called one tag the clear leader | Medium | Fixed (#60, 73b5052) | Draft |
 | NOW-SF-100 | 2026-10-23 | DB-52 | The refresh scanned every post twice per rating | Medium | Fixed (#60, 73b5052) | Draft |
 | NOW-SF-101 | 2026-10-23 | DB-52 | Malformed or unknown tag pairs in the settings made odd Mixed entries | Low | Fixed (#60, 73b5052) | Draft |
@@ -159,6 +159,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-148 | 2026-10-29 | APP-06 | A queued batch could be sent under a different session than its owner's for a moment (sign-up, server sign-out) | Low | Fixed (#80): the phone's session is checked before each batch; a mismatch drops the owner's events | Draft |
 | NOW-SF-149 | 2026-10-29 | APP-06 | Guest app opens were sent at every foreground, using up the one shared guest limit | Low | Fixed (#80): only the owner's first app_opened of the Lagos day is queued | Draft |
 | NOW-SF-150 | 2026-10-29 | APP-06 | No test proved DataProvider drops the last member's events | Low | Fixed (#80): a test in query.test.tsx, checked by a mutant | Draft |
+| NOW-SF-151 | 2026-10-29 | DB-62 | A member can learn the risky-word list by posting and seeing "being checked"; spelling tricks pass | Low | Accepted (Isaac, 2026-10-29): post limit slows probing, reports are the backstop | 2026-10-29 (Isaac) |
+| NOW-SF-152 | 2026-10-29 | DB-62 | The list's trigger writes `risky_word_list_version` in Tolu's `app_config` directly | Info | Tolu to confirm (DB-05 reserved the key for DB-62) | 2026-10-29 (Isaac) |
+| NOW-SF-153 | 2026-10-29 | DB-62 | `check_risky_text` fails if called as an API role; edits and comments must call it too | Low | Documented in contracts §2 (c69055e, `feature/db-62-risky-words`, not merged) | 2026-10-29 (Isaac) |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -319,7 +322,6 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Evidence:** 60 pgTAP tests in CI (#57).
 
 ### NOW-SF-064 to NOW-SF-066 and NOW-SF-075: review of DB-21 part 2 (the visibility rule)
-> Draft, not confirmed
 - **Found:** 2026-10-23, Junior's inline review (Isaac's call, no agent) of DB-21 part 2, uncommitted on `feature/db-21-visibility-rule` (`supabase/migrations/20261022210000_db_21_visibility_rule.sql`: `can_view`, `post_audience`, `post_audience_pending`, the snapshot trigger, the list-removal trigger, `public_posts`). Nothing Critical or High. Checked and clean: `can_view` matches system architecture §7.1 line by line (guests go to the public branch before any block check, so SF-022's worry can't happen; a missing post is false; author sees every state but deleted); member and post statuses match DB-10 and DB-31; the projection carries no exact time, pending text, client ID or audience; grants, row rules and `security_invoker` on the view; `posts` stays closed to the API roles, so dropping the RV3-14 policy wrapper opens nothing. All three gaps below were reproduced on PGlite before writing them up.
 - **SF-064:** the trigger header says "a row a clean-up missed opens nothing", and the test checks that only while the two are still apart. When they follow each other again, `is_friend` is true and the old row grants the old list or picked post, which FR-AUD-04 says they lost. Everything hangs on DB-22, DB-23, DB-14 and the revocation replay each deleting the rows. Proposed fix: an AFTER DELETE trigger on `app.follows` that deletes `post_audience` and `post_audience_pending` rows between the two, both ways, the same pattern this migration already uses for list removals. Why: any follow ending (unfollow, remove follower, block, purge, replay) then cleans up with no task having to remember.
 - **SF-065:** `post_audience_check` checks the list is the author's but not that the member is on it, and it locks only the follow rows. If DB-26 reads the list, a removal commits, and DB-26 then inserts the removed person, the removal's clean-up ran too early and the row stays. Proposed fix: for a list row, the trigger requires the `audience_list_members` row and locks it (FOR KEY SHARE), so the removal waits and then deletes the new row. Why: the same RV3-04 lock-first rule the follow rows already get.
@@ -328,6 +330,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Fixed (uncommitted), 2026-10-23, on Isaac's OK:** all three as proposed (`follows_ended` trigger; the snapshot trigger requires and locks the list entry; `can_view` counts only rows for the current audience). Seven new tests (38 in the file); all 38 pass once SF-075's path is avoided, and each fix removed on its own makes at least one test fail (4 mutants, all caught). The branch was brought up to `main` 0b848bc (DB-34) and the migration renumbered to `20261023110000`, after DB-34's, so `db push` accepts it (the SF-031 lesson); the test now writes its posts in DB-34's bulk mode. contracts.md §2 now says the triggers do the clean-up.
 - **SF-075 (found while testing the fixes):** once the test gave list posts their list, deleting a list failed with "a removed or deleted post stays that way". `app.posts.list_id` and `pending_list_id` are ON DELETE SET NULL, and DB-31's `posts_guard` refuses any change to a removed or deleted post. So a member who deleted one list post can never delete that list. EC-92's "deleting a list ends access" then fails for every live post on it too, because the whole delete rolls back. A purge that deletes lists before posts hits the same wall. Proposed fix: `posts_guard` lets those two columns become empty on a removed or deleted post (a new migration replacing the function; DB-31 is Tolu's, so he reviews it). Why: the cascade is the only thing that writes them there, and an empty list ID opens nothing. **Fixed (uncommitted), 2026-10-23, on Isaac's OK:** `posts_guard` replaced in the DB-21 part 2 migration; two new tests (the list delete goes through; a deleted post still can't be moved to another list, and a mutant allowing that is caught). Branch brought up to `main` 098a58b (DB-37) and the migration renumbered again to `20261023130000`, since DB-37 took `20261023110000`. Whole suite on PGlite: `db_21_visibility_rule` 40/40, `db_31`, `db_34` and `db_37` pass; the only failures are the stand-in's missing vault and PostGIS functions, which fail on `main` too.
 
+- **Locked:** by Isaac, 2026-10-29.
 ### NOW-SF-067 to NOW-SF-074: review of DB-34 (the publish step)
 > Draft, not confirmed
 - **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #58 before merge. Nothing Critical or High. No member path can make a post live: `now.go_live` and `now.bulk_mode` are transaction settings PostgREST can't set, and bulk mode is refused when a member is signed in. Concurrency, hold reasons, notifications and `pg_cron` checked.
@@ -339,7 +342,6 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Evidence:** 33 pgTAP tests in CI with the whole suite (#58).
 
 ### NOW-SF-076 to NOW-SF-086 and NOW-SF-094 to NOW-SF-098: review of DB-07 (staff logins and the audit log)
-> Draft, not confirmed
 - **Found:** 2026-10-23, the `now-security-reviewer` agent on the DB-07 draft (uncommitted, `feature/db-07-staff-audit`), plus SF-086 by Junior. One High: the rest of the draft held (empty `search_path`, no API role reaches the tables, sequence or functions, refusals unlogged by design, append-only log).
 - **SF-076 (High, NFR-SEC-24):** `require_staff` read `aal` and `amr` from the token. With the service key, an attacker can delete a staff login's authenticator through the Auth admin API, start a session for that login, enrol a new authenticator (allowed when none is verified) and get a valid `aal2` token. **Fix:** each role is pinned to one verified TOTP factor at `add_staff`; `require_staff` reads the session's `aal` and factor from `auth.sessions` and the TOTP time from `auth.mfa_amr_claims`, and the factor must be the pinned, still-verified one. **Why this fix:** the database already holds the truth about how a session was raised, and a swapped factor can't match the pin, so it fails closed and only a founder over a direct connection can re-pin. Columns confirmed on a live Supabase project (read-only schema query).
 - **SF-077:** `remove_staff` now deletes the staff login itself; sessions, refresh tokens and authenticators cascade. A returning moderator gets a new login.
@@ -350,6 +352,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Evidence:** `db_07_staff_audit.sql` 56/56 and `db_03` 9/9 on the PGlite stand-in (Auth's MFA tables and a cron shim added to mirror the live schema); seven mutants (factor pin, verified check, phone regex, phone-login check, keeping the login on removal, purge age check, a commented-out staff check) each fail at least one test. Real CI not run. Second review pass pending.
 - **Second pass (2026-10-23, same agent, on the fixed code):** SF-076 to SF-084 and SF-086 confirmed fixed; nothing Critical, High or Medium. Checked read-only on a live Supabase project's Auth schema (MindBridge's, the only one the connector sees; schema metadata only): the service key can't write `auth.sessions`, `auth.mfa_factors` or `auth.mfa_amr_claims`; `postgres` can delete from `auth.users`; no Storage foreign key points at `auth.users`; Auth times are `timestamptz`. New Lows: **SF-094** (proposed fix: the `staff_removed` trigger writes the audit row, so an admin-API deletion is audited too); **SF-095** (legal item 36); **SF-096** (contrived, a reviewer catches it; note it in the test); **SF-097** (accept); **SF-098** (the old file was never committed, so CI and Tolu's pushes never saw it; only a local `supabase db push` by Isaac could have applied it to staging).
 
+- **Locked:** by Isaac, 2026-10-29.
 ### NOW-SF-087 to NOW-SF-093: review of DB-37 (place totals)
 > Draft, not confirmed
 - **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #59 before merge. One High; nothing Critical.
@@ -473,9 +476,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Evidence:** app suite 36/36, typecheck and lint clean, on this laptop.
 
 ### NOW-SF-151 to NOW-SF-153: review of DB-62 (risky-word check)
-> Draft, not confirmed
 - **Found:** 2026-10-29, Junior's inline review for Isaac (no agent, on Isaac's instruction), on `feature/db-62-risky-words` before a PR. No Critical, High or Medium: the only pattern is a fixed character class, text is capped at 5,000 characters, and the list is never turned into a pattern.
 - **SF-151 (Low, accepted for the beta):** a member can learn the list by posting and seeing "being checked"; the post limit (20 an hour, photos needed) slows it. Spelling tricks such as "sc4m" pass; reports are the backstop.
 - **SF-152 (Info, Tolu to confirm):** the list's trigger raises `risky_word_list_version` in Tolu's `app_config` directly, as Tolu's own migrations do; DB-05 reserved the key for DB-62.
 - **SF-153 (Low, documented):** `check_risky_text` reads `app.risky_terms`, which only the owner can read, so a caller running as an API role would fail; contracts.md now says to call it from owner-run code, and that edits and comments (DB-35, DB-39) must call it too.
 - **Evidence:** db_62 36/36, db_32 62/62, db_18 21/21 on the PGlite harness; whole suite unchanged apart from harness-only failures. Real CI not run.
+
+- **Locked:** by Isaac, 2026-10-29.
