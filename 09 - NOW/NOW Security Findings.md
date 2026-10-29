@@ -4,7 +4,7 @@ project: now
 type: reference
 author: junior
 created: 2026-10-22
-updated: 2026-10-29
+updated: 2026-10-30
 ---
 # NOW Security Findings
 
@@ -186,6 +186,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-175 | 2026-10-30 | DB-39 | A like made while the author went private could still count in public ranking | Low | Fixed (DB-39, not pushed): the like locks the author's row too | Draft |
 | NOW-SF-176 | 2026-10-30 | DB-39 | Test gaps: guest feed reactions, picked posts, the block race | Low | Fixed (DB-39, not pushed): cases added; like-notification read path left to DB-44's tests | Draft |
 | NOW-SF-177 | 2026-10-30 | DB-32 | The `posting_enabled` switch is never checked: turning it off doesn't stop posting | Info | Open for Tolu: check it in create_post beside read_only (and decide whether it also stops comments) | Draft |
+| NOW-SF-178 | 2026-10-30 | DB-63 | Two burst-check runs at once could both flag a rating; the second failed on the key and lost its run | Low | Fixed (f61a470, not merged): one run at a time (advisory lock) | Draft |
+| NOW-SF-179 | 2026-10-30 | DB-63 | At a busy place, one coordinated signal can sweep in an honest rater (an account made within an hour of others, a shared café network); in hold mode that holds an honest rating until staff look | Low | Open for the founders: accepted in flag mode (review only); revisit the rules before switching to hold mode | Draft |
+| NOW-SF-180 | 2026-10-30 | DB-63 | The network signal depends on Supabase passing Cloudflare's `cf-connecting-ip` to the database; if it stops, or ratings go through our own server, every member shares one address or none | Low | Open for Tolu: check once on staging that a rating records a network signal | Draft |
+| NOW-SF-181 | 2026-10-30 | DB-63 | With the abuse key missing from Vault, signals stop being recorded with only a database log line (fails open so posting never breaks) | Low | Open: add a "signals recorded in the last day" count to the health check (BE-11) | Draft |
+| NOW-SF-182 | 2026-10-30 | DB-63 | No burst check for likes, saves or "Been here" (F-17): coordinated likes can lift a post in Near you and the strip with nothing flagged | Medium | Open for Isaac: build before public launch (likes have no held state yet) or accept for the beta | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -537,3 +542,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Found:** 2026-10-30, the `now-security-reviewer` agent, on the uncommitted `feature/db-39-likes-comments` (Junior for Tolu). No Critical or High. Before the review Junior had already closed a widening leak: a list post widened later would have shown its list members' comments and like count to everyone, so `made_private` now keeps them private for good (EC-02).
 - **SF-172, 173, 175, 176:** fixed in DB-39. **SF-174:** Isaac's DB-60. **SF-177:** pre-existing in DB-32, Tolu's call. Also noted: hidden comments are never erased (retention to confirm); like counts left blocked likers in (fixed with SF-173).
 - **Evidence:** reviewer's report; CI not run yet (branch not pushed).
+
+### NOW-SF-178 to NOW-SF-182: review of DB-63 (rating integrity)
+> Draft, not confirmed
+- **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-63-rating-integrity` (f61a470). No Critical or High: abuse signals are HMACs under their own Vault key, recorded only in the member's own request from headers a caller can't set; the tables are closed to every API role; the mode switch is founder-only and audited; burst notes carry counts and signal names only.
+- **Numbering:** first drafted as SF-172 to 176, which clashed with DB-39's 172 to 177 (Tolu's session the same night); renumbered in f4af753.
+- **SF-178 (fixed):** an advisory lock makes the 10-minute job run one at a time.
+- **SF-179, 180, 181 (Low, open):** detection quality, not data exposure. **SF-182 (Medium, Isaac):** F-17 covers likes, saves and "Been here" too; DB-63's plan line covers ratings only.
+- **Evidence:** db_63 36/36 on the PGlite harness; whole suite unchanged apart from the known harness-only failures (db_07 #37, db_13, db_30, db_36); DB-37's and DB-45's fixtures changed for real weights. Real CI not run.
