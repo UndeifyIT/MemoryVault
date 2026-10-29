@@ -120,7 +120,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-109 | 2026-10-23 | DB-57 | Keep and unban aren't logged, so a restore's replay undoes them | Low | Accepted (restore procedure: staff re-apply) | Draft |
 | NOW-SF-110 | 2026-10-23 | DB-57 | Keep could restore a banned author's post; a rating restriction waits for the hourly refresh | Low | Fixed keep (#62); refresh delay accepted | Draft |
 | NOW-SF-111 | 2026-10-23 | DB-15 | The clean-up could delete a returning sign-up's login mid-flow; one failing step undid the rest | Medium | Fixed (#63, c6b3983) | Draft |
-| NOW-SF-112 | 2026-10-23 | DB-15 | Staff logins are safe only by convention (no phone) until DB-07's staff table exists | Medium | Fixed 2026-10-29 (Tolu's go): `20261029100000` adds the `app.staff` check and two DB-15 test cases; uncommitted on `tmp/db07-merge`, tests not run (CI) | Draft |
+| NOW-SF-112 | 2026-10-23 | DB-15 | Staff logins are safe only by convention (no phone) until DB-07's staff table exists | Medium | Fixed 2026-10-29 (#73): `20261029100000` adds the `app.staff` check and two DB-15 test cases; CI green | Draft |
 | NOW-SF-113 | 2026-10-23 | DB-15 | Phone-less logins (future sign-in methods) aren't cleaned; other clean-up steps belong to other tasks | Low | Open (noted in DB-15 row) | Draft |
 | NOW-SF-114 | 2026-10-23 | DB-40 | A "Did you go?" push that never arrives lost the question | Medium | Fixed (#64, 33aa527) | Draft |
 | NOW-SF-115 | 2026-10-23 | DB-40 | A private "Did you go?" rating could cancel a member's public post rating | Medium | Fixed (#64, 33aa527) | Draft |
@@ -156,9 +156,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-145 | 2026-10-23 | DB-59 | Session refresh time, old known phones, code lifetime, contract kinds | Low | Fixed (#71): refreshed_at counted, known phones expire after a year, 10-minute codes | Draft |
 | NOW-SF-146 | 2026-10-23 | DB-58 | The quiet-place hold could publish once when a place dropped below 10, and kept removed content in a verdict up to a day | Medium | Fixed (#72): held only while nothing went down; quiet while either count is under 10 | Draft |
 | NOW-SF-147 | 2026-10-23 | DB-58 | The quiet threshold could be set below 10 | Low | Fixed (#72): clamped to 10-1000 | Draft |
-| NOW-SF-148 | 2026-10-29 | APP-06 | A queued batch could be sent under a different session than its owner's for a moment (sign-up, server sign-out) | Low | Fixed (uncommitted, `feature/app-06-ui-events`): the phone's session is checked before each batch; a mismatch drops the owner's events | Draft |
-| NOW-SF-149 | 2026-10-29 | APP-06 | Guest app opens were sent at every foreground, using up the one shared guest limit | Low | Fixed (same branch): only the owner's first app_opened of the Lagos day is queued | Draft |
-| NOW-SF-150 | 2026-10-29 | APP-06 | No test proved DataProvider drops the last member's events | Low | Fixed (same branch): a test in query.test.tsx, checked by a mutant | Draft |
+| NOW-SF-148 | 2026-10-29 | APP-06 | A queued batch could be sent under a different session than its owner's for a moment (sign-up, server sign-out) | Low | Fixed (#80): the phone's session is checked before each batch; a mismatch drops the owner's events | Draft |
+| NOW-SF-149 | 2026-10-29 | APP-06 | Guest app opens were sent at every foreground, using up the one shared guest limit | Low | Fixed (#80): only the owner's first app_opened of the Lagos day is queued | Draft |
+| NOW-SF-150 | 2026-10-29 | APP-06 | No test proved DataProvider drops the last member's events | Low | Fixed (#80): a test in query.test.tsx, checked by a mutant | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -386,7 +386,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 > Draft, not confirmed
 - **Found:** 2026-10-23, the `now-security-reviewer` agent on Sonnet, on #63 before merge. Nothing Critical or High: no member, staff login, tester, used invite or evidence can be deleted; `app.members` blocks deleting any login with a profile.
 - **SF-111:** logins signed in to within 7 days are left, locked ones are skipped, and each step runs on its own.
-- **SF-112:** for Isaac: once DB-07 adds `app.staff`, `private.cleanup` must also skip staff logins, with a pgTAP case. **Fixed 2026-10-29 on Tolu's go:** `20261029100000_db_07_cleanup_skips_staff.sql` on `tmp/db07-merge` (uncommitted) adds the check; two DB-15 cases cover the staff check and the authenticator check alone; `now-security-reviewer` found nothing. Not yet run on a database (CI).
+- **SF-112:** for Isaac: once DB-07 adds `app.staff`, `private.cleanup` must also skip staff logins, with a pgTAP case. **Fixed 2026-10-29 on Tolu's go:** `20261029100000_db_07_cleanup_skips_staff.sql` (merged in #73, CI green) adds the check; two DB-15 cases cover the staff check and the authenticator check alone; `now-security-reviewer` found nothing. 
 - **SF-113:** logins with no phone stay until the rule covers future sign-in methods (E13); abuse signals, analytics and inboxes are cleaned by DB-63, DB-46 and DB-41.
 - **Evidence:** 17 pgTAP tests in CI with the whole suite (#63).
 
