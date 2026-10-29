@@ -141,3 +141,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-23 | junior | Tolu: DB-58 quiet-place totals merged (#72), off until launch; Sonnet review SF-146, 147 | Now merged #72
 2026-10-29 | junior | Tolu: SF-112 fixed on tmp/db07-merge; QA-06 coverage report and APP-06 events client built on their own branches (review SF-148 to 150 fixed); data map, participant notice and Waiting on Isaac updated; nothing committed | Now uncommitted
 2026-10-29 | junior | Tolu: merged #73 (DB-07 with main, types and SF-112), #79 (QA-06), #80 (APP-06 events), #81 (docs); CI green | Now 166f061
+2026-10-29 | junior | Isaac: after-the-fact approvals recorded (contracts #36-38, #48, #56, #57, #68, #69; APP-01, QA-01, APP-03); DB-07 marked merged | Now 4604ec2 on docs/isaac-approvals-2026-10-29
