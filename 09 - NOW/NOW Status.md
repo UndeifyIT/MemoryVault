@@ -4,7 +4,7 @@ project: now
 type: reference
 author: junior
 created: 2026-10-13
-updated: 2026-10-23
+updated: 2026-10-29
 ---
 # NOW Status
 
@@ -35,6 +35,8 @@ Each person keeps their own section current.
 - **Test bed:** the PGlite harness (Isaac's machine, session scratchpad `pgl/run.mjs`), now with pgmq, pg_cron run table and PostGIS distance shims; 28 seconds for the whole suite. Harness-only failures on `main`: db_07 #37 (cursor), db_13 (`auth.identities`), db_30, db_36, db_47 (spatial). CI is the real check.
 
 ### Tolu
+**Latest (2026-10-29, late).** **DB-60 (#95) and DB-45 (#96, `a8c13ad`) are merged; `main` CI on `a8c13ad` green.** DB-45 had reused finding numbers: Isaac's DB-60 review took NOW-SF-162 to 165 first, and DB-45's review used 162 to 167. DB-45's 162 to 165 became **168 to 171**; 166 and 167 kept their numbers (repo tracker, PR #96 text and [[NOW Security Findings]] fixed; the DB-60 rows were also missing from the findings table and are now in it). **Next free finding number: NOW-SF-172.** PR #96 CI: 42 files, 1,406 database tests pass. Waiting on Tolu: confirm DB-45's ranking proposals (gravity 1.5, 7-day strip) and DB-41's (Near radius 10 km, 30-day window, 600 feed pages an hour); SF-167: the app restarts Near you from page 1 on a 400. **Next:** DB-39 (likes and comments; it must set `likes.counts_in_public` from the post's audience at the moment of the like, SF-168), then DES-01.
+
 **Latest (2026-10-29 night).** Merged on Tolu's word: #88 (Dependabot batch 2, `4ffb145`), #89 (aws-cdk patch), #90 **DB-21 part 2** (`39ba7e2`, Isaac's; PR opened from Tolu's session), #91 **DB-62** (`0230f79`, after merging `main` into it). Isaac also pushed his approvals straight to `main` (`25dbe4b`). Unblocked for Tolu: DB-41 (built, **PR #92 green (1,339 database tests pass), review fixes in (SF-154 to 161), waiting for Tolu to review and say merge** (auto mode blocks merging unreviewed code); feeds, `seed_inbox`/`drop_from_inbox`, list and picked posts into the inbox at publish, which DB-34 had missed, trim to 300, a `sign_photo_url` stub for DB-50; Near radius 10 km proposed, Tolu to confirm; CI and security review running), then DB-39 (likes, comments) and DB-45 (ranking reads). DB-38 still waits on Isaac's DB-50. Contract note for Isaac: DB-27's audience changes must add or remove inbox rows.
 
 **Latest (2026-10-29 evening).** Isaac pushed three branches, with no PRs: `feature/db-21-visibility-rule` (DB-21 part 2, `de78a98`, on `b2164d7`), `feature/db-62-risky-words` (DB-62, `c69055e`, review SF-151 to 153) and `docs/isaac-approvals-2026-10-29` (his after-the-fact approvals of #36 to 38, #48, #56, #57, #68, #69, APP-01, QA-01, APP-03, the timer dial; SF-064 to 066, 075, 076 to 086, 094 to 098 locked). Auto mode blocked Junior from opening PRs on Isaac's branches. **Tolu's `posts_guard` review of DB-21 part 2 (SF-075), done by Junior: pass** (only emptying a removed post's list is allowed; the CHECK constraints allow it; tested). Dependabot's second batch: #83, #84, #85 (the tanstack group, all three at 5.104.5), #87 combined as #88, CI green, **waiting for Tolu's word to merge** (auto mode blocked it); #86 (async-storage 3, a major the Expo SDK pins at 2.2.0) to be closed; #88 adds a Dependabot ignore for it. **Sentry deferred by Tolu** until launch to save the free trial; Junior's flag: NFR-REL-04 (crash monitoring) is a beta Must, staging Sentry has been active since 2026-10-17 (FND-14), and Sentry seems to have a $0 Developer plan besides the trial (third-party sources disagree; check sentry.io/pricing).

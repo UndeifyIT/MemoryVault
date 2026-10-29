@@ -152,3 +152,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-29 | junior | Tolu: merged #88 to #91 (DB-21 part 2 and DB-62 among them); DB-41 feeds built, PR #92 in CI | Now 0230f79
 2026-10-29 | junior | Tolu: DB-41 PR #92 green after review fixes SF-154 to 161; waiting for Tolu to merge | Now d46090c
 2026-10-29 | junior | Isaac: DB-60 reports built on main after DB-41, reviewed inline (SF-162 to 165), pushed | Now ec30cb2 on feature/db-60-reports
+2026-10-29 | junior | Tolu: DB-45 findings renumbered 166 to 171 (clashed with DB-60's 162 to 165); #96 merged, CI green | Now a8c13ad
