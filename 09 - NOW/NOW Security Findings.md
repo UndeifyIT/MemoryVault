@@ -471,3 +471,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-149:** one app_opened a day per owner, so guests don't drain the shared 5,000-an-hour limit.
 - **SF-150:** the owner-change test; removing the reset in DataProvider fails it.
 - **Evidence:** app suite 36/36, typecheck and lint clean, on this laptop.
+
+### NOW-SF-151 to NOW-SF-153: review of DB-62 (risky-word check)
+> Draft, not confirmed
+- **Found:** 2026-10-29, Junior's inline review for Isaac (no agent, on Isaac's instruction), on `feature/db-62-risky-words` before a PR. No Critical, High or Medium: the only pattern is a fixed character class, text is capped at 5,000 characters, and the list is never turned into a pattern.
+- **SF-151 (Low, accepted for the beta):** a member can learn the list by posting and seeing "being checked"; the post limit (20 an hour, photos needed) slows it. Spelling tricks such as "sc4m" pass; reports are the backstop.
+- **SF-152 (Info, Tolu to confirm):** the list's trigger raises `risky_word_list_version` in Tolu's `app_config` directly, as Tolu's own migrations do; DB-05 reserved the key for DB-62.
+- **SF-153 (Low, documented):** `check_risky_text` reads `app.risky_terms`, which only the owner can read, so a caller running as an API role would fail; contracts.md now says to call it from owner-run code, and that edits and comments (DB-35, DB-39) must call it too.
+- **Evidence:** db_62 36/36, db_32 62/62, db_18 21/21 on the PGlite harness; whole suite unchanged apart from harness-only failures. Real CI not run.
