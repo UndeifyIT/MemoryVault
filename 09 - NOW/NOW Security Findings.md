@@ -498,3 +498,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-156 to 160:** held verdicts hidden, photo count not leaked, cheaper trim, no vanishing posts, more tests.
 - **SF-161:** open until the production log settings are checked.
 - **Evidence:** CI on #92 (db_41_feeds.sql and the whole suite).
+
+### NOW-SF-162 to NOW-SF-165: review of DB-60 (reports)
+> Draft, not confirmed
+- **Found:** 2026-10-29, Junior's inline review for Isaac (no agent), on `feature/db-60-reports` before a PR. No Critical or High: reports reach only what the reporter can see, the answer is always "received", and nothing is removed automatically except the planned safety hide.
+- **SF-162 (Medium, fixed):** two established safety reports at the same moment, one on a post and one on its photo, sit on different items, so each could count only itself and the safety hide never ran. The count now runs after taking the post's row lock.
+- **SF-163 (Low, fixed):** reports are kept once per member and item, so a member who first chose "spam" and then "threat" was dropped and the founders never heard. A safety reason now replaces an earlier ordinary one and alerts.
+- **SF-164 (Low, founders decide):** two accounts over 14 days old can hide any live post they can see with safety reports, until a person decides (RV1-26 by design). Bounded by 20 reports a day, every safety report alerts both founders, and the `safety_hide` switch turns it off. The switch shows in `get_app_config`, which tells people whether it is on.
+- **SF-165 (Low, for APP-50 and the founders):** a block hides the other person's posts, so the app must send a report before a block; profiles stay reportable through a block and in any account state. In read-only mode reports, safety ones included, are refused, so the app should show the support address then.
+- **Evidence:** db_60 48/48 on the PGlite harness; mutants (no visibility check, no established filter, no legal hold, no comment status, no switch, no safety upgrade) each fail a test; whole suite unchanged apart from harness-only failures. Real CI not run.
