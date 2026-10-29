@@ -162,6 +162,14 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-151 | 2026-10-29 | DB-62 | A member can learn the risky-word list by posting and seeing "being checked"; spelling tricks pass | Low | Accepted (Isaac, 2026-10-29): post limit slows probing, reports are the backstop | 2026-10-29 (Isaac) |
 | NOW-SF-152 | 2026-10-29 | DB-62 | The list's trigger writes `risky_word_list_version` in Tolu's `app_config` directly | Info | Tolu to confirm (DB-05 reserved the key for DB-62) | 2026-10-29 (Isaac) |
 | NOW-SF-153 | 2026-10-29 | DB-62 | `check_risky_text` fails if called as an API role; edits and comments must call it too | Low | Documented in contracts §2 (c69055e, `feature/db-62-risky-words`, not merged) | 2026-10-29 (Isaac) |
+| NOW-SF-154 | 2026-10-29 | DB-41 | The Following feed's direct query ran on every page once an inbox was full, checking every followed account's whole history | Medium | Fixed (#92): inbox first on a matching index; per-account newest 21 only when the inbox runs out | Draft |
+| NOW-SF-155 | 2026-10-29 | DB-41 | Near you cast the place column, so the places index was unused, and sorted every public post in the radius; no member rate limit | Medium | Fixed (#92): bounding-box cut on places_geom_idx, 30-day window (proposed), `feeds` limit 600 an hour (proposed); guests limited at the edge | Draft |
+| NOW-SF-156 | 2026-10-29 | DB-41 | A verdict held for integrity review showed on a post | Low | Fixed (#92): only pending, active or superseded verdicts show. Open: a second post at the same place within 30 days shows no verdict (take_rating reuses the first) | Draft |
+| NOW-SF-157 | 2026-10-29 | DB-41 | The photos list held one null per photo, revealing the count before DB-50 | Low | Fixed (#92): missing links left out | Draft |
+| NOW-SF-158 | 2026-10-29 | DB-41 | The daily inbox trim ranked the whole inbox table | Low | Fixed (#92): only inboxes over 300 | Draft |
+| NOW-SF-159 | 2026-10-29 | DB-41 | After an unfollow dropped an inbox below 300, older posts vanished | Low | Fixed (#92) by the new fallback; a new follow's unseeded posts newer than the inbox's end still show only on the profile | Draft |
+| NOW-SF-160 | 2026-10-29 | DB-41 | Test gaps: fallback negative case, private account, unchecked place, stale hidden post | Low | Fixed (#92): cases added | Draft |
+| NOW-SF-161 | 2026-10-29 | DB-41 | If slow-query logging is on in production, Near-you coordinates could land in Postgres logs | Low | Open: check Supabase log settings before launch (Tolu, Isaac) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -482,3 +490,11 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-153 (Low, documented):** `check_risky_text` reads `app.risky_terms`, which only the owner can read, so a caller running as an API role would fail; contracts.md now says to call it from owner-run code, and that edits and comments (DB-35, DB-39) must call it too.
 - **Evidence:** db_62 36/36, db_32 62/62, db_18 21/21 on the PGlite harness; whole suite unchanged apart from harness-only failures. Real CI not run.
 - **Locked:** by Isaac, 2026-10-29.
+
+### NOW-SF-154 to NOW-SF-161: review of DB-41 (feeds)
+> Draft, not confirmed
+- **Found:** 2026-10-29, the `now-security-reviewer` agent, on PR #92 before merge (Claude for Tolu). No Critical or High: no feed path shows a post the viewer may not see; every candidate passes can_view, the follow and mutes; Near you reads only the public projection.
+- **SF-154, 155:** speed and denial-of-service fixes in the Following fallback and Near you.
+- **SF-156 to 160:** held verdicts hidden, photo count not leaked, cheaper trim, no vanishing posts, more tests.
+- **SF-161:** open until the production log settings are checked.
+- **Evidence:** CI on #92 (db_41_feeds.sql and the whole suite).
