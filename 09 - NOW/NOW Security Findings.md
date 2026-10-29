@@ -180,6 +180,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-169 | 2026-10-29 | DB-45 | Every Near-you page rebuilt and scored the whole candidate set, with per-row block and mute calls | Medium | Fixed (#96): scores stored hourly; ranked_nearby plain SQL with cursor and limit passed in; anti-joins | Draft |
 | NOW-SF-170 | 2026-10-29 | DB-45 | Ranking movement can tell an account whether its likes count (held or young), once DB-63 is real | Low | Accepted risk for the founders to confirm (T-15): likes are counted only hourly; consider a 2-liker floor if abuse appears | Draft |
 | NOW-SF-171 | 2026-10-29 | DB-45 | The hourly recount rewrote every row, could fail as a whole on a bad weight, and could overlap | Low | Fixed (#96): only changed rows, GREATEST 0, advisory lock | Draft |
+| NOW-SF-172 | 2026-10-30 | DB-39 | A comment written while the post's author blocked its writer stayed live and visible to others (the block's clean-up couldn't see it yet) | Medium | Fixed (DB-39, not pushed): comment_shown and the counts hide comments from someone the author blocks; comment locks the follow rows | Draft |
+| NOW-SF-173 | 2026-10-30 | DB-39 | Reaction counts on every feed item ran a function per comment, so a post with thousands of comments made public feed pages expensive | Medium | Fixed (DB-39, not pushed): inline block checks, counts stop at 100 ("99+") | Draft |
+| NOW-SF-174 | 2026-10-30 | DB-60 | The report check ignores `made_private`: after a widening, anyone who can see the post can report (and so confirm) a private comment, given its random ID | Low | Open for Isaac: use private.comment_shown in report_target | Draft |
+| NOW-SF-175 | 2026-10-30 | DB-39 | A like made while the author went private could still count in public ranking | Low | Fixed (DB-39, not pushed): the like locks the author's row too | Draft |
+| NOW-SF-176 | 2026-10-30 | DB-39 | Test gaps: guest feed reactions, picked posts, the block race | Low | Fixed (DB-39, not pushed): cases added; like-notification read path left to DB-44's tests | Draft |
+| NOW-SF-177 | 2026-10-30 | DB-32 | The `posting_enabled` switch is never checked: turning it off doesn't stop posting | Info | Open for Tolu: check it in create_post beside read_only (and decide whether it also stops comments) | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -525,3 +531,9 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-168:** the one product rule this adds: a like counts in public ranking only if the post was public when it was liked. DB-39 sets `counts_in_public`.
 - **SF-169, 171, 166:** speed, robustness and test fixes. **SF-170:** accepted risk for the founders. **SF-167:** app follow-up.
 - **Evidence:** CI on #96.
+
+### NOW-SF-172 to NOW-SF-177: review of DB-39 (likes and comments)
+> Draft, not confirmed
+- **Found:** 2026-10-30, the `now-security-reviewer` agent, on the uncommitted `feature/db-39-likes-comments` (Junior for Tolu). No Critical or High. Before the review Junior had already closed a widening leak: a list post widened later would have shown its list members' comments and like count to everyone, so `made_private` now keeps them private for good (EC-02).
+- **SF-172, 173, 175, 176:** fixed in DB-39. **SF-174:** Isaac's DB-60. **SF-177:** pre-existing in DB-32, Tolu's call. Also noted: hidden comments are never erased (retention to confirm); like counts left blocked likers in (fixed with SF-173).
+- **Evidence:** reviewer's report; CI not run yet (branch not pushed).
