@@ -170,6 +170,12 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-159 | 2026-10-29 | DB-41 | After an unfollow dropped an inbox below 300, older posts vanished | Low | Fixed (#92) by the new fallback; a new follow's unseeded posts newer than the inbox's end still show only on the profile | Draft |
 | NOW-SF-160 | 2026-10-29 | DB-41 | Test gaps: fallback negative case, private account, unchecked place, stale hidden post | Low | Fixed (#92): cases added | Draft |
 | NOW-SF-161 | 2026-10-29 | DB-41 | If slow-query logging is on in production, Near-you coordinates could land in Postgres logs | Low | Open: check Supabase log settings before launch (Tolu, Isaac) | Draft |
+| NOW-SF-162 | 2026-10-29 | DB-45 | Likes made while a post was friends, list or picked would start lifting it in public if widened to Public, hinting at private likes (EC-02) | Medium | Fixed (#96): `likes.counts_in_public`, set by DB-39 at the moment of the like; only those count | Draft |
+| NOW-SF-163 | 2026-10-29 | DB-45 | Every Near-you page rebuilt and scored the whole candidate set, with per-row block and mute calls | Medium | Fixed (#96): scores stored hourly; ranked_nearby plain SQL with cursor and limit passed in; anti-joins | Draft |
+| NOW-SF-164 | 2026-10-29 | DB-45 | Ranking movement can tell an account whether its likes count (held or young), once DB-63 is real | Low | Accepted risk for the founders to confirm (T-15): likes are counted only hourly; consider a 2-liker floor if abuse appears | Draft |
+| NOW-SF-165 | 2026-10-29 | DB-45 | The hourly recount rewrote every row, could fail as a whole on a bad weight, and could overlap | Low | Fixed (#96): only changed rows, GREATEST 0, advisory lock | Draft |
+| NOW-SF-166 | 2026-10-29 | DB-45 | Strip tests couldn't catch a leak (excluded posts could never reach the top 10) | Low | Fixed (#96): excluded posts carry enough likes to top the list | Draft |
+| NOW-SF-167 | 2026-10-29 | DB-45 | Near-you cursors from DB-41 get a 400 after DB-45 | Low | Open for the app (Tolu): restart Near you from page 1 on a 400 | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -507,3 +513,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **SF-164 (Low, founders decide):** two accounts over 14 days old can hide any live post they can see with safety reports, until a person decides (RV1-26 by design). Bounded by 20 reports a day, every safety report alerts both founders, and the `safety_hide` switch turns it off. The switch shows in `get_app_config`, which tells people whether it is on.
 - **SF-165 (Low, for APP-50 and the founders):** a block hides the other person's posts, so the app must send a report before a block; profiles stay reportable through a block and in any account state. In read-only mode reports, safety ones included, are refused, so the app should show the support address then.
 - **Evidence:** db_60 48/48 on the PGlite harness; mutants (no visibility check, no established filter, no legal hold, no comment status, no switch, no safety upgrade) each fail a test; whole suite unchanged apart from harness-only failures. Real CI not run.
+
+### NOW-SF-162 to NOW-SF-167: review of DB-45 (ranking reads)
+> Draft, not confirmed
+- **Found:** 2026-10-29, the `now-security-reviewer` agent, on PR #96 before merge (Claude for Tolu). No Critical or High: Near you and the strip read only the public projection; no score, count, time or liker is returned.
+- **SF-162:** the one product rule this adds: a like counts in public ranking only if the post was public when it was liked. DB-39 sets `counts_in_public`.
+- **SF-163, 165, 166:** speed, robustness and test fixes. **SF-164:** accepted risk for the founders. **SF-167:** app follow-up.
+- **Evidence:** CI on #96.
