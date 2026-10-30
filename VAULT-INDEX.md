@@ -55,6 +55,11 @@ Repo: https://github.com/UndeifyLTD/Now (private; the git remote, checked 2026-1
 Repo: https://github.com/UndeifyLTD/CompanyWebsite (private). The company website for undeify.com.
 - **Status:** v1 built and pushed 2026-10-16, not deployed yet. See [[Undeify Website Status]].
 
+## YouTube Channel (11 - YouTube Channel)
+
+Repo: https://github.com/isaaCecurity/U-Youtube_animated_Channel1. An animated YouTube channel about how we build with AI.
+- **Status:** Idea stage since 2026-10-30; the repo holds only a README. Concept not recorded yet. See [[YouTube Channel Status]].
+
 ## Vault Structure
 
 ```
@@ -69,6 +74,7 @@ Repo: https://github.com/UndeifyLTD/CompanyWebsite (private). The company websit
 08 - Resources      ← Cross-project reference material, templates, Jobs
 09 - NOW            ← NOW project notes (place discovery for Lagos Gen Z)
 10 - Website        ← Undeify company website (undeify.com)
+11 - YouTube Channel ← Animated YouTube channel about building with AI
 ```
 
 ## What's Active Right Now

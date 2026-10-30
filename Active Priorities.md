@@ -38,6 +38,9 @@ The detail for every item below is in [[NOW Status]], [[NOW Security Findings]] 
 - [ ] **NOW, after Isaac's DB-63 to DB-55 merges (2026-10-30; DB-63 #98, DB-64, DB-50, DB-55 merged straight to `main` with no PRs, which turned `main` red until Tolu's #99):** Tolu agrees DB-63's trigger and index on `app.ratings` and the burst numbers, DB-64's analytics re-stamp and DB-55's map numbers after the fact; DB-38 is unblocked for Tolu (DB-50 is in); Isaac removes his personal allowlist from the shared `.claude/settings.json` (`26cab38`); decide NOW-SF-182 (burst checks for likes, saves, "Been here"); lock or answer NOW-SF-162 to 165 and 178 to 187; decide E17 and E20. Loop continues with DB-22. See [[NOW Status]].
 - [ ] NOW capacity and beta timing: answer capacity and area (T1, T2); recruit founding posters at least 14 days before the beta (0007); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
+#### YouTube Channel
+- [ ] Explain the concept of the animated YouTube channel (audience, episode format, what gets animated) so Junior can record it and propose the cheapest way to test it (Isaac). See [[YouTube Channel Status]].
+
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).
 
