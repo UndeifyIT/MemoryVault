@@ -158,3 +158,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-30 | junior | Isaac: DB-64 team accounts built, reviewed inline (SF-183, 184), pushed stacked on DB-63 | Now 7e059a2 on feature/db-64-team-accounts
 2026-10-30 | junior | Isaac: DB-50 photo link signing built, reviewed inline (SF-185, 186), pushed stacked on DB-64 | Now afa450b on feature/db-50-photo-signing
 2026-10-30 | junior | Isaac: DB-55 map pins built, reviewed inline (SF-187), pushed stacked on DB-50 | Now 520cef9 on feature/db-55-pins
+2026-10-30 | junior | Tolu: DB-39 merged (#97); PullUp 14-screen design draft built (outside repo) | Now 13094fd
