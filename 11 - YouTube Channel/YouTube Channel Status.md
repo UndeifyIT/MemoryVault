@@ -22,13 +22,13 @@ Planning stage: the concept is written up, Junior has proposed a production pipe
 ## Where we stopped
 
 ### Isaac
-Junior proposed the architecture (see [[YouTube Channel Architecture]]) and ran an ambition pass on it (2026-10-30). Next: Isaac answers whether the channel is Undeify-branded, then approves or changes the plan; ThinkPad purchase and its pre-purchase checks are on Isaac.
+Isaac chose the three.js pipeline with code-built characters (see [[YouTube Channel Renderer Decision]], 2026-10-30). Next: Junior proposes the repo scaffold and our own reel skill, and waits for Isaac's go before touching the repo; ThinkPad purchase and its pre-purchase checks are on Isaac.
 
 ### Tolu
 Nothing yet.
 
 ## Next steps
 1. Isaac decides Undeify-branded channel or separate brand.
-2. Isaac approves or changes the proposed pipeline ("lock it").
+2. Isaac approves the repo scaffold and our own reel skill (Junior proposes the exact change).
 3. Isaac verifies the ThinkPad before paying (real GPU and dedicated memory in Task Manager, no BIOS supervisor lock), then reinstalls Windows.
 4. Name the AI character and the channel; check the YouTube handle, domain and trademark are free.
