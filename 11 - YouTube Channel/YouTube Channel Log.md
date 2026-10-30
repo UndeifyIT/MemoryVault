@@ -16,3 +16,4 @@ created: 2026-10-30
 2026-10-30 | junior | Phase A: channel strategy and three pilot script drafts (uncommitted) | n/a
 2026-10-30 | isaac | Audience: builders in Africa first; strategy and EP001 hook updated | n/a
 2026-10-30 | isaac | Builder keeps concept look, American voice; voices from ElevenLabs or better later; bible v0.3 | n/a
+2026-10-30 | junior | Safety-checked and installed 3 screenwriting skills (gitignored); bible v0.4 adds comedic modes | n/a
