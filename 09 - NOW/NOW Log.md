@@ -165,3 +165,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-30 | junior | Tolu: DB-38 committed, pushed, PR #100 opened on Tolu's word; CI running | Now 093a15d on feature/db-38-place-reads
 2026-10-30 | junior | Tolu: DB-38 merged (#100, CI 1,612 tests pass); DB-70 profiling drafted | Now d69898c
 2026-10-30 | junior | Tolu: DB-70 profiling pushed (profile/db-70-launch-scale), first run started | Now 7b81dff
+2026-10-30 | junior | Tolu: DB-70 first profile run done (Near you 780 ms, follow pins 3.3 s are the problems); run 2 with query plans pushed | Now 8e706ec
