@@ -23,13 +23,13 @@ Planning stage: the concept is written up, Junior has proposed a production pipe
 ## Where we stopped
 
 ### Isaac
-Isaac chose the three.js pipeline with code-built characters (see [[YouTube Channel Renderer Decision]], 2026-10-30). On Isaac's go, Junior set up the repo (uncommitted, 2026-10-30): our own skill `.claude/skills/builder-ai-reel/SKILL.md` (rewritten from the third-party file, Claude branding removed), `CHARACTER_BIBLE.md` v0.1 draft (the single source of truth for both characters), a repo `CLAUDE.md`, `.gitignore`, `.env.example`, `config/voices.json`, `golden/README.md` and an audio licence register; concept images moved to `assets/concept/`. Bible now v0.2 with Junior's name and limbs. Next: Isaac confirms the Claude wording, reviews the bible and says whether to commit; ThinkPad purchase and its pre-purchase checks are on Isaac.
+Isaac chose the three.js pipeline with code-built characters (see [[YouTube Channel Renderer Decision]], 2026-10-30). On Isaac's go, Junior set up the repo (uncommitted, 2026-10-30): our own skill `.claude/skills/builder-ai-reel/SKILL.md` (rewritten from the third-party file, Claude branding removed), `CHARACTER_BIBLE.md` v0.1 draft (the single source of truth for both characters), a repo `CLAUDE.md`, `.gitignore`, `.env.example`, `config/voices.json`, `golden/README.md` and an audio licence register; concept images moved to `assets/concept/`. Bible now v0.2 with Junior's name and limbs. Isaac confirmed the "Junior runs on Claude" wording. Next: Isaac gives the word to commit; ThinkPad purchase and its pre-purchase checks are on Isaac.
 
 ### Tolu
 Nothing yet.
 
 ## Next steps
 1. Isaac decides Undeify-branded channel or separate brand.
-2. Isaac confirms the Claude wording, gives the Builder's name when ready, and gives the word to commit the repo setup.
+2. Isaac gives the Builder's name when ready and gives the word to commit the repo setup.
 3. Isaac verifies the ThinkPad before paying (real GPU and dedicated memory in Task Manager, no BIOS supervisor lock), then reinstalls Windows.
 4. Name the channel; check the YouTube handle, domain and trademark are free.
