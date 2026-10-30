@@ -15,3 +15,4 @@ created: 2026-10-30
 2026-10-30 | isaac | AI named Junior, runs on Claude in the story; arms and legs kept; bible v0.2 | n/a
 2026-10-30 | junior | Phase A: channel strategy and three pilot script drafts (uncommitted) | n/a
 2026-10-30 | isaac | Audience: builders in Africa first; strategy and EP001 hook updated | n/a
+2026-10-30 | isaac | Builder keeps concept look, American voice; voices from ElevenLabs or better later; bible v0.3 | n/a
