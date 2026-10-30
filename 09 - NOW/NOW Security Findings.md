@@ -195,6 +195,7 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-184 | 2026-10-30 | DB-64 | A late marking re-stamps the member's events, but weekly reports already written still count them | Low | Open for the founders: mark founding posters and team accounts before they post (seeding guide); regenerate a report if one was missed | Draft |
 | NOW-SF-185 | 2026-10-30 | DB-50 | Each photo link reads the key from Vault and re-runs can_view, up to 100 times for a feed page with 5 photos a post | Low | Open: measure in the feed speed tests (NFR-PERF); if slow, fetch the key once per page | Draft |
 | NOW-SF-186 | 2026-10-30 | DB-50 | sign_photo_export_url trusts its caller for whose photos to sign; a wrapper that took the member from the request would let anyone export anyone's photos | Low | Handed to BE-06 and BE-26: the wrapper takes the member from the session | Draft |
+| NOW-SF-187 | 2026-10-30 | DB-55 | Follow pins run can_view for every candidate post before the 300-pin cap, so someone following many busy posters in a dense box does a lot of work per call | Low | Open: measure in the map speed tests (SPK-02, NFR-PERF); the 1-degree box and 600 calls an hour bound it meanwhile | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -566,3 +567,8 @@ Every security gap found in a NOW security review, with the fix and why that fix
 - **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-50-photo-signing` (afa450b). No Critical or High: links are signed only after can_view (or, for a profile photo, an active member with no block), the viewing and export families use separate keys and paths that can't pass as tickets or receipts, and a missing key drops photos rather than failing. The shared-secret link key in CloudFront stays the accepted risk RV3-15.
 - **SF-185 (Low):** speed, to measure. **SF-186 (Low):** a rule for BE-06's wrapper.
 - **Evidence:** db_50 21/21 on the harness (Node test vectors match), stacked on DB-63 and DB-64; whole suite unchanged apart from the known harness-only failures. Real CI not run.
+
+### NOW-SF-187: review of DB-55 (map pins)
+> Draft, not confirmed
+- **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-55-pins` (520cef9). No Critical or High: the shared tile reads only the public projection, re-checks it when read and returns no author, score or weight, with totals only past their thresholds; follow pins use can_view per post and return only a count of people. Score order (the contract's "for ordering only") and the 60-second CloudFront cache are by design.
+- **Evidence:** db_55 22/22 on the harness; three mutants (no can_view, no read-time public check, no mute filter) each fail a test; the harness's bounding-box shims are now real, and DB-45's tests still pass. Real CI not run.
