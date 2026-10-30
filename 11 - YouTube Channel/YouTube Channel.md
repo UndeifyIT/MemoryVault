@@ -15,3 +15,4 @@ An animated YouTube channel about building with AI, startups and building in pub
 - [[YouTube Channel Architecture]]: repo, tools and how episodes get made.
 - [[YouTube Channel Log]]: dated record of what changed.
 - [[YouTube Channel Renderer Decision]] (in `Decisions/`): three.js with code-built characters for Pilot 1; Blender as the upgrade path.
+- [[YouTube Channel AI Character Decision]] (in `Decisions/`): the AI is Junior, runs on Claude in the story, keeps the concept's arms and legs.
