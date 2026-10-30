@@ -9,3 +9,4 @@ created: 2026-10-30
 
 2026-10-30 | isaac | Repo created on GitHub with initial commit | 43c5f32
 2026-10-30 | junior | Cloned repo, created vault project notes (index, Status, Architecture, Log) | n/a
+2026-10-30 | junior | Recorded concept from the brief; proposed pipeline (draft); ambition pass | n/a

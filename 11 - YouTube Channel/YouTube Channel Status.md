@@ -8,25 +8,27 @@ updated: 2026-10-30
 ---
 # YouTube Channel Status
 
-> Draft, not confirmed. Isaac is about to explain the concept; replace the Unverified lines once he has.
+> Draft, not confirmed. Concept recorded from Isaac's brief; the production architecture is proposed, not locked.
 
-The animated YouTube channel is at the very start: the repo exists and nothing else does.
+Planning stage: the concept is written up, Junior has proposed a production pipeline, and no production work starts until Isaac buys the ThinkPad.
 
 ## Snapshot
-- **Stage:** Idea stage. Repo created with GitHub's initial commit only (`43c5f32`, checked 2026-10-30).
-- **What exists:** a README saying "a animated youtube channel going about how we build using ai".
-- **What does not exist yet:** channel name, audience, format, episode list, animation tools, publishing schedule, budget. Unverified: whether a YouTube channel account exists.
-- **Known issues:** none.
+- **Stage:** Planning. Repo has GitHub's initial commit (`43c5f32`) plus Isaac's uncommitted `PROJECT_MASTER_BREIF.md` and a `character concepts` folder with two images (checked 2026-10-30).
+- **Concept (source: the brief in the repo):** a faceless, avatar-led channel of short vertical (9:16, 30–60 s) low-poly 3D animated conversations between two original characters, The Builder (young developer in a dark hoodie) and The AI (small orange cube). Content pillars: Build with AI 50%, startup and tech skits 30%, building in public 20%. Long-form tutorials later. Visual reference for the format: the Instagram account Agent Morphy (format only, no copying).
+- **Hardware (checked 2026-10-30):** Isaac's current laptop is an HP ProBook x360 11 G1 EE (Pentium N4200, about 4 GB RAM, Intel HD 505, about 11 GB free disk): fine for planning, not for Blender. Isaac will do the Blender work on a Lenovo ThinkPad he has not bought yet (advertised: 11th-gen i7, 8 cores, 32 GB RAM, "6 GB dedicated graphics", 770k). Unverified: the ThinkPad's real GPU.
+- **What does not exist yet:** channel name, character names, YouTube account (Unverified), any pipeline code or 3D assets.
+- **Known issues:** the brief's example dialogue addresses the AI character as "Claude", which would imply endorsement; the character needs its own name.
 
 ## Where we stopped
 
 ### Isaac
-Repo cloned to Isaac's machine and the vault project set up (2026-10-30). Next: Isaac explains what the channel is about; Junior records it here and in the Architecture note.
+Junior proposed the architecture (see [[YouTube Channel Architecture]]) and ran an ambition pass on it (2026-10-30). Next: Isaac answers whether the channel is Undeify-branded, then approves or changes the plan; ThinkPad purchase and its pre-purchase checks are on Isaac.
 
 ### Tolu
 Nothing yet.
 
 ## Next steps
-1. Isaac explains the concept: audience, what each episode covers, who or what is animated.
-2. Junior records the concept, then proposes the cheapest way to test it (free or cheap tools first, per the budget).
-3. Decide the channel name and check it is free (YouTube handle, domain, trademark).
+1. Isaac decides Undeify-branded channel or separate brand.
+2. Isaac approves or changes the proposed pipeline ("lock it").
+3. Isaac verifies the ThinkPad before paying (real GPU and dedicated memory in Task Manager, no BIOS supervisor lock), then reinstalls Windows.
+4. Name the AI character and the channel; check the YouTube handle, domain and trademark are free.

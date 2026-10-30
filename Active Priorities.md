@@ -39,7 +39,7 @@ The detail for every item below is in [[NOW Status]], [[NOW Security Findings]] 
 - [ ] NOW capacity and beta timing: answer capacity and area (T1, T2); recruit founding posters at least 14 days before the beta (0007); set the beta start date once the build date is known (Isaac). See [[NOW Status]].
 
 #### YouTube Channel
-- [ ] Explain the concept of the animated YouTube channel (audience, episode format, what gets animated) so Junior can record it and propose the cheapest way to test it (Isaac). See [[YouTube Channel Status]].
+- [ ] YouTube Channel: decide Undeify-branded or separate brand, then lock or change Junior's proposed pipeline; verify the ThinkPad (real GPU, no BIOS lock) before buying (Isaac). See [[YouTube Channel Status]].
 
 #### MindBridge
 - [ ] [[MindBridge]] is parked (2026-10-13). Before it restarts, tell Junior where its repo is so its notes can be drafted (Isaac).

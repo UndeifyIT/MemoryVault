@@ -8,7 +8,7 @@ updated: 2026-10-30
 ---
 # YouTube Channel
 
-An animated YouTube channel about how Undeify builds with AI. Just started: the repo holds only a README and the concept is not yet recorded. Repo: https://github.com/isaaCecurity/U-Youtube_animated_Channel1
+An animated YouTube channel about building with AI, startups and building in public, told through two low-poly characters. Planning stage: concept recorded, pipeline proposed (draft). Repo: https://github.com/isaaCecurity/U-Youtube_animated_Channel1
 
 ## Start here
 - [[YouTube Channel Status]]: where the project stands and where we stopped.
