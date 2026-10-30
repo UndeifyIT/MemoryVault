@@ -161,3 +161,4 @@ Append-only record of what changed in NOW, oldest first. One line per change. Ea
 2026-10-30 | junior | Tolu: DB-39 merged (#97); PullUp 14-screen design draft built (outside repo) | Now 13094fd
 2026-10-30 | junior | Isaac: merged origin/feature/db-07-staff-audit into local main (4e8c555, conflicts in contracts.md and database.generated.ts resolved to main's side, which was a superset); origin/feature/db-45-ranking skipped, already on main via #96 | Now 4e8c555 on main, not pushed
 2026-10-30 | junior | Tolu: red main fixed (DB-50 test keys through vault.create_secret), #99 merged; PullUp draft gets the words screen (15 screens) | Now af748e8
+2026-10-30 | junior | Tolu: DB-38 place reads built, security review SF-188 to 196 (5 fixed), uncommitted; waiting for Tolu's word to push | Now feature/db-38-place-reads

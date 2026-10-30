@@ -196,6 +196,15 @@ Every security gap found in a NOW security review, with the fix and why that fix
 | NOW-SF-185 | 2026-10-30 | DB-50 | Each photo link reads the key from Vault and re-runs can_view, up to 100 times for a feed page with 5 photos a post | Low | Open: measure in the feed speed tests (NFR-PERF); if slow, fetch the key once per page | Draft |
 | NOW-SF-186 | 2026-10-30 | DB-50 | sign_photo_export_url trusts its caller for whose photos to sign; a wrapper that took the member from the request would let anyone export anyone's photos | Low | Handed to BE-06 and BE-26: the wrapper takes the member from the session | Draft |
 | NOW-SF-187 | 2026-10-30 | DB-55 | Follow pins run can_view for every candidate post before the 300-pin cap, so someone following many busy posters in a dense box does a lot of work per call | Low | Open: measure in the map speed tests (SPK-02, NFR-PERF); the 1-degree box and 600 calls an hour bound it meanwhile | Draft |
+| NOW-SF-188 | 2026-10-30 | DB-38 | Muted people's public posts still showed on place pages and preview cards (F-06 says mute hides them everywhere) | Medium | Fixed in the branch (both rest parts drop muted authors) | Draft |
+| NOW-SF-189 | 2026-10-30 | DB-38 | A held rating's verdict and price show once it is superseded (a merge or a later post), in feed_item and the preview card | Medium | Open: founders decide (a never-released flag set by DB-63's hold); hold mode is off in the beta | Draft |
+| NOW-SF-190 | 2026-10-30 | DB-38 | Access tests missed one-way friends-only, list in/out, others' only-me, banned authors, removed and scheduled posts, rejected places, cross-place and guest cursors | Medium | Fixed in the branch (51 pgTAP tests) | Draft |
+| NOW-SF-191 | 2026-10-30 | DB-38 | A test expected the guest photo grid without a followed account's public post | Low | Fixed in the branch | Draft |
+| NOW-SF-192 | 2026-10-30 | DB-38 | get_place_posts checked the place in one statement and read public posts in another | Low | Fixed in the branch (re-checked in the same statement) | Draft |
+| NOW-SF-193 | 2026-10-30 | DB-38 | A not-found after check_rate undoes the count, so failed place lookups are free | Low | Accepted by Junior (IDs can't be guessed); Tolu to confirm | Draft |
+| NOW-SF-194 | 2026-10-30 | DB-38 | One 1,200-an-hour bucket let an account copy about 24,000 posts an hour; no database limit for guests | Low | Fixed: post pages 600 an hour; guest per-IP limit is a go-live condition for the edge function | Draft |
+| NOW-SF-195 | 2026-10-30 | DB-38 | The followed parts loop over everyone a member follows, so cost grows with follows | Low | Open: DB-70 profiles it at launch scale | Draft |
+| NOW-SF-196 | 2026-10-30 | DB-38 | The summary beside each post's own verdict shows whose rating was dropped or down-weighted | Low | Open: founders accept (next to EC-99) or show raters as a band | Draft |
 | NOW-SF-087 | 2026-10-23 | DB-37 | A verdict given on a private post reached public totals when an older public post existed | High | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-088 | 2026-10-23 | DB-37 | The hour before counting ran from writing, not from going live | Medium | Fixed (#59, 098a58b) | Draft |
 | NOW-SF-089 | 2026-10-23 | DB-37 | Three posts by one person unlocked a place verdict | Medium | Fixed (#59, 098a58b) | Draft |
@@ -572,3 +581,10 @@ Every security gap found in a NOW security review, with the fix and why that fix
 > Draft, not confirmed
 - **Found:** 2026-10-30, Junior's inline review for Isaac (no agent), on `feature/db-55-pins` (520cef9). No Critical or High: the shared tile reads only the public projection, re-checks it when read and returns no author, score or weight, with totals only past their thresholds; follow pins use can_view per post and return only a count of people. Score order (the contract's "for ordering only") and the 60-second CloudFront cache are by design.
 - **Evidence:** db_55 22/22 on the harness; three mutants (no can_view, no read-time public check, no mute filter) each fail a test; the harness's bounding-box shims are now real, and DB-45's tests still pass. Real CI not run.
+
+### NOW-SF-188 to NOW-SF-196: review of DB-38 (place reads)
+> Draft, not confirmed
+- **Found:** 2026-10-30, `now-security-reviewer` for Tolu, on the uncommitted `feature/db-38-place-reads`. No Critical or High: no path shows a post, photo, name or count that can_view refuses; summaries come only from place_stats past their thresholds; unknown and unseeable places give the same not-found.
+- **Fixed in the branch:** 188 (mutes hide posts everywhere, F-06; DB-21's `is_muted` comment says "feeds" and misled the build), 190, 191, 192, 194.
+- **Waiting:** 189 and 196 for the founders; 193 for Tolu to confirm; 195 measured in DB-70.
+- **Evidence:** not run on a database yet (no Docker on the DELL laptop); CI is the check.
