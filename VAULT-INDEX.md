@@ -57,7 +57,7 @@ Repo: https://github.com/UndeifyLTD/CompanyWebsite (private). The company websit
 
 ## YouTube Channel (11 - YouTube Channel)
 
-Repo: https://github.com/isaaCecurity/U-Youtube_animated_Channel1. An animated YouTube channel about how we build with AI.
+Repo: https://github.com/UndeifyLTD/U-Youtube_animated_Channel1 (private; moved from Isaac's personal `isaaCecurity` account, checked 2026-11-01). An animated YouTube channel about how we build with AI.
 - **Status:** Idea stage since 2026-10-30; the repo holds only a README. Concept not recorded yet. See [[YouTube Channel Status]].
 
 ## Vault Structure

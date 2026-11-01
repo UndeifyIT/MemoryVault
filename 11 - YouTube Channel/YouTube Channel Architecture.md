@@ -4,7 +4,7 @@ project: youtube
 type: reference
 author: junior
 created: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-01
 ---
 # YouTube Channel Architecture
 
@@ -12,7 +12,11 @@ updated: 2026-10-30
 
 How episodes get made: two characters and one set are built once in code with three.js, and each episode is a script and timeline that a Node pipeline renders frame by frame in headless Chrome and mixes into a vertical video.
 
-- **Repo:** https://github.com/isaaCecurity/U-Youtube_animated_Channel1 (default branch `main`). Under Isaac's personal GitHub account, not the Undeify organisation; private (GitHub answers 404 to an unauthenticated request, checked 2026-10-30).
+- **Repo:** https://github.com/UndeifyLTD/U-Youtube_animated_Channel1 (default branch `main`). Moved to the Undeify organisation (was Isaac's personal `isaaCecurity` account); private (GitHub answers 404 to an unauthenticated request, checked 2026-11-01).
+- **Library (built 2026-11-01, Junior for Tolu):** `lib/characters/builder.js` and `lib/characters/ai.js` (joint hierarchies, the bible's expression/gesture and state tables, deterministic idle motion), `lib/set/workspace.js` (desk, chair, laptop, walls, lights) and `lib/set/cameras.js` (anchor-relative shot machinery, not yet used by an episode). `lib/util.js` holds shared math (seeded hash, smootherstep, no `Math.random`, no clocks — `pose()` is a pure function of time, matching the skill's page contract). `package.json` pins three.js to `0.187.0`, installed from the lockfile. Commit `b060f26`.
+- **Verified, not just claimed:** built a throwaway dev preview (`lib/preview.html`/`preview.js`, not the real render pipeline) and actually rendered it with headless Chrome. That caught two real bugs before they shipped: Junior's `pose()` was overwriting his own placement every frame (so "float above the desk" never took effect), and the hair geometry was large enough to swallow the whole face. Both fixed. Playwright's own browser launch failed in this session (exit code 9, not diagnosed); the direct headless-Chrome screenshot flag was used instead.
+- **Provisional, not locked:** every proportion, every material colour and the five expressions the bible marks "spec" (no reference image) are Junior's best reading of the bible's text, not traced from art. `CHARACTER_BIBLE.md`, `config/voices.json` and `golden/` were not touched. Needs Isaac's approval through stills (Phase D) before any of it is final.
+- **Not built yet:** the actual render pipeline (`film.html`/`scene.js` with the DOF/bloom/composite chain, `timeline.mjs`, the `tools/` scripts, subtitles) — separate work, not part of this pass.
 - **Pipeline:** script → voice takes per line with word timings → `timeline.mjs` (single source of truth for cues, gaps, shots) → `film.json` (voice buses, mouth envelopes, subtitle chunks) → three.js page with a pure `setT(t)` rendered one frame at a time in headless Chrome on the GPU → ffmpeg mix (−14 LUFS) and mux to 1080×1920, 30 fps. Defined in the repo skill `.claude/skills/builder-ai-reel/SKILL.md`, our rewrite of a third-party file ("dev-claude-reel", source not recorded).
 - **Characters and set:** built from code primitives in a shared library used by every episode (the skill builds them per video; we don't, so they can't drift). Expressions and gestures as named key tables. The AI is our own original character with its own name, not "Claude" (the skill's Claude branding conflicts with the brief). Upgrade path: Blender-modelled characters exported as glTF if the code-built look falls short.
 - **Character consistency:** `CHARACTER_BIBLE.md` in the repo is the single source of truth (look, expressions, AI states, voices, personality, change process); code in `lib/characters/` must match it, and approved golden frames catch drift. The repo's `CLAUDE.md` makes every Claude session read it first.

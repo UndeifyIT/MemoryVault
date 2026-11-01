@@ -4,7 +4,7 @@ project: youtube
 type: reference
 author: junior
 created: 2026-10-30
-updated: 2026-10-30
+updated: 2026-11-01
 ---
 # YouTube Channel Status
 
@@ -26,10 +26,12 @@ Planning stage: the concept is written up, Junior has proposed a production pipe
 Isaac chose the three.js pipeline with code-built characters (see [[YouTube Channel Renderer Decision]], 2026-10-30). On Isaac's go, Junior set up the repo (2026-10-30; Isaac committed it): our own skill `.claude/skills/builder-ai-reel/SKILL.md` (rewritten from the third-party file, Claude branding removed), `CHARACTER_BIBLE.md` v0.1 draft (the single source of truth for both characters), a repo `CLAUDE.md`, `.gitignore`, `.env.example`, `config/voices.json`, `golden/README.md` and an audio licence register; concept images moved to `assets/concept/`. Bible now v0.2 with Junior's name and limbs. Isaac confirmed the "Junior runs on Claude" wording and committed and pushed the repo setup himself (latest `a870356`, checked 2026-10-30). Phase A started: Junior drafted `docs/channel-strategy.md` (audience, hooks, next step, measurement) and three pilot scripts in `episodes/` (all uncommitted, Isaac edits). Audience decided: builders in Africa first (see [[YouTube Channel Audience Decision]]). The Builder keeps his concept look and sounds American; Isaac picks both voices later from ElevenLabs or a better provider. Next: Isaac edits the scripts and runs the EP002 experiment; Pilot 2 needs Isaac's real landing-page experiment; ThinkPad purchase and its pre-purchase checks are on Isaac.
 
 ### Tolu
-Nothing yet.
+2026-11-01: repo moved to `UndeifyLTD/U-Youtube_animated_Channel1` (was Isaac's personal account). Tolu asked Junior to start the characters and set in code; built `lib/characters/{builder,ai}.js` and `lib/set/{workspace,cameras}.js` from the bible and the skill's motion rules, pinned three.js (`package.json`), and actually rendered it with headless Chrome rather than just claiming it worked — found and fixed two real bugs (Junior's pose overwriting his own position; hair geometry swallowing the face). Committed and pushed (`b060f26`). See [[YouTube Channel Architecture]] for what's provisional. Also connected ElevenLabs for Tolu's own Claude Code (account "Toluwani", Free plan, 5/10,000 credits used) — not yet wired into `config/voices.json`, which is still all null; that's Isaac's call per the bible.
 
 ## Next steps
 1. Isaac decides Undeify-branded channel or separate brand.
-2. Isaac gives the Builder's name when ready and gives the word to commit the repo setup.
+2. Isaac gives the Builder's name when ready.
 3. Isaac verifies the ThinkPad before paying (real GPU and dedicated memory in Task Manager, no BIOS supervisor lock), then reinstalls Windows.
 4. Name the channel; check the YouTube handle, domain and trademark are free.
+5. Isaac reviews the character/set code against the bible through stills and locks Phase D proportions and colours, or sends corrections.
+6. Someone benchmarks render speed on real hardware (this Surface Pro: i7-7660U, Iris Plus 640, 16 GB RAM — untested; or the ThinkPad once bought) before building the full render pipeline.
