@@ -20,3 +20,4 @@ created: 2026-10-30
 2026-11-01 | isaac | Repo moved from personal `isaaCecurity` account to `UndeifyLTD` org; still private | n/a
 2026-11-01 | tolu | Connected ElevenLabs to Tolu's own Claude Code (account "Toluwani", Free plan) | n/a
 2026-11-01 | junior | Built lib/characters/{builder,ai}.js and lib/set/{workspace,cameras}.js from the bible; pinned three.js 0.187.0; found and fixed 2 bugs via an actual headless-Chrome render (Junior's pose overwriting his own position; hair swallowing the face). Committed and pushed on Tolu's go | b060f26
+2026-11-01 | junior | GPU render benchmark on Tolu's Surface Pro (tools/gpu-benchmark.mjs): real GPU (Iris Plus 640, ANGLE/Direct3D11), not software fallback. ~221ms/frame, no post chain. ThinkPad no longer a hard gate for prototyping | 003a7de
